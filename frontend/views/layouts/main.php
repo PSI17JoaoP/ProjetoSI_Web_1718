@@ -26,7 +26,7 @@ AppAsset::register($this);
 
 <?= $this->render('topbar') ?>
 
-<?= $this->render('sidebar') ?>
+
 
 <div class="wrap">
     <div class="container">
