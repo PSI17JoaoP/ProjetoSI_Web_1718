@@ -1,5 +1,3 @@
-<?php //$this->beginContent('@app/views/layouts/main.php'); ?>
-
 <div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
         <li class="nav-item">
@@ -16,5 +14,3 @@
         </li>
     </ul>
 </div>
-
-<?php //$this->endContent(); ?>

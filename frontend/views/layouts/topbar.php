@@ -4,8 +4,6 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 
-//$this->beginContent('@app/views/layouts/main.php');
-
     NavBar::begin([
         'brandLabel' => 'Sistema de Trocas',
         'brandUrl' => Yii::$app->homeUrl,
@@ -15,11 +13,23 @@ use yii\bootstrap\NavBar;
     ]);
     $menuItems = [];
 
-    //Comentado para efeito de desenvolvimento na parte autenticada
-    /*if (Yii::$app->user->isGuest) {
+    //Comentem o if e o else para efeito de desenvolvimento na parte autenticada
+    if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
         $menuItems[] = ['label' => 'Registo', 'url' => ['/site/signup']];
-    } else {*/
+    } else {
+        $menuItems[] =  Html::beginTag('li', ['class' => 'nav-item dropdown'])
+            . Html::tag('a','Notificações',
+                ['class' => 'nav-link dropdown-toggle',
+                    'id' => 'navbarDropdownMenuLink',
+                    'data-toggle' => 'dropdown',
+                    'aria-haspopup' => true,
+                    'aria-expanded' => false])
+            . Html::beginTag('div', ['class' => 'dropdown-menu', 'aria-labelledby' => 'navbarDropdownMenuLink'])
+
+                // Ciclo For each para imprimir as notificações para dentro do dropdown
+
+            . Html::endTag('div') . Html::endTag('li');
         $menuItems[] =  Html::beginTag('li', ['class' => 'nav-item dropdown'])
             . Html::tag('a', /*Yii::$app->user->identity->username*/'Teste',
                 ['class' => 'nav-link dropdown-toggle',
@@ -37,11 +47,9 @@ use yii\bootstrap\NavBar;
             )
             . Html::endForm()
             . Html::endTag('a') . Html::endTag('div') . Html::endTag('li');
-    //}
+    }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
     NavBar::end();
-
-//$this->endContent();
