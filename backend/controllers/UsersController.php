@@ -5,21 +5,21 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
 
 class UsersController extends Controller
 {
+   
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                    /*[
-                        'actions' => ['logout', 'index'],
+                    [
+                        'actions' => ['index'],
                         'allow' => true,
-                        'roles' => ['@'],
-                    ],*/
+                        'roles' => ['?', '@'],
+                    ]
                 ],
             ],
             'verbs' => [
@@ -30,7 +30,6 @@ class UsersController extends Controller
             ],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -50,11 +49,12 @@ class UsersController extends Controller
      */
     public function actionIndex()
     {
+
         $notifications = array('Notification 1', 'Notification 2');
         
         $this->view->params['notifications'] = $notifications;
         $this->layout = 'main';
-        
-        return $this->render('gestaoUsers');
+
+        return $this->render('index');
     }
 }
