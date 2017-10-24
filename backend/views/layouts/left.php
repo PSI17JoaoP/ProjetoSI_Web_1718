@@ -30,7 +30,7 @@
                             ['label' => 'Stat 3', 'icon' => 'circle-o', 'url' => '#'],
                         ]
                     ],
-                    ['label' => 'Utilizadores', 'icon' => 'users', 'url' => ['site/index']],
+                    ['label' => 'Utilizadores', 'icon' => 'users', 'url' => ['users/gestaoUsers']],
                 ],
             ]
         ) ?>
