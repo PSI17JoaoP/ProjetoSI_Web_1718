@@ -1,3 +1,7 @@
+<?php
+/* @var $this yii\web\View */
+?>
+
 <div class="col-12 col-md-8">
     <div class="panel panel-default">
         <div class="panel-body">
@@ -22,6 +26,8 @@
                     </div>
                 </div>
             </div>
+
+            <!--Código repetido para efeito de visualização com multiplos paineis-->
 
             <div class="panel panel-default">
                 <div class="panel-body">

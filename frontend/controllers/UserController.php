@@ -20,4 +20,11 @@ class UserController extends Controller
 
         return $this->render('history');
     }
+
+    public function actionPropostas()
+    {
+        $this->layout = "main-user";
+
+        return $this->render('propostas');
+    }
 }
