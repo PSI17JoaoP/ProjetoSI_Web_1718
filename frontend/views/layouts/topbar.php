@@ -27,11 +27,15 @@ use yii\bootstrap\NavBar;
                     'aria-expanded' => false])
             . Html::beginTag('div', ['class' => 'dropdown-menu', 'aria-labelledby' => 'navbarDropdownMenuLink'])
 
-                // Ciclo For each para imprimir as notificações para dentro do dropdown
+                /*foreach($notificacoes as $notificacao)
+                {
+                    //Imprimir HTML da notificação
+                }*/
 
             . Html::endTag('div') . Html::endTag('li');
+
         $menuItems[] =  Html::beginTag('li', ['class' => 'nav-item dropdown'])
-            . Html::tag('a', /*Yii::$app->user->identity->username*/'Teste',
+            . Html::tag('a', Yii::$app->user->identity->username,
                 ['class' => 'nav-link dropdown-toggle',
                 'id' => 'navbarDropdownMenuLink',
                 'data-toggle' => 'dropdown',

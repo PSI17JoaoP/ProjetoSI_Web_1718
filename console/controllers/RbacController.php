@@ -12,31 +12,73 @@ class RbacController extends Controller
 
         // Temos que definir as permissões de cada utilizador;
 
-        /*// add "createPost" permission
-        $createPost = $auth->createPermission('createPost');
-        $createPost->description = 'Create a post';
-        $auth->add($createPost);
+        //--------------------------Permissões-----------------------------------------
 
-        // add "updatePost" permission
-        $updatePost = $auth->createPermission('updatePost');
-        $updatePost->description = 'Update post';
-        $auth->add($updatePost);
+        //----------------------------Cliente----------------------------------
+        $criarAnuncio = $auth->createPermission('criarAnuncio');
+        $criarAnuncio->description = 'Criar um anúncio';
+        $auth->add($criarAnuncio);
 
-        // add "author" role and give this role the "createPost" permission
-        $author = $auth->createRole('author');
-        $auth->add($author);
-        $auth->addChild($author, $createPost);
+        $pesquisarAnuncios = $auth->createPermission('pesquisarAnuncios');
+        $pesquisarAnuncios->description = 'Pesquisar Anúncios';
+        $auth->add($pesquisarAnuncios);
 
-        // add "admin" role and give this role the "updatePost" permission
-        // as well as the permissions of the "author" role
+        $enviarProposta = $auth->createPermission('enviarProposta');
+        $enviarProposta->description = 'Enviar uma proposta a um anúncio';
+        $auth->add($enviarProposta);
+
+        $aceitarProposta = $auth->createPermission('aceitarProposta');
+        $aceitarProposta->description = 'Aceitar uma proposta a um anúncio';
+        $auth->add($aceitarProposta);
+
+        $recusarProposta = $auth->createPermission('recusarProposta');
+        $recusarProposta->description = 'Recusar uma proposta a um anúncio';
+        $auth->add($recusarProposta);
+
+        $gerarPINMovel = $auth->createPermission('gerarPINMovel');
+        $gerarPINMovel->description = 'Gerar PIN para a aplicação móvel';
+        $auth->add($gerarPINMovel);
+        //---------------------------------------------------------------------
+
+        //----------------------------Administrador----------------------------
+        $criarCliente = $auth->createPermission('criarCliente');
+        $criarCliente->description = 'Criar um cliente';
+        $auth->add($criarCliente);
+
+        $alterarCliente = $auth->createPermission('alterarCliente');
+        $alterarCliente->description = 'Alterar um cliente';
+        $auth->add($alterarCliente);
+
+        $eliminarCliente = $auth->createPermission('eliminarCliente');
+        $eliminarCliente->description = 'Eliminar um cliente';
+        $auth->add($eliminarCliente);
+        //---------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------
+
+
+
+        //-----------------------------------Roles-------------------------------------
+
+        //---------------------Cliente--------------------------
+        $cliente = $auth->createRole('cliente');
+        $auth->add($cliente);
+        $auth->addChild($cliente, $criarAnuncio);
+        $auth->addChild($cliente, $pesquisarAnuncios);
+        $auth->addChild($cliente, $enviarProposta);
+        $auth->addChild($cliente, $recusarProposta);
+        $auth->addChild($cliente, $aceitarProposta);
+        $auth->addChild($cliente, $gerarPINMovel);
+        //------------------------------------------------------
+
+        //-------------------Administrador----------------------
         $admin = $auth->createRole('admin');
         $auth->add($admin);
-        $auth->addChild($admin, $updatePost);
-        $auth->addChild($admin, $author);
+        $auth->addChild($admin, $criarCliente);
+        $auth->addChild($admin, $alterarCliente);
+        $auth->addChild($admin, $eliminarCliente);
+        //------------------------------------------------------
 
-        // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()
-        // usually implemented in your User model.
-        $auth->assign($author, 2);
-        $auth->assign($admin, 1);*/
+        //-----------------------------------------------------------------------------
     }
 }
