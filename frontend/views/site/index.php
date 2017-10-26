@@ -2,51 +2,93 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Página Inicial';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
 
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            <form class="form" role="search">
+            <div class="col-lg-6">
+                
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Pesquisar...">
+                    </div>
+                    <div class="col-xs-6">
+                        <select class="form-control" id="categoria">
+                            <option value="" disabled selected>Categorias</option>
+                            <option value="brinquedos">Brinquedos</option>
+                            <option value="jogos">Jogos</option>
+                            <option value="eletronica">Eletrónica</option>
+                            <option value="computadores">Computadores</option>
+                            <option value="smartphones">Smartphones</option>
+                            <option value="livros">Livros</option>
+                            <option value="roupa">Roupa</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-6">
+                        <select class="form-control" id="regiao">
+                            <option value="" disabled selected>Distrito</option>
+                            <option value="Aveiro">Aveiro</option>
+                            <option value="Beja">Beja</option>
+                            <option value="Braga">Braga</option>
+                            <option value="Bragança">Bragança</option>
+                            <option value="Castelo Branco">Castelo Branco</option>
+                            <option value="Coimbra">Coimbra</option>
+                            <option value="Évora">Évora</option>
+                            <option value="Faro">Faro</option>
+                            <option value="Guarda">Guarda</option>
+                            <option value="Leiria">Leiria</option>
+                            <option value="Lisboa">Lisboa</option>
+                            <option value="Portalegre">Portalegre</option>
+                            <option value="Porto">Porto</option>
+                            <option value="Santarém">Santarém</option>
+                            <option value="Setúbal">Setúbal</option>
+                            <option value="Viana do Castelo">Viana do Castelo</option>
+                            <option value="Vila Real">Vila Real</option>
+                            <option value="Viseu">Viseu</option>
+                            <option value="Açores">Açores</option>
+                            <option value="Madeira">Madeira</option>
+                        </select>
+                    </div>
+                
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            <div class="col-lg-2" >
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
             </div>
+            </form>
+
             <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                <button type="button" class="btn btn-success btn-lg">Criar Anúncio</button>
             </div>
+        </div>
+        <div class="row" style="padding-bottom:10%"></div>
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Anúncios mais recentes
+                    </div>
+                    <div class="panel-body">
+                        soon
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Anúncios recomendados
+                    </div>
+                    <div class="panel-body">
+                        soon
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
