@@ -17,11 +17,24 @@ dmstr\web\AdminLteAsset::register($this);
                     </div>
                     <!-- Master -->
                     <div class="box-body">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                            </tr>
+                        <table id="tableListaUsers" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- TEMP! -->
+                                <tr class="rowListaUsers" data-info="1">
+                                    <td>Nome1</td>
+                                    <td>Email1</td>
+                                </tr>
+                                <tr class="rowListaUsers" data-info="2">
+                                    <td>Nome2</td>
+                                    <td>Email2</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -33,11 +46,19 @@ dmstr\web\AdminLteAsset::register($this);
                         <h3 class="box-title">Detalhes do Utilizador</h3>
                     </div>
                     <!-- Detail. Import vista (render) -->
-                    <div class="box-body">
-
+                    <div class="box-body box-profile">
+                        <?= $this->render('user-info.php'); ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php 
+    $this->registerJs(
+        '$(".rowListaUsers").click(function() {
+            var testID = $(this).data("info");
+            $("#userProfileName").html("Nome " + testID);
+        })'
+    );
+?>
