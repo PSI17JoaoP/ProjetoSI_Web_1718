@@ -1,5 +1,7 @@
 <?php
 /* @var $this yii\web\View */
+
+$this->title = 'Perfil';
 ?>
 <h1>user/index</h1>
 

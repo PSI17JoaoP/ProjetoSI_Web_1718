@@ -1,21 +1,29 @@
+<?php
+
+/* @var $this \yii\web\View */
+
+use yii\helpers\Html;
+
+?>
+
 <div class="col-6 col-md-4">
     <div class="panel panel-default">
         <div class="panel-body">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Definições da Conta</a>
+                    <?= Html::a('Definições da Conta', '#', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Anúncios</a>
+                    <?= Html::a('Anúncios', '#', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Propostas</a>
+                    <?= Html::a('Propostas', 'propostas', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Histórico</a>
+                    <?= Html::a('Histórico', 'history', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Gerar PIN Móvel</a>
+                    <?= Html::a('Gerar PIN Móvel', '#', ['class' => 'nav-link'])?>
                 </li>
             </ul>
         </div>

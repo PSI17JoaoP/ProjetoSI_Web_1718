@@ -11,6 +11,8 @@ class UserController extends Controller
 {
     public function actionIndex()
     {
+        $this->layout = "main-user";
+
         return $this->render('index');
     }
 
