@@ -7,8 +7,12 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = 'Registo';
 $this->params['breadcrumbs'][] = $this->title;
+
+// Telefone Comentado temporariamente, penso que não é o mais recomendado estar a pedir dados pessoais no registo.
+// Possivelmente, quando o cliente fizer a sua primeira proposta ou anúncio, pergunta-se os dados pessoais. No registo não parece ser adequado.
+
 ?>
 <div class="site-signup">
     <div class="container">
@@ -17,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="col-8 col-md-6 align-self-center">
 
-                <?= Html::tag('h2', $this->title, ['style' => ['text-align' => 'center', 'margin-bottom' => '30px']])?>
+                <?= Html::tag('h3', $this->title, ['style' => ['text-align' => 'center', 'margin-bottom' => '30px']])?>
 
                 <?php $form = ActiveForm::begin(); ?>
 
@@ -25,9 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
+                <?php //<?= $form->field($model, 'checkPassword')->passwordInput() ?>
+
                 <?= $form->field($model, 'email') ?>
 
-                <?= $form->field($model, 'telefone') ?>
+                <?php //<?= $form->field($model, 'telefone') ?>
 
                 <div class="form-group center-block">
                     <?= Html::submitButton('Criar Conta', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
@@ -52,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
 . Html::activepasswordInput($model, 'password')
 . Html::passwordInput('checkPassword')
 . Html::activeInput('email', $model, 'email')
-. Html::activeTextInput($model, 'telefone')
+//. Html::activeTextInput($model, 'telefone')
 . Html::submitButton('Criar Conta', ['class' => 'btn btn-primary', 'name' => 'signup-button'])
 . Html::endForm() ?>*/
 
