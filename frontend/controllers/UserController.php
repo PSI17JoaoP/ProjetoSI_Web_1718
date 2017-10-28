@@ -27,4 +27,11 @@ class UserController extends Controller
 
         return $this->render('propostas');
     }
+
+    public function actionConta()
+    {
+        $this->layout = "main-user";
+
+        return $this->render('conta');
+    }
 }
