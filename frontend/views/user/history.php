@@ -1,5 +1,7 @@
 <?php
 /* @var $this yii\web\View */
+
+$this->title = 'Histórico';
 ?>
 
 <div class="col-12 col-md-8">

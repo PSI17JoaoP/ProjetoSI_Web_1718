@@ -12,6 +12,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $telefone;
+    public $checkPassword;
 
 
     /**
@@ -33,6 +35,14 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['checkPassword', 'required'],
+            ['checkPassword', 'string'],
+            ['checkPassword', 'checkPassword'],
+
+            /*['telefone', 'trim'],
+            ['telefone', 'integer', 'min' => 9, 'max' => 9],
+            ['telefone', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This phone number as already been taken.'],*/
         ];
     }
 
@@ -59,5 +69,10 @@ class SignupForm extends Model
         }
 
         return null;
+    }
+
+    public function checkPassword($attribute, $params, $validator)
+    {
+
     }
 }
