@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 $this->title = 'Página Inicial';
+
 ?>
 <div class="site-index">
 
@@ -73,7 +74,20 @@ $this->title = 'Página Inicial';
                         Anúncios mais recentes
                     </div>
                     <div class="panel-body">
-                        soon
+                        <table id="tableRecent" class="table table-hover">
+                            <tr height="100px">
+                                <td width="40%">
+                                    <img src="" width="75px" height="75px">
+                                    <p>Troco: Exemplo Bem 1</p>
+                                </td>
+                                <td width="40%" >
+                                    <img src="" width="75px" height="75px">
+                                    <p>Por: Exemplo Bem 2</p>
+                                </td>
+                                <td width="20%" align="right" style="padding-top: 30px"><button class="btn btn-sm">Enviar proposta</button></td>
+                            </tr>
+
+                        </table>
                     </div>
                 </div>
             </div>
@@ -84,7 +98,20 @@ $this->title = 'Página Inicial';
                         Anúncios recomendados
                     </div>
                     <div class="panel-body">
-                        soon
+                        <table id="tableRecommend" class="table table-hover">
+                            <tr height="100px">
+                                <td width="40%">
+                                    <img src="" width="75px" height="75px">
+                                    <p>Troco: Exemplo Bem 1</p>
+                                </td>
+                                <td width="40%" >
+                                    <img src="" width="75px" height="75px">
+                                    <p>Por: Exemplo Bem 2</p>
+                                </td>
+                                <td width="20%" align="right" style="padding-top: 30px"><button class="btn btn-sm">Enviar proposta</button></td>
+                            </tr>
+
+                        </table>
                     </div>
                 </div>
             </div>
