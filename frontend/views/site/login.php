@@ -11,13 +11,13 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="container">
+        <div class="row align-items-center">        
+            <div class="col-4 col-md-3 align-self-start"></div>
 
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+            <div class="col-8 col-md-6 align-self-center">
+                <?= Html::tag('h3', $this->title, ['style' => ['text-align' => 'center', 'margin-bottom' => '30px']])?>
+                <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
@@ -26,14 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+                    Se esqueceu a sua password pode requisitar um <?= Html::a('reset', ['site/request-password-reset']) ?>.
                 </div>
 
                 <div class="form-group">
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 
-            <?php ActiveForm::end(); ?>
-        </div>
+                <?php ActiveForm::end(); ?>
+            </div>
+
+        <div class="col-4 col-md-3 align-self-end"></div>
     </div>
 </div>
