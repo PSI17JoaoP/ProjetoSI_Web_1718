@@ -14,7 +14,7 @@ use yii\helpers\Html;
                     <?= Html::a('Definições da Conta', '#', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
-                    <?= Html::a('Anúncios', '#', ['class' => 'nav-link'])?>
+                    <?= Html::a('Anúncios', 'anuncio', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
                     <?= Html::a('Propostas', 'propostas', ['class' => 'nav-link'])?>
