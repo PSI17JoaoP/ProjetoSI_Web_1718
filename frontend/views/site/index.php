@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
+
 $this->title = 'Página Inicial';
 
 ?>
@@ -62,7 +64,7 @@ $this->title = 'Página Inicial';
             </form>
 
             <div class="col-lg-4">
-                <button type="button" class="btn btn-success btn-lg">Criar Anúncio</button>
+            <?= Html::a('Criar Anúncio', ['anuncio/criar'], ['class' => 'btn btn-success'])?>
             </div>
         </div>
         <div class="row" style="padding-bottom:10%"></div>

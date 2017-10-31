@@ -4,6 +4,7 @@
 $this->title = 'Propostas Recebidas';
 ?>
 
+<!--Código ainda tem de ser alterado de forma a acomodar rows-->
 <div class="col-12 col-md-8">
     <div class="panel panel-default">
         <div class="panel-body">
