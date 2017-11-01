@@ -1,55 +1,181 @@
 <?php
 
 /* @var $this yii\web\View */
-use yii\helpers\Url;
 
-$this->title = 'My Yii Application';
+$this->title = 'Dashboard - Back Office';
+
 dmstr\web\AdminLteAsset::register($this);
 ?>
 <div class="site-index">
+    <div class="col-4 col-md-6">
+        <div class="box box-info">
+            <div class="box-body">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
     </div>
 
-    <div class="body-content">
-
+    <div class="col-4 col-md-6">
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="box box-info">
+                <div class="box-header">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#" data-toggle="tab">Todos</a></li>
+                        <li><a href="#" data-toggle="tab">Anúncios</a></li>
+                        <li><a href="#" data-toggle="tab">Propostas</a></li>
+                        <li><a href="#" data-toggle="tab">Utilizadores</a></li>
+                    </ul>
+                </div>
+                <!-- /.box-header -->
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <div class="box-body">
+                    <div class="col-6 col-md-10">
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+                        <!--TODOS-->
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                            <!--<div class="info-box">
+                                <span class="info-box-icon bg-red"></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Nº Anuncios</span>
+                                    <span class="info-box-number">41,410</span>
+                                </div>
+                            </div>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+                            <div class="info-box">
+                                <span class="info-box-icon bg-green"></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Nº Propostas</span>
+                                    <span class="info-box-number">41,410</span>
+                                </div>
+                            </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                            <div class="info-box">
+                                <span class="info-box-icon bg-blue"></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Nº Utilizadores</span>
+                                    <span class="info-box-number">41,410</span>
+                                </div>
+                            </div>-->
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                        <!--/TODOS-->
+
+                        <!--ANUNCIOS-->
+
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Column heading</th>
+                                <th>Column heading</th>
+                                <th>Column heading</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <!--/ANUNCIOS-->
+
+                        <!--PROPOSTAS-->
+
+                        <!--<table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Column heading</th>
+                                <th>Column heading</th>
+                                <th>Column heading</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            </tbody>
+                        </table>-->
+
+                        <!--/PROPOSTAS-->
+
+                        <!--UTILIZADORES-->
+
+                        <!--<div class="panel panel-default">
+                            <div class="panel-body">
+                                User 1
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                User 2
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                User 3
+                            </div>
+                        </div>-->
+
+                        <!--/UTILIZADORES-->
+
+                    </div>
+                </div>
             </div>
         </div>
 
+        <div class="row">
+            <div class="box box-info">
+                <div class="box-body">
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
