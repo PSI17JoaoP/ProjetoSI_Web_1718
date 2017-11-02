@@ -11,25 +11,35 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+    <div class="col-6 col-md-4"></div>
+    <div class="col-6 col-md-4">
+        <div class="login-box" style="width: 100%">
+            <div class="login-box-body">
+                <div class="login-logo">
+                    <h1><?= Html::encode($this->title) ?></h1>
                 </div>
 
-            <?php ActiveForm::end(); ?>
+                <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+
+                    <?= $form->field($model, 'username')->textInput() ?>
+
+                    <?= $form->field($model, 'password')->passwordInput() ?>
+
+                    <?= $form->field($model, 'rememberMe')->checkbox() ?>
+
+                    <div class="form-group">
+
+                        <?= Html::a('Esqueci-me da palavra-passe', ['login'], ['style' => ['margin-top' => '10px']]) ?>
+
+                        <span class="pull-right">
+                            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button pull-right']) ?>
+                        </span>
+                    </div>
+
+                <?php ActiveForm::end(); ?>
+
+            </div>
         </div>
     </div>
+    <div class="col-6 col-md-4"></div>
 </div>

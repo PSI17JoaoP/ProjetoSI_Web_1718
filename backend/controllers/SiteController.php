@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -60,6 +61,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $notifications = ['Notification 1', 'Notification 2'];
+
+        $this->view->params['notifications'] = $notifications;
+        $this->layout = 'main';
         return $this->render('index');
     }
 
@@ -71,31 +76,27 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            if(ArrayHelper::isIn('admin', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))) {
+                return $this->goHome();
+            } else {
+                return $this->redirect(Yii::$app->urlManagerFrontEnd->createUrl(['site/login']));
+            }
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if($model->validateUser(Yii::$app->authManager->getRole('admin'))) {
+                return $this->goBack();
+            } else {
+                return $this->redirect(Yii::$app->urlManagerFrontEnd->createUrl(['site/login']));
+            }
         } else {
-            /*
-            $this->layout = '//main-login';
+
+            $this->layout = 'main-login';
+
             return $this->render('login', [
                 'model' => $model,
             ]);
-            
-            */
-
-            /* ATENÇÃO: Código para testar apenas. 
-             * Movê-lo para actionIndex()
-            */ 
-            
-            $notifications = array('Notification 1', 'Notification 2');
-            
-            $this->view->params['notifications'] = $notifications;
-            $this->layout = 'main';
-            return $this->render('index');
-            
         }
     }
 

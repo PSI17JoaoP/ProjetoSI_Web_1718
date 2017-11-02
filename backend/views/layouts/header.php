@@ -49,20 +49,15 @@ $count_notifications = count($notifications);
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs"><?= Yii::$app->user->identity->username ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                 alt="User Image"/>
-
-                            <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
-                            </p>
-                        </li>
+                        <div class="box box-widget widget-user-2" style="margin-bottom: 0px">
+                            <div class="widget-user-header bg-blue">
+                                <h3 class="widget-user-username"><?= Yii::$app->user->identity->username ?></h3>
+                                <h5 class="widget-user-desc">Admin</h5>
+                            </div>
+                        </div>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">

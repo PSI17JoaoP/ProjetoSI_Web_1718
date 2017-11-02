@@ -23,14 +23,12 @@ class AppAsset extends AssetBundle
     ];
     */
 
-    public $sourcePath = '@vendor/almasaeed2010/adminlte/plugins';
+    public $sourcePath = '@vendor/almasaeed2010/adminlte/';
     public $js = [
-        //'datatables/dataTables.bootstrap.min.js',
-        // more plugin Js here
+
     ];
     public $css = [
-        //'datatables/dataTables.bootstrap.css',
-        // more plugin CSS here
+        'bower_components/font-awesome/css/font-awesome'
     ];
     public $depends = [
         'dmstr\web\AdminLteAsset',
