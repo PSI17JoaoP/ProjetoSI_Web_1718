@@ -25,12 +25,11 @@
                         'icon' => 'bar-chart-o', 
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Stat 1', 'icon' => 'circle-o', 'url' => '#'],
-                            ['label' => 'Stat 2', 'icon' => 'circle-o', 'url' => '#'],
-                            ['label' => 'Stat 3', 'icon' => 'circle-o', 'url' => '#'],
+                            ['label' => 'Anúncios', 'icon' => 'circle-o', 'url' => '#'],
+                            ['label' => 'Propostas', 'icon' => 'circle-o', 'url' => '#'],
+                            ['label' => 'Utilizadores', 'icon' => 'circle-o', 'url' => ['users/index']],
                         ]
                     ],
-                    ['label' => 'Utilizadores', 'icon' => 'users', 'url' => ['users/index']],
                 ],
             ]
         ) ?>
