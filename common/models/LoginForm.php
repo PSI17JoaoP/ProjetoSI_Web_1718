@@ -49,16 +49,18 @@ class LoginForm extends Model
         }
     }
 
+    /**
+     * Validates the user's role.
+     *
+     * @param string $role the role to be validated
+     * @return bool
+     */
     public function validateUser($role)
     {
         $auth = Yii::$app->authManager;
         $roles = $auth->getRolesByUser(Yii::$app->user->getId());
 
-        if(ArrayHelper::isIn($role, $roles)) {
-            return true;
-        }
-
-        return false;
+        return ArrayHelper::isIn($role, $roles);
     }
 
     /**
