@@ -36,10 +36,10 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
 
-            ['checkPassword', 'required'],
+            /*['checkPassword', 'required'],
             ['checkPassword', 'string'],
             ['checkPassword', 'checkPassword'],
-
+            */
             /*['telefone', 'trim'],
             ['telefone', 'integer', 'min' => 9, 'max' => 9],
             ['telefone', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This phone number as already been taken.'],*/
