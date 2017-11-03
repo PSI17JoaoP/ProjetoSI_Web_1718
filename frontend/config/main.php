@@ -9,6 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
+    'language' => 'pt-PT',
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
@@ -45,6 +46,12 @@ return [
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
             ],
+        ],
+        'urlManagerBackEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/../../backend/web',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
         ],
     ],
     'params' => $params,

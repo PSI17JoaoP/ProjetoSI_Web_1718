@@ -65,7 +65,7 @@ return [
         ],
         'urlManagerFrontEnd' => [
             'class' => 'yii\web\urlManager',
-            'baseUrl' => '/../../frontend/web',
+            'baseUrl' => '../../../frontend/web',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],

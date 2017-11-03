@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -86,12 +87,20 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            if(ArrayHelper::isIn('admin', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))) {
+                return $this->goHome();
+            } else {
+                return $this->redirect(Yii::$app->urlManagerBackEnd->createUrl(['site/login']));
+            }
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if($model->validateUser(Yii::$app->authManager->getRole('cliente'))) {
+                return $this->goBack();
+            } else {
+                return $this->redirect(Yii::$app->urlManagerBackEnd->createUrl(['site/login']));
+            }
         } else {
             return $this->render('login', [
                 'model' => $model,

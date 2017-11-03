@@ -29,11 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <?php //<?= $form->field($model, 'checkPassword')->passwordInput() ?>
+                <?= $form->field($model, 'checkPassword')->passwordInput() ?>
 
                 <?= $form->field($model, 'email') ?>
-
-                <?php //<?= $form->field($model, 'telefone') ?>
 
                 <div class="form-group center-block">
                     <?= Html::submitButton('Criar Conta', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

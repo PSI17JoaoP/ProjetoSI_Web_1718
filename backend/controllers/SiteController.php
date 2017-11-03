@@ -23,13 +23,18 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['error'],
                         'allow' => true,
                     ],
                     [
                         'actions' => ['logout', 'index'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
                     ],
                 ],
             ],
@@ -79,21 +84,26 @@ class SiteController extends Controller
             if(ArrayHelper::isIn('admin', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))) {
                 return $this->goHome();
             } else {
-                return $this->redirect(Yii::$app->urlManagerFrontEnd->createUrl(['site/login']));
+                return $this->redirect(Yii::$app->urlManagerFrontEnd->createUrl('site/login'));
             }
         }
 
+        $this->layout = 'main-login';
+
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if($model->validateUser(Yii::$app->authManager->getRole('admin'))) {
-                return $this->goBack();
+        if($model->load(Yii::$app->request->post())) {
+            if ($model->validateUser(Yii::$app->authManager->getRole('admin'))) {
+                if ($model->login()) {
+                    return $this->goBack();
+                } else {
+                    return $this->render('login', [
+                        'model' => $model,
+                    ]);
+                }
             } else {
-                return $this->redirect(Yii::$app->urlManagerFrontEnd->createUrl(['site/login']));
+                return $this->redirect(Yii::$app->urlManagerFrontEnd->createUrl('site/login'));
             }
         } else {
-
-            $this->layout = 'main-login';
-
             return $this->render('login', [
                 'model' => $model,
             ]);
