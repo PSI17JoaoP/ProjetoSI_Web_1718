@@ -91,6 +91,7 @@ class SiteController extends Controller
         $this->layout = 'main-login';
 
         $model = new LoginForm();
+
         if($model->load(Yii::$app->request->post())) {
             if ($model->validateUser(Yii::$app->authManager->getRole('admin'))) {
                 if ($model->login()) {

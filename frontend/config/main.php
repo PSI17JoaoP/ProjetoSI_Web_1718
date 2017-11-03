@@ -49,7 +49,7 @@ return [
         ],
         'urlManagerBackEnd' => [
             'class' => 'yii\web\urlManager',
-            'baseUrl' => '/../../backend/web',
+            'baseUrl' => '../../../backend/web',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],

@@ -95,11 +95,18 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if($model->validateUser(Yii::$app->authManager->getRole('cliente'))) {
-                return $this->goBack();
+
+        if($model->load(Yii::$app->request->post())) {
+            if ($model->validateUser(Yii::$app->authManager->getRole('cliente'))) {
+                if ($model->login()) {
+                    return $this->goBack();
+                } else {
+                    return $this->render('login', [
+                        'model' => $model,
+                    ]);
+                }
             } else {
-                return $this->redirect(Yii::$app->urlManagerBackEnd->createUrl(['site/login']));
+                return $this->redirect(Yii::$app->urlManagerBackEnd->createUrl('site/login'));
             }
         } else {
             return $this->render('login', [

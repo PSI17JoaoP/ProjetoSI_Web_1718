@@ -1,6 +1,7 @@
 <?php
 namespace frontend\models;
 
+use Yii;
 use yii\base\Model;
 use common\models\User;
 
@@ -14,7 +15,6 @@ class SignupForm extends Model
     public $password;
     public $telefone;
     public $checkPassword;
-
 
     /**
      * @inheritdoc
@@ -34,15 +34,11 @@ class SignupForm extends Model
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            ['password', 'string', 'min' => 8],
 
             ['checkPassword', 'required'],
             ['checkPassword', 'string'],
-            ['checkPassword', 'checkPassword'],
-
-            /*['telefone', 'trim'],
-            ['telefone', 'integer', 'min' => 9, 'max' => 9],
-            ['telefone', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This phone number as already been taken.'],*/
+            ['checkPassword', 'validateCheckPassword'],
         ];
     }
 
@@ -55,7 +51,6 @@ class SignupForm extends Model
             'checkPassword' => 'Verificar Palavra-passe',
             'username' => 'Nome do utilizador',
             'password' => 'Palavra-passe',
-            'verifyCode' => 'Verification Code',
         ];
     }
 
@@ -74,7 +69,7 @@ class SignupForm extends Model
             $user->generateAuthKey();
             $user->save(false);
 
-            $auth = \Yii::$app->authManager;
+            $auth = Yii::$app->authManager;
             $clienteRole = $auth->getRole('cliente');
             $auth->assign($clienteRole, $user->getId());
 
@@ -84,8 +79,21 @@ class SignupForm extends Model
         return null;
     }
 
-    public function checkPassword($attribute, $params, $validator)
+    /**
+     * Validates the entered password.
+     * This method serves as the validation for the password.
+     *
+     * @param string $attribute the attribute currently being validated
+     * @param array $params the additional name-value pairs given in the rule
+     *
+     */
+    public function validateCheckPassword($attribute, $params, $validator)
     {
+        $passwordHash = Yii::$app->security->generatePasswordHash($this->password);
 
+        if(!Yii::$app->security->validatePassword($this->$attribute, $passwordHash))
+        {
+            $this->addError($attribute, 'As palavras-chaves não coincidem.');
+        }
     }
 }
