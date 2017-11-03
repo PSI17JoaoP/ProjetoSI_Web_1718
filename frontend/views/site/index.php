@@ -8,18 +8,14 @@ $this->title = 'Página Inicial';
 
 ?>
 <div class="site-index">
-
-
     <div class="body-content">
-
-        <div class="row">
-            <form class="form" role="search">
-            <div class="col-lg-6">
-                
-                    <div class="col-lg-12">
+        <div class="row" style="padding-bottom:10%">
+            <div class="col-md-6">
+                <form class="form" role="search">
+                    <div class="col-md-12" style="margin-bottom: 10px">
                         <input type="text" class="form-control" placeholder="Pesquisar...">
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-md-5">
                         <select class="form-control" id="categoria">
                             <option value="" disabled selected>Categorias</option>
                             <option value="brinquedos">Brinquedos</option>
@@ -31,7 +27,7 @@ $this->title = 'Página Inicial';
                             <option value="roupa">Roupa</option>
                         </select>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-md-4">
                         <select class="form-control" id="regiao">
                             <option value="" disabled selected>Distrito</option>
                             <option value="Aveiro">Aveiro</option>
@@ -56,35 +52,33 @@ $this->title = 'Página Inicial';
                             <option value="Madeira">Madeira</option>
                         </select>
                     </div>
-                
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary">Pesquisar</button>
+                    </div>
+                </form>
             </div>
-            <div class="col-lg-2" >
-                <button type="submit" class="btn btn-primary">Pesquisar</button>
-            </div>
-            </form>
 
-            <div class="col-lg-4">
-            <?= Html::a('Criar Anúncio', ['anuncio/criar'], ['class' => 'btn btn-success'])?>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-success btn-lg">Criar Anúncio</button>
             </div>
         </div>
-        <div class="row" style="padding-bottom:10%"></div>
-        <div class="row">
 
+        <div class="row">
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Anúncios mais recentes
+                        Mais Recentes
                     </div>
                     <div class="panel-body">
                         <table id="tableRecent" class="table table-hover">
                             <tr height="100px">
                                 <td width="40%">
-                                    <img src="" width="75px" height="75px">
+                                    <img src="favicon.ico" width="75px" height="75px">
                                     <p>Troco: Exemplo Bem 1</p>
                                 </td>
                                 <td width="40%" >
-                                    <img src="" width="75px" height="75px">
-                                    <p>Por: Exemplo Bem 2</p>
+                                    <img src="favicon.ico" width="75px" height="75px">
+                                    <p>Quero: Exemplo Bem 2</p>
                                 </td>
                                 <td width="20%" align="right" style="padding-top: 30px"><button class="btn btn-sm">Enviar proposta</button></td>
                             </tr>
@@ -97,28 +91,25 @@ $this->title = 'Página Inicial';
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Anúncios recomendados
+                        Recomendados
                     </div>
                     <div class="panel-body">
                         <table id="tableRecommend" class="table table-hover">
                             <tr height="100px">
                                 <td width="40%">
-                                    <img src="" width="75px" height="75px">
+                                    <img src="favicon.ico" width="75px" height="75px">
                                     <p>Troco: Exemplo Bem 1</p>
                                 </td>
                                 <td width="40%" >
-                                    <img src="" width="75px" height="75px">
-                                    <p>Por: Exemplo Bem 2</p>
+                                    <img src="favicon.ico" width="75px" height="75px">
+                                    <p>Quero: Exemplo Bem 2</p>
                                 </td>
                                 <td width="20%" align="right" style="padding-top: 30px"><button class="btn btn-sm">Enviar proposta</button></td>
                             </tr>
-
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>

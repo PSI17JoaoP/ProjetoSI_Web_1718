@@ -23,14 +23,12 @@ class AppAsset extends AssetBundle
     ];
     */
 
-    public $sourcePath = '@vendor/almasaeed2010/adminlte/plugins';
+    public $sourcePath = '@vendor/almasaeed2010/adminlte/';
     public $js = [
-        //'datatables/dataTables.bootstrap.min.js',
-        // more plugin Js here
+        'bower_components/chart.js/Chart.min'
     ];
     public $css = [
-        //'datatables/dataTables.bootstrap.css',
-        // more plugin CSS here
+
     ];
     public $depends = [
         'dmstr\web\AdminLteAsset',
@@ -39,16 +37,5 @@ class AppAsset extends AssetBundle
 
 /*class AdminLtePluginAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/almasaeed2010/adminlte/plugins';
-    public $js = [
-        'datatables/dataTables.bootstrap.min.js',
-        // more plugin Js here
-    ];
-    public $css = [
-        'datatables/dataTables.bootstrap.css',
-        // more plugin CSS here
-    ];
-    public $depends = [
-        'dmstr\web\AdminLteAsset',
-    ];
+    //Conteudo em cima da definição desta classe
 }*/

@@ -11,7 +11,7 @@ use yii\helpers\Html;
         <div class="panel-body">
             <ul class="nav">
                 <li class="nav-item">
-                    <?= Html::a('Definições da Conta', '#', ['class' => 'nav-link'])?>
+                    <?= Html::a('Definições da Conta', 'conta', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
                     <?= Html::a('Anúncios', 'anuncio', ['class' => 'nav-link'])?>
