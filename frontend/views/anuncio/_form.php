@@ -1,10 +1,14 @@
 <?php
-/* @var $this yii\web\View */
-
-$this->title = 'Criar Anuncio';
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model common\models\Anuncio */
+/* @var $form yii\widgets\ActiveForm */
 ?>
+
+<div class="anuncio-form">
 
 <div class="col-12 col-md-8">
     <div class="panel panel-default">
@@ -82,4 +86,7 @@ use yii\helpers\Html;
     </div>
 
     
+</div>
+
+
 </div>

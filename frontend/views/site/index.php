@@ -59,7 +59,7 @@ $this->title = 'Página Inicial';
             </div>
 
             <div class="col-md-6">
-                <button type="button" class="btn btn-success btn-lg">Criar Anúncio</button>
+                <?= Html::a('Criar Anúncio', ['anuncio/create'], ['class' => 'btn btn-success btn-lg'])?>
             </div>
         </div>
 
