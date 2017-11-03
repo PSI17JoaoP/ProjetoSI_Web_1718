@@ -16,9 +16,9 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'perfil'],
                         'allow' => true,
-                        'roles' => ['?', '@'],
+                        'roles' => ['admin'],
                     ]
                 ],
             ],
@@ -60,6 +60,21 @@ class UserController extends Controller
 
     public function actionPerfil()
     {
+
+        $notifications = array('Notification 1', 'Notification 2');
         
+        $this->view->params['notifications'] = $notifications;
+        $this->layout = 'main';
+
+        //Fazer Modelo para edição de dados no perfil
+        //  Basear-me no signupForm
+        
+
+        return $this->render('perfil');
+        /*
+        return $this->render('login', [
+                'model' => $model,
+            ]);
+        */
     }
 }
