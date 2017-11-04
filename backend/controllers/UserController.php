@@ -5,6 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use backend\models\PerfilForm;
 
 class UserController extends Controller
 {
@@ -66,15 +67,18 @@ class UserController extends Controller
         $this->view->params['notifications'] = $notifications;
         $this->layout = 'main';
 
-        //Fazer Modelo para edição de dados no perfil
-        //  Basear-me no signupForm
         
+        $model = new PerfilForm();
 
-        return $this->render('perfil');
-        /*
-        return $this->render('login', [
+        if ($model->load(Yii::$app->request->post()) && $model->update()) {
+            
+            return $this->render('index');
+            
+        } else {
+
+            return $this->render('perfil', [
                 'model' => $model,
             ]);
-        */
+        }
     }
 }

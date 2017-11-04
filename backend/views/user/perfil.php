@@ -2,6 +2,9 @@
 
 /* @var $this yii\web\View */
 use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+
 
 $this->title = 'Gestão de Utilizadores';
 dmstr\web\AdminLteAsset::register($this);
@@ -31,16 +34,18 @@ dmstr\web\AdminLteAsset::register($this);
                         <h3 class="box-title">Editar dados pessoais</h3>
                     </div>
                     <div class="box-body">
-                        <label for="nomeAdmin">Nome:</label>
-                        <input type="text" class="form-control" id="nomeAdmin" value="<?= Yii::$app->user->identity->username ?>">
+                        <?php $form = ActiveForm::begin(['id' => 'perfil-form']); ?>
 
-                        <label for="emailAdmin">Email:</label>
-                        <input type="email" class="form-control" id="emailAdmin" value="<?= Yii::$app->user->identity->email ?>">
+                        <?= $form->field($model, 'username')->textInput() ?>
+                       
+                        <?= $form->field($model, 'email')->input('email') ?>
 
-                        <label for="passAdmin">Nova palavra-passe</label>
-                        <input type="password" class="form-control" id="passAdmin">
-
-                        <button class="btn btn-default btn-lg">Concluído</button>
+                        <?= $form->field($model, 'password')->passwordInput() ?>
+                        
+                        <span class="pull-right">
+                            <?= Html::submitButton('Concluído', ['class' => 'btn btn-primary btn-lg', 'name' => 'perfil-button pull-right']) ?>
+                        </span>
+                        <?php ActiveForm::end(); ?>
                     </div>
                 </div>
             </div>
