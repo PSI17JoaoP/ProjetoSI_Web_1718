@@ -96,4 +96,5 @@ class SignupForm extends Model
             $this->addError($attribute, 'As palavras-chaves não coincidem.');
         }
     }
+
 }
