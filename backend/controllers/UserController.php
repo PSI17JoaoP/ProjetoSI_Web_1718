@@ -5,6 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use backend\models\PerfilForm;
 
 class UserController extends Controller
 {
@@ -16,9 +17,9 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'perfil'],
                         'allow' => true,
-                        'roles' => ['?', '@'],
+                        'roles' => ['admin'],
                     ]
                 ],
             ],
@@ -56,5 +57,28 @@ class UserController extends Controller
         $this->layout = 'main';
 
         return $this->render('index');
+    }
+
+    public function actionPerfil()
+    {
+
+        $notifications = array('Notification 1', 'Notification 2');
+        
+        $this->view->params['notifications'] = $notifications;
+        $this->layout = 'main';
+
+        
+        $model = new PerfilForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->update()) {
+            
+            return $this->render('index');
+            
+        } else {
+
+            return $this->render('perfil', [
+                'model' => $model,
+            ]);
+        }
     }
 }

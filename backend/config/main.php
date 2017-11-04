@@ -24,6 +24,7 @@ if (YII_ENV_DEV) {
 return [
     'id' => 'app-backend',
     'name' => 'Sistema de Trocas',
+    'language' => 'pt-PT',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
