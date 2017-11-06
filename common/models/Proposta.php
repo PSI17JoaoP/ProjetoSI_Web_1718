@@ -15,8 +15,8 @@ use Yii;
  * @property string $estado
  * @property string $data_proposta
  *
- * @property Clientes $idUser
- * @property Anuncios $idAnuncio
+ * @property User $idUser
+ * @property Anuncio $idAnuncio
  */
 class Proposta extends \yii\db\ActiveRecord
 {
@@ -38,8 +38,8 @@ class Proposta extends \yii\db\ActiveRecord
             [['cat_proposto', 'quant', 'id_user', 'id_anuncio'], 'integer'],
             [['data_proposta'], 'safe'],
             [['estado'], 'string', 'max' => 10],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Clientes::className(), 'targetAttribute' => ['id_user' => 'id_user']],
-            [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncios::className(), 'targetAttribute' => ['id_anuncio' => 'id']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id_user']],
+            [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncio::className(), 'targetAttribute' => ['id_anuncio' => 'id']],
         ];
     }
 
@@ -64,7 +64,7 @@ class Proposta extends \yii\db\ActiveRecord
      */
     public function getIdUser()
     {
-        return $this->hasOne(Clientes::className(), ['id_user' => 'id_user']);
+        return $this->hasOne(User::className(), ['id_user' => 'id_user']);
     }
 
     /**
@@ -72,6 +72,6 @@ class Proposta extends \yii\db\ActiveRecord
      */
     public function getIdAnuncio()
     {
-        return $this->hasOne(Anuncios::className(), ['id' => 'id_anuncio']);
+        return $this->hasOne(User::className(), ['id' => 'id_anuncio']);
     }
 }
