@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "c_brinquedos".
@@ -12,10 +13,10 @@ use Yii;
  * @property integer $faixa_etaria
  * @property string $descricao
  *
- * @property Categorias $idCategoria
- * @property CJogos $cJogos
+ * @property Categoria $idCategoria
+ * @property CategoriaJogos $cJogos
  */
-class CategoriaBrinquedos extends \yii\db\ActiveRecord
+class CategoriaBrinquedos extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -35,7 +36,7 @@ class CategoriaBrinquedos extends \yii\db\ActiveRecord
             [['id_categoria', 'faixa_etaria'], 'integer'],
             [['editora'], 'string', 'max' => 25],
             [['descricao'], 'string', 'max' => 30],
-            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['id_categoria' => 'id']],
+            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['id_categoria' => 'id']],
         ];
     }
 
@@ -45,10 +46,9 @@ class CategoriaBrinquedos extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_categoria' => 'Id Categoria',
             'editora' => 'Editora',
-            'faixa_etaria' => 'Faixa Etaria',
-            'descricao' => 'Descricao',
+            'faixa_etaria' => 'Faixa Etária',
+            'descricao' => 'Descrição',
         ];
     }
 
@@ -57,7 +57,7 @@ class CategoriaBrinquedos extends \yii\db\ActiveRecord
      */
     public function getIdCategoria()
     {
-        return $this->hasOne(Categorias::className(), ['id' => 'id_categoria']);
+        return $this->hasOne(Categoria::className(), ['id' => 'id_categoria']);
     }
 
     /**
@@ -65,6 +65,6 @@ class CategoriaBrinquedos extends \yii\db\ActiveRecord
      */
     public function getCJogos()
     {
-        return $this->hasOne(CJogos::className(), ['id_brinquedo' => 'id_categoria']);
+        return $this->hasOne(CategoriaJogos::className(), ['id_brinquedo' => 'id_categoria']);
     }
 }

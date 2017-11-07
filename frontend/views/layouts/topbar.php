@@ -42,9 +42,9 @@ use yii\bootstrap\NavBar;
                 'aria-haspopup' => true,
                 'aria-expanded' => false])
             . Html::beginTag('div', ['class' => 'dropdown-menu', 'aria-labelledby' => 'navbarDropdownMenuLink'])
-            . Html::a('Anúncios', ['user/anuncio'], ['class' => 'dropdown-item btn'])
+            . Html::a('Anúncios', ['user/anuncios'], ['class' => 'dropdown-item btn'])
             . Html::a('Propostas', ['user/propostas'], ['class' => 'dropdown-item btn'])
-            . Html::a('Histórico', ['user/history'], ['class' => 'dropdown-item btn'])
+            . Html::a('Histórico', ['user/historico'], ['class' => 'dropdown-item btn'])
             . Html::a('Definições', ['user/conta'], ['class' => 'dropdown-item btn'])
             . Html::beginTag('a', ['class' => 'dropdown-item'])
             . Html::beginForm(['/site/logout'], 'post')

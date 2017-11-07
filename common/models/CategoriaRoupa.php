@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "c_roupa".
@@ -12,10 +13,10 @@ use Yii;
  * @property string $tamanho
  * @property integer $id_tipo
  *
- * @property Categorias $idCategoria
+ * @property Categoria $idCategoria
  * @property TipoRoupas $idTipo
  */
-class CategoriaRoupa extends \yii\db\ActiveRecord
+class CategoriaRoupa extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -35,7 +36,7 @@ class CategoriaRoupa extends \yii\db\ActiveRecord
             [['id_categoria', 'id_tipo'], 'integer'],
             [['marca'], 'string', 'max' => 25],
             [['tamanho'], 'string', 'max' => 5],
-            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['id_categoria' => 'id']],
+            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['id_categoria' => 'id']],
             [['id_tipo'], 'exist', 'skipOnError' => true, 'targetClass' => TipoRoupas::className(), 'targetAttribute' => ['id_tipo' => 'id']],
         ];
     }
@@ -46,10 +47,8 @@ class CategoriaRoupa extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_categoria' => 'Id Categoria',
             'marca' => 'Marca',
             'tamanho' => 'Tamanho',
-            'id_tipo' => 'Id Tipo',
         ];
     }
 
@@ -58,7 +57,7 @@ class CategoriaRoupa extends \yii\db\ActiveRecord
      */
     public function getIdCategoria()
     {
-        return $this->hasOne(Categorias::className(), ['id' => 'id_categoria']);
+        return $this->hasOne(Categoria::className(), ['id' => 'id_categoria']);
     }
 
     /**

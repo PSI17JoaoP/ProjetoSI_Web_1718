@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "propostas".
@@ -18,8 +19,12 @@ use Yii;
  * @property User $idUser
  * @property Anuncio $idAnuncio
  */
-class Proposta extends \yii\db\ActiveRecord
+class Proposta extends ActiveRecord
 {
+    const ESTADO_ABERTA = 'ABERTA';
+    const ESTADO_ACEITE = 'ACEITE';
+    const ESTADO_RECUSADA = 'RECUSADA';
+
     /**
      * @inheritdoc
      */
@@ -37,7 +42,8 @@ class Proposta extends \yii\db\ActiveRecord
             [['cat_proposto', 'quant', 'id_user', 'id_anuncio', 'estado', 'data_proposta'], 'required'],
             [['cat_proposto', 'quant', 'id_user', 'id_anuncio'], 'integer'],
             [['data_proposta'], 'safe'],
-            [['estado'], 'string', 'max' => 10],
+            ['estado', 'default', 'value' => self::ESTADO_ABERTA],
+            ['status', 'in', 'range' => [self::ESTADO_ACEITE, self::ESTADO_RECUSADA, self::ESTADO_ABERTA]],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id_user']],
             [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncio::className(), 'targetAttribute' => ['id_anuncio' => 'id']],
         ];

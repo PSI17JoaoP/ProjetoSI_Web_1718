@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "c_jogos".
@@ -11,10 +12,10 @@ use Yii;
  * @property integer $id_genero
  * @property string $produtora
  *
- * @property CBrinquedos $idBrinquedo
+ * @property CategoriaBrinquedos $idBrinquedo
  * @property GeneroJogos $idGenero
  */
-class CategoriaJogos extends \yii\db\ActiveRecord
+class CategoriaJogos extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -33,7 +34,7 @@ class CategoriaJogos extends \yii\db\ActiveRecord
             [['id_brinquedo', 'id_genero', 'produtora'], 'required'],
             [['id_brinquedo', 'id_genero'], 'integer'],
             [['produtora'], 'string', 'max' => 25],
-            [['id_brinquedo'], 'exist', 'skipOnError' => true, 'targetClass' => CBrinquedos::className(), 'targetAttribute' => ['id_brinquedo' => 'id_categoria']],
+            [['id_brinquedo'], 'exist', 'skipOnError' => true, 'targetClass' => CategoriaBrinquedos::className(), 'targetAttribute' => ['id_brinquedo' => 'id_categoria']],
             [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => GeneroJogos::className(), 'targetAttribute' => ['id_genero' => 'id']],
         ];
     }
@@ -44,8 +45,6 @@ class CategoriaJogos extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_brinquedo' => 'Id Brinquedo',
-            'id_genero' => 'Id Genero',
             'produtora' => 'Produtora',
         ];
     }
@@ -55,7 +54,7 @@ class CategoriaJogos extends \yii\db\ActiveRecord
      */
     public function getIdBrinquedo()
     {
-        return $this->hasOne(CBrinquedos::className(), ['id_categoria' => 'id_brinquedo']);
+        return $this->hasOne(CategoriaBrinquedos::className(), ['id_categoria' => 'id_brinquedo']);
     }
 
     /**

@@ -11,7 +11,6 @@ use yii\db\ActiveRecord;
  * @property integer $id_user
  * @property string $nome_completo
  * @property string $data_nasc
- * @property string $email
  * @property integer $telefone
  * @property string $regiao
  * @property integer $pin
@@ -36,10 +35,10 @@ class Cliente extends ActiveRecord
     public function rules()
     {
         return [
-            [['id_user', 'nome_completo', 'data_nasc', 'telefone', 'regiao'], 'required'],
-            [['id_user', 'telefone', 'pin'], 'integer'],
+            [['nome_completo', 'data_nasc', 'telefone', 'regiao'], 'required'],
+            [['telefone', 'pin'], 'integer'],
             [['data_nasc'], 'safe'],
-            [['nome_completo', 'email'], 'string', 'max' => 50],
+            [['nome_completo'], 'string', 'max' => 50],
             [['regiao'], 'string', 'max' => 10],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
