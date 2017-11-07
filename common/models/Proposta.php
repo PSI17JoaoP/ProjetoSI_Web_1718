@@ -49,13 +49,8 @@ class Proposta extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'cat_proposto' => 'Cat Proposto',
-            'quant' => 'Quant',
-            'id_user' => 'Id User',
-            'id_anuncio' => 'Id Anuncio',
-            'estado' => 'Estado',
-            'data_proposta' => 'Data Proposta',
+            'cat_proposto' => 'Categoria',
+            'quant' => 'Quantidade',
         ];
     }
 
