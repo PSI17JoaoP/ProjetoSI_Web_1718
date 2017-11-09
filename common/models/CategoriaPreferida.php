@@ -6,24 +6,22 @@ use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "c_livros".
+ * This is the model class for table "categoria_preferida".
  *
+ * @property integer $id_user
  * @property integer $id_categoria
- * @property string $titulo
- * @property string $editora
- * @property string $autor
- * @property integer $isbn
  *
+ * @property User $idUser
  * @property Categoria $idCategoria
  */
-class CategoriaLivros extends ActiveRecord
+class CategoriaPreferida extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'c_livros';
+        return 'categoria_preferida';
     }
 
     /**
@@ -32,25 +30,19 @@ class CategoriaLivros extends ActiveRecord
     public function rules()
     {
         return [
-            [['id_categoria', 'titulo', 'editora', 'autor', 'isbn'], 'required'],
-            [['id_categoria', 'isbn'], 'integer'],
-            [['titulo'], 'string', 'max' => 30],
-            [['editora', 'autor'], 'string', 'max' => 25],
+            [['id_user', 'id_categoria'], 'required'],
+            [['id_user', 'id_categoria'], 'integer'],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
             [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['id_categoria' => 'id']],
         ];
     }
 
     /**
-     * @inheritdoc
+     * @return \yii\db\ActiveQuery
      */
-    public function attributeLabels()
+    public function getIdUser()
     {
-        return [
-            'titulo' => 'Titulo',
-            'editora' => 'Editora',
-            'autor' => 'Autor',
-            'isbn' => 'ISBN',
-        ];
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
 
     /**

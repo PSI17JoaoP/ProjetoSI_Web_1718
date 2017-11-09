@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "c_smartphones".
@@ -14,9 +15,9 @@ use Yii;
  * @property string $os
  * @property string $tamanho
  *
- * @property CEletronica $idEletronica
+ * @property CategoriaEletronica $idEletronica
  */
-class CategoriaSmartphones extends \yii\db\ActiveRecord
+class CategoriaSmartphones extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -38,7 +39,7 @@ class CategoriaSmartphones extends \yii\db\ActiveRecord
             [['ram'], 'string', 'max' => 5],
             [['hdd', 'tamanho'], 'string', 'max' => 10],
             [['os'], 'string', 'max' => 25],
-            [['id_eletronica'], 'exist', 'skipOnError' => true, 'targetClass' => CEletronica::className(), 'targetAttribute' => ['id_eletronica' => 'id_categoria']],
+            [['id_eletronica'], 'exist', 'skipOnError' => true, 'targetClass' => CategoriaEletronica::className(), 'targetAttribute' => ['id_eletronica' => 'id_categoria']],
         ];
     }
 
@@ -48,11 +49,10 @@ class CategoriaSmartphones extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_eletronica' => 'Id Eletronica',
-            'processador' => 'Processador',
-            'ram' => 'Ram',
-            'hdd' => 'Hdd',
-            'os' => 'Os',
+            'processador' => 'CPU',
+            'ram' => 'Memória RAM',
+            'hdd' => 'Armazenamento',
+            'os' => 'Sistema Operativo',
             'tamanho' => 'Tamanho',
         ];
     }
@@ -62,6 +62,6 @@ class CategoriaSmartphones extends \yii\db\ActiveRecord
      */
     public function getIdEletronica()
     {
-        return $this->hasOne(CEletronica::className(), ['id_categoria' => 'id_eletronica']);
+        return $this->hasOne(CategoriaEletronica::className(), ['id_categoria' => 'id_eletronica']);
     }
 }

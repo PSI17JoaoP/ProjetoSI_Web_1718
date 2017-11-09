@@ -14,13 +14,13 @@ use yii\helpers\Html;
                     <?= Html::a('Definições da Conta', 'conta', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
-                    <?= Html::a('Anúncios', 'anuncio', ['class' => 'nav-link'])?>
+                    <?= Html::a('Anúncios', 'anuncios', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
                     <?= Html::a('Propostas', 'propostas', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
-                    <?= Html::a('Histórico', 'history', ['class' => 'nav-link'])?>
+                    <?= Html::a('Histórico', 'historico', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
                     <?= Html::a('Gerar PIN Móvel', '#', ['class' => 'nav-link'])?>

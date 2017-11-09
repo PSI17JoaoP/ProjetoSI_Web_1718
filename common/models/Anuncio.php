@@ -27,6 +27,11 @@ use yii\db\ActiveRecord;
  */
 class Anuncio extends ActiveRecord
 {
+    const ESTADO_ABERTA = 'ABERTA';
+    const ESTADO_FECHADO = 'FECHADO';
+    const ESTADO_PENDENTE = 'PENDENTE';
+
+
     /**
      * @inheritdoc
      */
