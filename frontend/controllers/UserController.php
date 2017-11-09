@@ -9,6 +9,7 @@ use yii\filters\AccessControl;
 
 class UserController extends Controller
 {
+
     public function actionIndex()
     {
         $this->layout = "main-user";

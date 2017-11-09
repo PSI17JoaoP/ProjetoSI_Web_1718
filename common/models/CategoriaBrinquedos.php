@@ -35,7 +35,7 @@ class CategoriaBrinquedos extends \yii\db\ActiveRecord
             [['id_categoria', 'faixa_etaria'], 'integer'],
             [['editora'], 'string', 'max' => 25],
             [['descricao'], 'string', 'max' => 30],
-            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['id_categoria' => 'id']],
+            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['id_categoria' => 'id']],
         ];
     }
 

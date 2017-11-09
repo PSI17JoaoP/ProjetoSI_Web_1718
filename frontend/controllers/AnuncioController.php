@@ -8,6 +8,13 @@ use common\models\AnuncioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
+use frontend\models\AnuncioForm;
+use frontend\models\AnuncioBrinquedosForm;
+
+use yii\web\Response;
+
 
 /**
  * AnuncioController implements the CRUD actions for Anuncio model.
@@ -20,6 +27,20 @@ class AnuncioController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create'],
+                'rules' => [
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    //throw new \Exception('You are not allowed to access this page');
+                }
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -61,13 +82,48 @@ class AnuncioController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Anuncio();
+        $listaCategorias = array('brinquedos' => "Brinquedos" , 
+                                'jogos' => "Jogos",
+                                'eletronica' => "Eletrónica",
+                                'computadores' => "Computadores",
+                                'smartphones' => "Smartphones",
+                                'livros' => "Livros",
+                                'roupa' => "Roupa"
+                            );
+        
+        //$model = new Anuncio();
+        $model = new AnuncioForm(); 
+        
+        if(null !== Yii::$app->request->get('type'))
+        {   
+            $type = Yii::$app->request->get('type');
+
+            switch ($type) {
+                case 'brinquedos':
+                    $model = new AnuncioBrinquedosForm();
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            $model->type = $type;
+        }
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+
+        //----------
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'catList' => $listaCategorias,
             ]);
         }
     }
