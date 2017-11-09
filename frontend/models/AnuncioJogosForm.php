@@ -4,6 +4,7 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use frontend\models\AnuncioBrinquedosForm;
+use common\models\GeneroJogos;
 
 /**
  * Anuncio form
@@ -12,18 +13,25 @@ class AnuncioJogosForm extends AnuncioBrinquedosForm
 {
     
     public $produtora;
+    public $generoList;
     public $genero;
+    
+
+    public function __construct(){
+        $this->generoList = GeneroJogos::find()->all();
+    }
+
+
+    
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['editora', 'descricao'], 'required'],
+            [['produtora', 'genero'], 'required'],
             
-            ['editora', 'string', 'max' => 25],
-
-            ['descricao', 'string', 'max' => 30],
+            ['produtora', 'string', 'max' => 25],
         ];
     }
 
@@ -33,8 +41,8 @@ class AnuncioJogosForm extends AnuncioBrinquedosForm
     public function attributeLabels()
     {
         return [
-            'editora' => 'Editora',
-            'descricao' => 'Descrição',
+            'produtora' => 'Produtora',
+            'genero' => 'Género',
         ];
     }
 

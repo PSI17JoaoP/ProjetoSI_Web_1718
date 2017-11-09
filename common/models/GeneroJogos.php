@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\models;
+namespace common\models;
 
 use Yii;
 
@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $nome
  *
- * @property CJogos[] $cJogos
+ * @property CategoriaJogos[] $cJogos
  */
 class GeneroJogos extends \yii\db\ActiveRecord
 {
@@ -49,6 +49,6 @@ class GeneroJogos extends \yii\db\ActiveRecord
      */
     public function getCJogos()
     {
-        return $this->hasMany(CJogos::className(), ['id_genero' => 'id']);
+        return $this->hasMany(CategoriaJogos::className(), ['id_genero' => 'id']);
     }
 }

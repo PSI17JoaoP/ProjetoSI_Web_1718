@@ -12,6 +12,7 @@ use yii\filters\AccessControl;
 
 use frontend\models\AnuncioForm;
 use frontend\models\AnuncioBrinquedosForm;
+use frontend\models\AnuncioJogosForm;
 
 use yii\web\Response;
 
@@ -102,7 +103,9 @@ class AnuncioController extends Controller
                 case 'brinquedos':
                     $model = new AnuncioBrinquedosForm();
                     break;
-                
+                case 'jogos':
+                    $model = new AnuncioJogosForm();
+                    break;
                 default:
                     # code...
                     break;

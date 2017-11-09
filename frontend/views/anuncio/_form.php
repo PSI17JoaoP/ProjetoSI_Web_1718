@@ -55,6 +55,12 @@ use yii\helpers\Url;
                                     echo $form->field($model, 'editora')->textInput();
                                     echo $form->field($model, 'descricao')->textArea();
                                 }
+                                if ($model->type==='jogos') {
+                                    echo $form->field($model, 'editora')->textInput();
+                                    echo $form->field($model, 'descricao')->textArea();
+                                    echo $form->field($model, 'produtora')->textInput();
+                                    echo $form->field($model, 'genero')->dropDownList($model->generoList);
+                                }
                             ?>
 
                             <?php Pjax::end(); ?>  
