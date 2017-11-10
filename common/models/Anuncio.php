@@ -51,7 +51,7 @@ class Anuncio extends ActiveRecord
             [['data_criacao', 'data_conclusao'], 'safe'],
             [['titulo'], 'string', 'max' => 25],
             [['estado'], 'string', 'max' => 10],
-            [['comentarios'], 'string', 'max' => 256],
+            [['comentarios'], 'string', 'max' => 255],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id_user']],
             [['cat_oferecer'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_oferecer' => 'id']],
             [['cat_receber'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_receber' => 'id']],

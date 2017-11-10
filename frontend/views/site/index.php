@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use common\models\Anuncio;
+use yii\materialicons\MD;
 
 $this->title = 'Página Inicial';
 
@@ -59,7 +61,11 @@ $this->title = 'Página Inicial';
             </div>
 
             <div class="col-md-6">
-                <?= Html::a('Criar Anúncio', ['anuncio/create'], ['class' => 'btn btn-success btn-lg'])?>
+                <div class="panel panel-success">
+                    <div class="panel-body">
+                        <?= Html::a('Criar Anúncio', ['anuncio/create'], ['class' => 'btn btn-success btn-lg'])?>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -67,46 +73,112 @@ $this->title = 'Página Inicial';
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Mais Recentes
-                    </div>
-                    <div class="panel-body">
-                        <table id="tableRecent" class="table table-hover">
-                            <tr height="100px">
-                                <td width="40%">
-                                    <img src="favicon.ico" width="75px" height="75px">
-                                    <p>Troco: Exemplo Bem 1</p>
-                                </td>
-                                <td width="40%" >
-                                    <img src="favicon.ico" width="75px" height="75px">
-                                    <p>Quero: Exemplo Bem 2</p>
-                                </td>
-                                <td width="20%" align="right" style="padding-top: 30px"><button class="btn btn-sm">Enviar proposta</button></td>
-                            </tr>
+                        <p style="margin: 0">Recentes</p>
+                    </div
 
-                        </table>
+                    <div class="panel-body">
+
+                        <?php
+
+                        $anuncios = Anuncio::find()->join('RIGHT', 'imagens_anuncios')->limit(5)->all();
+
+                        foreach ($anuncios as $anuncio) {
+
+                            if($anuncio !== null) { ?>
+
+                                <div class="panel panel-info">
+                                    <div class="panel-body">
+                                        <div class="col-md-3">
+                                            <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <?= MD::icon(MD::_SWAP_HORIZ) ?>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
+                                        </div>
+
+                                        <div class="col-md-4">
+
+                                            <?php
+                                            if($anuncio->quant_receber !== null) {
+                                                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncioId' => 1],
+                                                    ['class' => 'btn btn-info',
+                                                    'data' => ['method' => 'post'],
+                                                    'style' => 'margin-left: 17px; margin-top: 15px']);
+                                            }
+
+                                            else {
+                                                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncioId' => 1],
+                                                    ['class' => 'btn btn-info',
+                                                    'style' => 'margin-left: 17px; margin-top: 15px']);
+                                            }
+
+                                            ?>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
                 </div>
-            </div>
 
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Recomendados
-                    </div>
+                        <p style="margin: 0">Destaques</p>
+                    </div
+
                     <div class="panel-body">
-                        <table id="tableRecommend" class="table table-hover">
-                            <tr height="100px">
-                                <td width="40%">
-                                    <img src="favicon.ico" width="75px" height="75px">
-                                    <p>Troco: Exemplo Bem 1</p>
-                                </td>
-                                <td width="40%" >
-                                    <img src="favicon.ico" width="75px" height="75px">
-                                    <p>Quero: Exemplo Bem 2</p>
-                                </td>
-                                <td width="20%" align="right" style="padding-top: 30px"><button class="btn btn-sm">Enviar proposta</button></td>
-                            </tr>
-                        </table>
+
+                        <?php
+
+                        $anuncios = Anuncio::find()->limit(5)->all();
+
+                        foreach ($anuncios as $anuncio) {
+
+                            if($anuncio !== null) { ?>
+
+                                <div class="panel panel-info">
+                                    <div class="panel-body">
+                                        <div class="col-md-3">
+                                            <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <?= MD::icon(MD::_SWAP_HORIZ) ?>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
+                                        </div>
+
+                                        <div class="col-md-4">
+
+                                            <?php
+                                            if($anuncio->quant_receber !== null) {
+                                                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncioId' => 1], [
+                                                    'class' => 'btn btn-info',
+                                                    'data' => ['method' => 'post'],
+                                                    'style' => 'margin-left: 17px; margin-top: 15px']);
+                                            }
+
+                                            else {
+                                                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncioId' => 1], [
+                                                    'class' => 'btn btn-info',
+                                                    'style' => 'margin-left: 17px; margin-top: 15px']);
+                                            }
+
+                                            ?>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

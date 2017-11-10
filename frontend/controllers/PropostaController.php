@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Anuncio;
 use Yii;
 use common\models\Proposta;
 use yii\web\Controller;
@@ -42,16 +43,42 @@ class PropostaController extends Controller
 
     /**
      * Creates a new Proposta model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * If creation is successful, the browser will be redirected to the previous page.
+     * @param integer $anuncioId O id do anúncio
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($anuncioId)
     {
         $model = new Proposta();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($model->load(Yii::$app->request->post())) {
+
+            if (($anuncio = Anuncio::findOne($anuncioId)) !== null) {
+
+                if($anuncio->cat_receber !== null) {
+                    $model->cat_proposto = $anuncio->cat_receber;
+                    $model->quant = $anuncio->quant_receber;
+                    $model->id_user = Yii::$app->user->identity->getId();
+                    $model->id_anuncio = $anuncio->id;
+                }
+
+                if($model->save()) {
+                    return $this->goBack();
+                }
+
+                else {
+                    return $this->render('create', [
+                        'model' => $model,
+                    ]);
+                }
+            }
+
+            else {
+                return $this->goBack();
+            }
+        }
+
+        else {
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -79,7 +106,7 @@ class PropostaController extends Controller
 
     /**
      * Deletes an existing Proposta model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected to the previous page.
      * @param integer $id
      * @return mixed
      */
@@ -87,7 +114,7 @@ class PropostaController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->goBack();
     }
 
     /**

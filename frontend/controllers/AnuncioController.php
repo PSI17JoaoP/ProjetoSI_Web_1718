@@ -33,7 +33,7 @@ class AnuncioController extends Controller
      * Lists all Anuncio models.
      * @return mixed
      */
-    public function actionIndex()
+    /*public function actionIndex()
     {
         $searchModel = new AnuncioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -42,16 +42,34 @@ class AnuncioController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }*/
 
     /**
      * Displays a single Anuncio model.
-
+     * @param integer $id
      * @return mixed
      */
-    public function actionView()
+    public function actionView($id)
     {
-        return $this->render('pesquisa');
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Searches for Anuncio models.
+     * @param array $params Os parâmetros de pesquisa
+     * @return mixed
+     */
+    public function actionSearch($params)
+    {
+        /*$searchModel = new AnuncioSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);*/
     }
 
     /**

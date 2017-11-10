@@ -37,10 +37,10 @@ class UserController extends Controller
         return $this->render('conta');
     }
 
-    public function actionAnuncio()
+    public function actionAnuncios()
     {
         $this->layout = "main-user";
 
-        return $this->render('anuncio');
+        return $this->render('anuncios');
     }
 }

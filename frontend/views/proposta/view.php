@@ -11,4 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="proposta-view">
 
+
+
 </div>
