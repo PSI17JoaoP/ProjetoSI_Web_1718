@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 
+use common\models\ImagensAnuncio;
 use yii\helpers\Html;
 use common\models\Anuncio;
 use yii\materialicons\MD;
@@ -80,11 +81,13 @@ $this->title = 'Página Inicial';
 
                         <?php
 
-                        $anuncios = Anuncio::find()->join('RIGHT', 'imagens_anuncios')->limit(5)->all();
+                        $anuncios = Anuncio::find()/*->join('RIGHT JOIN', 'imagens_anuncio', 'anuncios.id = imagens_anuncio.anuncio_id')*/->limit(5)->all();
 
                         foreach ($anuncios as $anuncio) {
 
-                            if($anuncio !== null) { ?>
+                            if($anuncio !== null) {
+
+                                //ImagensAnuncio::findOne() ?>
 
                                 <div class="panel panel-info">
                                     <div class="panel-body">
