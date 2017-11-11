@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "tipo_roupas".
@@ -10,9 +11,9 @@ use Yii;
  * @property integer $id
  * @property string $nome
  *
- * @property CRoupa[] $cRoupas
+ * @property CategoriaRoupa[] $cRoupas
  */
-class TipoRoupas extends \yii\db\ActiveRecord
+class TipoRoupas extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -49,6 +50,6 @@ class TipoRoupas extends \yii\db\ActiveRecord
      */
     public function getCRoupas()
     {
-        return $this->hasMany(CRoupa::className(), ['id_tipo' => 'id']);
+        return $this->hasMany(CategoriaRoupa::className(), ['id_tipo' => 'id']);
     }
 }

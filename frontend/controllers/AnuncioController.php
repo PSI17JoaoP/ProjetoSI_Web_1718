@@ -63,13 +63,13 @@ class AnuncioController extends Controller
      */
     public function actionSearch($params)
     {
-        /*$searchModel = new AnuncioSearch();
+        $searchModel = new AnuncioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);*/
+        ]);
     }
 
     /**

@@ -2,12 +2,12 @@
 
 namespace frontend\controllers;
 
-use common\models\Anuncio;
 use Yii;
-use common\models\Proposta;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\Anuncio;
+use common\models\Proposta;
 
 /**
  * PropostaController implements the CRUD actions for Proposta model.
@@ -67,9 +67,16 @@ class PropostaController extends Controller
                 }
 
                 else {
-                    return $this->render('create', [
-                        'model' => $model,
-                    ]);
+
+                    if($anuncio->cat_receber !== null) {
+                        $this->goBack();
+                    }
+
+                    else {
+                        return $this->render('create', [
+                            'model' => $model,
+                        ]);
+                    }
                 }
             }
 

@@ -7,7 +7,6 @@ use yii\helpers\Html;
 $this->title = 'Os meus anúncios';
 ?>
 
-<!--Código ainda tem de ser alterado de forma a acomodar rows-->
 <div class="col-12 col-md-8">
     <div class="panel panel-default">
         <div class="panel-body">
@@ -44,21 +43,25 @@ $this->title = 'Os meus anúncios';
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        ...
+
+
+
                                     </div>
                                     <div class="modal-footer">
                                         <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-6 col-md-2">
+
                             <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
+
                         </div>
                     </div>
-
                 <?php } ?>
             <?php } ?>
         </div>

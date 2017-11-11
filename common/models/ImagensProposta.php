@@ -6,22 +6,22 @@ use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "imagens_anuncio".
+ * This is the model class for table "imagens_proposta".
  *
  * @property integer $id
- * @property integer $anuncio_id
+ * @property integer $proposta_id
  * @property string $path_relativo
  *
- * @property Anuncio $anuncio
+ * @property Proposta $proposta
  */
-class ImagensAnuncio extends ActiveRecord
+class ImagensProposta extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'imagens_anuncio';
+        return 'imagens_proposta';
     }
 
     /**
@@ -30,10 +30,10 @@ class ImagensAnuncio extends ActiveRecord
     public function rules()
     {
         return [
-            [['anuncio_id', 'path_relativo'], 'required'],
-            [['anuncio_id'], 'integer'],
+            [['proposta_id', 'path_relativo'], 'required'],
+            [['proposta_id'], 'integer'],
             [['path_relativo'], 'string', 'max' => 255],
-            [['anuncio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncio::className(), 'targetAttribute' => ['anuncio_id' => 'id']],
+            [['proposta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Proposta::className(), 'targetAttribute' => ['proposta_id' => 'id']],
         ];
     }
 
@@ -44,7 +44,7 @@ class ImagensAnuncio extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'anuncio_id' => 'Anuncio ID',
+            'proposta_id' => 'Proposta ID',
             'path_relativo' => 'Path Relativo',
         ];
     }
@@ -52,8 +52,8 @@ class ImagensAnuncio extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAnuncio()
+    public function getProposta()
     {
-        return $this->hasOne(Anuncio::className(), ['id' => 'anuncio_id']);
+        return $this->hasOne(Proposta::className(), ['id' => 'proposta_id']);
     }
 }

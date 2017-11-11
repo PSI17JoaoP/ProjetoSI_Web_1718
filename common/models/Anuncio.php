@@ -23,6 +23,7 @@ use yii\db\ActiveRecord;
  * @property Cliente $idUser
  * @property Categoria $catOferecer
  * @property Categoria $catReceber
+ * @property ImagensAnuncio[] $imagensAnuncios
  * @property Proposta[] $propostas
  */
 class Anuncio extends ActiveRecord
@@ -52,7 +53,7 @@ class Anuncio extends ActiveRecord
             [['titulo'], 'string', 'max' => 25],
             [['estado'], 'string', 'max' => 10],
             [['comentarios'], 'string', 'max' => 255],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id_user']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['id_user' => 'id_user']],
             [['cat_oferecer'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_oferecer' => 'id']],
             [['cat_receber'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_receber' => 'id']],
         ];
@@ -96,6 +97,14 @@ class Anuncio extends ActiveRecord
     public function getCatReceber()
     {
         return $this->hasOne(Categoria::className(), ['id' => 'cat_receber']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImagensAnuncios()
+    {
+        return $this->hasMany(ImagensAnuncio::className(), ['anuncio_id' => 'id']);
     }
 
     /**

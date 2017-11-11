@@ -24,7 +24,7 @@ class m171103_121647_drop_admin_table extends Migration
     public function down()
     {
         $this->createTable('admin', [
-            'id_user' => $this->integer(11)->notNull()->primaryKey(),
+            'id_user' => $this->primaryKey(),
         ]);
 
         // creates index for column `id_user`
