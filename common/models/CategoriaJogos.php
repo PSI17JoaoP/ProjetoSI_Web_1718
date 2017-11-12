@@ -50,12 +50,6 @@ class CategoriaJogos extends \yii\db\ActiveRecord
         ];
     }
 
-    //Nao devia de ser assim, mas é para efeitos de teste
-    public function getIdCategoria()
-    {
-        return $this->hasOne(CategoriaBrinquedos::className(), ['id_categoria' => 'id_brinquedo']);
-    }
-
     /**
      * @return \yii\db\ActiveQuery
      */

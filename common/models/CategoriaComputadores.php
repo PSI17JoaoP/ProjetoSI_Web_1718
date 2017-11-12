@@ -15,7 +15,7 @@ use Yii;
  * @property string $os
  * @property integer $portatil
  *
- * @property CEletronica $idEletronica
+ * @property CategoriaEletronica $idEletronica
  */
 class CategoriaComputadores extends \yii\db\ActiveRecord
 {
@@ -39,7 +39,7 @@ class CategoriaComputadores extends \yii\db\ActiveRecord
             [['ram'], 'string', 'max' => 5],
             [['hdd'], 'string', 'max' => 10],
             [['os'], 'string', 'max' => 25],
-            [['id_eletronica'], 'exist', 'skipOnError' => true, 'targetClass' => CEletronica::className(), 'targetAttribute' => ['id_eletronica' => 'id_categoria']],
+            [['id_eletronica'], 'exist', 'skipOnError' => true, 'targetClass' => CategoriaEletronica::className(), 'targetAttribute' => ['id_eletronica' => 'id_categoria']],
         ];
     }
 
@@ -64,6 +64,6 @@ class CategoriaComputadores extends \yii\db\ActiveRecord
      */
     public function getIdEletronica()
     {
-        return $this->hasOne(CEletronica::className(), ['id_categoria' => 'id_eletronica']);
+        return $this->hasOne(CategoriaEletronica::className(), ['id_categoria' => 'id_eletronica']);
     }
 }

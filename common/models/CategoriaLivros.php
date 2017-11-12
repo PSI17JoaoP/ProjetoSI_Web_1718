@@ -13,7 +13,7 @@ use Yii;
  * @property string $autor
  * @property integer $isbn
  *
- * @property Categorias $idCategoria
+ * @property Categoria $idCategoria
  */
 class CategoriaLivros extends \yii\db\ActiveRecord
 {
@@ -35,7 +35,7 @@ class CategoriaLivros extends \yii\db\ActiveRecord
             [['id_categoria', 'isbn'], 'integer'],
             [['titulo'], 'string', 'max' => 30],
             [['editora', 'autor'], 'string', 'max' => 25],
-            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['id_categoria' => 'id']],
+            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['id_categoria' => 'id']],
         ];
     }
 
@@ -58,6 +58,6 @@ class CategoriaLivros extends \yii\db\ActiveRecord
      */
     public function getIdCategoria()
     {
-        return $this->hasOne(Categorias::className(), ['id' => 'id_categoria']);
+        return $this->hasOne(Categoria::className(), ['id' => 'id_categoria']);
     }
 }

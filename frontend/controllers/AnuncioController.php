@@ -13,6 +13,11 @@ use yii\filters\AccessControl;
 use frontend\models\AnuncioForm;
 use frontend\models\AnuncioBrinquedosForm;
 use frontend\models\AnuncioJogosForm;
+use frontend\models\AnuncioEletronicaForm;
+use frontend\models\AnuncioComputadoresForm;
+use frontend\models\AnuncioSmartphonesForm;
+use frontend\models\AnuncioLivrosForm;
+use frontend\models\AnuncioRoupaForm;
 
 use yii\web\Response;
 
@@ -87,7 +92,7 @@ class AnuncioController extends Controller
                                 'jogos' => "Jogos",
                                 'eletronica' => "Eletrónica",
                                 'computadores' => "Computadores",
-                                'smarthphones' => "Smarthphones",
+                                'smartphones' => "Smartphones",
                                 'livros' => "Livros",
                                 'roupa' => "Roupa"
                             );
@@ -108,19 +113,19 @@ class AnuncioController extends Controller
                     $model->mOferta = new AnuncioJogosForm();
                     break;
                 case 'eletronica':
-                    # code...
+                    $model->mOferta = new AnuncioEletronicaForm();
                     break;
                 case 'computadores':
-                    # code...
+                    $model->mOferta = new AnuncioComputadoresForm();
                     break;
-                case 'smarthphones':
-                    # code...
+                case 'smartphones':
+                    $model->mOferta = new AnuncioSmartphonesFormForm();
                     break;
                 case 'livros':
-                    # code...
+                    $model->mOferta = new AnuncioLivrosForm();
                     break;
                 case 'roupa':
-                    # code...
+                    $model->mOferta = new AnuncioRoupaForm();
                     break;
             }
             
@@ -140,19 +145,19 @@ class AnuncioController extends Controller
                     $model->mProcura = new AnuncioJogosForm();
                     break;
                 case 'eletronica':
-                    # code...
+                    $model->mProcura = new AnuncioEletronicaForm();
                     break;
                 case 'computadores':
-                    # code...
+                    $model->mProcura = new AnuncioComputadoresForm();
                     break;
-                case 'smarthphones':
-                    # code...
+                case 'smartphones':
+                    $model->mProcura = new AnuncioSmartphonesForm();
                     break;
                 case 'livros':
-                    # code...
+                    $model->mProcura = new AnuncioLivrosForm();
                     break;
                 case 'roupa':
-                    # code...
+                    $model->mProcura = new AnuncioRoupaForm();
                     break;
             }
             
@@ -172,19 +177,19 @@ class AnuncioController extends Controller
                     $model->mOferta = new AnuncioJogosForm();
                     break;
                 case 'eletronica':
-                    # code...
+                    $model->mOferta = new AnuncioEletronicaForm();
                     break;
                 case 'computadores':
-                    # code...
+                    $model->mOferta = new AnuncioComputadoresForm();
                     break;
-                case 'smarthphones':
-                    # code...
+                case 'smartphones':
+                    $model->mOferta = new AnuncioSmartphonesFormForm();
                     break;
                 case 'livros':
-                    # code...
+                    $model->mOferta = new AnuncioLivrosForm();
                     break;
                 case 'roupa':
-                    # code...
+                    $model->mOferta = new AnuncioRoupaForm();
                     break;
             }
 
@@ -196,19 +201,19 @@ class AnuncioController extends Controller
                     $model->mProcura = new AnuncioJogosForm();
                     break;
                 case 'eletronica':
-                    # code...
+                    $model->mProcura = new AnuncioEletronicaForm();
                     break;
                 case 'computadores':
-                    # code...
+                    $model->mProcura = new AnuncioComputadoresForm();
                     break;
-                case 'smarthphones':
-                    # code...
+                case 'smartphones':
+                    $model->mProcura = new AnuncioSmartphonesForm();
                     break;
                 case 'livros':
-                    # code...
+                    $model->mProcura = new AnuncioLivrosForm();
                     break;
                 case 'roupa':
-                    # code...
+                    $model->mProcura = new AnuncioRoupaForm();
                     break;
             }
             $model->mOferta->load(Yii::$app->request->post());
@@ -223,7 +228,7 @@ class AnuncioController extends Controller
             }else if (($modeloO = $model->mOferta->guardar()) && ($modeloP = $model->mProcura->guardar())) 
             {
                 if (($modelo = $model->guardar(Yii::$app->user->identity->id, $modeloO, $modeloP))) {
-                    return $this->redirect(['view', 'id' => $modelo->id]);
+                    return $this->redirect(['view', 'model' => $modelo]);
                 }else {
                     return $this->render('create', [
                         'model' => $model,

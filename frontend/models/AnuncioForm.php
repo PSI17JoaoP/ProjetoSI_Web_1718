@@ -28,7 +28,7 @@ class AnuncioForm extends Model
         return [
             ['titulo', 'trim'],
             [['catOferta','titulo','catProcura'], 'required'],
-            ['titulo', 'string', 'min' => 2, 'max' => 255],
+            ['titulo', 'string', 'min' => 2, 'max' => 25],
             [['comentarios'], 'string', 'max' => 256],
         ];
     }
