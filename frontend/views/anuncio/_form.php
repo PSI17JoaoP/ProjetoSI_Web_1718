@@ -33,33 +33,93 @@ use yii\helpers\Url;
                         <div class="panel-body">
                             <div class="row">
 
-                                <?= $form->field($model, 'type')->dropDownList($catItems,
+                                <?= $form->field($model, 'catOferta')->dropDownList($catItems,
                                 [
                                 'onchange'=>'
                                     $.pjax.reload({
-                                    url: "'. Url::toRoute(['create']).'?type="+$(this).val(),
-                                    container: "#pjax-dynamic-form",
+                                    url: "'. Url::toRoute(['create']).'?catOferta="+$(this).val(),
+                                    container: "#pjax-dynamic-form-oferta",
                                     timeout: 1000,
                                     });
                                 ',
 
                                 'class'=>'form-control',
-                                'prompt' => 'Seleciona a categoria'
+                                'prompt' => 'Selecione a categoria'
                                 ]) ?>
                             </div>
                             <div class="row">
-                            <?php  Pjax::begin(['id'=>'pjax-dynamic-form','enablePushState'=>false]); ?>
+                            <?php  Pjax::begin(['id'=>'pjax-dynamic-form-oferta','enablePushState'=>false]); ?>
                             
                             <?php
-                                if($model->type==='brinquedos'){
-                                    echo $form->field($model, 'editora')->textInput();
-                                    echo $form->field($model, 'descricao')->textArea();
+                                if($model->catOferta==='brinquedos'){
+                                    echo $form->field($model->mOferta, 'nome')->textInput();
+                                    echo $form->field($model->mOferta, 'faixaEtaria')->textInput(['type' => 'number']);
+                                    echo $form->field($model->mOferta, 'editora')->textInput();
+                                    echo $form->field($model->mOferta, 'descricao')->textArea();
                                 }
-                                if ($model->type==='jogos') {
-                                    echo $form->field($model, 'editora')->textInput();
-                                    echo $form->field($model, 'descricao')->textArea();
-                                    echo $form->field($model, 'produtora')->textInput();
-                                    echo $form->field($model, 'genero')->dropDownList($model->generoList);
+                                if ($model->catOferta==='jogos') {
+                                    echo $form->field($model->mOferta, 'nome')->textInput();
+                                    echo $form->field($model->mOferta, 'faixaEtaria')->textInput(['type' => 'number']);
+                                    echo $form->field($model->mOferta, 'editora')->textInput();
+                                    echo $form->field($model->mOferta, 'descricao')->textArea();
+                                    echo $form->field($model->mOferta, 'produtora')->textInput();
+                                    echo $form->field($model->mOferta, 'genero')->dropDownList($model->mOferta->generoList, 
+                                    [
+                                    'class'=>'form-control',
+                                    'prompt' => 'Selecione o género'
+                                    ]);
+                                }
+                            ?>
+
+                            <?php Pjax::end(); ?>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <h3>Por:</h3>
+
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <?= $form->field($model, 'catProcura')->dropDownList(['todos' => 'Qualquer coisa']+$catItems,
+                                    [
+                                    'onchange'=>'
+                                        $.pjax.reload({
+                                        url: "'. Url::toRoute(['create']).'?catProcura="+$(this).val(),
+                                        container: "#pjax-dynamic-form-procura",
+                                        timeout: 1000,
+                                        });
+                                    ',
+
+                                    'class'=>'form-control',
+                                    'prompt' => 'Selecione a categoria'
+                                ]) ?>   
+                            </div>
+                            <div class="row">
+                            <?php  Pjax::begin(['id'=>'pjax-dynamic-form-procura','enablePushState'=>false]); ?>
+                            
+                            <?php
+                                if($model->catProcura==='brinquedos'){
+                                    echo $form->field($model->mProcura, 'nome', ['inputOptions' => ['id' => 'channel-description']])->textInput();
+                                    echo $form->field($model->mProcura, 'faixaEtaria')->textInput(['type' => 'number']);                                    
+                                    echo $form->field($model->mProcura, 'editora')->textInput();
+                                    echo $form->field($model->mProcura, 'descricao')->textArea(['style' => 'resize: none']);
+                                }
+                                if ($model->catProcura==='jogos') {
+                                    echo $form->field($model->mProcura, 'nome')->textInput();
+                                    echo $form->field($model->mProcura, 'faixaEtaria')->textInput(['type' => 'number']);
+                                    echo $form->field($model->mProcura, 'editora')->textInput();
+                                    echo $form->field($model->mProcura, 'descricao')->textArea(['style' => 'resize: none']);
+                                    echo $form->field($model->mProcura, 'produtora')->textInput();
+                                    echo $form->field($model->mProcura, 'genero')->dropDownList($model->mProcura->generoList, 
+                                    [
+                                    'class'=>'form-control',
+                                    'prompt' => 'Selecione o género'
+                                    ]);
                                 }
                             ?>
 
@@ -69,54 +129,25 @@ use yii\helpers\Url;
                     </div>
                 </div>
 
-                <div class="col-12 col-md-8">
-                    <div class="row">
-                        <div class="col-12 col-md-8">
-                        <a href="#" class="btn btn-danger">Adicionar</a>
-                        </div>
-                    </div>
-                </div>
             </div>
-        
-            <h3>Por:</h3>
-
-            <div class="row">
-            <div class="col-12 col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-6 col-md-4">Outro Produto</div>
-                            <div class="col-12 col-md-8">
-                                <span class="pull-right"><a href="#"><u>Remover</u></a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-8">
-                <div class="row">
-                    <div class="col-12 col-md-8">
-                    <a href="#" class="btn btn-danger">Adicionar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <h4>Comentário</h4>    
 
             <div class="form-group">                
-                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="textArea"></textarea>
-                     <span class="help-block">Adicione aqui comentários adicionais referentes ao anuncio.</span>
+                 <div class="col-lg-8">
+                    <?= $form->field($model, 'comentarios')->textArea(
+                        ['rows' => '4', 'style' => 'resize: none']);?>
+                    <span class="help-block">Adicione aqui comentários adicionais referentes ao anuncio.</span>
                  </div>
             </div>
         </div>
         
         
         <div class="row">
-            <div class="col-lg-10">
-            <a href="#" class="btn btn-primary btn-lg" style="">Criar Anúncio</a>
+            <div class="col-lg-12">
+                <span class="pull-right">
+                    <?= Html::submitButton('Concluído', ['class' => 'btn btn-primary btn-lg', 'name' => 'anuncio-button pull-right']) ?>
+                </span>
             </div>
         </div>
     </div>

@@ -20,8 +20,8 @@ use Yii;
  * @property string $comentarios
  *
  * @property Clientes $idUser
- * @property Categorias $catOferecer
- * @property Categorias $catReceber
+ * @property Categoria $catOferecer
+ * @property Categoria $catReceber
  * @property Propostas[] $propostas
  */
 class Anuncio extends \yii\db\ActiveRecord
@@ -46,7 +46,7 @@ class Anuncio extends \yii\db\ActiveRecord
             [['titulo'], 'string', 'max' => 25],
             [['estado'], 'string', 'max' => 10],
             [['comentarios'], 'string', 'max' => 256],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id_user']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
             [['cat_oferecer'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_oferecer' => 'id']],
             [['cat_receber'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_receber' => 'id']],
         ];
@@ -85,7 +85,7 @@ class Anuncio extends \yii\db\ActiveRecord
      */
     public function getCatOferecer()
     {
-        return $this->hasOne(Categorias::className(), ['id' => 'cat_oferecer']);
+        return $this->hasOne(Categoria::className(), ['id' => 'cat_oferecer']);
     }
 
     /**

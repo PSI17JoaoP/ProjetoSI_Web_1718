@@ -12,8 +12,8 @@ use Yii;
  * @property integer $faixa_etaria
  * @property string $descricao
  *
- * @property Categorias $idCategoria
- * @property CJogos $cJogos
+ * @property Categoria $idCategoria
+ * @property CategoriaJogos $cJogos
  */
 class CategoriaBrinquedos extends \yii\db\ActiveRecord
 {
@@ -57,7 +57,7 @@ class CategoriaBrinquedos extends \yii\db\ActiveRecord
      */
     public function getIdCategoria()
     {
-        return $this->hasOne(Categorias::className(), ['id' => 'id_categoria']);
+        return $this->hasOne(Categoria::className(), ['id' => 'id_categoria']);
     }
 
     /**
@@ -65,6 +65,6 @@ class CategoriaBrinquedos extends \yii\db\ActiveRecord
      */
     public function getCJogos()
     {
-        return $this->hasOne(CJogos::className(), ['id_brinquedo' => 'id_categoria']);
+        return $this->hasOne(CategoriaJogos::className(), ['id_brinquedo' => 'id_categoria']);
     }
 }

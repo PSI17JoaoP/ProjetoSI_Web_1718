@@ -12,8 +12,13 @@ class AnuncioForm extends Model
 {
     
     public $titulo;
-    public $type;
-
+    public $catOferta;
+    public $catProcura;
+    //incluir modelos neste
+    public $mOferta;
+    public $mProcura;
+    //--
+    public $comentarios;
 
     /**
      * @inheritdoc
@@ -22,8 +27,9 @@ class AnuncioForm extends Model
     {
         return [
             ['titulo', 'trim'],
-            ['titulo', 'required'],
+            [['catOferta','titulo','catProcura'], 'required'],
             ['titulo', 'string', 'min' => 2, 'max' => 255],
+            [['comentarios'], 'string', 'max' => 256],
         ];
     }
 
@@ -34,8 +40,31 @@ class AnuncioForm extends Model
     {
         return [
             'titulo' => 'Título',
-            'type' => 'Categoria',
+            'catOferta' => 'Categoria',
+            'catProcura' => 'Categoria',
         ];
+    }
+
+    public function guardar($idUser, $modeloOferta, $modeloProcura)
+    {
+        if ($this->validate()) 
+        {
+            $anuncio = new Anuncio();
+            $anuncio->titulo = $this->titulo;
+            $anuncio->id_user = $idUser;
+            $anuncio->cat_oferecer = $modeloOferta;
+            $anuncio->quant_oferecer = 1;
+            $anuncio->cat_receber = $modeloProcura;
+            $anuncio->quant_receber = 1;
+            $anuncio->estado = 'ativo';
+            $anuncio->data_criacao = date("Y-m-d h:i:s");
+            $anuncio->comentarios = $this->comentarios;
+            $anuncio->save();
+
+            return $anuncio;
+        }
+
+        return null;
     }
 
 }

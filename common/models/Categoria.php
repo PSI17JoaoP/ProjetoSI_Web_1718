@@ -12,10 +12,10 @@ use Yii;
  *
  * @property Anuncios[] $anuncios
  * @property Anuncios[] $anuncios0
- * @property CBrinquedos $cBrinquedos
- * @property CEletronica $cEletronica
- * @property CLivros $cLivros
- * @property CRoupa $cRoupa
+ * @property CategoriaBrinquedos $cBrinquedos
+ * @property CategoriaEletronica $cEletronica
+ * @property CategoriaLivros $cLivros
+ * @property CategoriaRoupa $cRoupa
  * @property CategoriaPreferida[] $categoriaPreferidas
  * @property User[] $idUsers
  */
@@ -72,7 +72,7 @@ class Categoria extends \yii\db\ActiveRecord
      */
     public function getCBrinquedos()
     {
-        return $this->hasOne(CBrinquedos::className(), ['id_categoria' => 'id']);
+        return $this->hasOne(CategoriaBrinquedos::className(), ['id_categoria' => 'id']);
     }
 
     /**
@@ -80,7 +80,7 @@ class Categoria extends \yii\db\ActiveRecord
      */
     public function getCEletronica()
     {
-        return $this->hasOne(CEletronica::className(), ['id_categoria' => 'id']);
+        return $this->hasOne(CategoriaEletronica::className(), ['id_categoria' => 'id']);
     }
 
     /**
@@ -88,7 +88,7 @@ class Categoria extends \yii\db\ActiveRecord
      */
     public function getCLivros()
     {
-        return $this->hasOne(CLivros::className(), ['id_categoria' => 'id']);
+        return $this->hasOne(CategoriaLivros::className(), ['id_categoria' => 'id']);
     }
 
     /**
@@ -96,7 +96,7 @@ class Categoria extends \yii\db\ActiveRecord
      */
     public function getCRoupa()
     {
-        return $this->hasOne(CRoupa::className(), ['id_categoria' => 'id']);
+        return $this->hasOne(CategoriaRoupa::className(), ['id_categoria' => 'id']);
     }
 
     /**

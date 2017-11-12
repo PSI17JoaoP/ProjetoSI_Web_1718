@@ -87,43 +87,158 @@ class AnuncioController extends Controller
                                 'jogos' => "Jogos",
                                 'eletronica' => "Eletrónica",
                                 'computadores' => "Computadores",
-                                'smartphones' => "Smartphones",
+                                'smarthphones' => "Smarthphones",
                                 'livros' => "Livros",
                                 'roupa' => "Roupa"
                             );
         
-        //$model = new Anuncio();
         $model = new AnuncioForm(); 
         
-        if(null !== Yii::$app->request->get('type'))
+        //Validar a escolha da categoria do evento onChange (Oferta)
+        if(null !== Yii::$app->request->get('catOferta'))
         {   
-            $type = Yii::$app->request->get('type');
+            $cat = Yii::$app->request->get('catOferta');
+            $model->catOferta = $cat;
 
-            switch ($type) {
+            switch ($cat) {
                 case 'brinquedos':
-                    $model = new AnuncioBrinquedosForm();
+                    $model->mOferta = new AnuncioBrinquedosForm();
                     break;
                 case 'jogos':
-                    $model = new AnuncioJogosForm();
+                    $model->mOferta = new AnuncioJogosForm();
                     break;
-                default:
+                case 'eletronica':
+                    # code...
+                    break;
+                case 'computadores':
+                    # code...
+                    break;
+                case 'smarthphones':
+                    # code...
+                    break;
+                case 'livros':
+                    # code...
+                    break;
+                case 'roupa':
                     # code...
                     break;
             }
-            $model->type = $type;
+            
         }
 
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        //Validar a escolha da categoria do evento onChange (Procura)
+        if(null !== Yii::$app->request->get('catProcura'))
+        {   
+            $cat = Yii::$app->request->get('catProcura');
+            $model->catProcura = $cat;
+
+            switch ($cat) {
+                case 'brinquedos':
+                    $model->mProcura = new AnuncioBrinquedosForm();
+                    break;
+                case 'jogos':
+                    $model->mProcura = new AnuncioJogosForm();
+                    break;
+                case 'eletronica':
+                    # code...
+                    break;
+                case 'computadores':
+                    # code...
+                    break;
+                case 'smarthphones':
+                    # code...
+                    break;
+                case 'livros':
+                    # code...
+                    break;
+                case 'roupa':
+                    # code...
+                    break;
+            }
+            
+        }
+
+        //Validar envio de dados
+        if ($model->load(Yii::$app->request->post())) 
         {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return \yii\widgets\ActiveForm::validate($model);
-        }
+            $catO = $model->catOferta;
+            $catP = $model->catProcura;
 
-        //----------
+            switch ($catO) {
+                case 'brinquedos':
+                    $model->mOferta = new AnuncioBrinquedosForm();
+                    break;
+                case 'jogos':
+                    $model->mOferta = new AnuncioJogosForm();
+                    break;
+                case 'eletronica':
+                    # code...
+                    break;
+                case 'computadores':
+                    # code...
+                    break;
+                case 'smarthphones':
+                    # code...
+                    break;
+                case 'livros':
+                    # code...
+                    break;
+                case 'roupa':
+                    # code...
+                    break;
+            }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+            switch ($catP) {
+                case 'brinquedos':
+                    $model->mProcura = new AnuncioBrinquedosForm();
+                    break;
+                case 'jogos':
+                    $model->mProcura = new AnuncioJogosForm();
+                    break;
+                case 'eletronica':
+                    # code...
+                    break;
+                case 'computadores':
+                    # code...
+                    break;
+                case 'smarthphones':
+                    # code...
+                    break;
+                case 'livros':
+                    # code...
+                    break;
+                case 'roupa':
+                    # code...
+                    break;
+            }
+            $model->mOferta->load(Yii::$app->request->post());
+            $model->mProcura->load(Yii::$app->request->post());
+            
+
+            //Validar o pedido AJAX do evento onChange e validar o formulário com os novos dados
+            if (Yii::$app->request->isAjax)
+            {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return \yii\widgets\ActiveForm::validate($model);
+            }else if (($modeloO = $model->mOferta->guardar()) && ($modeloP = $model->mProcura->guardar())) 
+            {
+                if (($modelo = $model->guardar(Yii::$app->user->identity->id, $modeloO, $modeloP))) {
+                    return $this->redirect(['view', 'id' => $modelo->id]);
+                }else {
+                    return $this->render('create', [
+                        'model' => $model,
+                        'catList' => $listaCategorias,
+                    ]);
+                }
+                
+            }else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'catList' => $listaCategorias,
+                ]);
+            }
+        }else 
+        {
             return $this->render('create', [
                 'model' => $model,
                 'catList' => $listaCategorias,
