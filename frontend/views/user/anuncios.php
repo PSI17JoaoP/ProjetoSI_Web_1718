@@ -2,6 +2,7 @@
 /* @var $this yii\web\View */
 
 use common\models\Anuncio;
+use common\models\ImagensAnuncio;
 use yii\helpers\Html;
 
 $this->title = 'Os meus anúncios';
@@ -17,7 +18,9 @@ $this->title = 'Os meus anúncios';
 
             foreach($anuncios as $anuncio) {
 
-                if($anuncio !== null) { ?>
+                if($anuncio !== null) {
+
+                    $imagens = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id]) ?>
 
                     <div class="row">
                         <div class="col-12 col-md-10">

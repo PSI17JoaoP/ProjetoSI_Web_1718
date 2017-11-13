@@ -12,9 +12,9 @@ $this->title = 'Página Inicial';
 ?>
 <div class="site-index">
     <div class="body-content">
-        <div class="row" style="margin-bottom:10%">
-            <div class="col-md-6">
-                <div class="panel panel-primary">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-info">
                     <div class="panel-body">
                         <form class="form" role="search">
                             <div class="col-md-12" style="margin-bottom: 10px">
@@ -31,6 +31,8 @@ $this->title = 'Página Inicial';
                                     <option value="livros">Livros</option>
                                     <option value="roupa">Roupa</option>
                                 </select>
+
+
                             </div>
                             <div class="col-md-4">
                                 <select class="form-control" id="regiao">
@@ -65,17 +67,31 @@ $this->title = 'Página Inicial';
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="panel panel-success">
-                    <div class="panel-body">
-                        <?= Html::a('Criar Anúncio', ['anuncio/create'], ['class' => 'btn btn-success btn-lg'])?>
+            <?php
+
+            if(!Yii::$app->user->isGuest)
+            {
+                if(Anuncio::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) { ?>
+                    <div class="col-md-4">
+                        <div class="panel panel-success">
+                            <div class="panel-body" style="text-align: center; background-color: #449d44">
+                                <p class="text-center" style="color: white">É a sua primeira vez online ?</p>
+                                <p class="text-center" style="color: white">Crie agora um anúncio !!</p>
+                                <?= Html::a('Criar Anúncio', ['anuncio/create'], ['class' => 'btn btn-success btn-lg'])?>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
+            <?php } ?>
+        <?php } ?>
+    </div>
+
+
+
+
+
 
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <p style="margin: 0">Recentes</p>
@@ -96,7 +112,7 @@ $this->title = 'Página Inicial';
                                 <div class="panel panel-info">
                                     <div class="panel-body">
                                         <div class="col-md-3">
-                                            <?= Html::img( '', ['width' => '75px', 'height' => '75px']) ?>
+                                            <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
                                         </div>
 
                                         <div class="col-md-2">
@@ -134,7 +150,7 @@ $this->title = 'Página Inicial';
                     </div>
                 </div>
 
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <p style="margin: 0">Destaques</p>

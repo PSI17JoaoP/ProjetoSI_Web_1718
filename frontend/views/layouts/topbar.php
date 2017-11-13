@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Anuncio;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -18,6 +19,13 @@ use yii\bootstrap\NavBar;
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
         $menuItems[] = ['label' => 'Registo', 'url' => ['/site/signup']];
     } else {
+
+        if(Anuncio::findOne(['id_user' => Yii::$app->user->identity->getId()]) !== null) {
+            $menuItems[] = Html::beginTag('li')
+                . Html::a('Criar Anúncio', ['anuncio/create'], ['class' => 'btn btn-success btn-lg', 'style' => 'color: #fff; padding: 10px; margin-top: 4px;'])
+                . Html::endTag('li');
+        }
+
         $menuItems[] =  Html::beginTag('li', ['class' => 'nav-item dropdown'])
             . Html::tag('a','Notificações',
                 ['class' => 'nav-link dropdown-toggle',

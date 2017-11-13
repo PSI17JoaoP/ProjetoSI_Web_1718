@@ -23,14 +23,16 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este nome já foi escolhido.'],
             ['username', 'string', 'min' => 8, 'max' => 255],
+            ['username', 'validateUsername'],
+            ['username', 'match', 'pattern' => '/^[a-z]\w*$/i', 'message' => 'O nome contém caratéres especiais.'],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este email já foi escolhido.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 8],
