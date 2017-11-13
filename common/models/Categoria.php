@@ -97,7 +97,7 @@ class Categoria extends ActiveRecord
      */
     public function getCRoupa()
     {
-        return $this->hasOne(CategoriaLivros::className(), ['id_categoria' => 'id']);
+        return $this->hasOne(CategoriaRoupa::className(), ['id_categoria' => 'id']);
     }
 
     /**
