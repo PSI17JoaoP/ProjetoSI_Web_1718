@@ -14,6 +14,8 @@ class AnuncioForm extends Model
     public $titulo;
     public $catOferta;
     public $catProcura;
+    public $quantOferta;
+    public $quantProcura;
     //incluir modelos neste
     public $mOferta;
     public $mProcura;
@@ -27,7 +29,8 @@ class AnuncioForm extends Model
     {
         return [
             ['titulo', 'trim'],
-            [['catOferta','titulo','catProcura'], 'required'],
+            [['catOferta','titulo','catProcura', 'quantOferta'], 'required'],
+            [['quantProcura', 'quantOferta'], 'integer'],
             ['titulo', 'string', 'min' => 2, 'max' => 25],
             [['comentarios'], 'string', 'max' => 256],
         ];
@@ -42,6 +45,8 @@ class AnuncioForm extends Model
             'titulo' => 'Título',
             'catOferta' => 'Categoria',
             'catProcura' => 'Categoria',
+            'quantOferta' => 'Quantidade',
+            'quantProcura' => 'Quantidade',
         ];
     }
 
@@ -53,9 +58,11 @@ class AnuncioForm extends Model
             $anuncio->titulo = $this->titulo;
             $anuncio->id_user = $idUser;
             $anuncio->cat_oferecer = $modeloOferta;
-            $anuncio->quant_oferecer = 1;
-            $anuncio->cat_receber = $modeloProcura;
-            $anuncio->quant_receber = 1;
+            $anuncio->quant_oferecer =$this->quantOferta;
+            if ($modeloProcura!='null') {
+                $anuncio->cat_receber = $modeloProcura;
+                $anuncio->quant_receber = $this->quantProcura;
+            }
             $anuncio->estado = 'ativo';
             $anuncio->data_criacao = date("Y-m-d h:i:s");
             $anuncio->comentarios = $this->comentarios;

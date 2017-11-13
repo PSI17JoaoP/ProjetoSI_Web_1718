@@ -51,6 +51,8 @@ use yii\helpers\Url;
                             <?php  Pjax::begin(['id'=>'pjax-dynamic-form-oferta','enablePushState'=>false]); ?>
                             
                             <?php
+                                echo $form->field($model, 'quantOferta')->textInput(['type' => 'number']);
+
                                 if($model->catOferta==='brinquedos'){
                                     echo $form->field($model->mOferta, 'nome')->textInput();
                                     echo $form->field($model->mOferta, 'faixaEtaria')->textInput(['type' => 'number']);
@@ -148,6 +150,12 @@ use yii\helpers\Url;
                             <?php  Pjax::begin(['id'=>'pjax-dynamic-form-procura','enablePushState'=>false]); ?>
                             
                             <?php
+
+                                if ($model->catProcura!=='todos') {
+                                    echo $form->field($model, 'quantProcura')->textInput(['type' => 'number']);
+                                }
+                                
+
                                 if($model->catProcura==='brinquedos'){
                                     echo $form->field($model->mProcura, 'nome')->textInput();
                                     echo $form->field($model->mProcura, 'faixaEtaria')->textInput(['type' => 'number']);                                    

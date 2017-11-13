@@ -18,6 +18,7 @@ use frontend\models\AnuncioComputadoresForm;
 use frontend\models\AnuncioSmartphonesForm;
 use frontend\models\AnuncioLivrosForm;
 use frontend\models\AnuncioRoupaForm;
+use frontend\models\AnuncioTodosForm;
 
 use yii\web\Response;
 
@@ -159,6 +160,9 @@ class AnuncioController extends Controller
                 case 'roupa':
                     $model->mProcura = new AnuncioRoupaForm();
                     break;
+                case 'todos':
+                    $model->mProcura = new AnuncioTodosForm();
+                    break;
             }
             
         }
@@ -214,6 +218,9 @@ class AnuncioController extends Controller
                     break;
                 case 'roupa':
                     $model->mProcura = new AnuncioRoupaForm();
+                    break;
+                case 'todos':
+                    $model->mProcura = new AnuncioTodosForm();
                     break;
             }
             $model->mOferta->load(Yii::$app->request->post());
