@@ -10,6 +10,7 @@ use common\models\Cliente;
 
 class UserController extends Controller
 {
+
     public function actionIndex()
     {
         $this->layout = "main-user";
