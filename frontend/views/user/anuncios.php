@@ -47,24 +47,21 @@ $this->title = 'Os meus anúncios';
                                     </div>
                                     <div class="modal-body">
 
-
+                                        //Content ...
 
                                     </div>
                                     <div class="modal-footer">
                                         <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
-
-                                        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-6 col-md-2">
-
                             <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
-
                         </div>
                     </div>
+
                 <?php } ?>
             <?php } ?>
         </div>

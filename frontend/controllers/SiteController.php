@@ -76,7 +76,43 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $listaCategorias = array(
+            'brinquedos' => "Brinquedos",
+            'jogos' => "Jogos",
+            'eletronica' => "Eletrónica",
+            'computadores' => "Computadores",
+            'smartphones' => "Smartphones",
+            'livros' => "Livros",
+            'roupa' => "Roupa"
+        );
+
+        $listaRegioes = array(
+            'Aveiro' => "Aveiro",
+            'Beja' => "Beja",
+            'Braga' => "Braga",
+            'Bragança' => "Bragança",
+            'Castelo Branco' => "Castelo Branco",
+            'Coimbra' => "Coimbra",
+            'Évora' => "Évora",
+            'Faro' => "Faro",
+            'Guarda' => "Guarda",
+            'Leiria' => "Leiria",
+            'Lisboa' => "Lisboa",
+            'Portalegre' => "Portalegre",
+            'Porto' => "Porto",
+            'Santarém' => "Santarém",
+            'Setúbal' => "Setúbal",
+            'Viana do Castelo' => "Viana do Castelo",
+            'Vila Real' => "Vila Real",
+            'Viseu' => "Viseu",
+            'Açores' => "Açores",
+            'Madeira' => "Madeira",
+        );
+
+        return $this->render('index', [
+            'categorias' => $listaCategorias,
+            'regioes' => $listaRegioes,
+        ]);
     }
 
     /**
@@ -132,7 +168,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionContact()
+    /*public function actionContact()
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -148,7 +184,7 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
-    }
+    }*/
 
     /**
      * Displays about page.
