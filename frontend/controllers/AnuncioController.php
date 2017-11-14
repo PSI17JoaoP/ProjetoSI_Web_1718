@@ -119,7 +119,7 @@ class AnuncioController extends Controller
         $model = new AnuncioForm(); 
         
         //Validar a escolha da categoria do evento onChange (Oferta)
-        if(Yii::$app->request->get('catOferta') !== null)
+        if(Yii::$app->request->get('catOferta') !== 'null')
         {   
             $cat = Yii::$app->request->get('catOferta');
             $model->catOferta = $cat;
@@ -128,7 +128,7 @@ class AnuncioController extends Controller
         }
 
         //Validar a escolha da categoria do evento onChange (Procura)
-        if(Yii::$app->request->get('catProcura') !== null)
+        if(Yii::$app->request->get('catProcura') !== 'null')
         {   
             $cat = Yii::$app->request->get('catProcura');
             $model->catProcura = $cat;
@@ -157,7 +157,7 @@ class AnuncioController extends Controller
 
             else if (($modeloOferta = $model->mOferta->guardar()) && ($modeloProcura = $model->mProcura->guardar()))
             {
-                if (($modelo = $model->guardar(Yii::$app->user->identity->id, $modeloOferta, $modeloProcura))) {
+                if (($modelo = $model->guardar(Yii::$app->user->identity->getId(), $modeloOferta, $modeloProcura))) {
                     return $this->redirect(['view', 'model' => $modelo]);
                 } else {
                     return $this->render('create', [

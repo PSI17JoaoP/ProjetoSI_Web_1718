@@ -22,9 +22,9 @@ class AnuncioForm extends Model
     public $mProcura;
 
     //Constantes de Estado do Anúncio
-    const ESTADO_ATIVO = 'ATIVO';
-    const ESTADO_FECHADO = 'FECHADO';
-    const ESTADO_PENDENTE = 'PENDENTE';
+    //const ESTADO_ATIVO = 'ATIVO';
+    //const ESTADO_FECHADO = 'FECHADO';
+    //const ESTADO_PENDENTE = 'PENDENTE';
 
     /**
      * @inheritdoc
@@ -34,8 +34,6 @@ class AnuncioForm extends Model
         return [
             ['titulo', 'trim'],
             [['catOferta','titulo','catProcura', 'quantOferta'], 'required'],
-            ['estado', 'default', 'value' => self::ESTADO_ATIVO],
-            ['estado', 'in', 'range' => [self::ESTADO_ATIVO, self::ESTADO_FECHADO, self::ESTADO_PENDENTE]],
             [['quantProcura', 'quantOferta'], 'integer'],
             ['titulo', 'string', 'min' => 2, 'max' => 25],
             [['comentarios'], 'string', 'max' => 256],
@@ -66,6 +64,7 @@ class AnuncioForm extends Model
             $anuncio->cat_oferecer = $modeloOferta;
             $anuncio->quant_oferecer =$this->quantOferta;
             $anuncio->comentarios = $this->comentarios;
+            $anuncio->estado = 'ATIVO';
 
             if ($modeloProcura !== 'null') {
                 $anuncio->cat_receber = $modeloProcura;
@@ -113,6 +112,9 @@ class AnuncioForm extends Model
             case 'roupa':
                 $model = new AnuncioRoupaForm();
                 break;
+            case 'todos':
+                $model = new AnuncioTodosForm();
+
         }
 
         return $model;

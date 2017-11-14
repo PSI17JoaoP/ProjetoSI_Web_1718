@@ -20,7 +20,7 @@ use yii\db\ActiveRecord;
  * @property string $data_conclusao
  * @property string $comentarios
  *
- * @property Cliente $idUser
+ * @property User $idUser
  * @property Categoria $catOferecer
  * @property Categoria $catReceber
  * @property ImagensAnuncio[] $imagensAnuncios
@@ -28,11 +28,6 @@ use yii\db\ActiveRecord;
  */
 class Anuncio extends ActiveRecord
 {
-    const ESTADO_ABERTA = 'ABERTA';
-    const ESTADO_FECHADO = 'FECHADO';
-    const ESTADO_PENDENTE = 'PENDENTE';
-
-
     /**
      * @inheritdoc
      */
@@ -53,7 +48,7 @@ class Anuncio extends ActiveRecord
             [['titulo'], 'string', 'max' => 25],
             [['estado'], 'string', 'max' => 10],
             [['comentarios'], 'string', 'max' => 255],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['id_user' => 'id']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
             [['cat_oferecer'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_oferecer' => 'id']],
             [['cat_receber'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_receber' => 'id']],
         ];
@@ -80,7 +75,7 @@ class Anuncio extends ActiveRecord
      */
     public function getIdUser()
     {
-        return $this->hasOne(Cliente::className(), ['id_user' => 'id_user']);
+        return $this->hasOne(User::className(), ['id_user' => 'id_user']);
     }
 
     /**
