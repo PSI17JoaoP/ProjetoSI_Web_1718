@@ -44,7 +44,7 @@ class Proposta extends ActiveRecord
             [['cat_proposto', 'quant', 'id_user', 'id_anuncio'], 'integer'],
             [['data_proposta'], 'safe'],
             ['estado', 'default', 'value' => self::ESTADO_ABERTA],
-            ['status', 'in', 'range' => [self::ESTADO_ACEITE, self::ESTADO_RECUSADA, self::ESTADO_ABERTA]],
+            ['estado', 'in', 'range' => [self::ESTADO_ACEITE, self::ESTADO_RECUSADA, self::ESTADO_ABERTA]],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['id_user' => 'id_user']],
             [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncio::className(), 'targetAttribute' => ['id_anuncio' => 'id']],
         ];

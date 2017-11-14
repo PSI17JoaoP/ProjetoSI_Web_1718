@@ -10,17 +10,21 @@ use common\models\Anuncio;
  */
 class AnuncioForm extends Model
 {
-    
     public $titulo;
     public $catOferta;
     public $catProcura;
     public $quantOferta;
     public $quantProcura;
-    //incluir modelos neste
+    public $comentarios;
+
+    //Modelos de Oferta e Procura
     public $mOferta;
     public $mProcura;
-    //--
-    public $comentarios;
+
+    //Constantes de Estado do Anúncio
+    const ESTADO_ATIVO = 'ATIVO';
+    const ESTADO_FECHADO = 'FECHADO';
+    const ESTADO_PENDENTE = 'PENDENTE';
 
     /**
      * @inheritdoc
@@ -30,6 +34,8 @@ class AnuncioForm extends Model
         return [
             ['titulo', 'trim'],
             [['catOferta','titulo','catProcura', 'quantOferta'], 'required'],
+            ['estado', 'default', 'value' => self::ESTADO_ATIVO],
+            ['estado', 'in', 'range' => [self::ESTADO_ATIVO, self::ESTADO_FECHADO, self::ESTADO_PENDENTE]],
             [['quantProcura', 'quantOferta'], 'integer'],
             ['titulo', 'string', 'min' => 2, 'max' => 25],
             [['comentarios'], 'string', 'max' => 256],
@@ -59,13 +65,14 @@ class AnuncioForm extends Model
             $anuncio->id_user = $idUser;
             $anuncio->cat_oferecer = $modeloOferta;
             $anuncio->quant_oferecer =$this->quantOferta;
-            if ($modeloProcura!='null') {
+            $anuncio->comentarios = $this->comentarios;
+
+            if ($modeloProcura !== 'null') {
                 $anuncio->cat_receber = $modeloProcura;
                 $anuncio->quant_receber = $this->quantProcura;
             }
-            $anuncio->estado = 'ativo';
+
             $anuncio->data_criacao = date("Y-m-d h:i:s");
-            $anuncio->comentarios = $this->comentarios;
             $anuncio->save();
 
             return $anuncio;
@@ -74,4 +81,40 @@ class AnuncioForm extends Model
         return null;
     }
 
+    /**
+     *
+     *
+     * @param $categoria
+     * @return mixed
+     */
+    public function selecionarCategoria($categoria)
+    {
+        $model = null;
+
+        switch ($categoria) {
+            case 'brinquedos':
+                $model = new AnuncioBrinquedosForm();
+                break;
+            case 'jogos':
+                $model = new AnuncioJogosForm();
+                break;
+            case 'eletronica':
+                $model = new AnuncioEletronicaForm();
+                break;
+            case 'computadores':
+                $model = new AnuncioComputadoresForm();
+                break;
+            case 'smartphones':
+                $model = new AnuncioSmartphonesForm();
+                break;
+            case 'livros':
+                $model = new AnuncioLivrosForm();
+                break;
+            case 'roupa':
+                $model = new AnuncioRoupaForm();
+                break;
+        }
+
+        return $model;
+    }
 }

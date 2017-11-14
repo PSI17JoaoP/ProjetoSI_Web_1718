@@ -21,6 +21,7 @@ use frontend\models\AnuncioRoupaForm;
 use frontend\models\AnuncioTodosForm;
 
 use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 
 /**
@@ -113,161 +114,69 @@ class AnuncioController extends Controller
                                 'computadores' => "Computadores",
                                 'smartphones' => "Smartphones",
                                 'livros' => "Livros",
-                                'roupa' => "Roupa"
-                            );
+                                'roupa' => "Roupa");
         
         $model = new AnuncioForm(); 
         
         //Validar a escolha da categoria do evento onChange (Oferta)
-        if(null !== Yii::$app->request->get('catOferta'))
+        if(Yii::$app->request->get('catOferta') !== null)
         {   
             $cat = Yii::$app->request->get('catOferta');
             $model->catOferta = $cat;
 
-            switch ($cat) {
-                case 'brinquedos':
-                    $model->mOferta = new AnuncioBrinquedosForm();
-                    break;
-                case 'jogos':
-                    $model->mOferta = new AnuncioJogosForm();
-                    break;
-                case 'eletronica':
-                    $model->mOferta = new AnuncioEletronicaForm();
-                    break;
-                case 'computadores':
-                    $model->mOferta = new AnuncioComputadoresForm();
-                    break;
-                case 'smartphones':
-                    $model->mOferta = new AnuncioSmartphonesFormForm();
-                    break;
-                case 'livros':
-                    $model->mOferta = new AnuncioLivrosForm();
-                    break;
-                case 'roupa':
-                    $model->mOferta = new AnuncioRoupaForm();
-                    break;
-            }
-            
+            $model->mOferta = $model->selecionarCategoria($cat);
         }
 
         //Validar a escolha da categoria do evento onChange (Procura)
-        if(null !== Yii::$app->request->get('catProcura'))
+        if(Yii::$app->request->get('catProcura') !== null)
         {   
             $cat = Yii::$app->request->get('catProcura');
             $model->catProcura = $cat;
 
-            switch ($cat) {
-                case 'brinquedos':
-                    $model->mProcura = new AnuncioBrinquedosForm();
-                    break;
-                case 'jogos':
-                    $model->mProcura = new AnuncioJogosForm();
-                    break;
-                case 'eletronica':
-                    $model->mProcura = new AnuncioEletronicaForm();
-                    break;
-                case 'computadores':
-                    $model->mProcura = new AnuncioComputadoresForm();
-                    break;
-                case 'smartphones':
-                    $model->mProcura = new AnuncioSmartphonesForm();
-                    break;
-                case 'livros':
-                    $model->mProcura = new AnuncioLivrosForm();
-                    break;
-                case 'roupa':
-                    $model->mProcura = new AnuncioRoupaForm();
-                    break;
-                case 'todos':
-                    $model->mProcura = new AnuncioTodosForm();
-                    break;
-            }
-            
+            $model->mProcura = $model->selecionarCategoria($cat);
         }
 
         //Validar envio de dados
         if ($model->load(Yii::$app->request->post())) 
         {
-            $catO = $model->catOferta;
-            $catP = $model->catProcura;
+            $catOferta = $model->catOferta;
+            $catProcura = $model->catProcura;
 
-            switch ($catO) {
-                case 'brinquedos':
-                    $model->mOferta = new AnuncioBrinquedosForm();
-                    break;
-                case 'jogos':
-                    $model->mOferta = new AnuncioJogosForm();
-                    break;
-                case 'eletronica':
-                    $model->mOferta = new AnuncioEletronicaForm();
-                    break;
-                case 'computadores':
-                    $model->mOferta = new AnuncioComputadoresForm();
-                    break;
-                case 'smartphones':
-                    $model->mOferta = new AnuncioSmartphonesFormForm();
-                    break;
-                case 'livros':
-                    $model->mOferta = new AnuncioLivrosForm();
-                    break;
-                case 'roupa':
-                    $model->mOferta = new AnuncioRoupaForm();
-                    break;
-            }
+            $model->mOferta = $model->selecionarCategoria($catOferta);
+            $model->mProcura = $model->selecionarCategoria($catProcura);
 
-            switch ($catP) {
-                case 'brinquedos':
-                    $model->mProcura = new AnuncioBrinquedosForm();
-                    break;
-                case 'jogos':
-                    $model->mProcura = new AnuncioJogosForm();
-                    break;
-                case 'eletronica':
-                    $model->mProcura = new AnuncioEletronicaForm();
-                    break;
-                case 'computadores':
-                    $model->mProcura = new AnuncioComputadoresForm();
-                    break;
-                case 'smartphones':
-                    $model->mProcura = new AnuncioSmartphonesForm();
-                    break;
-                case 'livros':
-                    $model->mProcura = new AnuncioLivrosForm();
-                    break;
-                case 'roupa':
-                    $model->mProcura = new AnuncioRoupaForm();
-                    break;
-                case 'todos':
-                    $model->mProcura = new AnuncioTodosForm();
-                    break;
-            }
             $model->mOferta->load(Yii::$app->request->post());
             $model->mProcura->load(Yii::$app->request->post());
-            
 
             //Validar o pedido AJAX do evento onChange e validar o formulário com os novos dados
             if (Yii::$app->request->isAjax)
             {
                 Yii::$app->response->format = Response::FORMAT_JSON;
-                return \yii\widgets\ActiveForm::validate($model);
-            }else if (($modeloO = $model->mOferta->guardar()) && ($modeloP = $model->mProcura->guardar())) 
+                return ActiveForm::validate($model);
+            }
+
+            else if (($modeloOferta = $model->mOferta->guardar()) && ($modeloProcura = $model->mProcura->guardar()))
             {
-                if (($modelo = $model->guardar(Yii::$app->user->identity->id, $modeloO, $modeloP))) {
+                if (($modelo = $model->guardar(Yii::$app->user->identity->id, $modeloOferta, $modeloProcura))) {
                     return $this->redirect(['view', 'model' => $modelo]);
-                }else {
+                } else {
                     return $this->render('create', [
                         'model' => $model,
                         'catList' => $listaCategorias,
                     ]);
                 }
-                
-            }else {
+            }
+
+            else
+            {
                 return $this->render('create', [
                     'model' => $model,
                     'catList' => $listaCategorias,
                 ]);
             }
-        }else 
+        }
+
+        else
         {
             return $this->render('create', [
                 'model' => $model,
