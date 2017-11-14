@@ -85,7 +85,7 @@ $this->title = 'Página Inicial';
                                     </div>
 
                                     <div class="col-md-2">
-                                        <?= MD::icon(MD::_SWAP_HORIZ, ['width' => '50px', 'height' => '50px']) ?>
+                                        <?= MD::icon(MD::_SWAP_HORIZ, ['style' => 'font-size: 50px']) ?>
                                     </div>
 
                                     <div class="col-md-3">
@@ -145,7 +145,7 @@ $this->title = 'Página Inicial';
                                         </div>
 
                                         <div class="col-md-2">
-                                            <?= MD::icon(MD::_SWAP_HORIZ, ['width' => '50px', 'height' => '50px']) ?>
+                                            <?= MD::icon(MD::_SWAP_HORIZ, ['style' => 'font-size: 50px']) ?>
                                         </div>
 
                                         <div class="col-md-3">
