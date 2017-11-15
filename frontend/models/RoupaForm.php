@@ -3,7 +3,6 @@ namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
-use frontend\models\AnuncioForm;
 use common\models\Categoria;
 use common\models\CategoriaRoupa;
 use common\models\TipoRoupas;
@@ -11,7 +10,7 @@ use common\models\TipoRoupas;
 /**
  * Anuncio form
  */
-class AnuncioRoupaForm extends Model
+class RoupaForm extends Model
 {
     
     public $nome;

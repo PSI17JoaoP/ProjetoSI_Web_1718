@@ -3,14 +3,13 @@ namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
-use frontend\models\AnuncioForm;
 use common\models\Categoria;
 use common\models\CategoriaEletronica;
 
 /**
  * Anuncio form
  */
-class AnuncioEletronicaForm extends Model
+class EletronicaForm extends Model
 {
     
     public $nome;

@@ -3,7 +3,6 @@ namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
-use frontend\models\AnuncioBrinquedosForm;
 use common\models\Categoria;
 use common\models\CategoriaBrinquedos;
 use common\models\CategoriaJogos;
@@ -12,7 +11,7 @@ use common\models\GeneroJogos;
 /**
  * Anuncio form
  */
-class AnuncioJogosForm extends Model
+class JogosForm extends Model
 {
     
     public $nome;

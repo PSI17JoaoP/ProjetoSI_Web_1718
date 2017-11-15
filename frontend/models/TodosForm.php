@@ -3,13 +3,12 @@ namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
-use frontend\models\AnuncioForm;
 
 
 /**
  * Anuncio form
  */
-class AnuncioTodosForm extends Model
+class TodosForm extends Model
 {
     
 

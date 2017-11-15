@@ -9,19 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
-use frontend\models\AnuncioForm;
-use frontend\models\AnuncioBrinquedosForm;
-use frontend\models\AnuncioJogosForm;
-use frontend\models\AnuncioEletronicaForm;
-use frontend\models\AnuncioComputadoresForm;
-use frontend\models\AnuncioSmartphonesForm;
-use frontend\models\AnuncioLivrosForm;
-use frontend\models\AnuncioRoupaForm;
-use frontend\models\AnuncioTodosForm;
-
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use frontend\models\AnuncioForm;
 
 
 /**

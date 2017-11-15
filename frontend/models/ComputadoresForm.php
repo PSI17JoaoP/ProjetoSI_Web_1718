@@ -3,7 +3,6 @@ namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
-use frontend\models\AnuncioForm;
 use common\models\Categoria;
 use common\models\CategoriaEletronica;
 use common\models\CategoriaComputadores;
@@ -11,7 +10,7 @@ use common\models\CategoriaComputadores;
 /**
  * Anuncio form
  */
-class AnuncioComputadoresForm extends Model
+class ComputadoresForm extends Model
 {
     
     public $nome;

@@ -24,7 +24,6 @@ class AnuncioForm extends Model
     //Constantes de Estado do Anúncio
     //const ESTADO_ATIVO = 'ATIVO';
     //const ESTADO_FECHADO = 'FECHADO';
-    //const ESTADO_PENDENTE = 'PENDENTE';
 
     /**
      * @inheritdoc
@@ -92,28 +91,28 @@ class AnuncioForm extends Model
 
         switch ($categoria) {
             case 'brinquedos':
-                $model = new AnuncioBrinquedosForm();
+                $model = new BrinquedosForm();
                 break;
             case 'jogos':
-                $model = new AnuncioJogosForm();
+                $model = new JogosForm();
                 break;
             case 'eletronica':
-                $model = new AnuncioEletronicaForm();
+                $model = new EletronicaForm();
                 break;
             case 'computadores':
-                $model = new AnuncioComputadoresForm();
+                $model = new ComputadoresForm();
                 break;
             case 'smartphones':
-                $model = new AnuncioSmartphonesForm();
+                $model = new SmartphonesForm();
                 break;
             case 'livros':
-                $model = new AnuncioLivrosForm();
+                $model = new LivrosForm();
                 break;
             case 'roupa':
-                $model = new AnuncioRoupaForm();
+                $model = new RoupaForm();
                 break;
             case 'todos':
-                $model = new AnuncioTodosForm();
+                $model = new TodosForm();
 
         }
 

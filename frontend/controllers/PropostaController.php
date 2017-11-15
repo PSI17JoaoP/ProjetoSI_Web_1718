@@ -44,6 +44,7 @@ class PropostaController extends Controller
     /**
      * Creates a new Proposta model.
      * If creation is successful, the browser will be redirected to the previous page.
+     * @param null $id ID do anúncio
      * @return mixed
      */
     public function actionCreate($id = null)
@@ -66,7 +67,7 @@ class PropostaController extends Controller
                     $model->id_user = Yii::$app->user->identity->getId();
                     $model->id_anuncio = $anuncio->id;
                     $model->data_proposta = date("Y-m-d h:i:s");
-                    $model->estado = 'ABERTA';
+                    $model->estado = 'PENDENTE';
                 }
 
                 if($model->save()) {
@@ -74,6 +75,7 @@ class PropostaController extends Controller
                 }
 
                 else {
+
                     if($anuncio->cat_receber !== null) {
                         $this->goBack();
                     }
@@ -84,6 +86,10 @@ class PropostaController extends Controller
                         ]);
                     }
                 }
+            }
+
+            else {
+                return $this->goBack();
             }
         }
 
