@@ -2,19 +2,20 @@
 
 /* @var $this yii\web\View */
 
-use common\models\ImagensAnuncio;
 use yii\helpers\Html;
-use common\models\Anuncio;
 use yii\materialicons\MD;
+use common\models\Anuncio;
+use common\models\ImagensAnuncio;
 
 $this->title = 'Página Inicial';
 
 ?>
+
 <div class="site-index">
     <div class="body-content">
         <div class="row" style="margin-bottom: 10%">
             <div class="col-md-8">
-                <div class="panel panel-info">
+                <div class="panel panel-primary">
                     <div class="panel-body">
                         <form class="form" role="search">
                             <div class="col-md-12" style="margin-bottom: 10px">
@@ -55,128 +56,69 @@ $this->title = 'Página Inicial';
                         </div>
                     </div>
 
+                <?php } ?>
             <?php } ?>
-        <?php } ?>
-    </div>
+        </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <p style="margin: 0">Recentes</p>
-                </div
-
-                <div class="panel-body">
-
-                    <?php
-
-                    $anuncios = Anuncio::find()->all();
-
-                    foreach ($anuncios as $anuncio) {
-
-                        if($anuncio !== null) {
-
-                            $imagens = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id]) ?>
-
-                            <div class="panel panel-info">
-                                <div class="panel-body">
-                                    <div class="col-md-3">
-                                        <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <?= MD::icon(MD::_SWAP_HORIZ, ['style' => 'font-size: 50px']) ?>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
-                                    </div>
-
-                                    <div class="col-md-4">
-
-                                        <?php
-
-                                            if($anuncio->quant_receber !== null) {
-                                                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncioId' => $anuncio->id],
-                                                    ['class' => 'btn btn-info',
-                                                    'data' => ['method' => 'post'],
-                                                    'style' => 'margin-left: 17px; margin-top: 15px']);
-                                            }
-
-                                            else {
-                                                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncioId' => $anuncio->id],
-                                                    ['class' => 'btn btn-info',
-                                                    'style' => 'margin-left: 17px; margin-top: 15px']);
-                                            }
-
-                                        ?>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        <?php } ?>
-                    <?php } ?>
-                </div>
-            </div>
-
+        <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <p style="margin: 0">Destaques</p>
-                    </div
+                        <p style="margin: 0">Recentes</p>
+                    </div>
 
                     <div class="panel-body">
 
-                        <?php
+                        <?php 
 
-                        $anuncios = Anuncio::find()->all();
+                            $anuncios = Anuncio::find()->all();
 
-                        foreach ($anuncios as $anuncio) {
+                            foreach ($anuncios as $anuncio) {
 
-                            if($anuncio !== null) {
+                                if($anuncio !== null) {
 
-                                $imagens = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id]) ?>
+                                    $imagens = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id]);
+                                    
+                                    if(!Yii::$app->user->isGuest) {
+                                        echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
+                                    } else {
+                                        echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
+                                    } ?>
 
-                                <div class="panel panel-info">
-                                    <div class="panel-body">
-                                        <div class="col-md-3">
-                                            <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <?= MD::icon(MD::_SWAP_HORIZ, ['style' => 'font-size: 50px']) ?>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
-                                        </div>
-
-                                        <div class="col-md-4">
-
-                                            <?php
-
-                                                if($anuncio->quant_receber !== null) {
-                                                    echo Html::a('Enviar Proposta', ['proposta/create', 'anuncioId' => $anuncio->id], [
-                                                        'class' => 'btn btn-info',
-                                                        'data' => ['method' => 'post'],
-                                                        'style' => 'margin-left: 17px; margin-top: 15px']);
-                                                }
-
-                                                else {
-                                                    echo Html::a('Enviar Proposta', ['proposta/create', 'anuncioId' => $anuncio->id], [
-                                                        'class' => 'btn btn-info',
-                                                        'style' => 'margin-left: 17px; margin-top: 15px']);
-                                                }
-
-                                            ?>
-
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <?php } ?>
                             <?php } ?>
-                        <?php } ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <p style="margin: 0">Destaques</p>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <?php 
+
+                                $anuncios = Anuncio::find()->all();
+
+                                foreach ($anuncios as $anuncio) {
+
+                                    if($anuncio !== null) {
+
+                                        $imagens = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id]);
+                                        
+                                        if(!Yii::$app->user->isGuest) {
+                                            echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
+                                        } else {
+                                            echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
+                                        } ?>
+
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

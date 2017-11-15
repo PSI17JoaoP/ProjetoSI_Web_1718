@@ -17,15 +17,11 @@ use yii\db\ActiveRecord;
  * @property string $data_proposta
  *
  * @property ImagensProposta[] $imagensPropostas
- * @property Cliente $idUser
+ * @property User $idUser
  * @property Anuncio $idAnuncio
  */
 class Proposta extends ActiveRecord
 {
-    const ESTADO_ABERTA = 'ABERTA';
-    const ESTADO_ACEITE = 'ACEITE';
-    const ESTADO_RECUSADA = 'RECUSADA';
-
     /**
      * @inheritdoc
      */
@@ -43,9 +39,7 @@ class Proposta extends ActiveRecord
             [['cat_proposto', 'quant', 'id_user', 'id_anuncio', 'estado', 'data_proposta'], 'required'],
             [['cat_proposto', 'quant', 'id_user', 'id_anuncio'], 'integer'],
             [['data_proposta'], 'safe'],
-            ['estado', 'default', 'value' => self::ESTADO_ABERTA],
-            ['estado', 'in', 'range' => [self::ESTADO_ACEITE, self::ESTADO_RECUSADA, self::ESTADO_ABERTA]],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['id_user' => 'id_user']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
             [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncio::className(), 'targetAttribute' => ['id_anuncio' => 'id']],
         ];
     }
@@ -74,7 +68,7 @@ class Proposta extends ActiveRecord
      */
     public function getIdUser()
     {
-        return $this->hasOne(Cliente::className(), ['id_user' => 'id_user']);
+        return $this->hasOne(User::className(), ['id_user' => 'id_user']);
     }
 
     /**
