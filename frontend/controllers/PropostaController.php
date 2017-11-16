@@ -2,7 +2,9 @@
 
 namespace frontend\controllers;
 
+use frontend\models\PropostaForm;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,6 +22,20 @@ class PropostaController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create'],
+                'rules' => [
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    //throw new \Exception('You are not allowed to access this page');
+                }
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -49,53 +65,64 @@ class PropostaController extends Controller
      */
     public function actionCreate($id = null)
     {
-        $model = new Proposta();
+        $listaCategorias = array('brinquedos' => "Brinquedos" ,
+            'jogos' => "Jogos",
+            'eletronica' => "Eletrónica",
+            'computadores' => "Computadores",
+            'smartphones' => "Smartphones",
+            'livros' => "Livros",
+            'roupa' => "Roupa");
 
-        if (/*($post = */Yii::$app->request->post()/*)*/) {
+        $modelForm = new PropostaForm();
 
-            //Código comentado para a implementação da forma alternativa de enviar proposta (ver index)
-            
-            //$model->load($post);
+        if(Yii::$app->request->get('catProposto') !== null)
+        {   
+            $cat = Yii::$app->request->get('catProposto');
+            $modelForm->catProposto = $cat;
 
-            $anuncioID = Yii::$app->request->post('id_anuncio');
-
-            if (($anuncio = Anuncio::findOne($anuncioID)) !== null) {
-                
-                if($anuncio->cat_receber !== null) {
-                    $model->cat_proposto = $anuncio->cat_receber;
-                    $model->quant = $anuncio->quant_receber;
-                    $model->id_user = Yii::$app->user->identity->getId();
-                    $model->id_anuncio = $anuncio->id;
-                    $model->data_proposta = date("Y-m-d h:i:s");
-                    $model->estado = 'PENDENTE';
-                }
-
-                if($model->save()) {
-                    return $this->goBack();
-                }
-
-                else {
-
-                    if($anuncio->cat_receber !== null) {
-                        $this->goBack();
-                    }
-
-                    else {
-                        return $this->render('create', [
-                            'model' => $model,
-                        ]);
-                    }
-                }
-            }
-
-            else {
-                return $this->goBack();
-            }
+            $modelForm->modelProposto = $modelForm->selecionarCategoria($cat);
         }
 
-        else {
+        if (Yii::$app->request->post()) {
+
+            if($id !== null /*|| Yii::$app->user->getReturnUrl()*/) {
+
+                $model = new Proposta();
+
+                $anuncioID = Yii::$app->request->post('id_anuncio');
+
+                if (($anuncio = Anuncio::findOne($anuncioID)) !== null) {
+
+                    if ($anuncio->cat_receber !== null) {
+
+                        $model->cat_proposto = $anuncio->cat_receber;
+                        $model->quant = $anuncio->quant_receber;
+                        $model->id_user = Yii::$app->user->identity->getId();
+                        $model->id_anuncio = $anuncio->id;
+                        $model->data_proposta = date("Y-m-d h:i:s");
+                        $model->estado = 'PENDENTE';
+                    }
+
+                    if ($model->save()) {
+                        return $this->goBack();
+                    } else {
+
+                        if ($anuncio->cat_receber !== null) {
+                            $this->goBack();
+                        } else {
+                            return $this->render('create', [
+                                'model' => $model,
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                return $this->goBack();
+            }
+        } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $modelForm,
+                'listaCategorias' => $listaCategorias,
             ]);
         }
     }

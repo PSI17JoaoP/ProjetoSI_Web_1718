@@ -6,8 +6,10 @@ use yii\widgets\Pjax;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Anuncio */
+/* @var $model frontend\models\AnuncioForm */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $catItems array */
+
 ?>
 
 <div class="anuncio-form">
@@ -49,72 +51,74 @@ use yii\helpers\Url;
 
                                         <?php  Pjax::begin(['id'=>'pjax-dynamic-form-oferta','enablePushState'=>false]); ?>
 
-                                        <?php
-                                            echo $form->field($model, 'quantOferta')->textInput(['type' => 'number']);
+                                        <?= $form->field($model, 'quantOferta')->textInput(['type' => 'number']); ?>
 
-                                            if($model->catOferta==='brinquedos'){
-                                                echo $form->field($model->mOferta, 'nome')->textInput();
-                                                echo $form->field($model->mOferta, 'faixaEtaria')->textInput(['type' => 'number']);
-                                                echo $form->field($model->mOferta, 'editora')->textInput();
-                                                echo $form->field($model->mOferta, 'descricao')->textArea();
-                                            }
-                                            if ($model->catOferta==='jogos') {
-                                                echo $form->field($model->mOferta, 'nome')->textInput();
-                                                echo $form->field($model->mOferta, 'faixaEtaria')->textInput(['type' => 'number']);
-                                                echo $form->field($model->mOferta, 'editora')->textInput();
-                                                echo $form->field($model->mOferta, 'descricao')->textArea();
-                                                echo $form->field($model->mOferta, 'produtora')->textInput();
-                                                echo $form->field($model->mOferta, 'genero')->dropDownList($model->mOferta->generoList,
-                                                [
-                                                'class'=>'form-control',
-                                                'prompt' => 'Selecione o género'
-                                                ]);
-                                            }
-                                            if ($model->catOferta==='eletronica') {
-                                                echo $form->field($model->mOferta, 'nome')->textInput();
-                                                echo $form->field($model->mOferta, 'marca')->textInput();
-                                                echo $form->field($model->mOferta, 'descricao')->textArea();
-                                            }
-                                            if ($model->catOferta==='computadores'){
-                                                echo $form->field($model->mOferta, 'nome')->textInput();
-                                                echo $form->field($model->mOferta, 'marca')->textInput();
-                                                echo $form->field($model->mOferta, 'descricao')->textArea();
-                                                echo $form->field($model->mOferta, 'processador')->textInput();
-                                                echo $form->field($model->mOferta, 'ram')->textInput();
-                                                echo $form->field($model->mOferta, 'hdd')->textInput();
-                                                echo $form->field($model->mOferta, 'gpu')->textInput();
-                                                echo $form->field($model->mOferta, 'os')->textInput();
-                                                echo $form->field($model->mOferta, 'portatil')->dropDownList(['Não', 'Sim'], [
-                                                        'class'=>'form-control'
+                                        <?php
+
+                                            switch ($model->catOferta)
+                                            {
+                                                case 'brinquedos':
+
+                                                    echo $this->render('//forms/brinquedos', [
+                                                        'form' => $form,
+                                                        'model' => $model->mOferta,
+                                                    ]);
+
+                                                    break;
+
+                                                case 'jogos':
+
+                                                    echo $this->render('//forms/jogos', [
+                                                        'form' => $form,
+                                                        'model' => $model->mOferta,
+                                                    ]);
+
+                                                    break;
+
+                                                case 'eletronica':
+
+                                                    echo $this->render('//forms/eletronica', [
+                                                        'form' => $form,
+                                                        'model' => $model->mOferta,
+                                                    ]);
+
+                                                    break;
+
+                                                case 'computadores':
+
+                                                    echo $this->render('//forms/computadores', [
+                                                        'form' => $form,
+                                                        'model' => $model->mOferta,
+                                                    ]);
+
+                                                    break;
+
+                                                case 'smartphones':
+
+                                                    echo $this->render('//forms/smartphones', [
+                                                        'form' => $form,
+                                                        'model' => $model->mOferta,
+                                                    ]);
+
+                                                    break;
+
+                                                case 'livros':
+
+                                                    echo $this->render('//forms/livros', [
+                                                        'form' => $form,
+                                                        'model' => $model->mOferta,
+                                                    ]);
+
+                                                    break;
+
+                                                case 'roupa':
+
+                                                    echo $this->render('//forms/roupa', [
+                                                        'form' => $form,
+                                                        'model' => $model->mOferta,
                                                     ]);
                                             }
-                                            if ($model->catOferta==='smartphones'){
-                                                echo $form->field($model->mOferta, 'nome')->textInput();
-                                                echo $form->field($model->mOferta, 'marca')->textInput();
-                                                echo $form->field($model->mOferta, 'descricao')->textArea();
-                                                echo $form->field($model->mOferta, 'processador')->textInput();
-                                                echo $form->field($model->mOferta, 'ram')->textInput();
-                                                echo $form->field($model->mOferta, 'hdd')->textInput();
-                                                echo $form->field($model->mOferta, 'os')->textInput();
-                                                echo $form->field($model->mOferta, 'tamanho')->textInput();
-                                            }
-                                            if ($model->catOferta==='livros') {
-                                                echo $form->field($model->mOferta, 'nome')->textInput();
-                                                echo $form->field($model->mOferta, 'titulo')->textInput();
-                                                echo $form->field($model->mOferta, 'editora')->textInput();
-                                                echo $form->field($model->mOferta, 'autor')->textInput();
-                                                echo $form->field($model->mOferta, 'isbn')->textInput(['type' => 'number']);
-                                            }
-                                            if ($model->catOferta==='roupa') {
-                                                echo $form->field($model->mOferta, 'nome')->textInput();
-                                                echo $form->field($model->mOferta, 'marca')->textInput();
-                                                echo $form->field($model->mOferta, 'tamanho')->textInput();
-                                                echo $form->field($model->mOferta, 'tipoRoupa')->dropDownList($model->mOferta->tipoRoupaList,
-                                                [
-                                                'class'=>'form-control',
-                                                'prompt' => 'Selecione o tipo de roupa'
-                                                ]);
-                                            }
+
                                         ?>
 
                                         <?php Pjax::end(); ?>
@@ -157,70 +161,74 @@ use yii\helpers\Url;
                                                 echo $form->field($model, 'quantProcura')->textInput(['type' => 'number']);
                                             }
 
+                                            ?>
 
-                                            if($model->catProcura==='brinquedos'){
-                                                echo $form->field($model->mProcura, 'nome')->textInput();
-                                                echo $form->field($model->mProcura, 'faixaEtaria')->textInput(['type' => 'number']);
-                                                echo $form->field($model->mProcura, 'editora')->textInput();
-                                                echo $form->field($model->mProcura, 'descricao')->textArea(['style' => 'resize: none']);
-                                            }
-                                            if ($model->catProcura==='jogos') {
-                                                echo $form->field($model->mProcura, 'nome')->textInput();
-                                                echo $form->field($model->mProcura, 'faixaEtaria')->textInput(['type' => 'number']);
-                                                echo $form->field($model->mProcura, 'editora')->textInput();
-                                                echo $form->field($model->mProcura, 'descricao')->textArea(['style' => 'resize: none']);
-                                                echo $form->field($model->mProcura, 'produtora')->textInput();
-                                                echo $form->field($model->mProcura, 'genero')->dropDownList($model->mProcura->generoList,
-                                                [
-                                                'class'=>'form-control',
-                                                'prompt' => 'Selecione o género'
+                                        <?php
+
+                                        switch ($model->catProcura)
+                                        {
+                                            case 'brinquedos':
+
+                                                echo $this->render('//forms/brinquedos', [
+                                                    'form' => $form,
+                                                    'model' => $model->mProcura,
                                                 ]);
-                                            }
-                                            if ($model->catProcura==='eletronica') {
-                                                echo $form->field($model->mProcura, 'nome')->textInput();
-                                                echo $form->field($model->mProcura, 'marca')->textInput();
-                                                echo $form->field($model->mProcura, 'descricao')->textArea();
-                                            }
-                                            if ($model->catProcura==='computadores'){
-                                                echo $form->field($model->mProcura, 'nome')->textInput();
-                                                echo $form->field($model->mProcura, 'marca')->textInput();
-                                                echo $form->field($model->mProcura, 'descricao')->textArea();
-                                                echo $form->field($model->mProcura, 'processador')->textInput();
-                                                echo $form->field($model->mProcura, 'ram')->textInput();
-                                                echo $form->field($model->mProcura, 'hdd')->textInput();
-                                                echo $form->field($model->mProcura, 'gpu')->textInput();
-                                                echo $form->field($model->mProcura, 'os')->textInput();
-                                                echo $form->field($model->mProcura, 'portatil')->dropDownList(['Não', 'Sim'], [
-                                                        'class'=>'form-control'
-                                                    ]);
-                                            }
-                                            if ($model->catProcura==='smartphones'){
-                                                echo $form->field($model->mProcura, 'nome')->textInput();
-                                                echo $form->field($model->mProcura, 'marca')->textInput();
-                                                echo $form->field($model->mProcura, 'descricao')->textArea();
-                                                echo $form->field($model->mProcura, 'processador')->textInput();
-                                                echo $form->field($model->mProcura, 'ram')->textInput();
-                                                echo $form->field($model->mProcura, 'hdd')->textInput();
-                                                echo $form->field($model->mProcura, 'os')->textInput();
-                                                echo $form->field($model->mProcura, 'tamanho')->textInput();
-                                            }
-                                            if ($model->catProcura==='livros') {
-                                                echo $form->field($model->mProcura, 'nome')->textInput();
-                                                echo $form->field($model->mProcura, 'titulo')->textInput();
-                                                echo $form->field($model->mProcura, 'editora')->textInput();
-                                                echo $form->field($model->mProcura, 'autor')->textInput();
-                                                echo $form->field($model->mProcura, 'isbn')->textInput(['type' => 'number']);
-                                            }
-                                            if ($model->catProcura==='roupa') {
-                                                echo $form->field($model->mProcura, 'nome')->textInput();
-                                                echo $form->field($model->mProcura, 'marca')->textInput();
-                                                echo $form->field($model->mProcura, 'tamanho')->textInput();
-                                                echo $form->field($model->mProcura, 'tipoRoupa')->dropDownList($model->mProcura->tipoRoupaList,
-                                                [
-                                                'class'=>'form-control',
-                                                'prompt' => 'Selecione o tipo de roupa'
+
+                                                break;
+
+                                            case 'jogos':
+
+                                                echo $this->render('//forms/jogos', [
+                                                    'form' => $form,
+                                                    'model' => $model->mProcura,
                                                 ]);
-                                            }
+
+                                                break;
+
+                                            case 'eletronica':
+
+                                                echo $this->render('//forms/eletronica', [
+                                                    'form' => $form,
+                                                    'model' => $model->mProcura,
+                                                ]);
+
+                                                break;
+
+                                            case 'computadores':
+
+                                                echo $this->render('//forms/computadores', [
+                                                    'form' => $form,
+                                                    'model' => $model->mProcura,
+                                                ]);
+
+                                                break;
+
+                                            case 'smartphones':
+
+                                                echo $this->render('//forms/smartphones', [
+                                                    'form' => $form,
+                                                    'model' => $model->mProcura,
+                                                ]);
+
+                                                break;
+
+                                            case 'livros':
+
+                                                echo $this->render('//forms/livros', [
+                                                    'form' => $form,
+                                                    'model' => $model->mProcura,
+                                                ]);
+
+                                                break;
+
+                                            case 'roupa':
+
+                                                echo $this->render('//forms/roupa', [
+                                                    'form' => $form,
+                                                    'model' => $model->mProcura,
+                                                ]);
+                                        }
+
                                         ?>
 
                                         <?php Pjax::end(); ?>

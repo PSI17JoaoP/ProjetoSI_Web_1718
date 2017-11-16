@@ -25,7 +25,7 @@ class PropostaForm extends Model
     {
         return [
             [['catProposto', 'quantProposto'], 'required'],
-            [['catProposto', 'quantProposto'], 'integer'],
+            [['quantProposto'], 'integer'],
         ];
     }
 
