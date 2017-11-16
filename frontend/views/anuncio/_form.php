@@ -62,6 +62,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/brinquedos', [
                                                         'form' => $form,
                                                         'model' => $model->mOferta,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -71,6 +72,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/jogos', [
                                                         'form' => $form,
                                                         'model' => $model->mOferta,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -80,6 +82,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/eletronica', [
                                                         'form' => $form,
                                                         'model' => $model->mOferta,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -89,6 +92,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/computadores', [
                                                         'form' => $form,
                                                         'model' => $model->mOferta,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -98,6 +102,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/smartphones', [
                                                         'form' => $form,
                                                         'model' => $model->mOferta,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -107,6 +112,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/livros', [
                                                         'form' => $form,
                                                         'model' => $model->mOferta,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -116,6 +122,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/roupa', [
                                                         'form' => $form,
                                                         'model' => $model->mOferta,
+                                                        'i' => 0,
                                                     ]);
                                             }
 
@@ -172,6 +179,7 @@ use yii\helpers\Url;
                                                 echo $this->render('//forms/brinquedos', [
                                                     'form' => $form,
                                                     'model' => $model->mProcura,
+                                                    'i' => 1,
                                                 ]);
 
                                                 break;
@@ -181,6 +189,7 @@ use yii\helpers\Url;
                                                 echo $this->render('//forms/jogos', [
                                                     'form' => $form,
                                                     'model' => $model->mProcura,
+                                                    'i' => 1,
                                                 ]);
 
                                                 break;
@@ -190,6 +199,7 @@ use yii\helpers\Url;
                                                 echo $this->render('//forms/eletronica', [
                                                     'form' => $form,
                                                     'model' => $model->mProcura,
+                                                    'i' => 1,
                                                 ]);
 
                                                 break;
@@ -199,6 +209,7 @@ use yii\helpers\Url;
                                                 echo $this->render('//forms/computadores', [
                                                     'form' => $form,
                                                     'model' => $model->mProcura,
+                                                    'i' => 1,
                                                 ]);
 
                                                 break;
@@ -208,6 +219,7 @@ use yii\helpers\Url;
                                                 echo $this->render('//forms/smartphones', [
                                                     'form' => $form,
                                                     'model' => $model->mProcura,
+                                                    'i' => 1,
                                                 ]);
 
                                                 break;
@@ -217,6 +229,7 @@ use yii\helpers\Url;
                                                 echo $this->render('//forms/livros', [
                                                     'form' => $form,
                                                     'model' => $model->mProcura,
+                                                    'i' => 1,
                                                 ]);
 
                                                 break;
@@ -226,6 +239,7 @@ use yii\helpers\Url;
                                                 echo $this->render('//forms/roupa', [
                                                     'form' => $form,
                                                     'model' => $model->mProcura,
+                                                    'i' => 1,
                                                 ]);
                                         }
 

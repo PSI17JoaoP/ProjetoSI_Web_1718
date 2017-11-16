@@ -13,6 +13,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use frontend\models\AnuncioForm;
 
+use yii\base\Model;
 
 /**
  * AnuncioController implements the CRUD actions for Anuncio model.
@@ -135,8 +136,17 @@ class AnuncioController extends Controller
             $model->mOferta = $model->selecionarCategoria($catOferta);
             $model->mProcura = $model->selecionarCategoria($catProcura);
 
-            $model->mOferta->load(Yii::$app->request->post());
-            $model->mProcura->load(Yii::$app->request->post());
+
+            $data = array(
+                '0' => $model->selecionarCategoria($catOferta), 
+                '1' => $model->selecionarCategoria($catProcura)
+            );
+
+
+            if (Model::loadMultiple($data, Yii::$app->request->post())) {
+                $model->mOferta = $data['0'];
+                $model->mProcura = $data['1'];
+            }
 
             //Validar o pedido AJAX do evento onChange e validar o formulário com os novos dados
             if (Yii::$app->request->isAjax)
@@ -148,7 +158,7 @@ class AnuncioController extends Controller
             else if (($modeloOferta = $model->mOferta->guardar()) && ($modeloProcura = $model->mProcura->guardar()))
             {
                 if (($modelo = $model->guardar(Yii::$app->user->identity->getId(), $modeloOferta, $modeloProcura))) {
-                    return $this->redirect(['view', 'model' => $modelo]);
+                    return $this->redirect(['view', 'id' => $modelo->id]);
                 } else {
                     return $this->render('create', [
                         'model' => $model,
