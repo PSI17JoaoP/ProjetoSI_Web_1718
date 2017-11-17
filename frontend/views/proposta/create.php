@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\PropostaForm */
 /* @var $listaCategorias array */
+/* @var $anuncio integer */
 
-$this->title = 'Create Proposta';
-$this->params['breadcrumbs'][] = ['label' => 'Home', 'url' => ['site/index']];
+$this->title = 'Enviar Proposta';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="proposta-create">
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'anuncio' => $anuncio,
         'listaCategorias' => $listaCategorias,
     ]) ?>
 

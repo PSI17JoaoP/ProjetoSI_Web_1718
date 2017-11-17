@@ -3,15 +3,17 @@
 namespace frontend\models;
 
 use common\models\Proposta;
+use Yii;
 use yii\base\Model;
 
 class PropostaForm extends Model
 {
     public $catProposto;
     public $quantProposto;
+    public $anuncioID;
 
     //Modelo da categoria do bem a oferecer
-    public  $modelProposto;
+    public $modelProposto;
 
     //Constantes de Estado da Proposta
     //const ESTADO_ACEITE = 'ACEITE';
@@ -24,8 +26,8 @@ class PropostaForm extends Model
     public function rules()
     {
         return [
-            [['catProposto', 'quantProposto'], 'required'],
-            [['quantProposto'], 'integer'],
+            [['catProposto', 'quantProposto', 'anuncioID'], 'required'],
+            [['quantProposto', 'anuncioID'], 'integer'],
         ];
     }
 
@@ -40,17 +42,17 @@ class PropostaForm extends Model
         ];
     }
 
-    public function guardar($userID, $anuncioID, $modeloProposto)
+    public function enviar($categoriaPropostoID)
     {
         if ($this->validate())
         {
             $proposta = new Proposta();
 
-            $proposta->id_user = $userID;
-            $proposta->cat_proposto = $modeloProposto;
+            $proposta->id_user = Yii::$app->user->getId();
+            $proposta->cat_proposto = $categoriaPropostoID;
             $proposta->quant = $this->quantProposto;
             $proposta->estado = 'ATIVO';
-            $proposta->id_anuncio = $anuncioID;
+            $proposta->id_anuncio = $this->anuncioID;
             $proposta->data_proposta = date("Y-m-d h:i:s");
 
             $proposta->save();

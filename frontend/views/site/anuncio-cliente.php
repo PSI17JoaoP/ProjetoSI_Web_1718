@@ -42,7 +42,7 @@ use yii\materialicons\MD;
                 }
 
                 else {
-                    echo Html::a('Enviar Proposta', ['proposta/create', 'id' => $anuncio->id],
+                    echo Html::a('Enviar Proposta', ['proposta/create', 'id_anuncio' => $anuncio->id],
                         ['class' => 'btn btn-info',
                         'style' => 'margin-left: 17px; margin-top: 13px']);
                 } ?>
