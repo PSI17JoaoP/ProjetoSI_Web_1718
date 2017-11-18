@@ -26,14 +26,13 @@ use yii\materialicons\MD;
 
             <div class="col-md-4">
 
-                <?php if($anuncio->quant_receber !== null) {
+                <?php if($anuncio->cat_receber !== null) {
 
-                    echo Html::a('Enviar Proposta', ['proposta/create'], [
+                    echo Html::a('Enviar Proposta', ['proposta/create', 'anuncio' => $anuncio->id], [
                         'class' => 'btn btn-info',
                         'style' => 'margin-left: 17px; margin-top: 13px',
                         'data' => [
                             'method' => 'post',
-                            'confirm' => 'Tem a certeza que deseja enviar uma proposta ?',
                             'params' => [
                                 'id_anuncio' => $anuncio->id,
                             ],
@@ -42,7 +41,7 @@ use yii\materialicons\MD;
                 }
 
                 else {
-                    echo Html::a('Enviar Proposta', ['proposta/create', 'id_anuncio' => $anuncio->id],
+                    echo Html::a('Enviar Proposta', ['proposta/create', 'anuncio' => $anuncio->id],
                         ['class' => 'btn btn-info',
                         'style' => 'margin-left: 17px; margin-top: 13px']);
                 } ?>

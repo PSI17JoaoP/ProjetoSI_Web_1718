@@ -66,7 +66,7 @@ class PropostaController extends Controller
      * @param integer $anuncio O ID do Anuncio
      * @return mixed
      */
-    public function actionCreate($id_anuncio)
+    public function actionCreate($anuncio)
     {
         $listaCategorias = array('brinquedos' => "Brinquedos" ,
             'jogos' => "Jogos",
@@ -149,7 +149,7 @@ class PropostaController extends Controller
                             else {
                                 return $this->render('create', [
                                     'model' => $modelForm,
-                                    'anuncio' => $id_anuncio,
+                                    'anuncio' => $anuncio,
                                     'listaCategorias' => $listaCategorias,
                                 ]);
                             }
@@ -158,7 +158,7 @@ class PropostaController extends Controller
                         else {
                             return $this->render('create', [
                                 'model' => $modelForm,
-                                'anuncio' => $id_anuncio,
+                                'anuncio' => $anuncio,
                                 'listaCategorias' => $listaCategorias,
                             ]);
                         }
@@ -167,7 +167,7 @@ class PropostaController extends Controller
                     else {
                         return $this->render('create', [
                             'model' => $modelForm,
-                            'anuncio' => $id_anuncio,
+                            'anuncio' => $anuncio,
                             'listaCategorias' => $listaCategorias,
                         ]);
                     }
@@ -176,7 +176,7 @@ class PropostaController extends Controller
                 else {
                     return $this->render('create', [
                         'model' => $modelForm,
-                        'anuncio' => $id_anuncio,
+                        'anuncio' => $anuncio,
                         'listaCategorias' => $listaCategorias,
                     ]);
                 }
@@ -186,7 +186,7 @@ class PropostaController extends Controller
         else {
             return $this->render('create', [
                 'model' => $modelForm,
-                'anuncio' => $id_anuncio,
+                'anuncio' => $anuncio,
                 'listaCategorias' => $listaCategorias,
             ]);
         }
