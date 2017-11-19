@@ -28,6 +28,7 @@ use yii\materialicons\MD;
 
                 <?php if($anuncio->cat_receber !== null) {
 
+                    //Envia tambem o id do anuncio no GET, devido ao parâmetro no GET da action Create
                     echo Html::a('Enviar Proposta', ['proposta/create', 'anuncio' => $anuncio->id], [
                         'class' => 'btn btn-info',
                         'style' => 'margin-left: 17px; margin-top: 13px',

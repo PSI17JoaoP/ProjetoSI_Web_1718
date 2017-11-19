@@ -8,11 +8,12 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\User;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+use frontend\models\ClienteForm;
 
 /**
  * Site controller
@@ -109,10 +110,57 @@ class SiteController extends Controller
             'Madeira' => "Madeira",
         );
 
-        return $this->render('index', [
-            'categorias' => $listaCategorias,
-            'regioes' => $listaRegioes,
-        ]);
+        if(!Yii::$app->user->isGuest) {
+
+            $user = User::findOne(['id' => Yii::$app->user->getId()]);
+
+            if($user->getCliente() === null) {
+
+                $model = new ClienteForm();
+
+                if($model->load(Yii::$app->request->post())) {
+
+                    if($model->guardar(Yii::$app->user->getId())) {
+
+                        if(Yii::$app->request->post('botao') === 'anuncio') {
+                            $this->redirect(['anuncio/create']);
+                        }
+
+                        elseif(Yii::$app->request->post('botao') === 'proposta-get') {
+                            $this->redirect(['proposta/create', 'anuncio' => Yii::$app->request->post('anuncio')]);
+                        }
+
+                        else {
+                            return $this->render('index', [
+                                'model' => $model,
+                                'categorias' => $listaCategorias,
+                                'regioes' => $listaRegioes,
+                            ]);
+                        }
+                    }
+
+                } else {
+                    return $this->render('index', [
+                        'model' => $model,
+                        'categorias' => $listaCategorias,
+                        'regioes' => $listaRegioes,
+                    ]);
+                }
+
+            } else {
+                return $this->render('index', [
+                    'categorias' => $listaCategorias,
+                    'regioes' => $listaRegioes,
+                ]);
+            }
+        }
+
+        else {
+            return $this->render('index', [
+                'categorias' => $listaCategorias,
+                'regioes' => $listaRegioes,
+            ]);
+        }
     }
 
     /**
