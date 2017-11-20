@@ -48,17 +48,25 @@ $this->title = 'Página Inicial';
 
             if(!Yii::$app->user->isGuest)
             {
+                
+
                 if(Anuncio::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) { ?>
+                   
+                    
 
                     <div class="col-md-4">
                         <div class="panel panel-success">
                             <div class="panel-body" style="text-align: center; background-color: #449d44">
                                 <p class="text-center" style="color: white">É a sua primeira vez online ?</p>
                                 <p class="text-center" style="color: white">Crie agora um anúncio !!</p>
-                                <?= Html::a('Criar Anúncio', ['anuncio/create'], ['class' => 'btn btn-success btn-lg'])?>
+                                <?= Html::a('Criar Anúncio','#', ['class' => 'btn btn-success btn-lg showModal'])?>
                             </div>
                         </div>
                     </div>
+
+                    <?= $this->renderAjax('modal',[
+                                'model' => $model,
+                                'content' => '//forms/cliente']);?>
 
                 <?php } ?>
             <?php } ?>
