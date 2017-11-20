@@ -128,16 +128,7 @@ class SiteController extends Controller
                 {
                     if($model->guardar(Yii::$app->user->getId()))
                     {
-                        if(Yii::$app->request->post('botao') === 'anuncio') {
-                            $this->redirect(['anuncio/create']);
-                        }
-
-                        elseif(Yii::$app->request->post('botao') === 'proposta-get') {
-                            $this->redirect(['proposta/create', 'anuncio' => Yii::$app->request->post('anuncio')]);
-                        }
-                    }
-                    else
-                    {
+                        
                         return $this->render('index', [
                             'model' => $model,
                             'anunciosRecentes' => $anunciosRecentes,
