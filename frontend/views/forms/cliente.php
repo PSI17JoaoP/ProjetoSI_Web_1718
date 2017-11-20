@@ -2,12 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\Url;
 
-?>
-
-
-<?php
+/** @var $model frontend\models\ClienteForm */
 
 $form = ActiveForm::begin(['id' => 'cliente-form']); 
 
@@ -40,19 +36,8 @@ echo $form->field($model, 'regiao')->dropDownList([
     'Madeira' => "Madeira"
 ]);
 
-?>
+echo "<div class='row'><span class='pull-right' style='padding-right:13px'>"
+ . Html::submitButton('Guardar', ['class' => 'btn btn-primary btn-lg', 'name' => 'clienteInfo-button pull-right'])
+ . "</span></div>";
 
-<?php
-
-
-echo "
-<div class='row'>
-<span class='pull-right' style='padding-right:13px'>";
-
-echo Html::submitButton('Guardar', ['class' => 'btn btn-primary btn-lg', 'name' => 'clienteInfo-button pull-right']);
-
-echo "</span>
-</div>";
 ActiveForm::end();
-?>
-

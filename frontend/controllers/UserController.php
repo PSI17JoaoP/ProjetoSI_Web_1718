@@ -4,19 +4,34 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Cliente;
 use common\models\Anuncio;
 
 class UserController extends Controller
 {
-
-    public function actionIndex()
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
     {
-        $this->layout = "main-user";
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'history', 'anuncios', 'propostas', 'conta'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'history', 'anuncios', 'propostas', 'conta'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
 
-        return $this->render('index');
+                'denyCallback' => function ($rule, $action) {
+                    //throw new \Exception('You are not allowed to access this page');
+                }
+            ],
+        ];
     }
 
     public function actionHistory()

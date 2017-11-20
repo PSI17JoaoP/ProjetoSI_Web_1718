@@ -122,7 +122,7 @@ class SiteController extends Controller
 
             $model = new ClienteForm();
 
-            if($user->getCliente() === null)
+            if($user->cliente === null)
             {
                 if($model->load(Yii::$app->request->post()))
                 {

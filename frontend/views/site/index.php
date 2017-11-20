@@ -6,6 +6,7 @@
  * @var array $categorias
  * @var array $anunciosRecentes
  * @var array $anunciosDestaques
+ * @var $model frontend\models\ClienteForm
  */
 
 use yii\helpers\Html;
@@ -48,11 +49,7 @@ $this->title = 'Página Inicial';
 
             if(!Yii::$app->user->isGuest)
             {
-                
-
                 if(Anuncio::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) { ?>
-                   
-                    
 
                     <div class="col-md-4">
                         <div class="panel panel-success">
@@ -65,8 +62,9 @@ $this->title = 'Página Inicial';
                     </div>
 
                     <?= $this->renderAjax('modal',[
-                                'model' => $model,
-                                'content' => '//forms/cliente']);?>
+                            'header' => "<h4>Adicionar informações de conta</h4>",
+                            'model' => $model,
+                            'content' => '//forms/cliente']);?>
 
                 <?php } ?>
             <?php } ?>

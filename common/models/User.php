@@ -23,9 +23,9 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  *
  * @property Anuncio[] $anuncios
- * @property CategoriaPreferida[] $categoriaPreferidas
- * @property Categoria[] $idCategorias
- * @property Cliente $clientes
+ * @property CategoriaPreferida[] $categoriasPreferidas
+ * @property Categoria[] $categorias
+ * @property Cliente $cliente
  * @property Proposta[] $propostas
  */
 class User extends ActiveRecord implements IdentityInterface

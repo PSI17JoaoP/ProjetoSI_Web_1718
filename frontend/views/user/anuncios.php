@@ -24,7 +24,7 @@ $this->title = 'Os meus anúncios';
                                     <div class="row">
                                         <div class="col-6 col-md-4"><?= Html::encode($anuncio->titulo) ?></div>
                                         <div class="col-12 col-md-8">
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detalhesModal">Detalhes</button>
+                                            <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary showModal'])?>
                                         </div>
                                     </div>
                                 </div>
@@ -35,6 +35,11 @@ $this->title = 'Os meus anúncios';
                             <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
                         </div>
                     </div>
+
+                    <?= $this->renderAjax('//site/modal',[
+                            'header' => $anuncio->titulo,
+                            'model' => $anuncio,
+                            'content' => '//modals/anuncio']) ?>
 
                 <?php } ?>
             <?php } ?>
