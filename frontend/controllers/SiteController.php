@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Anuncio;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\helpers\ArrayHelper;
@@ -110,18 +111,23 @@ class SiteController extends Controller
             'Madeira' => "Madeira",
         );
 
-        if(!Yii::$app->user->isGuest) {
+        $anunciosRecentes = Anuncio::find()->all();
+
+        $anunciosDestaques = Anuncio::find()->all();
+
+        if(!Yii::$app->user->isGuest)
+        {
 
             $user = User::findOne(['id' => Yii::$app->user->getId()]);
 
-            if($user->getCliente() === null) {
+            $model = new ClienteForm();
 
-                $model = new ClienteForm();
-
-                if($model->load(Yii::$app->request->post())) {
-
-                    if($model->guardar(Yii::$app->user->getId())) {
-
+            if($user->getCliente() === null)
+            {
+                if($model->load(Yii::$app->request->post()))
+                {
+                    if($model->guardar(Yii::$app->user->getId()))
+                    {
                         if(Yii::$app->request->post('botao') === 'anuncio') {
                             $this->redirect(['anuncio/create']);
                         }
@@ -129,34 +135,45 @@ class SiteController extends Controller
                         elseif(Yii::$app->request->post('botao') === 'proposta-get') {
                             $this->redirect(['proposta/create', 'anuncio' => Yii::$app->request->post('anuncio')]);
                         }
-
-                        else {
-                            return $this->render('index', [
-                                'model' => $model,
-                                'categorias' => $listaCategorias,
-                                'regioes' => $listaRegioes,
-                            ]);
-                        }
                     }
-
-                } else {
+                    else
+                    {
+                        return $this->render('index', [
+                            'model' => $model,
+                            'anunciosRecentes' => $anunciosRecentes,
+                            'anunciosDestaques' => $anunciosDestaques,
+                            'categorias' => $listaCategorias,
+                            'regioes' => $listaRegioes,
+                        ]);
+                    }
+                }
+                else
+                {
                     return $this->render('index', [
                         'model' => $model,
+                        'anunciosRecentes' => $anunciosRecentes,
+                        'anunciosDestaques' => $anunciosDestaques,
                         'categorias' => $listaCategorias,
                         'regioes' => $listaRegioes,
                     ]);
                 }
-
-            } else {
+            }
+            else
+            {
                 return $this->render('index', [
+                    'model' => $model,
+                    'anunciosRecentes' => $anunciosRecentes,
+                    'anunciosDestaques' => $anunciosDestaques,
                     'categorias' => $listaCategorias,
                     'regioes' => $listaRegioes,
                 ]);
             }
         }
-
-        else {
+        else
+        {
             return $this->render('index', [
+                'anunciosRecentes' => $anunciosRecentes,
+                'anunciosDestaques' => $anunciosDestaques,
                 'categorias' => $listaCategorias,
                 'regioes' => $listaRegioes,
             ]);

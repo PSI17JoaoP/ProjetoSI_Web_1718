@@ -1,11 +1,15 @@
 <?php
 
-/* @var $this yii\web\View */
+/**
+ * @var $this yii\web\View
+ * @var array $regioes
+ * @var array $categorias
+ * @var array $anunciosRecentes
+ * @var array $anunciosDestaques
+ */
 
 use yii\helpers\Html;
-use yii\materialicons\MD;
 use common\models\Anuncio;
-use common\models\ImagensAnuncio;
 
 $this->title = 'Página Inicial';
 
@@ -69,56 +73,39 @@ $this->title = 'Página Inicial';
 
                     <div class="panel-body">
 
-                        <?php 
+                        <?php
 
-                            $anuncios = Anuncio::find()->all();
+                        foreach ($anunciosRecentes as $anuncio) {
 
-                            foreach ($anuncios as $anuncio) {
-
-                                if($anuncio !== null) {
-
-                                    $imagens = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id]);
-                                    
-                                    if(!Yii::$app->user->isGuest) {
-                                        echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
-                                    } else {
-                                        echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
-                                    } ?>
-
-                                <?php } ?>
-                            <?php } ?>
-                        </div>
+                                if(!Yii::$app->user->isGuest) {
+                                    echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
+                                } else {
+                                    echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
+                                }
+                        } ?>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <p style="margin: 0">Destaques</p>
-                        </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <p style="margin: 0">Destaques</p>
+                    </div>
 
-                        <div class="panel-body">
+                    <div class="panel-body">
 
-                            <?php 
+                        <?php
 
-                                $anuncios = Anuncio::find()->all();
+                        foreach ($anunciosDestaques as $anuncio) {
 
-                                foreach ($anuncios as $anuncio) {
+                            if(!Yii::$app->user->isGuest) {
+                                echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
+                            } else {
+                                echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
+                            } ?>
 
-                                    if($anuncio !== null) {
-
-                                        $imagens = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id]);
-                                        
-                                        if(!Yii::$app->user->isGuest) {
-                                            echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
-                                        } else {
-                                            echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
-                                        } ?>
-
-                                    <?php } ?>
-                                <?php } ?>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

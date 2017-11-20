@@ -7,6 +7,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Cliente;
+use common\models\Anuncio;
 
 class UserController extends Controller
 {
@@ -35,8 +36,8 @@ class UserController extends Controller
     public function actionConta()
     {
         $this->layout = "main-user";
-        
-        $arrayRegiao = array('aveiro' => "Aveiro", 
+
+        $arrayRegiao = array('aveiro' => "Aveiro",
                             'beja' => "Beja",
                             'braga' => "Braga",
                             'bragança' => "Bragança",
@@ -60,15 +61,15 @@ class UserController extends Controller
         
         $model = new Cliente();
 
-        return $this->render('conta', ['model' => $model, 'regiao' => $arrayRegiao]);
-
-        
+        return $this->render('conta', ['model' => $model, 'regioes' => $arrayRegiao]);
     }
 
     public function actionAnuncios()
     {
         $this->layout = "main-user";
 
-        return $this->render('anuncios');
+        $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->identity->getId()]);
+
+        return $this->render('anuncios', ['anuncios' => $anuncios]);
     }
 }
