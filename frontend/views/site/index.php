@@ -67,7 +67,7 @@ $this->title = 'Página Inicial';
                             <div class="panel-body" style="text-align: center; background-color: #449d44">
                                 <p class="text-center" style="color: white">É a sua primeira vez online ?</p>
                                 <p class="text-center" style="color: white">Crie agora um anúncio !!</p>
-                                <?= Html::a('Criar Anúncio','#', ['class' => 'btn btn-success btn-lg showModal'])?>
+                                <?= Html::a('Criar Anúncio',['anuncio/create'], ['class' => 'btn btn-success btn-lg showModal'])?>
                             </div>
                         </div>
                     </div>
