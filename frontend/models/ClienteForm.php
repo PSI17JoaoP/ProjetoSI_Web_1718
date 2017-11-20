@@ -21,7 +21,7 @@ class ClienteForm extends Model
             [['nomeCompleto', 'dataNasc', 'telefone', 'regiao'], 'required'],
             ['regiao', 'string', 'max' => 10],
             ['nomeCompleto', 'string', 'max' => 50],
-            [['telefone'], 'integer', 'min' => 910000000, 'max' => 980000000],
+            [['telefone'], 'integer', 'min' => 910000000, 'max' => 990000000],
         ];
     }
 

@@ -18,22 +18,31 @@ $this->title = 'Os meus anúncios';
                 if($anuncio !== null) { ?>
 
                     <div class="row">
-                        <div class="col-12 col-md-10">
+                        <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-6 col-md-4"><?= Html::encode($anuncio->titulo) ?></div>
-                                        <div class="col-12 col-md-8">
-                                            <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary showModal'])?>
+                                        <div class="col-md-8">
+                                            <p style="margin-top: 8px; margin-left: 5px"><?= Html::encode($anuncio->titulo) ?></p>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <span class="pull-right">
+                                                <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary showModal'])?>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <span class="pull-right">
+                                                <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-6 col-md-2">
-                            <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
-                        </div>
+
                     </div>
 
                     <?= $this->renderAjax('//site/modal',[

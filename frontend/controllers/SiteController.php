@@ -115,27 +115,34 @@ class SiteController extends Controller
 
         $anunciosDestaques = Anuncio::find()->all();
 
-        if(!Yii::$app->user->isGuest)
+        if(Yii::$app->user->isGuest)
         {
+            return $this->render('index', [
+                'anunciosRecentes' => $anunciosRecentes,
+                'anunciosDestaques' => $anunciosDestaques,
+                'categorias' => $listaCategorias,
+                'regioes' => $listaRegioes,
+            ]);
+        }
 
-            $user = User::findOne(['id' => Yii::$app->user->getId()]);
+    $user = User::findOne(['id' => Yii::$app->user->getId()]);
 
-            $model = new ClienteForm();
+        $model = new ClienteForm();
 
-            if($user->cliente === null)
+        if($user->cliente === null)
+        {
+            if($model->load(Yii::$app->request->post()))
             {
-                if($model->load(Yii::$app->request->post()))
+                if($model->guardar(Yii::$app->user->getId()))
                 {
-                    if($model->guardar(Yii::$app->user->getId()))
-                    {
-                        if(Yii::$app->request->post('botao') === 'anuncio') {
-                            $this->redirect(['anuncio/create']);
-                        }
-
-                        elseif(Yii::$app->request->post('botao') === 'proposta-get') {
-                            $this->redirect(['proposta/create', 'anuncio' => Yii::$app->request->post('anuncio')]);
-                        }
+                    if(Yii::$app->request->post('botao') === 'anuncio') {
+                        $this->redirect(['anuncio/create']);
                     }
+
+                    elseif(Yii::$app->request->post('botao') === 'proposta-get') {
+                        $this->redirect(['proposta/create', 'anuncio' => Yii::$app->request->post('anuncio')]);
+                    }
+
                     else
                     {
                         return $this->render('index', [
@@ -172,6 +179,7 @@ class SiteController extends Controller
         else
         {
             return $this->render('index', [
+                'model' => $model,
                 'anunciosRecentes' => $anunciosRecentes,
                 'anunciosDestaques' => $anunciosDestaques,
                 'categorias' => $listaCategorias,
