@@ -114,10 +114,10 @@ class SiteController extends Controller
 
             $user = User::findOne(['id' => Yii::$app->user->getId()]);
 
+            $model = new ClienteForm();
+
             if($user->getCliente() === null) {
-
-                $model = new ClienteForm();
-
+                
                 if($model->load(Yii::$app->request->post())) {
 
                     if($model->guardar(Yii::$app->user->getId())) {
@@ -149,6 +149,7 @@ class SiteController extends Controller
 
             } else {
                 return $this->render('index', [
+                    'model' => $model,
                     'categorias' => $listaCategorias,
                     'regioes' => $listaRegioes,
                 ]);

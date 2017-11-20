@@ -34,6 +34,7 @@ class ClienteForm extends Model
             'nomeCompleto' => 'Nome Completo',
             'telefone' => 'Nº Telef./Telemóvel',
             'regiao' => 'Região',
+            'dataNasc' => 'Data de Nascimento'
         ];
     }
 
