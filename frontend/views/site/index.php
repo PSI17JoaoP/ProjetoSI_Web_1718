@@ -11,6 +11,7 @@
 
 use yii\helpers\Html;
 use common\models\Anuncio;
+use common\models\Cliente;
 
 $this->title = 'Página Inicial';
 
@@ -49,6 +50,16 @@ $this->title = 'Página Inicial';
 
             if(!Yii::$app->user->isGuest)
             {
+
+                if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) 
+                {
+                    echo $this->renderAjax('modal',[
+                            'header' => "<h4>Adicionar informações de conta</h4>",
+                            'model' => $model,
+                            'content' => '//forms/cliente'
+                            ]);
+                }
+
                 if(Anuncio::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) { ?>
 
                     <div class="col-md-4">
@@ -60,11 +71,6 @@ $this->title = 'Página Inicial';
                             </div>
                         </div>
                     </div>
-
-                    <?= $this->renderAjax('modal',[
-                            'header' => "<h4>Adicionar informações de conta</h4>",
-                            'model' => $model,
-                            'content' => '//forms/cliente']);?>
 
                 <?php } ?>
             <?php } ?>
