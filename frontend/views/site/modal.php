@@ -7,7 +7,7 @@ use yii\bootstrap\Modal;
 
 Modal::begin([
     'header'=>'<h4>Adicionar informações de conta</h4>',
-    'id'=>'UserInfo-modal',
+    'id'=>'modal_geral',
     'size'=>'modal-md',
  ]);
 

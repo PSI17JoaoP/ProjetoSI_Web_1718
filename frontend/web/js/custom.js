@@ -1,4 +1,4 @@
-$('#btn-create-anuncio').click(function(){
-    $('#UserInfo-modal').modal('show');
+$('.showModal').click(function(){
+    $('#modal_geral').modal('show');
 });
 
