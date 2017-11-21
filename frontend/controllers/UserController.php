@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Categoria;
 use frontend\models\ClienteForm;
 use Yii;
 use yii\db\Query;
@@ -48,12 +49,19 @@ class UserController extends Controller
     {
         $this->layout = "main-user";
 
-        $propostas = Proposta::findBySql('SELECT * FROM propostas
-                                              JOIN anuncios ON propostas.id_anuncio = anuncios.id
-                                              JOIN categorias ON propostas.cat_proposto = categorias.id
-                                              WHERE anuncios.id_user = :id_user', [':id_user' => Yii::$app->user->getId()])->all();
+        $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->getId()]);
 
-        return $this->render('propostas', ['propostas' => $propostas]);
+        foreach ($anuncios as $anuncio)
+        {
+            $propostas = $anuncio->propostas;
+
+            foreach ($propostas as $proposta)
+            {
+                $dados = [];
+            }
+        }
+
+        return $this->render('propostas');
     }
 
     public function actionConta()
