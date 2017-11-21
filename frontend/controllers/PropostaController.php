@@ -90,7 +90,7 @@ class PropostaController extends Controller
         if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null)
         {
             Yii::$app->runAction('user/cliente', [
-                '$controllerID' => Yii::$app->controller->id,
+                'controllerID' => Yii::$app->controller->id,
                 'model' => $modelForm,
             ]);
         }
@@ -116,7 +116,7 @@ class PropostaController extends Controller
                         $model->estado = 'PENDENTE';
 
                         if ($model->save()) {
-                            return $this->goBack();
+                            return $this->redirect('user/propostas');
                         }
 
                         else {

@@ -120,7 +120,7 @@ class UserController extends Controller
         {
             if($modalModel->guardar(Yii::$app->user->getId()))
             {
-                return $this->render($controllerID . 'create', [
+                return $this->render($controllerID . '/create', [
                     'model' => $model,
                     'catList' => $listaCategorias,
                 ]);
