@@ -22,33 +22,29 @@ use yii\materialicons\MD;
             <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
         </div>
 
-        <?php if(!Yii::$app->user->isGuest) { ?>
+        <div class="col-md-4">
 
-            <div class="col-md-4">
+            <?php if($anuncio->cat_receber !== null) {
 
-                <?php if($anuncio->quant_receber !== null) {
+                //Envia tambem o id do anuncio no GET, devido ao parâmetro no GET da action Create
+                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncio' => $anuncio->id], [
+                    'class' => 'btn btn-info',
+                    'style' => 'margin-left: 17px; margin-top: 13px',
+                    'data' => [
+                        'method' => 'post',
+                        'params' => [
+                            'id_anuncio' => $anuncio->id,
+                        ],
+                    ]
+                ]);
+            }
 
-                    echo Html::a('Enviar Proposta', ['proposta/create'], [
-                        'class' => 'btn btn-info',
-                        'style' => 'margin-left: 17px; margin-top: 13px',
-                        'data' => [
-                            'method' => 'post',
-                            'confirm' => 'Tem a certeza que deseja enviar uma proposta ?',
-                            'params' => [
-                                'id_anuncio' => $anuncio->id,
-                            ],
-                        ]
-                    ]);
-                }
+            else {
+                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncio' => $anuncio->id],
+                    ['class' => 'btn btn-info',
+                    'style' => 'margin-left: 17px; margin-top: 13px']);
+            } ?>
 
-                else {
-                    echo Html::a('Enviar Proposta', ['proposta/create', 'id' => $anuncio->id],
-                        ['class' => 'btn btn-info',
-                        'style' => 'margin-left: 17px; margin-top: 13px']);
-                } ?>
-
-            </div>
-
-        <?php } ?>
+        </div>
     </div>
 </div>

@@ -9,6 +9,7 @@ use yii\helpers\Url;
 /* @var $model frontend\models\PropostaForm */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $listaCategorias array */
+/* @var $anuncio integer */
 
 ?>
 
@@ -17,6 +18,8 @@ use yii\helpers\Url;
         <div class="panel panel-default">
 
             <?php $form = ActiveForm::begin(['id' => 'proposta-form']); ?>
+
+            <?= $form->field($model, 'anuncioID')->hiddenInput(['value' => $anuncio])->label(false) ?>
 
             <div class="panel-body">
                 <div class="col-md-12">
@@ -29,7 +32,7 @@ use yii\helpers\Url;
 
                                         <?= $form->field($model, 'catProposto')->dropDownList($listaCategorias, [
                                         'onchange' => '$.pjax.reload({
-                                                        url: "' . Url::toRoute(['create']) . '?catProposto="+$(this).val(),
+                                                        url: "' . Url::toRoute(['create']) . '?id_anuncio=' . $anuncio . '&catProposto="+$(this).val(),
                                                         container: "#pjax-dynamic-form-proposta",
                                                         timeout: 1000,
                                         });',
@@ -53,6 +56,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/brinquedos', [
                                                         'form' => $form,
                                                         'model' => $model->modelProposto,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -62,6 +66,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/jogos', [
                                                         'form' => $form,
                                                         'model' => $model->modelProposto,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -71,6 +76,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/eletronica', [
                                                         'form' => $form,
                                                         'model' => $model->modelProposto,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -80,6 +86,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/computadores', [
                                                         'form' => $form,
                                                         'model' => $model->modelProposto,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -89,6 +96,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/smartphones', [
                                                         'form' => $form,
                                                         'model' => $model->modelProposto,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -98,6 +106,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/livros', [
                                                         'form' => $form,
                                                         'model' => $model->modelProposto,
+                                                        'i' => 0,
                                                     ]);
 
                                                     break;
@@ -107,6 +116,7 @@ use yii\helpers\Url;
                                                     echo $this->render('//forms/roupa', [
                                                         'form' => $form,
                                                         'model' => $model->modelProposto,
+                                                        'i' => 0,
                                                     ]);
                                             }
 

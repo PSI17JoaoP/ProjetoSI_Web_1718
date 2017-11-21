@@ -1,11 +1,17 @@
 <?php
 
-/* @var $this yii\web\View */
+/**
+ * @var $this yii\web\View
+ * @var array $regioes
+ * @var array $categorias
+ * @var array $anunciosRecentes
+ * @var array $anunciosDestaques
+ * @var $model frontend\models\ClienteForm
+ */
 
+use common\models\Cliente;
 use yii\helpers\Html;
-use yii\materialicons\MD;
 use common\models\Anuncio;
-use common\models\ImagensAnuncio;
 
 $this->title = 'Página Inicial';
 
@@ -44,6 +50,7 @@ $this->title = 'Página Inicial';
 
             if(!Yii::$app->user->isGuest)
             {
+
                 if(Anuncio::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) { ?>
 
                     <div class="col-md-4">
@@ -51,7 +58,7 @@ $this->title = 'Página Inicial';
                             <div class="panel-body" style="text-align: center; background-color: #449d44">
                                 <p class="text-center" style="color: white">É a sua primeira vez online ?</p>
                                 <p class="text-center" style="color: white">Crie agora um anúncio !!</p>
-                                <?= Html::a('Criar Anúncio', ['anuncio/create'], ['class' => 'btn btn-success btn-lg'])?>
+                                <?= Html::a('Criar Anúncio',['anuncio/create'], ['class' => 'btn btn-success btn-lg showModal'])?>
                             </div>
                         </div>
                     </div>
@@ -69,56 +76,39 @@ $this->title = 'Página Inicial';
 
                     <div class="panel-body">
 
-                        <?php 
+                        <?php
 
-                            $anuncios = Anuncio::find()->all();
+                        foreach ($anunciosRecentes as $anuncio) {
 
-                            foreach ($anuncios as $anuncio) {
-
-                                if($anuncio !== null) {
-
-                                    $imagens = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id]);
-                                    
-                                    if(!Yii::$app->user->isGuest) {
-                                        echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
-                                    } else {
-                                        echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
-                                    } ?>
-
-                                <?php } ?>
-                            <?php } ?>
-                        </div>
+                                if(!Yii::$app->user->isGuest) {
+                                    echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
+                                } else {
+                                    echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
+                                }
+                        } ?>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <p style="margin: 0">Destaques</p>
-                        </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <p style="margin: 0">Destaques</p>
+                    </div>
 
-                        <div class="panel-body">
+                    <div class="panel-body">
 
-                            <?php 
+                        <?php
 
-                                $anuncios = Anuncio::find()->all();
+                        foreach ($anunciosDestaques as $anuncio) {
 
-                                foreach ($anuncios as $anuncio) {
+                            if(!Yii::$app->user->isGuest) {
+                                echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
+                            } else {
+                                echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
+                            } ?>
 
-                                    if($anuncio !== null) {
-
-                                        $imagens = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id]);
-                                        
-                                        if(!Yii::$app->user->isGuest) {
-                                            echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
-                                        } else {
-                                            echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
-                                        } ?>
-
-                                    <?php } ?>
-                                <?php } ?>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

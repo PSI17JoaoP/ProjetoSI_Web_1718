@@ -11,7 +11,6 @@ use yii\helpers\Url;
 /* @var $catItems array */
 
 ?>
-
 <div class="anuncio-form">
     <div class="col-md-8">
         <div class="panel panel-default">

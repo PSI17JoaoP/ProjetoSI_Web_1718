@@ -2,14 +2,17 @@
 
 namespace frontend\controllers;
 
-use frontend\models\PropostaForm;
 use Yii;
+use yii\base\Model;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 use common\models\Anuncio;
 use common\models\Proposta;
+use frontend\models\PropostaForm;
 
 /**
  * PropostaController implements the CRUD actions for Proposta model.
@@ -33,7 +36,7 @@ class PropostaController extends Controller
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {
-                    //throw new \Exception('You are not allowed to access this page');
+                    throw new \Exception('You are not allowed to access this page');
                 }
             ],
             'verbs' => [
@@ -59,11 +62,11 @@ class PropostaController extends Controller
 
     /**
      * Creates a new Proposta model.
-     * If creation is successful, the browser will be redirected to the previous page.
-     * @param null $id ID do anúncio
+     *
+     * @param integer $anuncio O ID do Anuncio
      * @return mixed
      */
-    public function actionCreate($id = null)
+    public function actionCreate($anuncio)
     {
         $listaCategorias = array('brinquedos' => "Brinquedos" ,
             'jogos' => "Jogos",
@@ -75,21 +78,21 @@ class PropostaController extends Controller
 
         $modelForm = new PropostaForm();
 
-        if(Yii::$app->request->get('catProposto') !== null)
-        {   
-            $cat = Yii::$app->request->get('catProposto');
-            $modelForm->catProposto = $cat;
-
-            $modelForm->modelProposto = $modelForm->selecionarCategoria($cat);
+        //Valicação da escolha da categoria no evento Pjax do _form.php
+        if(($categoriaProposto = Yii::$app->request->get('catProposto')) !== null)
+        {
+            $modelForm->catProposto = $categoriaProposto;
+            $modelForm->modelProposto = $modelForm->selecionarCategoria($categoriaProposto);
         }
 
         if (Yii::$app->request->post()) {
 
-            if($id !== null /*|| Yii::$app->user->getReturnUrl()*/) {
+            //Entra neste if, se o anúncio especificar o bem que quer receber.
+            //O botão de Enviar Proposta no tipo de anúncios anteriores executa um pedido do tipo POST,
+            //no qual envia o id do anúncio (id_anuncio).
+            if(($anuncioID = Yii::$app->request->post('id_anuncio'))) {
 
                 $model = new Proposta();
-
-                $anuncioID = Yii::$app->request->post('id_anuncio');
 
                 if (($anuncio = Anuncio::findOne($anuncioID)) !== null) {
 
@@ -101,27 +104,89 @@ class PropostaController extends Controller
                         $model->id_anuncio = $anuncio->id;
                         $model->data_proposta = date("Y-m-d h:i:s");
                         $model->estado = 'PENDENTE';
-                    }
 
-                    if ($model->save()) {
-                        return $this->goBack();
-                    } else {
+                        if ($model->save()) {
+                            return $this->goBack();
+                        }
 
-                        if ($anuncio->cat_receber !== null) {
+                        else {
                             $this->goBack();
-                        } else {
-                            return $this->render('create', [
-                                'model' => $model,
-                            ]);
                         }
                     }
                 }
-            } else {
-                return $this->goBack();
             }
-        } else {
+
+            //Caso o pedido POST não contém o id_anuncio, ou seja, o anúncio não especifica o bem a receber,
+            //executa o código seguinte.
+            else {
+
+                if ($modelForm->load(Yii::$app->request->post()))
+                {
+                    //Definição de um modelo da categoria escolhida para carregamento de dados.
+                    //Implementado de forma a se poder usar os mesmos forms que o AnúncioForm utiliza.
+                    $models = array(
+                        '0' => $modelForm->selecionarCategoria($categoriaProposto),
+                    );
+
+                    if (Model::loadMultiple($models, Yii::$app->request->post()))
+                    {
+                        $modelForm->modelProposto = $models['0'];
+
+                        //Verificação de dados recebidos, caso tenha sido um pedido AJAX
+                        if (Yii::$app->request->isAjax)
+                        {
+                            Yii::$app->response->format = Response::FORMAT_JSON;
+                            return ActiveForm::validate($modelForm);
+                        }
+
+                        else if (($categoriaPropostoID = $modelForm->modelProposto->guardar()))
+                        {
+                            if($modelForm->enviar($categoriaPropostoID))
+                            {
+                                return $this->redirect(['user/propostas']);
+                            }
+
+                            else {
+                                return $this->render('create', [
+                                    'model' => $modelForm,
+                                    'anuncio' => $anuncio,
+                                    'listaCategorias' => $listaCategorias,
+                                ]);
+                            }
+                        }
+
+                        else {
+                            return $this->render('create', [
+                                'model' => $modelForm,
+                                'anuncio' => $anuncio,
+                                'listaCategorias' => $listaCategorias,
+                            ]);
+                        }
+                    }
+
+                    else {
+                        return $this->render('create', [
+                            'model' => $modelForm,
+                            'anuncio' => $anuncio,
+                            'listaCategorias' => $listaCategorias,
+                        ]);
+                    }
+                }
+
+                else {
+                    return $this->render('create', [
+                        'model' => $modelForm,
+                        'anuncio' => $anuncio,
+                        'listaCategorias' => $listaCategorias,
+                    ]);
+                }
+            }
+        }
+
+        else {
             return $this->render('create', [
                 'model' => $modelForm,
+                'anuncio' => $anuncio,
                 'listaCategorias' => $listaCategorias,
             ]);
         }

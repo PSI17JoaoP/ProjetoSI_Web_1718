@@ -4,19 +4,35 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Cliente;
 use common\models\Proposta;
+use common\models\Anuncio;git
 
 class UserController extends Controller
 {
-
-    public function actionIndex()
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
     {
-        $this->layout = "main-user";
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'history', 'anuncios', 'propostas', 'conta'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'history', 'anuncios', 'propostas', 'conta'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
 
-        return $this->render('index');
+                'denyCallback' => function ($rule, $action) {
+                    //throw new \Exception('You are not allowed to access this page');
+                }
+            ],
+        ];
     }
 
     public function actionHistory()
@@ -38,8 +54,8 @@ class UserController extends Controller
     public function actionConta()
     {
         $this->layout = "main-user";
-        
-        $arrayRegiao = array('aveiro' => "Aveiro", 
+
+        $arrayRegiao = array('aveiro' => "Aveiro",
                             'beja' => "Beja",
                             'braga' => "Braga",
                             'bragança' => "Bragança",
@@ -63,15 +79,15 @@ class UserController extends Controller
         
         $model = new Cliente();
 
-        return $this->render('conta', ['model' => $model, 'regiao' => $arrayRegiao]);
-
-        
+        return $this->render('conta', ['model' => $model, 'regioes' => $arrayRegiao]);
     }
 
     public function actionAnuncios()
     {
         $this->layout = "main-user";
 
-        return $this->render('anuncios');
+        $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->identity->getId()]);
+
+        return $this->render('anuncios', ['anuncios' => $anuncios]);
     }
 }

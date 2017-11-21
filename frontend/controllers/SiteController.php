@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Anuncio;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\helpers\ArrayHelper;
@@ -8,11 +9,12 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\User;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+use frontend\models\ClienteForm;
 
 /**
  * Site controller
@@ -109,7 +111,52 @@ class SiteController extends Controller
             'Madeira' => "Madeira",
         );
 
+        $anunciosRecentes = Anuncio::find()->all();
+
+        $anunciosDestaques = Anuncio::find()->all();
+
+        if(Yii::$app->user->isGuest) {
+            return $this->render('index', [
+                'anunciosRecentes' => $anunciosRecentes,
+                'anunciosDestaques' => $anunciosDestaques,
+                'categorias' => $listaCategorias,
+                'regioes' => $listaRegioes,
+            ]);
+        }
+
+        $user = User::findOne(['id' => Yii::$app->user->getId()]);
+
+        if ($user->cliente !== null) {
+            return $this->render('index', [
+                'anunciosRecentes' => $anunciosRecentes,
+                'anunciosDestaques' => $anunciosDestaques,
+                'categorias' => $listaCategorias,
+                'regioes' => $listaRegioes,
+            ]);
+        }
+
+        $modelForm = new ClienteForm();
+
+        if ($modelForm->load(Yii::$app->request->post()))
+        {
+            if ($modelForm->guardar(Yii::$app->user->getId()))
+            {
+                if (Yii::$app->request->post('botao') === 'anuncio')
+                {
+                    $this->redirect(['anuncio/create']);
+                }
+
+                elseif (Yii::$app->request->post('botao') === 'proposta-get')
+                {
+                    $this->redirect(['proposta/create', 'anuncio' => Yii::$app->request->post('anuncio_id')]);
+                }
+            }
+        }
+
         return $this->render('index', [
+            'model' => $modelForm,
+            'anunciosRecentes' => $anunciosRecentes,
+            'anunciosDestaques' => $anunciosDestaques,
             'categorias' => $listaCategorias,
             'regioes' => $listaRegioes,
         ]);
@@ -191,10 +238,10 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionAbout()
+    /*public function actionAbout()
     {
         return $this->render('about');
-    }
+    }*/
 
     /**
      * Signs user up.

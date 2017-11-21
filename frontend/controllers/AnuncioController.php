@@ -12,6 +12,8 @@ use yii\filters\AccessControl;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use frontend\models\AnuncioForm;
+use common\models\Cliente;
+use frontend\models\ClienteForm;
 
 use yii\base\Model;
 
@@ -127,6 +129,39 @@ class AnuncioController extends Controller
             $model->mProcura = $model->selecionarCategoria($cat);
         }
 
+
+        if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) 
+        {
+            $modalModel = new ClienteForm();
+
+            /*
+            echo $this->renderAjax('modal',[
+                    'header' => "<h4>Adicionar informações de conta</h4>",
+                    'model' => $modalModel,
+                    'content' => '//forms/cliente'
+                    ]);
+            */
+            if($modalModel->load(Yii::$app->request->post()))
+            {
+                if($modalModel->guardar(Yii::$app->user->getId()))
+                {
+                    
+                    return $this->render('create', [
+                        'model' => $model,
+                        'catList' => $listaCategorias,
+                    ]);
+                }
+            }
+            else
+            {
+                echo $this->renderAjax('modal',[
+                    'header' => "<h4>Adicionar informações de conta</h4>",
+                    'model' => $modalModel,
+                    'content' => '//forms/cliente'
+                    ]);
+            }
+        }
+
         //Validar envio de dados
         if ($model->load(Yii::$app->request->post())) 
         {
@@ -158,7 +193,7 @@ class AnuncioController extends Controller
             else if (($modeloOferta = $model->mOferta->guardar()) && ($modeloProcura = $model->mProcura->guardar()))
             {
                 if (($modelo = $model->guardar(Yii::$app->user->identity->getId(), $modeloOferta, $modeloProcura))) {
-                    return $this->redirect(['view', 'model' => $modelo]);
+                    return $this->redirect(['user/anuncios', 'model' => $modelo]);
                 } else {
                     return $this->render('create', [
                         'model' => $model,
