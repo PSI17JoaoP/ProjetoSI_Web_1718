@@ -51,6 +51,30 @@ return [
                     'controller' => 'anuncios'
                     
                 ],
+                [
+                    
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'categorias'
+                    
+                ],
+                [
+                    
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'clientes'
+                    
+                ],
+                [
+                    
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'propostas'
+                    
+                ],
+                [
+                    
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'users'
+                    
+                ],
             ],
         ],
         
