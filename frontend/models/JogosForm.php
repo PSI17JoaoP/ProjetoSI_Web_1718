@@ -32,8 +32,6 @@ class JogosForm extends Model
         }
         $this->generoList = $list;
     }
-
-
     
     /**
      * @inheritdoc

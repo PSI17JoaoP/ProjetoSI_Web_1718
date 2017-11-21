@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use frontend\models\ClienteForm;
 use Yii;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use common\models\Cliente;
@@ -47,10 +48,10 @@ class UserController extends Controller
     {
         $this->layout = "main-user";
 
-        $propostas = Proposta::find()
-            ->rightJoin('anuncios', 'propostas.id_anuncio = anuncios.id')
-            ->where('anuncios.id_user = :id_user', [':id_user' => Yii::$app->user->getId()])
-            ->all();
+        $propostas = Proposta::findBySql('SELECT * FROM propostas
+                                              JOIN anuncios ON propostas.id_anuncio = anuncios.id
+                                              JOIN categorias ON propostas.cat_proposto = categorias.id
+                                              WHERE anuncios.id_user = :id_user', [':id_user' => Yii::$app->user->getId()])->all();
 
         return $this->render('propostas', ['propostas' => $propostas]);
     }
@@ -95,7 +96,7 @@ class UserController extends Controller
         return $this->render('anuncios', ['anuncios' => $anuncios]);
     }
 
-    public function actionCliente($model)
+    public function actionCliente($model, $controllerID)
     {
         $listaCategorias = array('brinquedos' => "Brinquedos" ,
             'jogos' => "Jogos",
@@ -111,7 +112,7 @@ class UserController extends Controller
         {
             if($modalModel->guardar(Yii::$app->user->getId()))
             {
-                return $this->render('create', [
+                return $this->render($controllerID . 'create', [
                     'model' => $model,
                     'catList' => $listaCategorias,
                 ]);

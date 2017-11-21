@@ -131,10 +131,11 @@ class AnuncioController extends Controller
 
         if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) 
         {
-            $this->run('user/cliente', [
+            Yii::$app->runAction('user/cliente', [
+                '$controllerID' => $this->id,
                 'model' => $model,
-                'listaCategorias' => $listaCategorias
-                ]);
+                'listaCategorias' => $listaCategorias,
+            ]);
         }
 
         //Validar envio de dados
