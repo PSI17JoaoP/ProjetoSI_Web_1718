@@ -9,7 +9,6 @@
  * @var $model frontend\models\ClienteForm
  */
 
-use common\models\Cliente;
 use yii\helpers\Html;
 use common\models\Anuncio;
 
@@ -50,7 +49,6 @@ $this->title = 'Página Inicial';
 
             if(!Yii::$app->user->isGuest)
             {
-
                 if(Anuncio::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) { ?>
 
                     <div class="col-md-4">

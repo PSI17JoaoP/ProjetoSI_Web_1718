@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Cliente;
 use Yii;
 use yii\base\Model;
 use yii\filters\AccessControl;
@@ -13,6 +14,7 @@ use yii\widgets\ActiveForm;
 use common\models\Anuncio;
 use common\models\Proposta;
 use frontend\models\PropostaForm;
+use frontend\controllers\UserController;
 
 /**
  * PropostaController implements the CRUD actions for Proposta model.
@@ -83,6 +85,13 @@ class PropostaController extends Controller
         {
             $modelForm->catProposto = $categoriaProposto;
             $modelForm->modelProposto = $modelForm->selecionarCategoria($categoriaProposto);
+        }
+
+        if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null)
+        {
+            Yii::$app->runAction('user/cliente', [
+                'model' => $modelForm,
+            ]);
         }
 
         if (Yii::$app->request->post()) {

@@ -129,37 +129,12 @@ class AnuncioController extends Controller
             $model->mProcura = $model->selecionarCategoria($cat);
         }
 
-
         if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) 
         {
-            $modalModel = new ClienteForm();
-
-            /*
-            echo $this->renderAjax('modal',[
-                    'header' => "<h4>Adicionar informações de conta</h4>",
-                    'model' => $modalModel,
-                    'content' => '//forms/cliente'
-                    ]);
-            */
-            if($modalModel->load(Yii::$app->request->post()))
-            {
-                if($modalModel->guardar(Yii::$app->user->getId()))
-                {
-                    
-                    return $this->render('create', [
-                        'model' => $model,
-                        'catList' => $listaCategorias,
-                    ]);
-                }
-            }
-            else
-            {
-                echo $this->renderAjax('modal',[
-                    'header' => "<h4>Adicionar informações de conta</h4>",
-                    'model' => $modalModel,
-                    'content' => '//forms/cliente'
-                    ]);
-            }
+            $this->run('user/cliente', [
+                'model' => $model,
+                'listaCategorias' => $listaCategorias
+                ]);
         }
 
         //Validar envio de dados

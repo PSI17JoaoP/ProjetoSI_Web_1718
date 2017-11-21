@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\ClienteForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -86,5 +87,35 @@ class UserController extends Controller
         $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->identity->getId()]);
 
         return $this->render('anuncios', ['anuncios' => $anuncios]);
+    }
+
+    public function actionCliente($model)
+    {
+        $listaCategorias = array('brinquedos' => "Brinquedos" ,
+            'jogos' => "Jogos",
+            'eletronica' => "Eletrónica",
+            'computadores' => "Computadores",
+            'smartphones' => "Smartphones",
+            'livros' => "Livros",
+            'roupa' => "Roupa");
+
+        $modalModel = new ClienteForm();
+
+        if($modalModel->load(Yii::$app->request->post()))
+        {
+            if($modalModel->guardar(Yii::$app->user->getId()))
+            {
+                return $this->render('create', [
+                    'model' => $model,
+                    'catList' => $listaCategorias,
+                ]);
+            }
+        }
+
+        echo $this->renderAjax('//modals/modal',[
+            'header' => 'Adicionar informações de conta',
+            'model' => $modalModel,
+            'content' => '//forms/cliente'
+        ]);
     }
 }
