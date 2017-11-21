@@ -104,9 +104,8 @@ $this->title = 'Página Inicial';
                                 echo $this->render('anuncio-cliente', ['anuncio' => $anuncio]);
                             } else {
                                 echo $this->render('anuncio-guest', ['anuncio' => $anuncio]);
-                            } ?>
-
-                        <?php } ?>
+                            }
+                        } ?>
                     </div>
                 </div>
             </div>

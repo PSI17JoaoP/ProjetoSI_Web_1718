@@ -115,46 +115,7 @@ class SiteController extends Controller
 
         $anunciosDestaques = Anuncio::find()->all();
 
-        if(Yii::$app->user->isGuest) {
-            return $this->render('index', [
-                'anunciosRecentes' => $anunciosRecentes,
-                'anunciosDestaques' => $anunciosDestaques,
-                'categorias' => $listaCategorias,
-                'regioes' => $listaRegioes,
-            ]);
-        }
-
-        $user = User::findOne(['id' => Yii::$app->user->getId()]);
-
-        if ($user->cliente !== null) {
-            return $this->render('index', [
-                'anunciosRecentes' => $anunciosRecentes,
-                'anunciosDestaques' => $anunciosDestaques,
-                'categorias' => $listaCategorias,
-                'regioes' => $listaRegioes,
-            ]);
-        }
-
-        $modelForm = new ClienteForm();
-
-        if ($modelForm->load(Yii::$app->request->post()))
-        {
-            if ($modelForm->guardar(Yii::$app->user->getId()))
-            {
-                if (Yii::$app->request->post('botao') === 'anuncio')
-                {
-                    $this->redirect(['anuncio/create']);
-                }
-
-                elseif (Yii::$app->request->post('botao') === 'proposta-get')
-                {
-                    $this->redirect(['proposta/create', 'anuncio' => Yii::$app->request->post('anuncio_id')]);
-                }
-            }
-        }
-
         return $this->render('index', [
-            'model' => $modelForm,
             'anunciosRecentes' => $anunciosRecentes,
             'anunciosDestaques' => $anunciosDestaques,
             'categorias' => $listaCategorias,

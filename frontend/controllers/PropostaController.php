@@ -55,12 +55,12 @@ class PropostaController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    /*public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+    }*/
 
     /**
      * Creates a new Proposta model.
@@ -204,50 +204,33 @@ class PropostaController extends Controller
     /**
      * Updates an existing Proposta model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param $propostaID integer O id da proposta
      * @return mixed
+     * @internal param int $id
      */
-    public function actionUpdate($id)
+    public function actionUpdate($propostaID)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    public function actionAceitarRecusar()
-    {
-
-        $propostaID = Yii::$app->request->post('id_proposta');
         $model = $this->findModel($propostaID);
 
         if (Yii::$app->request->post()) {
-            
+
             $propostaEstado = Yii::$app->request->post('estado');
 
             if ($propostaEstado === 'ACEITE') {
                 $model->estado = 'ACEITE';
             }
-             
+
             elseif($propostaEstado === 'RECUSADO') {
                 $model->estado = 'RECUSADO';
             }
 
             if ($model->save()) {
                 return $this->goBack();
-            }
-            else {
+            } else {
                 return $this->redirect(['user/propostas']);
             }
-
         }
     }
-
 
     /**
      * Deletes an existing Proposta model.

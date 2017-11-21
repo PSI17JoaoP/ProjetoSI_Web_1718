@@ -8,7 +8,7 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use common\models\Cliente;
 use common\models\Proposta;
-use common\models\Anuncio;git
+use common\models\Anuncio;
 
 class UserController extends Controller
 {
@@ -47,7 +47,10 @@ class UserController extends Controller
     {
         $this->layout = "main-user";
 
-        $propostas = Proposta::findAll(['id_user' => Yii::$app->user->identity->getId()]);
+        $propostas = Proposta::find()
+            ->rightJoin('anuncios', 'propostas.id_anuncio = anuncios.id')
+            ->where('anuncios.id_user = :id_user', [':id_user' => Yii::$app->user->getId()])
+            ->all();
 
         return $this->render('propostas', ['propostas' => $propostas]);
     }

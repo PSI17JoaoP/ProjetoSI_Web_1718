@@ -1,5 +1,9 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $propostas array
+ */
+
+use yii\helpers\Html;
 
 $this->title = 'Propostas Recebidas';
 ?>
@@ -11,9 +15,7 @@ $this->title = 'Propostas Recebidas';
 
             foreach($propostas as $proposta) {
                 
-                if($proposta !== null) {
-                
-                    $imagensPropostas = ImagensProposta::findAll(['proposta_id' => $proposta->id]) ?>
+                if($proposta !== null) { ?>
 
                     <!--Código repetido para efeito de visualização com multiplos paineis-->
                     <div class="row">
