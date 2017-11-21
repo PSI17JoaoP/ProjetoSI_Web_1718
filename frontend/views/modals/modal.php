@@ -7,7 +7,7 @@
 use yii\bootstrap\Modal;
 
 Modal::begin([
-    'header' => $header,
+    'header' => "<h4>".$header."</h4>",
     'id' => 'modal_geral',
     'size' => 'modal-md']) ?>
 

@@ -115,8 +115,7 @@ class SiteController extends Controller
 
         $anunciosDestaques = Anuncio::find()->all();
 
-        if(Yii::$app->user->isGuest)
-        {
+        if(Yii::$app->user->isGuest) {
             return $this->render('index', [
                 'anunciosRecentes' => $anunciosRecentes,
                 'anunciosDestaques' => $anunciosDestaques,
@@ -125,67 +124,42 @@ class SiteController extends Controller
             ]);
         }
 
-    $user = User::findOne(['id' => Yii::$app->user->getId()]);
+        $user = User::findOne(['id' => Yii::$app->user->getId()]);
 
-        $model = new ClienteForm();
-
-        if($user->cliente === null)
-        {
-            if($model->load(Yii::$app->request->post()))
-            {
-                if($model->guardar(Yii::$app->user->getId()))
-                {
-                    if(Yii::$app->request->post('botao') === 'anuncio') {
-                        $this->redirect(['anuncio/create']);
-                    }
-
-                    elseif(Yii::$app->request->post('botao') === 'proposta-get') {
-                        $this->redirect(['proposta/create', 'anuncio' => Yii::$app->request->post('anuncio')]);
-                    }
-
-                    else
-                    {
-                        return $this->render('index', [
-                            'model' => $model,
-                            'anunciosRecentes' => $anunciosRecentes,
-                            'anunciosDestaques' => $anunciosDestaques,
-                            'categorias' => $listaCategorias,
-                            'regioes' => $listaRegioes,
-                        ]);
-                    }
-                }
-                else
-                {
-                    return $this->render('index', [
-                        'model' => $model,
-                        'anunciosRecentes' => $anunciosRecentes,
-                        'anunciosDestaques' => $anunciosDestaques,
-                        'categorias' => $listaCategorias,
-                        'regioes' => $listaRegioes,
-                    ]);
-                }
-            }
-            else
-            {
-                return $this->render('index', [
-                    'model' => $model,
-                    'anunciosRecentes' => $anunciosRecentes,
-                    'anunciosDestaques' => $anunciosDestaques,
-                    'categorias' => $listaCategorias,
-                    'regioes' => $listaRegioes,
-                ]);
-            }
-        }
-        else
-        {
+        if ($user->cliente !== null) {
             return $this->render('index', [
-                'model' => $model,
                 'anunciosRecentes' => $anunciosRecentes,
                 'anunciosDestaques' => $anunciosDestaques,
                 'categorias' => $listaCategorias,
                 'regioes' => $listaRegioes,
             ]);
         }
+
+        $modelForm = new ClienteForm();
+
+        if ($modelForm->load(Yii::$app->request->post()))
+        {
+            if ($modelForm->guardar(Yii::$app->user->getId()))
+            {
+                if (Yii::$app->request->post('botao') === 'anuncio')
+                {
+                    $this->redirect(['anuncio/create']);
+                }
+
+                elseif (Yii::$app->request->post('botao') === 'proposta-get')
+                {
+                    $this->redirect(['proposta/create', 'anuncio' => Yii::$app->request->post('anuncio_id')]);
+                }
+            }
+        }
+
+        return $this->render('index', [
+            'model' => $modelForm,
+            'anunciosRecentes' => $anunciosRecentes,
+            'anunciosDestaques' => $anunciosDestaques,
+            'categorias' => $listaCategorias,
+            'regioes' => $listaRegioes,
+        ]);
     }
 
     /**
@@ -264,10 +238,10 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionAbout()
+    /*public function actionAbout()
     {
         return $this->render('about');
-    }
+    }*/
 
     /**
      * Signs user up.

@@ -41,14 +41,12 @@ $this->title = 'Os meus anúncios';
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
 
-                    <?= $this->renderAjax('//site/modal',[
+                    <?php /*echo $this->renderAjax('//modals/modal',[
                             'header' => $anuncio->titulo,
                             'model' => $anuncio,
-                            'content' => '//modals/anuncio']) ?>
+                            'content' => '//modals/anuncio'])*/ ?>
 
                 <?php } ?>
             <?php } ?>

@@ -9,6 +9,7 @@
  * @var $model frontend\models\ClienteForm
  */
 
+use common\models\Cliente;
 use yii\helpers\Html;
 use common\models\Anuncio;
 
@@ -56,15 +57,25 @@ $this->title = 'Página Inicial';
                             <div class="panel-body" style="text-align: center; background-color: #449d44">
                                 <p class="text-center" style="color: white">É a sua primeira vez online ?</p>
                                 <p class="text-center" style="color: white">Crie agora um anúncio !!</p>
-                                <?= Html::a('Criar Anúncio','#', ['class' => 'btn btn-success btn-lg showModal'])?>
+
+                                <?php
+
+                                    if(Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) {
+                                        echo Html::a('Criar Anúncio','#', ['class' => 'btn btn-success btn-lg showModal']);
+
+                                        /*echo $this->renderAjax('//modals/modal',[
+                                            'header' => 'Adicionar informações de conta',
+                                            'model' => $model,
+                                            'content' => '//forms/cliente']);*/
+                                    } else {
+                                        echo Html::a('Criar Anúncio', ['anuncio/create'], ['class' => 'btn btn-success btn-lg']);
+                                    }
+
+                                ?>
+
                             </div>
                         </div>
                     </div>
-
-                    <?= $this->renderAjax('modal',[
-                            'header' => "<h4>Adicionar informações de conta</h4>",
-                            'model' => $model,
-                            'content' => '//forms/cliente']);?>
 
                 <?php } ?>
             <?php } ?>
