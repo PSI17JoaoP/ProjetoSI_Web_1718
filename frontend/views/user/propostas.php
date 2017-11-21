@@ -34,11 +34,35 @@ $this->title = 'Propostas Recebidas';
 
                         <div class="col-6 col-md-4">
                             <div class="col-md-6">
-                                <a href="#" class="btn btn-success">Aceitar</a>
+                            <?php                             
+                            echo Html::a('Aceitar', ['proposta/update', 'propostaID' => $proposta->id], [
+                                'class' => 'btn btn-success',
+                                'style' => 'margin-left: 17px; margin-top: 13px',
+                                'data' => [
+                                    'method' => 'post',
+                                    'params' => [
+                                        'estado' => 'ACEITE',
+                                    ],
+                                ]
+                            ]);
+                            ?>
+                                
                             </div>
 
                             <div class="col-md-6">
-                                <a href="#" class="btn btn-danger">Recusar</a>
+                            <?php                             
+                            echo Html::a('Recusar', ['proposta/update', 'propostaID' => $proposta->id], [
+                                'class' => 'btn btn-danger',
+                                'style' => 'margin-left: 17px; margin-top: 13px',
+                                'data' => [
+                                    'method' => 'post',
+                                    'params' => [
+                                        'estado' => 'RECUSADO',
+                                    ],
+                                ]
+                            ]);
+                            ?>
+                                
                             </div>
                         </div>
                     </div>
