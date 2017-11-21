@@ -1,0 +1,168 @@
+2017-11-21 15:42:10 [::1][-][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: UrlRule::pattern must be set. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\UrlRule.php:192
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\BaseObject.php(108): yii\web\UrlRule->init()
+#1 [internal function]: yii\base\BaseObject->__construct(Array)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\web\\UrlRule', Array, Array)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\web\\UrlRule', Array, Array)
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\UrlManager.php(248): yii\BaseYii::createObject(Array)
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\UrlManager.php(190): yii\web\UrlManager->buildRules(Array)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\BaseObject.php(108): yii\web\UrlManager->init()
+#8 [internal function]: yii\base\BaseObject->__construct(Array)
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(381): ReflectionClass->newInstanceArgs(Array)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\web\\UrlMana...', Array, Array)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\web\\UrlMana...', Array, Array)
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\ServiceLocator.php(137): yii\BaseYii::createObject(Array)
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(724): yii\di\ServiceLocator->get('urlManager', true)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(571): yii\base\Module->get('urlManager')
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2-debug\Module.php(197): yii\base\Application->getUrlManager()
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(327): yii\debug\Module->bootstrap(Object(yii\web\Application))
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(69): yii\base\Application->bootstrap()
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(273): yii\web\Application->bootstrap()
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\BaseObject.php(108): yii\base\Application->init()
+#20 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(206): yii\base\BaseObject->__construct(Array)
+#21 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->__construct(Array)
+#22 {main}
+2017-11-21 15:42:10 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50375'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios'
+    'PHP_SELF' => '/index.php/anuncios'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.102 Safari/537.36 Vivaldi/1.93.955.42'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'pt-PT,pt;q=0.8,en-US;q=0.6,en;q=0.4'
+    'REQUEST_TIME_FLOAT' => 1511278930.2851
+    'REQUEST_TIME' => 1511278930
+]
+2017-11-21 15:48:34 [::1][-][-][error][yii\web\HttpException:405] yii\web\MethodNotAllowedHttpException: Method Not Allowed. This URL can only handle the following request methods: GET, HEAD. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\filters\VerbFilter.php:105
+Stack trace:
+#0 [internal function]: yii\filters\VerbFilter->beforeAction(Object(yii\base\ActionEvent))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Component.php(557): call_user_func(Array, Object(yii\base\ActionEvent))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(274): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Controller.php(164): yii\base\Controller->beforeAction(Object(yii\rest\IndexAction))
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(155): yii\web\Controller->beforeAction(Object(yii\rest\IndexAction))
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('', Array)
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/', Array)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#9 {main}
+2017-11-21 15:48:34 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50435'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/'
+    'PHP_SELF' => '/index.php/anuncios/'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '22'
+    'HTTP_CONTENT_LENGTH' => '22'
+    'HTTP_ORIGIN' => 'chrome-extension://aejoelaoggembcahagimdiliamlcdmfm'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.102 Safari/537.36 Vivaldi/1.93.955.42'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'pt-PT,pt;q=0.8,en-US;q=0.6,en;q=0.4'
+    'REQUEST_TIME_FLOAT' => 1511279314.0412
+    'REQUEST_TIME' => 1511279314
+]
+2017-11-21 16:04:26 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user.id_user' in 'where clause' in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php:1067
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1067): PDOStatement->execute()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(412): yii\db\Command->queryInternal('fetchColumn', 0)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(410): yii\db\Command->queryScalar()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\validators\ExistValidator.php(117): yii\db\Query->exists()
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\validators\Validator.php(267): yii\validators\ExistValidator->validateAttribute(Object(common\models\Anuncio), 'id_user')
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Model.php(360): yii\validators\Validator->validateAttributes(Object(common\models\Anuncio), Array)
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(581): yii\base\Model->validate(Array)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(649): yii\db\ActiveRecord->update(true, NULL)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\UpdateAction.php(48): yii\db\BaseActiveRecord->save()
+#9 [internal function]: yii\rest\UpdateAction->run('4')
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Action.php(94): call_user_func_array(Array, Array)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\Action->runWithParams(Array)
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('update', Array)
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/update', Array)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#16 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user.id_user' in 'where clause'
+The SQL being executed was: SELECT EXISTS(SELECT * FROM `user` WHERE (`user`.`id_user`=2)) in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php:594
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1082): yii\db\Schema->convertException(Object(PDOException), 'SELECT EXISTS(S...')
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(412): yii\db\Command->queryInternal('fetchColumn', 0)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(410): yii\db\Command->queryScalar()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\validators\ExistValidator.php(117): yii\db\Query->exists()
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\validators\Validator.php(267): yii\validators\ExistValidator->validateAttribute(Object(common\models\Anuncio), 'id_user')
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Model.php(360): yii\validators\Validator->validateAttributes(Object(common\models\Anuncio), Array)
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(581): yii\base\Model->validate(Array)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(649): yii\db\ActiveRecord->update(true, NULL)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\UpdateAction.php(48): yii\db\BaseActiveRecord->save()
+#9 [internal function]: yii\rest\UpdateAction->run('4')
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Action.php(94): call_user_func_array(Array, Array)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\Action->runWithParams(Array)
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('update', Array)
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/update', Array)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#16 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'user.id_user' in 'where clause'
+)
+
+2017-11-21 16:04:25 [::1][-][-][info][application] $_GET = [
+    'id' => '4'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50613'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/4'
+    'REQUEST_METHOD' => 'PUT'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/4'
+    'PHP_SELF' => '/index.php/anuncios/4'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '22'
+    'HTTP_CONTENT_LENGTH' => '22'
+    'HTTP_ORIGIN' => 'chrome-extension://aejoelaoggembcahagimdiliamlcdmfm'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.102 Safari/537.36 Vivaldi/1.93.955.42'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'pt-PT,pt;q=0.8,en-US;q=0.6,en;q=0.4'
+    'REQUEST_TIME_FLOAT' => 1511280265.8716
+    'REQUEST_TIME' => 1511280265
+]
