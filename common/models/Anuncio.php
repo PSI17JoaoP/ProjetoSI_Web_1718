@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "anuncios".
@@ -19,12 +20,13 @@ use Yii;
  * @property string $data_conclusao
  * @property string $comentarios
  *
- * @property Clientes $idUser
- * @property Categorias $catOferecer
- * @property Categorias $catReceber
- * @property Propostas[] $propostas
+ * @property User $idUser
+ * @property Categoria $catOferecer
+ * @property Categoria $catReceber
+ * @property ImagensAnuncio[] $imagensAnuncios
+ * @property Proposta[] $propostas
  */
-class Anuncio extends \yii\db\ActiveRecord
+class Anuncio extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -45,8 +47,8 @@ class Anuncio extends \yii\db\ActiveRecord
             [['data_criacao', 'data_conclusao'], 'safe'],
             [['titulo'], 'string', 'max' => 25],
             [['estado'], 'string', 'max' => 10],
-            [['comentarios'], 'string', 'max' => 256],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id_user']],
+            [['comentarios'], 'string', 'max' => 255],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
             [['cat_oferecer'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_oferecer' => 'id']],
             [['cat_receber'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_receber' => 'id']],
         ];
@@ -60,14 +62,10 @@ class Anuncio extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'titulo' => 'Titulo',
-            'id_user' => 'Id User',
-            'cat_oferecer' => 'Cat Oferecer',
-            'quant_oferecer' => 'Quant Oferecer',
-            'cat_receber' => 'Cat Receber',
-            'quant_receber' => 'Quant Receber',
-            'estado' => 'Estado',
-            'data_criacao' => 'Data Criacao',
-            'data_conclusao' => 'Data Conclusao',
+            'cat_oferecer' => 'Categoria',
+            'quant_oferecer' => 'Quantidade',
+            'cat_receber' => 'Categoria',
+            'quant_receber' => 'Quantidade',
             'comentarios' => 'Comentarios',
         ];
     }
@@ -77,7 +75,7 @@ class Anuncio extends \yii\db\ActiveRecord
      */
     public function getIdUser()
     {
-        return $this->hasOne(Clientes::className(), ['id_user' => 'id_user']);
+        return $this->hasOne(User::className(), ['id_user' => 'id_user']);
     }
 
     /**
@@ -85,7 +83,7 @@ class Anuncio extends \yii\db\ActiveRecord
      */
     public function getCatOferecer()
     {
-        return $this->hasOne(Categorias::className(), ['id' => 'cat_oferecer']);
+        return $this->hasOne(Categoria::className(), ['id' => 'cat_oferecer']);
     }
 
     /**
@@ -93,7 +91,15 @@ class Anuncio extends \yii\db\ActiveRecord
      */
     public function getCatReceber()
     {
-        return $this->hasOne(Categorias::className(), ['id' => 'cat_receber']);
+        return $this->hasOne(Categoria::className(), ['id' => 'cat_receber']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImagensAnuncios()
+    {
+        return $this->hasMany(ImagensAnuncio::className(), ['anuncio_id' => 'id']);
     }
 
     /**
@@ -101,6 +107,6 @@ class Anuncio extends \yii\db\ActiveRecord
      */
     public function getPropostas()
     {
-        return $this->hasMany(Propostas::className(), ['id_anuncio' => 'id']);
+        return $this->hasMany(Proposta::className(), ['id_anuncio' => 'id']);
     }
 }

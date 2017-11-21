@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "c_livros".
@@ -13,9 +14,9 @@ use Yii;
  * @property string $autor
  * @property integer $isbn
  *
- * @property Categorias $idCategoria
+ * @property Categoria $idCategoria
  */
-class CategoriaLivros extends \yii\db\ActiveRecord
+class CategoriaLivros extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -35,7 +36,7 @@ class CategoriaLivros extends \yii\db\ActiveRecord
             [['id_categoria', 'isbn'], 'integer'],
             [['titulo'], 'string', 'max' => 30],
             [['editora', 'autor'], 'string', 'max' => 25],
-            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['id_categoria' => 'id']],
+            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['id_categoria' => 'id']],
         ];
     }
 
@@ -45,11 +46,10 @@ class CategoriaLivros extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_categoria' => 'Id Categoria',
             'titulo' => 'Titulo',
             'editora' => 'Editora',
             'autor' => 'Autor',
-            'isbn' => 'Isbn',
+            'isbn' => 'ISBN',
         ];
     }
 
@@ -58,6 +58,6 @@ class CategoriaLivros extends \yii\db\ActiveRecord
      */
     public function getIdCategoria()
     {
-        return $this->hasOne(Categorias::className(), ['id' => 'id_categoria']);
+        return $this->hasOne(Categoria::className(), ['id' => 'id_categoria']);
     }
 }

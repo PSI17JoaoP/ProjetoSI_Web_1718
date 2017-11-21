@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "c_eletronica".
@@ -11,11 +12,11 @@ use Yii;
  * @property string $descricao
  * @property string $marca
  *
- * @property CComputadores $cComputadores
- * @property Categorias $idCategoria
- * @property CSmartphones $cSmartphones
+ * @property CategoriaComputadores $cComputadores
+ * @property Categoria $idCategoria
+ * @property CategoriaSmartphones $cSmartphones
  */
-class CategoriaEletronica extends \yii\db\ActiveRecord
+class CategoriaEletronica extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -35,7 +36,7 @@ class CategoriaEletronica extends \yii\db\ActiveRecord
             [['id_categoria'], 'integer'],
             [['descricao'], 'string', 'max' => 30],
             [['marca'], 'string', 'max' => 25],
-            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['id_categoria' => 'id']],
+            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['id_categoria' => 'id']],
         ];
     }
 
@@ -45,8 +46,7 @@ class CategoriaEletronica extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_categoria' => 'Id Categoria',
-            'descricao' => 'Descricao',
+            'descricao' => 'Descrição',
             'marca' => 'Marca',
         ];
     }
@@ -56,7 +56,7 @@ class CategoriaEletronica extends \yii\db\ActiveRecord
      */
     public function getCComputadores()
     {
-        return $this->hasOne(CComputadores::className(), ['id_eletronica' => 'id_categoria']);
+        return $this->hasOne(CategoriaComputadores::className(), ['id_eletronica' => 'id_categoria']);
     }
 
     /**
@@ -64,7 +64,7 @@ class CategoriaEletronica extends \yii\db\ActiveRecord
      */
     public function getIdCategoria()
     {
-        return $this->hasOne(Categorias::className(), ['id' => 'id_categoria']);
+        return $this->hasOne(Categoria::className(), ['id' => 'id_categoria']);
     }
 
     /**
@@ -72,6 +72,6 @@ class CategoriaEletronica extends \yii\db\ActiveRecord
      */
     public function getCSmartphones()
     {
-        return $this->hasOne(CSmartphones::className(), ['id_eletronica' => 'id_categoria']);
+        return $this->hasOne(CategoriaSmartphones::className(), ['id_eletronica' => 'id_categoria']);
     }
 }

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "c_computadores".
@@ -15,9 +16,9 @@ use Yii;
  * @property string $os
  * @property integer $portatil
  *
- * @property CEletronica $idEletronica
+ * @property CategoriaEletronica $idEletronica
  */
-class CategoriaComputadores extends \yii\db\ActiveRecord
+class CategoriaComputadores extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -39,7 +40,7 @@ class CategoriaComputadores extends \yii\db\ActiveRecord
             [['ram'], 'string', 'max' => 5],
             [['hdd'], 'string', 'max' => 10],
             [['os'], 'string', 'max' => 25],
-            [['id_eletronica'], 'exist', 'skipOnError' => true, 'targetClass' => CEletronica::className(), 'targetAttribute' => ['id_eletronica' => 'id_categoria']],
+            [['id_eletronica'], 'exist', 'skipOnError' => true, 'targetClass' => CategoriaEletronica::className(), 'targetAttribute' => ['id_eletronica' => 'id_categoria']],
         ];
     }
 
@@ -49,13 +50,12 @@ class CategoriaComputadores extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_eletronica' => 'Id Eletronica',
-            'processador' => 'Processador',
-            'ram' => 'Ram',
-            'hdd' => 'Hdd',
-            'gpu' => 'Gpu',
-            'os' => 'Os',
-            'portatil' => 'Portatil',
+            'processador' => 'CPU',
+            'ram' => 'Memória RAM',
+            'hdd' => 'Armazenamento',
+            'gpu' => 'GPU',
+            'os' => 'Sistema Operativo',
+            'portatil' => 'Portátil',
         ];
     }
 
@@ -64,6 +64,6 @@ class CategoriaComputadores extends \yii\db\ActiveRecord
      */
     public function getIdEletronica()
     {
-        return $this->hasOne(CEletronica::className(), ['id_categoria' => 'id_eletronica']);
+        return $this->hasOne(CategoriaEletronica::className(), ['id_categoria' => 'id_eletronica']);
     }
 }

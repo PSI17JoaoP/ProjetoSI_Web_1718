@@ -4,10 +4,11 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Anuncio */
+/* @var $model frontend\models\AnuncioForm */
+/* @var $catList array */
 
-$this->title = 'Create Anuncio';
-$this->params['breadcrumbs'][] = ['label' => 'Anuncios', 'url' => ['index']];
+$this->title = 'Criar Anúncio';
+$this->params['breadcrumbs'][] = ['label' => 'Home', 'url' => ['site/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anuncio-create">
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'catItems' => $catList,
     ]) ?>
 
 </div>

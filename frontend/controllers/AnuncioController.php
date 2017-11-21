@@ -8,6 +8,14 @@ use common\models\AnuncioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+use frontend\models\AnuncioForm;
+use common\models\Cliente;
+use frontend\models\ClienteForm;
+
+use yii\base\Model;
 
 /**
  * AnuncioController implements the CRUD actions for Anuncio model.
@@ -20,6 +28,20 @@ class AnuncioController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create'],
+                'rules' => [
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    //throw new \Exception('You are not allowed to access this page');
+                }
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -33,7 +55,35 @@ class AnuncioController extends Controller
      * Lists all Anuncio models.
      * @return mixed
      */
-    public function actionIndex()
+    /*public function actionIndex()
+    {
+        $searchModel = new AnuncioSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }*/
+
+    /**
+     * Displays a single Anuncio model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Searches for Anuncio models.
+     * @param array $params Os parâmetros de pesquisa
+     * @return mixed
+     */
+    public function actionSearch($params)
     {
         $searchModel = new AnuncioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -45,29 +95,103 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Displays a single Anuncio model.
-
-     * @return mixed
-     */
-    public function actionView()
-    {
-        return $this->render('pesquisa');
-    }
-
-    /**
      * Creates a new Anuncio model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Anuncio();
+        $listaCategorias = array('brinquedos' => "Brinquedos" , 
+                                'jogos' => "Jogos",
+                                'eletronica' => "Eletrónica",
+                                'computadores' => "Computadores",
+                                'smartphones' => "Smartphones",
+                                'livros' => "Livros",
+                                'roupa' => "Roupa");
+        
+        $model = new AnuncioForm(); 
+        
+        //Validar a escolha da categoria do evento onChange (Oferta)
+        if(Yii::$app->request->get('catOferta') !== 'null')
+        {   
+            $cat = Yii::$app->request->get('catOferta');
+            $model->catOferta = $cat;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+            $model->mOferta = $model->selecionarCategoria($cat);
+        }
+
+        //Validar a escolha da categoria do evento onChange (Procura)
+        if(Yii::$app->request->get('catProcura') !== 'null')
+        {   
+            $cat = Yii::$app->request->get('catProcura');
+            $model->catProcura = $cat;
+
+            $model->mProcura = $model->selecionarCategoria($cat);
+        }
+
+        if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) 
+        {
+            Yii::$app->runAction('user/cliente', [
+                '$controllerID' => $this->id,
+                'model' => $model,
+                'listaCategorias' => $listaCategorias,
+            ]);
+        }
+
+        //Validar envio de dados
+        if ($model->load(Yii::$app->request->post())) 
+        {
+            $catOferta = $model->catOferta;
+            $catProcura = $model->catProcura;
+
+            $model->mOferta = $model->selecionarCategoria($catOferta);
+            $model->mProcura = $model->selecionarCategoria($catProcura);
+
+
+            $data = array(
+                '0' => $model->selecionarCategoria($catOferta), 
+                '1' => $model->selecionarCategoria($catProcura)
+            );
+
+
+            if (Model::loadMultiple($data, Yii::$app->request->post())) {
+                $model->mOferta = $data['0'];
+                $model->mProcura = $data['1'];
+            }
+
+            //Validar o pedido AJAX do evento onChange e validar o formulário com os novos dados
+            if (Yii::$app->request->isAjax)
+            {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+
+            else if (($modeloOferta = $model->mOferta->guardar()) && ($modeloProcura = $model->mProcura->guardar()))
+            {
+                if (($modelo = $model->guardar(Yii::$app->user->identity->getId(), $modeloOferta, $modeloProcura))) {
+                    return $this->redirect(['user/anuncios', 'model' => $modelo]);
+                } else {
+                    return $this->render('create', [
+                        'model' => $model,
+                        'catList' => $listaCategorias,
+                    ]);
+                }
+            }
+
+            else
+            {
+                return $this->render('create', [
+                    'model' => $model,
+                    'catList' => $listaCategorias,
+                ]);
+            }
+        }
+
+        else
+        {
             return $this->render('create', [
                 'model' => $model,
+                'catList' => $listaCategorias,
             ]);
         }
     }

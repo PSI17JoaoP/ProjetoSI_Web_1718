@@ -21,6 +21,12 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property Anuncio[] $anuncios
+ * @property CategoriaPreferida[] $categoriasPreferidas
+ * @property Categoria[] $categorias
+ * @property Cliente $cliente
+ * @property Proposta[] $propostas
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -133,6 +139,46 @@ class User extends ActiveRecord implements IdentityInterface
     public function getAuthKey()
     {
         return $this->auth_key;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAnuncios()
+    {
+        return $this->hasMany(Anuncio::className(), ['id_user' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategoriasPreferidas()
+    {
+        return $this->hasMany(CategoriaPreferida::className(), ['id_user' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategorias()
+    {
+        return $this->hasMany(Categoria::className(), ['id' => 'id_categoria'])->viaTable('categoria_preferida', ['id_user' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCliente()
+    {
+        return $this->hasOne(Cliente::className(), ['id_user' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPropostas()
+    {
+        return $this->hasMany(Proposta::className(), ['id_user' => 'id']);
     }
 
     /**
