@@ -49,7 +49,7 @@ class PropostaForm extends Model
             $proposta->id_user = $userID;
             $proposta->cat_proposto = $modeloProposto;
             $proposta->quant = $this->quantProposto;
-            $proposta->estado = 'ATIVO';
+            $proposta->estado = 'PENDENTE';
             $proposta->id_anuncio = $anuncioID;
             $proposta->data_proposta = date("Y-m-d h:i:s");
 
