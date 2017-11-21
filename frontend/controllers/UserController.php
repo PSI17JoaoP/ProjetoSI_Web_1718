@@ -7,7 +7,8 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use common\models\Cliente;
-use common\models\Anuncio;
+use common\models\Proposta;
+use common\models\Anuncio;git
 
 class UserController extends Controller
 {
@@ -46,7 +47,9 @@ class UserController extends Controller
     {
         $this->layout = "main-user";
 
-        return $this->render('propostas');
+        $propostas = Proposta::findAll(['id_user' => Yii::$app->user->identity->getId()]);
+
+        return $this->render('propostas', ['propostas' => $propostas]);
     }
 
     public function actionConta()

@@ -220,6 +220,35 @@ class PropostaController extends Controller
         }
     }
 
+    public function actionAceitarRecusar()
+    {
+
+        $propostaID = Yii::$app->request->post('id_proposta');
+        $model = $this->findModel($propostaID);
+
+        if (Yii::$app->request->post()) {
+            
+            $propostaEstado = Yii::$app->request->post('estado');
+
+            if ($propostaEstado === 'ACEITE') {
+                $model->estado = 'ACEITE';
+            }
+             
+            elseif($propostaEstado === 'RECUSADO') {
+                $model->estado = 'RECUSADO';
+            }
+
+            if ($model->save()) {
+                return $this->goBack();
+            }
+            else {
+                return $this->redirect(['user/propostas']);
+            }
+
+        }
+    }
+
+
     /**
      * Deletes an existing Proposta model.
      * If deletion is successful, the browser will be redirected to the previous page.

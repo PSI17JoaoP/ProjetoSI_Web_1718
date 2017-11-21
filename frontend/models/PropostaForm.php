@@ -51,7 +51,7 @@ class PropostaForm extends Model
             $proposta->id_user = Yii::$app->user->getId();
             $proposta->cat_proposto = $categoriaPropostoID;
             $proposta->quant = $this->quantProposto;
-            $proposta->estado = 'ATIVO';
+            $proposta->estado = 'PENDENTE';
             $proposta->id_anuncio = $this->anuncioID;
             $proposta->data_proposta = date("Y-m-d h:i:s");
 
