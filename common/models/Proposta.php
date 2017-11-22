@@ -19,6 +19,7 @@ use yii\db\ActiveRecord;
  * @property ImagensProposta[] $imagensPropostas
  * @property User $idUser
  * @property Anuncio $idAnuncio
+ * @property Categoria $catProposto
  */
 class Proposta extends ActiveRecord
 {
@@ -41,6 +42,7 @@ class Proposta extends ActiveRecord
             [['data_proposta'], 'safe'],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
             [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncio::className(), 'targetAttribute' => ['id_anuncio' => 'id']],
+            [['cat_proposto'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['cat_proposto' => 'id']],
         ];
     }
 
@@ -77,5 +79,13 @@ class Proposta extends ActiveRecord
     public function getIdAnuncio()
     {
         return $this->hasOne(Anuncio::className(), ['id' => 'id_anuncio']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCatProposto()
+    {
+        return $this->hasOne(Categoria::className(), ['id' => 'cat_proposto']);
     }
 }

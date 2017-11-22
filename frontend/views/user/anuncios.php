@@ -11,9 +11,7 @@ $this->title = 'Os meus anúncios';
     <div class="panel panel-default">
         <div class="panel-body">
 
-            <?php
-
-            foreach($anuncios as $anuncio) { ?>
+            <?php foreach($anuncios as $dados) { ?>
 
                 <div class="row">
                     <div class="col-md-12">
@@ -21,12 +19,12 @@ $this->title = 'Os meus anúncios';
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <p style="margin-top: 8px; margin-left: 5px"><?= Html::encode($anuncio->titulo) ?></p>
+                                        <p style="margin-top: 8px; margin-left: 5px"><?= Html::encode($dados[0]->titulo) ?></p>
                                     </div>
 
                                     <div class="col-md-2">
                                         <span class="pull-right">
-                                            <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary showModal'])?>
+                                            <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary view_model'])?>
                                         </span>
                                     </div>
 
@@ -39,15 +37,19 @@ $this->title = 'Os meus anúncios';
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <?php echo $this->renderAjax('//modals/modal',[
-                        'id' => 'modal_detalhes',
-                        'header' => $anuncio->titulo,
+                    <?= $this->renderAjax('//modals/modal',[
+                        'header' => $dados[0]->titulo,
                         'backdrop' => 'true',
                         'keyboard' => 'true',
-                        'model' => $anuncio,
-                        'content' => '//modals/anuncio']) ?>
+                        'content' => '//modals/anuncio',
+                        'options' => [
+                            'model' => $dados[0],
+                            'categorias' => $dados[1],
+                        ],
+                    ]) ?>
+
+                </div>
 
             <?php } ?>
         </div>

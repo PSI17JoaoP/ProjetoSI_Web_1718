@@ -1,7 +1,7 @@
 <?php
 
 /** @var $content string
- *  @var $model mixed
+ *  @var $options array
  *  @var $backdrop string
  *  @var $keyboard string
  *  @var $id string
@@ -11,7 +11,7 @@ use yii\bootstrap\Modal;
 
 Modal::begin([
     'header' => "<h4>".$header."</h4>",
-    'id' => $id,
+    'id' => 'modal_geral',
     'size' => 'modal-md',
     'options' => [
         'data' => [
@@ -22,7 +22,7 @@ Modal::begin([
 ]); ?>
 
 <div id='modalContent'>
-    <?= $this->render($content, ['model' => $model]) ?>
+    <?= $this->render($content, $options) ?>
 </div>
 
 <?php Modal::end() ?>

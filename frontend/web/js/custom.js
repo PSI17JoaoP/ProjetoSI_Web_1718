@@ -1,18 +1,19 @@
 $(function(){
+    $('#modal_geral').ready(function(){
 
-    $('.showModal').click(function(){
-        $('#modal_detalhes').modal('show');
+        jQuery.fn.exists = function(){ return this.length > 0; };
+
+        if($('#cliente-form').exists()) {
+            $('.close').remove();
+            $('#modal_geral').modal('show');
+        }
+
+        else {
+            $('.view_model').click(function () {
+                $('#modal_geral').modal('toggle');
+            });
+        }
     });
-
-    $('#modal_cliente').ready(function(){
-        $('.close').remove();
-        $('#modal_cliente').modal('show');
-    });
-
-    $('#modal_detalhes').ready(function(){
-        $('#modal_detalhes').modal('toggle');
-    });
-
 });
 
 

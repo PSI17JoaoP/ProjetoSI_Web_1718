@@ -3,19 +3,12 @@
 namespace frontend\controllers;
 
 
+use frontend\models\GestorCategorias;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use common\models\Cliente;
 use common\models\Anuncio;
-use common\models\Categoria;
-use common\models\CategoriaBrinquedos;
-use common\models\CategoriaComputadores;
-use common\models\CategoriaEletronica;
-use common\models\CategoriaJogos;
-use common\models\CategoriaLivros;
-use common\models\CategoriaRoupa;
-use common\models\CategoriaSmartphones;
 use frontend\models\ClienteForm;
 
 class UserController extends Controller
@@ -57,58 +50,22 @@ class UserController extends Controller
 
         $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->getId()]);
 
-        $categoriasPropostas = array();
+        $gestorCategorias = new GestorCategorias();
 
-        foreach ($anuncios as $anuncio)
+        $propostas = [];
+
+        foreach($anuncios as $anuncio)
         {
-            $propostas = $anuncio->propostas;
+            $propostasAnuncio = $anuncio->propostas;
 
-            foreach ($propostas as $proposta)
-            {
-                $dados[] = Categoria::findAll(['id' => $proposta->cat_proposto]);
-
-                if(($categorias = CategoriaRoupa::findAll(['id_categoria' => $proposta->cat_proposto])))
-                {
-                    $dados[] = $categorias;
-                }
-
-                if(($categorias = CategoriaLivros::findAll(['id_categoria' => $proposta->cat_proposto])))
-                {
-                    $dados[] = $categorias;
-                }
-
-                if(($categorias = CategoriaEletronica::findAll(['id_categoria' => $proposta->cat_proposto])))
-                {
-                    $dados[] = $categorias;
-
-                    if(($categorias = CategoriaComputadores::findAll(['id_eletronica' => $proposta->cat_proposto])))
-                    {
-                        $dados[] = $categorias;
-                    }
-
-                    if(($categorias = CategoriaSmartphones::findAll(['id_eletronica' => $proposta->cat_proposto])))
-                    {
-                        $dados[] = $categorias;
-                    }
-                }
-
-                if(($categorias = CategoriaBrinquedos::findAll(['id_categoria' => $proposta->cat_proposto])))
-                {
-                    $dados[] = $categorias;
-
-                    if(($categorias = CategoriaJogos::findAll(['id_brinquedo' => $proposta->cat_proposto])))
-                    {
-                        $dados[] = $categorias;
-                    }
-                }
-
-                \array_push($categoriasPropostas, $dados);
+            if(!empty($propostasAnuncio)) {
+                $propostas = array_merge($propostas, $propostasAnuncio);
             }
         }
 
-        var_dump($categoriasPropostas);
+        $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');
 
-        return $this->render('propostas');
+        return $this->render('propostas', ['propostas' => $categorias]);
     }
 
     public function actionConta()
@@ -148,7 +105,11 @@ class UserController extends Controller
 
         $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->identity->getId()]);
 
-        return $this->render('anuncios', ['anuncios' => $anuncios]);
+        $gestorCategorias = new GestorCategorias();
+
+        $categorias = $gestorCategorias->getCategoriasDados($anuncios, 'cat_oferecer');
+
+        return $this->render('anuncios', ['anuncios' => $categorias]);
     }
 
     public function actionCliente($model, $viewPath)
@@ -175,12 +136,15 @@ class UserController extends Controller
         }
 
         echo $this->renderAjax('//modals/modal',[
-            'id' => 'modal_cliente',
             'header' => 'Adicionar informações de conta',
             'backdrop' => 'static',
             'keyboard' => 'false',
-            'model' => $modalModel,
+            'options' => [
+                'model' => $modalModel
+            ],
             'content' => '//forms/cliente'
         ]);
+
+        return false;
     }
 }
