@@ -32,7 +32,7 @@ use yii\helpers\Url;
 
                                         <?= $form->field($model, 'catProposto')->dropDownList($listaCategorias, [
                                         'onchange' => '$.pjax.reload({
-                                                        url: "' . Url::toRoute(['create']) . '?id_anuncio=' . $anuncio . '&catProposto="+$(this).val(),
+                                                        url: "' . Url::toRoute(['create']) . '?anuncio=' . $anuncio . '&catProposto="+$(this).val(),
                                                         container: "#pjax-dynamic-form-proposta",
                                                         timeout: 1000,
                                         });',

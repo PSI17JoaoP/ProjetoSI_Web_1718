@@ -9,12 +9,10 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\User;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ClienteForm;
 
 /**
  * Site controller
@@ -111,9 +109,23 @@ class SiteController extends Controller
             'Madeira' => "Madeira",
         );
 
-        $anunciosRecentes = Anuncio::find()->all();
+        if(!Yii::$app->user->isGuest) {
 
-        $anunciosDestaques = Anuncio::find()->all();
+            $anunciosRecentes = Anuncio::find()
+                ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+                ->all();
+
+            $anunciosDestaques = Anuncio::find()
+                ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+                ->all();
+        }
+
+        else {
+
+            $anunciosRecentes = Anuncio::find()->all();
+
+            $anunciosDestaques = Anuncio::find()->all();
+        }
 
         return $this->render('index', [
             'anunciosRecentes' => $anunciosRecentes,

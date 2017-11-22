@@ -17,7 +17,6 @@ $this->title = 'Propostas Recebidas';
                 
                 if($proposta !== null) { ?>
 
-                    <!--Código repetido para efeito de visualização com multiplos paineis-->
                     <div class="row">
                         <div class="col-12 col-md-8">
                             <div class="panel panel-default">
@@ -33,9 +32,10 @@ $this->title = 'Propostas Recebidas';
                         </div>
 
                         <div class="col-6 col-md-4">
+
                             <div class="col-md-6">
-                            <?php                             
-                            echo Html::a('Aceitar', ['proposta/update', 'propostaID' => $proposta->id], [
+
+                            <?= Html::a('Aceitar', ['proposta/update', 'propostaID' => $proposta->id], [
                                 'class' => 'btn btn-success',
                                 'style' => 'margin-left: 17px; margin-top: 13px',
                                 'data' => [
@@ -44,14 +44,13 @@ $this->title = 'Propostas Recebidas';
                                         'estado' => 'ACEITE',
                                     ],
                                 ]
-                            ]);
-                            ?>
+                            ]); ?>
                                 
                             </div>
 
                             <div class="col-md-6">
-                            <?php                             
-                            echo Html::a('Recusar', ['proposta/update', 'propostaID' => $proposta->id], [
+
+                            <?= Html::a('Recusar', ['proposta/update', 'propostaID' => $proposta->id], [
                                 'class' => 'btn btn-danger',
                                 'style' => 'margin-left: 17px; margin-top: 13px',
                                 'data' => [
@@ -60,8 +59,7 @@ $this->title = 'Propostas Recebidas';
                                         'estado' => 'RECUSADO',
                                     ],
                                 ]
-                            ]);
-                            ?>
+                            ]); ?>
                                 
                             </div>
                         </div>

@@ -2,18 +2,21 @@
 
 /** @var $content string
  *  @var $model mixed
+ *  @var $backdrop string
+ *  @var $keyboard string
+ *  @var $id string
  */
 
 use yii\bootstrap\Modal;
 
 Modal::begin([
     'header' => "<h4>".$header."</h4>",
-    'id' => 'modal_geral',
+    'id' => $id,
     'size' => 'modal-md',
     'options' => [
         'data' => [
-            'backdrop' => 'static',
-            'keyboard' => 'false',
+            'backdrop' => $backdrop,
+            'keyboard' => $keyboard,
         ],
     ],
 ]); ?>

@@ -13,7 +13,6 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use frontend\models\AnuncioForm;
 use common\models\Cliente;
-use frontend\models\ClienteForm;
 
 use yii\base\Model;
 
@@ -132,9 +131,8 @@ class AnuncioController extends Controller
         if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) 
         {
             Yii::$app->runAction('user/cliente', [
-                '$controllerID' => Yii::$app->controller->id,
+                'viewPath' => 'anuncio/create',
                 'model' => $model,
-                'listaCategorias' => $listaCategorias,
             ]);
         }
 

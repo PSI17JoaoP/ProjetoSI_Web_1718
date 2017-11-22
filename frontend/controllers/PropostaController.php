@@ -90,7 +90,7 @@ class PropostaController extends Controller
         if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null)
         {
             Yii::$app->runAction('user/cliente', [
-                '$controllerID' => Yii::$app->controller->id,
+                'viewPath' => 'proposta/create',
                 'model' => $modelForm,
             ]);
         }
@@ -116,11 +116,9 @@ class PropostaController extends Controller
                         $model->estado = 'PENDENTE';
 
                         if ($model->save()) {
+                            return $this->redirect(['user/propostas']);
+                        } else {
                             return $this->goBack();
-                        }
-
-                        else {
-                            $this->goBack();
                         }
                     }
                 }
@@ -154,9 +152,7 @@ class PropostaController extends Controller
                             if($modelForm->enviar($categoriaPropostoID))
                             {
                                 return $this->redirect(['user/propostas']);
-                            }
-
-                            else {
+                            } else {
                                 return $this->render('create', [
                                     'model' => $modelForm,
                                     'anuncio' => $anuncio,
@@ -164,42 +160,16 @@ class PropostaController extends Controller
                                 ]);
                             }
                         }
-
-                        else {
-                            return $this->render('create', [
-                                'model' => $modelForm,
-                                'anuncio' => $anuncio,
-                                'listaCategorias' => $listaCategorias,
-                            ]);
-                        }
                     }
-
-                    else {
-                        return $this->render('create', [
-                            'model' => $modelForm,
-                            'anuncio' => $anuncio,
-                            'listaCategorias' => $listaCategorias,
-                        ]);
-                    }
-                }
-
-                else {
-                    return $this->render('create', [
-                        'model' => $modelForm,
-                        'anuncio' => $anuncio,
-                        'listaCategorias' => $listaCategorias,
-                    ]);
                 }
             }
         }
 
-        else {
-            return $this->render('create', [
-                'model' => $modelForm,
-                'anuncio' => $anuncio,
-                'listaCategorias' => $listaCategorias,
-            ]);
-        }
+        return $this->render('create', [
+            'model' => $modelForm,
+            'anuncio' => $anuncio,
+            'listaCategorias' => $listaCategorias,
+        ]);
     }
 
     /**
