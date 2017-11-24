@@ -21,12 +21,17 @@ class GestorCategorias
         {
             foreach ($dadosArray as $dado)
             {
-                $categorias = $this->getCategoria($dado, $campoCategoria);
+                $categorias = [];
+                array_push($categorias, $dado);
 
-                if (!empty($categorias))
+                $categoriasAnuncio = $this->getCategorias($dado, $campoCategoria);
+
+                if (!empty($categoriasAnuncio))
                 {
-                    array_push($dados, $categorias);
+                    array_push($categorias, $categoriasAnuncio);
                 }
+
+                array_push($dados, $categorias);
             }
         }
 
@@ -40,11 +45,8 @@ class GestorCategorias
      * @param $campoCategoria
      * @return array
      */
-    private function getCategoria($dado, $campoCategoria)
+    public function getCategorias($dado, $campoCategoria)
     {
-        $dados = [];
-        array_push($dados, $dado);
-
         $categoriaID = $dado->$campoCategoria;
         $categoriaMae = Categoria::findOne(['id' => $categoriaID]);
 
@@ -87,8 +89,6 @@ class GestorCategorias
             }
         }
 
-        array_push($dados, $categorias);
-
-        return $dados;
+        return $categorias;
     }
 }

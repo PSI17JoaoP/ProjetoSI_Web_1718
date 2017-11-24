@@ -166,3 +166,903 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1511280265.8716
     'REQUEST_TIME' => 1511280265
 ]
+2017-11-24 13:09:05 [::1][-][-][error][Error] Error: Class 'api\controllers\GestorCategorias' not found in C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\AnunciosController.php:29
+Stack trace:
+#0 [internal function]: api\controllers\AnunciosController->actionCategorias('3')
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('categorias', Array)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#7 {main}
+2017-11-24 13:09:05 [::1][-][-][info][application] $_GET = [
+    'id' => '3'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50256'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/3/categorias'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/3/categorias'
+    'PHP_SELF' => '/index.php/anuncios/3/categorias'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511528945.6197
+    'REQUEST_TIME' => 1511528945
+]
+2017-11-24 20:40:07 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "anuncios/titulo/Teste". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/titulo...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-24 20:40:05 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51404'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/titulo/Teste'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/titulo/Teste'
+    'PHP_SELF' => '/index.php/anuncios/titulo/Teste'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511556005.3307
+    'REQUEST_TIME' => 1511556005
+]
+2017-11-24 20:42:27 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "anuncios/categoria/eletronica". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-24 20:42:27 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51411'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/categoria/eletronica'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/categoria/eletronica'
+    'PHP_SELF' => '/index.php/anuncios/categoria/eletronica'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511556147.1249
+    'REQUEST_TIME' => 1511556147
+]
+2017-11-24 20:42:43 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "anuncios/categoria/eletronica". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-24 20:42:43 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51412'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/categoria/eletronica'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/categoria/eletronica'
+    'PHP_SELF' => '/index.php/anuncios/categoria/eletronica'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511556163.6958
+    'REQUEST_TIME' => 1511556163
+]
+2017-11-24 20:44:06 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "anuncios/categoria/eletronica". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-24 20:44:06 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51416'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/categoria/eletronica'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/categoria/eletronica'
+    'PHP_SELF' => '/index.php/anuncios/categoria/eletronica'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511556246.0665
+    'REQUEST_TIME' => 1511556246
+]
+2017-11-24 20:44:22 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:660
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(660): PDO->__construct('mysql:host=loca...', 'dbdesigner_proj...', 'DBDesignerProje...', NULL)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(586): yii\db\Connection->createPdoInstance()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(441): yii\db\Connection->getSlavePdo()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(838): yii\db\Schema->quoteValue('3')
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(199): yii\db\Connection->quoteValue('3')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1018): yii\db\Command->getRawSql()
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1039): yii\db\Command->logQuery('yii\\db\\Command:...')
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#13 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\AnunciosController.php(102): yii\db\BaseActiveRecord::findOne(Array)
+#14 [internal function]: api\controllers\AnunciosController->actionCategorias('3')
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('categorias', Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#20 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#21 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:597
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(441): yii\db\Connection->getSlavePdo()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(838): yii\db\Schema->quoteValue('3')
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(199): yii\db\Connection->quoteValue('3')
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1018): yii\db\Command->getRawSql()
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1039): yii\db\Command->logQuery('yii\\db\\Command:...')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\AnunciosController.php(102): yii\db\BaseActiveRecord::findOne(Array)
+#12 [internal function]: api\controllers\AnunciosController->actionCategorias('3')
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('categorias', Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#18 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#19 {main}
+Additional Information:
+
+2017-11-24 20:44:18 [::1][-][-][info][application] $_GET = [
+    'id' => '3'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51417'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/3/categorias'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/3/categorias'
+    'PHP_SELF' => '/index.php/anuncios/3/categorias'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511556258.8032
+    'REQUEST_TIME' => 1511556258
+]
+2017-11-24 20:44:33 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:660
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(660): PDO->__construct('mysql:host=loca...', 'dbdesigner_proj...', 'DBDesignerProje...', NULL)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(586): yii\db\Connection->createPdoInstance()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(441): yii\db\Connection->getSlavePdo()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(838): yii\db\Schema->quoteValue('3')
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(199): yii\db\Connection->quoteValue('3')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1018): yii\db\Command->getRawSql()
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1039): yii\db\Command->logQuery('yii\\db\\Command:...')
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#13 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\AnunciosController.php(102): yii\db\BaseActiveRecord::findOne(Array)
+#14 [internal function]: api\controllers\AnunciosController->actionCategorias('3')
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('categorias', Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#20 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#21 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:597
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(441): yii\db\Connection->getSlavePdo()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(838): yii\db\Schema->quoteValue('3')
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(199): yii\db\Connection->quoteValue('3')
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1018): yii\db\Command->getRawSql()
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1039): yii\db\Command->logQuery('yii\\db\\Command:...')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\AnunciosController.php(102): yii\db\BaseActiveRecord::findOne(Array)
+#12 [internal function]: api\controllers\AnunciosController->actionCategorias('3')
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('categorias', Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#18 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#19 {main}
+Additional Information:
+
+2017-11-24 20:44:31 [::1][-][-][info][application] $_GET = [
+    'id' => '3'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51420'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/3/categorias'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/3/categorias'
+    'PHP_SELF' => '/index.php/anuncios/3/categorias'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511556271.694
+    'REQUEST_TIME' => 1511556271
+]
+2017-11-24 20:45:57 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "anuncios/titulo/Teste". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/titulo...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-24 20:45:57 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51439'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/titulo/Teste'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/titulo/Teste'
+    'PHP_SELF' => '/index.php/anuncios/titulo/Teste'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511556357.6079
+    'REQUEST_TIME' => 1511556357
+]
+2017-11-24 20:50:02 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "anuncios/titulo/Teste". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/titulo...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-24 20:50:02 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51451'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/titulo/Teste'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/titulo/Teste'
+    'PHP_SELF' => '/index.php/anuncios/titulo/Teste'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511556602.0549
+    'REQUEST_TIME' => 1511556602
+]
+2017-11-24 20:50:17 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:660
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(660): PDO->__construct('mysql:host=loca...', 'dbdesigner_proj...', 'DBDesignerProje...', NULL)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(586): yii\db\Connection->createPdoInstance()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(441): yii\db\Connection->getSlavePdo()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(838): yii\db\Schema->quoteValue('3')
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(199): yii\db\Connection->quoteValue('3')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1018): yii\db\Command->getRawSql()
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1039): yii\db\Command->logQuery('yii\\db\\Command:...')
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#13 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\AnunciosController.php(22): yii\db\BaseActiveRecord::findOne(Array)
+#14 [internal function]: api\controllers\AnunciosController->actionPropostas('3')
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('propostas', Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/propos...', Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#20 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#21 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:597
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(441): yii\db\Connection->getSlavePdo()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(838): yii\db\Schema->quoteValue('3')
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(199): yii\db\Connection->quoteValue('3')
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1018): yii\db\Command->getRawSql()
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1039): yii\db\Command->logQuery('yii\\db\\Command:...')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\AnunciosController.php(22): yii\db\BaseActiveRecord::findOne(Array)
+#12 [internal function]: api\controllers\AnunciosController->actionPropostas('3')
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('propostas', Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/propos...', Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#18 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#19 {main}
+Additional Information:
+
+2017-11-24 20:50:15 [::1][-][-][info][application] $_GET = [
+    'id' => '3'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51453'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/3/propostas'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/3/propostas'
+    'PHP_SELF' => '/index.php/anuncios/3/propostas'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511556615.1456
+    'REQUEST_TIME' => 1511556615
+]
+2017-11-24 21:13:04 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:660
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(660): PDO->__construct('mysql:host=loca...', 'dbdesigner_proj...', 'DBDesignerProje...', NULL)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(586): yii\db\Connection->createPdoInstance()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(243): yii\db\Connection->getSlavePdo()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1062): yii\db\Command->prepare(true)
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(386): yii\db\Command->queryInternal('fetchAll', NULL)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(320): yii\db\Command->queryAll()
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(111): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(660): yii\db\mysql\Schema->loadTableSchema('anuncios')
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(173): yii\db\Schema->getTableMetadata('anuncios', 'schema', false)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(346): yii\db\Schema->getTableSchema('anuncios')
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(380): yii\db\ActiveRecord::getTableSchema()
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\data\ActiveDataProvider.php(183): yii\db\ActiveRecord->attributes()
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Component.php(174): yii\data\ActiveDataProvider->setSort(Array)
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(532): yii\base\Component->__set('sort', Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\BaseObject.php(106): yii\BaseYii::configure(Object(yii\data\ActiveDataProvider), Array)
+#17 [internal function]: yii\base\BaseObject->__construct(Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(381): ReflectionClass->newInstanceArgs(Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\data\\Active...', Array, Array)
+#20 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\data\\Active...', Array, Array)
+#21 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(126): yii\BaseYii::createObject(Array)
+#22 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(82): yii\rest\IndexAction->prepareDataProvider()
+#23 [internal function]: yii\rest\IndexAction->run()
+#24 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Action.php(94): call_user_func_array(Array, Array)
+#25 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\Action->runWithParams(Array)
+#26 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#27 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/index', Array)
+#28 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#29 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#30 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:597
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(243): yii\db\Connection->getSlavePdo()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1062): yii\db\Command->prepare(true)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(386): yii\db\Command->queryInternal('fetchAll', NULL)
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(320): yii\db\Command->queryAll()
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(111): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(660): yii\db\mysql\Schema->loadTableSchema('anuncios')
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(173): yii\db\Schema->getTableMetadata('anuncios', 'schema', false)
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(346): yii\db\Schema->getTableSchema('anuncios')
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(380): yii\db\ActiveRecord::getTableSchema()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\data\ActiveDataProvider.php(183): yii\db\ActiveRecord->attributes()
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Component.php(174): yii\data\ActiveDataProvider->setSort(Array)
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(532): yii\base\Component->__set('sort', Array)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\BaseObject.php(106): yii\BaseYii::configure(Object(yii\data\ActiveDataProvider), Array)
+#15 [internal function]: yii\base\BaseObject->__construct(Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(381): ReflectionClass->newInstanceArgs(Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\data\\Active...', Array, Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\data\\Active...', Array, Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(126): yii\BaseYii::createObject(Array)
+#20 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(82): yii\rest\IndexAction->prepareDataProvider()
+#21 [internal function]: yii\rest\IndexAction->run()
+#22 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Action.php(94): call_user_func_array(Array, Array)
+#23 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\Action->runWithParams(Array)
+#24 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#25 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/index', Array)
+#26 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#27 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#28 {main}
+Additional Information:
+
+2017-11-24 21:13:01 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51570'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios'
+    'PHP_SELF' => '/index.php/anuncios'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511557981.5308
+    'REQUEST_TIME' => 1511557981
+]
+2017-11-24 21:13:46 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:660
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(660): PDO->__construct('mysql:host=loca...', 'dbdesigner_proj...', 'DBDesignerProje...', NULL)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(586): yii\db\Connection->createPdoInstance()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(243): yii\db\Connection->getSlavePdo()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1062): yii\db\Command->prepare(true)
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(386): yii\db\Command->queryInternal('fetchAll', NULL)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(320): yii\db\Command->queryAll()
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(111): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(660): yii\db\mysql\Schema->loadTableSchema('anuncios')
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(173): yii\db\Schema->getTableMetadata('anuncios', 'schema', false)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(346): yii\db\Schema->getTableSchema('anuncios')
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(380): yii\db\ActiveRecord::getTableSchema()
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\data\ActiveDataProvider.php(183): yii\db\ActiveRecord->attributes()
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Component.php(174): yii\data\ActiveDataProvider->setSort(Array)
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(532): yii\base\Component->__set('sort', Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\BaseObject.php(106): yii\BaseYii::configure(Object(yii\data\ActiveDataProvider), Array)
+#17 [internal function]: yii\base\BaseObject->__construct(Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(381): ReflectionClass->newInstanceArgs(Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\data\\Active...', Array, Array)
+#20 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\data\\Active...', Array, Array)
+#21 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(126): yii\BaseYii::createObject(Array)
+#22 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(82): yii\rest\IndexAction->prepareDataProvider()
+#23 [internal function]: yii\rest\IndexAction->run()
+#24 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Action.php(94): call_user_func_array(Array, Array)
+#25 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\Action->runWithParams(Array)
+#26 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#27 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/index', Array)
+#28 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#29 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#30 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:597
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(243): yii\db\Connection->getSlavePdo()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1062): yii\db\Command->prepare(true)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(386): yii\db\Command->queryInternal('fetchAll', NULL)
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(320): yii\db\Command->queryAll()
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(111): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(660): yii\db\mysql\Schema->loadTableSchema('anuncios')
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(173): yii\db\Schema->getTableMetadata('anuncios', 'schema', false)
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(346): yii\db\Schema->getTableSchema('anuncios')
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(380): yii\db\ActiveRecord::getTableSchema()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\data\ActiveDataProvider.php(183): yii\db\ActiveRecord->attributes()
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Component.php(174): yii\data\ActiveDataProvider->setSort(Array)
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(532): yii\base\Component->__set('sort', Array)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\BaseObject.php(106): yii\BaseYii::configure(Object(yii\data\ActiveDataProvider), Array)
+#15 [internal function]: yii\base\BaseObject->__construct(Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(381): ReflectionClass->newInstanceArgs(Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\data\\Active...', Array, Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\data\\Active...', Array, Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(126): yii\BaseYii::createObject(Array)
+#20 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(82): yii\rest\IndexAction->prepareDataProvider()
+#21 [internal function]: yii\rest\IndexAction->run()
+#22 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Action.php(94): call_user_func_array(Array, Array)
+#23 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\Action->runWithParams(Array)
+#24 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#25 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/index', Array)
+#26 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#27 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#28 {main}
+Additional Information:
+
+2017-11-24 21:13:44 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51575'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios'
+    'PHP_SELF' => '/index.php/anuncios'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511558024.6702
+    'REQUEST_TIME' => 1511558024
+]
+2017-11-24 21:14:08 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:660
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(660): PDO->__construct('mysql:host=loca...', 'dbdesigner_proj...', 'DBDesignerProje...', NULL)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(586): yii\db\Connection->createPdoInstance()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(441): yii\db\Connection->getSlavePdo()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(838): yii\db\Schema->quoteValue('3')
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(199): yii\db\Connection->quoteValue('3')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1018): yii\db\Command->getRawSql()
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1039): yii\db\Command->logQuery('yii\\db\\Command:...')
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#13 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\AnunciosController.php(104): yii\db\BaseActiveRecord::findOne(Array)
+#14 [internal function]: api\controllers\AnunciosController->actionCategorias('3')
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('categorias', Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#20 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#21 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:597
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(441): yii\db\Connection->getSlavePdo()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(838): yii\db\Schema->quoteValue('3')
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(199): yii\db\Connection->quoteValue('3')
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1018): yii\db\Command->getRawSql()
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1039): yii\db\Command->logQuery('yii\\db\\Command:...')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\AnunciosController.php(104): yii\db\BaseActiveRecord::findOne(Array)
+#12 [internal function]: api\controllers\AnunciosController->actionCategorias('3')
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('categorias', Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/catego...', Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#18 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#19 {main}
+Additional Information:
+
+2017-11-24 21:14:06 [::1][-][-][info][application] $_GET = [
+    'id' => '3'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51578'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/3/categorias'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/3/categorias'
+    'PHP_SELF' => '/index.php/anuncios/3/categorias'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511558046.6475
+    'REQUEST_TIME' => 1511558046
+]
+2017-11-24 21:14:36 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:660
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(660): PDO->__construct('mysql:host=loca...', 'dbdesigner_proj...', 'DBDesignerProje...', NULL)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(586): yii\db\Connection->createPdoInstance()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(243): yii\db\Connection->getSlavePdo()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1062): yii\db\Command->prepare(true)
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(386): yii\db\Command->queryInternal('fetchAll', NULL)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(320): yii\db\Command->queryAll()
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(111): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(660): yii\db\mysql\Schema->loadTableSchema('anuncios')
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(173): yii\db\Schema->getTableMetadata('anuncios', 'schema', false)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(346): yii\db\Schema->getTableSchema('anuncios')
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(380): yii\db\ActiveRecord::getTableSchema()
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\data\ActiveDataProvider.php(183): yii\db\ActiveRecord->attributes()
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Component.php(174): yii\data\ActiveDataProvider->setSort(Array)
+#15 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(532): yii\base\Component->__set('sort', Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\BaseObject.php(106): yii\BaseYii::configure(Object(yii\data\ActiveDataProvider), Array)
+#17 [internal function]: yii\base\BaseObject->__construct(Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(381): ReflectionClass->newInstanceArgs(Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\data\\Active...', Array, Array)
+#20 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\data\\Active...', Array, Array)
+#21 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(126): yii\BaseYii::createObject(Array)
+#22 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(82): yii\rest\IndexAction->prepareDataProvider()
+#23 [internal function]: yii\rest\IndexAction->run()
+#24 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Action.php(94): call_user_func_array(Array, Array)
+#25 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\Action->runWithParams(Array)
+#26 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#27 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/index', Array)
+#28 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#29 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#30 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2002] Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente.
+ in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php:597
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(943): yii\db\Connection->open()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Connection.php(930): yii\db\Connection->getMasterPdo()
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(243): yii\db\Connection->getSlavePdo()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1062): yii\db\Command->prepare(true)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(386): yii\db\Command->queryInternal('fetchAll', NULL)
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(320): yii\db\Command->queryAll()
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\mysql\Schema.php(111): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(660): yii\db\mysql\Schema->loadTableSchema('anuncios')
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php(173): yii\db\Schema->getTableMetadata('anuncios', 'schema', false)
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(346): yii\db\Schema->getTableSchema('anuncios')
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveRecord.php(380): yii\db\ActiveRecord::getTableSchema()
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\data\ActiveDataProvider.php(183): yii\db\ActiveRecord->attributes()
+#12 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Component.php(174): yii\data\ActiveDataProvider->setSort(Array)
+#13 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(532): yii\base\Component->__set('sort', Array)
+#14 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\BaseObject.php(106): yii\BaseYii::configure(Object(yii\data\ActiveDataProvider), Array)
+#15 [internal function]: yii\base\BaseObject->__construct(Array)
+#16 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(381): ReflectionClass->newInstanceArgs(Array)
+#17 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\data\\Active...', Array, Array)
+#18 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\data\\Active...', Array, Array)
+#19 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(126): yii\BaseYii::createObject(Array)
+#20 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\rest\IndexAction.php(82): yii\rest\IndexAction->prepareDataProvider()
+#21 [internal function]: yii\rest\IndexAction->run()
+#22 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Action.php(94): call_user_func_array(Array, Array)
+#23 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\Action->runWithParams(Array)
+#24 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#25 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/index', Array)
+#26 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#27 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#28 {main}
+Additional Information:
+
+2017-11-24 21:14:33 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51581'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios'
+    'PHP_SELF' => '/index.php/anuncios'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511558073.9071
+    'REQUEST_TIME' => 1511558073
+]
+2017-11-24 21:17:22 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "anuncios/titulo/Teste". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('anuncios/titulo...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-24 21:17:22 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '51596'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/anuncios/titulo/Teste'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/anuncios/titulo/Teste'
+    'PHP_SELF' => '/index.php/anuncios/titulo/Teste'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1511558242.0607
+    'REQUEST_TIME' => 1511558242
+]

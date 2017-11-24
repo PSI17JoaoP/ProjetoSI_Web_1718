@@ -8,4 +8,8 @@ class PropostasController extends ActiveController
 {
     public $modelClass = 'common\models\Proposta';
 
+    public function actionCategorias()
+    {
+
+    }
 }

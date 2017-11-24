@@ -48,36 +48,61 @@ return [
                 [
                     
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'anuncios'
-                    
+                    'controller' => 'anuncios',
+                    'extraPatterns' => [
+                        'GET {id}/propostas' => 'propostas',
+                        'GET {id}/categorias' => 'categorias',
+                        'GET titulo/{titulo}' => 'pesquisa',
+                        'GET titulo/{titulo}/regiao/{regiao}' => 'pesquisa',
+                        'GET titulo/{titulo}/categoria/{categoria}' => 'pesquisa',
+                        'GET titulo/{titulo}/regiao/{regiao}/categoria/{categoria}' => 'pesquisa',
+                        'GET regiao/{regiao}' => 'pesquisa',
+                        'GET categoria/{categoria}' => 'pesquisa',
+                        'GET categoria/{categoria}/regiao/{regiao}]' => 'pesquisa',
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                        '{titulo}' => '<titulo:\\w+>',
+                        '{regiao}' => '<regiao:\\w+>',
+                        '{categoria}' => '<categoria:\\w+>',
+                    ]
                 ],
                 [
                     
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'categorias'
-                    
+                    'controller' => 'categorias',
+                    'extraPatterns' => [
+
+                    ],
                 ],
                 [
                     
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'clientes'
-                    
+                    'controller' => 'clientes',
+                    'extraPatterns' => [
+                        'GET {id}/pin' => 'pin',
+                        'GET {id}/categorias_preferidas' => 'preferidas'
+                    ],
                 ],
                 [
                     
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'propostas'
-                    
+                    'controller' => 'propostas',
+                    'extraPatterns' => [
+                        'GET {id}/categorias' => 'categorias'
+                    ],
                 ],
                 [
                     
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'users'
-                    
+                    'controller' => 'users',
+                    'extraPatterns' => [
+                        'GET {id}/username' => 'username',
+                        'GET {id}/hash' => 'password'
+                    ],
                 ],
             ],
         ],
-        
     ],
     'params' => $params,
 ];
