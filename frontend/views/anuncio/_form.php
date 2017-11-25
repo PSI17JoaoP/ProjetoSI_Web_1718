@@ -31,103 +31,102 @@ use yii\helpers\Url;
                                 <div class="col-md-12">
                                     <div class="row">
 
-                                    <?= $form->field($model, 'catOferta')->dropDownList($catItems,
-                                    [
-                                    'onchange'=>'
-                                        $.pjax.reload({
-                                        url: "'. Url::toRoute(['create']).'?catOferta="+$(this).val(),
-                                        container: "#pjax-dynamic-form-oferta",
-                                        timeout: 1000,
-                                        });
-                                    ',
-
-                                    'class'=>'form-control',
-                                    'prompt' => 'Selecione a categoria']) ?>
+                                    <?= $form->field($model, 'catOferta')->dropDownList($catItems, [
+                                        //'onchange' => 'addParameter("' . Url::toRoute(['create']) . '", "#field-cat-oferta")',
+                                        'onchange' => '
+                                            $.pjax.reload({
+                                                url: "' . Url::toRoute(['create']) . '?catOferta=" + $(this).val(),
+                                                container: "#pjax-dynamic-form-oferta",
+                                                timeout: 1000,
+                                            });
+                                        ',
+                                        'id' => 'field-cat-oferta',
+                                        'class'=>'form-control',
+                                        'prompt' => 'Selecione a categoria'
+                                    ]) ?>
 
                                     </div>
 
                                     <div class="row">
 
-                                        <?php  Pjax::begin(['id'=>'pjax-dynamic-form-oferta','enablePushState'=>false]); ?>
-
-                                        <?= $form->field($model, 'quantOferta')->textInput(['type' => 'number']); ?>
-
                                         <?php
 
-                                            switch ($model->catOferta)
-                                            {
-                                                case 'brinquedos':
+                                        Pjax::begin(['id' => 'pjax-dynamic-form-oferta', 'enablePushState' => false]);
 
-                                                    echo $this->render('//forms/brinquedos', [
-                                                        'form' => $form,
-                                                        'model' => $model->mOferta,
-                                                        'i' => 0,
-                                                    ]);
+                                        echo $form->field($model, 'quantOferta')->textInput(['type' => 'number']);
 
-                                                    break;
+                                        switch ($model->catOferta)
+                                        {
+                                            case 'brinquedos':
 
-                                                case 'jogos':
+                                                echo $this->render('//forms/brinquedos', [
+                                                    'form' => $form,
+                                                    'model' => $model->mOferta,
+                                                    'i' => 0,
+                                                ]);
 
-                                                    echo $this->render('//forms/jogos', [
-                                                        'form' => $form,
-                                                        'model' => $model->mOferta,
-                                                        'i' => 0,
-                                                    ]);
+                                                break;
 
-                                                    break;
+                                            case 'jogos':
 
-                                                case 'eletronica':
+                                                echo $this->render('//forms/jogos', [
+                                                    'form' => $form,
+                                                    'model' => $model->mOferta,
+                                                    'i' => 0,
+                                                ]);
 
-                                                    echo $this->render('//forms/eletronica', [
-                                                        'form' => $form,
-                                                        'model' => $model->mOferta,
-                                                        'i' => 0,
-                                                    ]);
+                                                break;
 
-                                                    break;
+                                            case 'eletronica':
 
-                                                case 'computadores':
+                                                echo $this->render('//forms/eletronica', [
+                                                    'form' => $form,
+                                                    'model' => $model->mOferta,
+                                                    'i' => 0,
+                                                ]);
 
-                                                    echo $this->render('//forms/computadores', [
-                                                        'form' => $form,
-                                                        'model' => $model->mOferta,
-                                                        'i' => 0,
-                                                    ]);
+                                                break;
 
-                                                    break;
+                                            case 'computadores':
 
-                                                case 'smartphones':
+                                                echo $this->render('//forms/computadores', [
+                                                    'form' => $form,
+                                                    'model' => $model->mOferta,
+                                                    'i' => 0,
+                                                ]);
 
-                                                    echo $this->render('//forms/smartphones', [
-                                                        'form' => $form,
-                                                        'model' => $model->mOferta,
-                                                        'i' => 0,
-                                                    ]);
+                                                break;
 
-                                                    break;
+                                            case 'smartphones':
 
-                                                case 'livros':
+                                                echo $this->render('//forms/smartphones', [
+                                                    'form' => $form,
+                                                    'model' => $model->mOferta,
+                                                    'i' => 0,
+                                                ]);
 
-                                                    echo $this->render('//forms/livros', [
-                                                        'form' => $form,
-                                                        'model' => $model->mOferta,
-                                                        'i' => 0,
-                                                    ]);
+                                                break;
 
-                                                    break;
+                                            case 'livros':
 
-                                                case 'roupa':
+                                                echo $this->render('//forms/livros', [
+                                                    'form' => $form,
+                                                    'model' => $model->mOferta,
+                                                    'i' => 0,
+                                                ]);
 
-                                                    echo $this->render('//forms/roupa', [
-                                                        'form' => $form,
-                                                        'model' => $model->mOferta,
-                                                        'i' => 0,
-                                                    ]);
-                                            }
+                                                break;
 
-                                        ?>
+                                            case 'roupa':
 
-                                        <?php Pjax::end(); ?>
+                                                echo $this->render('//forms/roupa', [
+                                                    'form' => $form,
+                                                    'model' => $model->mOferta,
+                                                    'i' => 0,
+                                                ]);
+                                        }
+
+                                        Pjax::end(); ?>
 
                                     </div>
                                 </div>
@@ -142,34 +141,30 @@ use yii\helpers\Url;
                             <div class="panel-body">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <?= $form->field($model, 'catProcura')->dropDownList(['todos' => 'Qualquer coisa']+$catItems,
-                                            [
-                                            'onchange'=>'
-                                                $.pjax.reload({
-                                                url: "'. Url::toRoute(['create']).'?catProcura="+$(this).val(),
-                                                container: "#pjax-dynamic-form-procura",
-                                                timeout: 1000,
-                                                });
-                                            ',
-
-                                            'class'=>'form-control',
-                                            'prompt' => 'Selecione a categoria'
+                                        <?= $form->field($model, 'catProcura')->dropDownList(['todos' => 'Qualquer coisa'] + $catItems, [
+                                                //'onchange' => 'addParameter("' . Url::toRoute(['create']) . '", "#field-cat-procura")',
+                                                'onchange' => '
+                                                    $.pjax.reload({
+                                                        url: "' . Url::toRoute(['create']) . '?catProcura=" + $(this).val(),
+                                                        container: "#pjax-dynamic-form-procura",
+                                                        timeout: 1000,
+                                                    });
+                                                ',
+                                                'id' => 'field-cat-procura',
+                                                'class' => 'form-control',
+                                                'prompt' => 'Selecione a categoria'
                                         ]) ?>
                                     </div>
 
                                     <div class="row">
 
-                                        <?php  Pjax::begin(['id'=>'pjax-dynamic-form-procura','enablePushState'=>false]); ?>
-
                                         <?php
+                                        
+                                        Pjax::begin(['id' => 'pjax-dynamic-form-procura', 'enablePushState' => false]);
 
-                                            if ($model->catProcura!=='todos') {
-                                                echo $form->field($model, 'quantProcura')->textInput(['type' => 'number']);
-                                            }
-
-                                            ?>
-
-                                        <?php
+                                        if ($model->catProcura !== 'todos') {
+                                            echo $form->field($model, 'quantProcura')->textInput(['type' => 'number']);
+                                        }
 
                                         switch ($model->catProcura)
                                         {
@@ -242,9 +237,7 @@ use yii\helpers\Url;
                                                 ]);
                                         }
 
-                                        ?>
-
-                                        <?php Pjax::end(); ?>
+                                        Pjax::end(); ?>
 
                                     </div>
                                 </div>
