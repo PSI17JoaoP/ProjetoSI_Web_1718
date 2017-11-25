@@ -161,21 +161,24 @@ class AnuncioController extends Controller
 
             else
             {
+                //Oferta
                 $dataO = array(
                     '0' => $model->selecionarCategoria($catOferta)
                 );
 
-                $dataP = array(
-                    '1' => $model->selecionarCategoria($catProcura)
-                );
-
+                
                 if (Model::loadMultiple($dataO, Yii::$app->request->post())) {
                     $model->mOferta = $dataO['0'];
+                }
 
-                    if($catProcura !== 'todos') {
-                        if(Model::loadMultiple($dataP, Yii::$app->request->post())) {
-                            $model->mProcura = $dataP['1'];
-                        }
+                //Procura
+                if($catProcura !== 'todos') {
+                    $dataP = array(
+                        '1' => $model->selecionarCategoria($catProcura)
+                    );
+
+                    if(Model::loadMultiple($dataP, Yii::$app->request->post())) {
+                        $model->mProcura = $dataP['1'];
                     }
                 }
             }
