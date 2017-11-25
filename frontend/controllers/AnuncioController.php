@@ -108,6 +108,17 @@ class AnuncioController extends Controller
                                 'livros' => "Livros",
                                 'roupa' => "Roupa");
         
+
+        //Validar estado de conta do cliente. SE for o seu 1º anúncio, mostrar popup de informações extra
+        if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) 
+        {
+            Yii::$app->runAction('user/cliente', [
+                'viewPath' => 'anuncio/create',
+                'model' => $model,
+            ]);
+        }
+
+
         $model = new AnuncioForm(); 
         
         //Validar a escolha da categoria do evento onChange (Oferta)
@@ -128,14 +139,7 @@ class AnuncioController extends Controller
             $model->mProcura = $model->selecionarCategoria($cat);
         }
 
-        if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null) 
-        {
-            Yii::$app->runAction('user/cliente', [
-                'viewPath' => 'anuncio/create',
-                'model' => $model,
-            ]);
-        }
-
+    
         //Validar envio de dados
         if ($model->load(Yii::$app->request->post())) 
         {
@@ -146,16 +150,33 @@ class AnuncioController extends Controller
             $model->mProcura = $model->selecionarCategoria($catProcura);
 
 
-            $data = array(
-                '0' => $model->selecionarCategoria($catOferta), 
-                '1' => $model->selecionarCategoria($catProcura)
-            );
+            if ($catOferta == $catProcura) {
+                $data = array(
+                    '0' => $model->selecionarCategoria($catOferta), 
+                    '1' => $model->selecionarCategoria($catProcura)
+                );
+
+                if (Model::loadMultiple($data, Yii::$app->request->post())) {
+                    $model->mOferta = $data['0'];
+                    $model->mProcura = $data['1'];
+                }
+            }else {
+                $dataO = array(
+                    '0' => $model->selecionarCategoria($catOferta)
+                );
+
+                $dataP = array(
+                    '1' => $model->selecionarCategoria($catProcura)
+                );
 
 
-            if (Model::loadMultiple($data, Yii::$app->request->post())) {
-                $model->mOferta = $data['0'];
-                $model->mProcura = $data['1'];
+                if (Model::loadMultiple($dataO, Yii::$app->request->post()) && Model::loadMultiple($dataP, Yii::$app->request->post())) {
+                    $model->mOferta = $dataO['0'];
+                    $model->mProcura = $dataP['1'];
+                }
             }
+
+            
 
             //Validar o pedido AJAX do evento onChange e validar o formulário com os novos dados
             if (Yii::$app->request->isAjax)
