@@ -141,7 +141,7 @@ use yii\helpers\Url;
                             <div class="panel-body">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <?= $form->field($model, 'catProcura')->dropDownList(['todos' => 'Qualquer coisa'] + $catItems, [
+                                        <?= $form->field($model, 'catProcura')->dropDownList(['todos' => 'Todas as categorias'] + $catItems, [
                                                 //'onchange' => 'addParameter("' . Url::toRoute(['create']) . '", "#field-cat-procura")',
                                                 'onchange' => '
                                                     $.pjax.reload({

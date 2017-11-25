@@ -10,8 +10,6 @@ use yii\base\Model;
  */
 class TodosForm extends Model
 {
-    
-
     /**
      * @inheritdoc
      */
