@@ -90,7 +90,7 @@ class PropostaController extends Controller
         if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null)
         {
             Yii::$app->runAction('user/cliente', [
-                'viewPath' => ['proposta/create'],
+                'viewPath' => 'proposta/create',
                 'model' => $modelForm,
             ]);
         }
