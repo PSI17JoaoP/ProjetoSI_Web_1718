@@ -114,7 +114,7 @@ class AnuncioController extends Controller
         if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null)
         {
             Yii::$app->runAction('user/cliente', [
-                'viewPath' => 'anuncio/create',
+                'viewPath' => ['anuncio/create'],
                 'model' => $model,
             ]);
         }
@@ -166,13 +166,13 @@ class AnuncioController extends Controller
                     '0' => $model->selecionarCategoria($catOferta)
                 );
 
-                
                 if (Model::loadMultiple($dataO, Yii::$app->request->post())) {
                     $model->mOferta = $dataO['0'];
                 }
 
                 //Procura
                 if($catProcura !== 'todos') {
+
                     $dataP = array(
                         '1' => $model->selecionarCategoria($catProcura)
                     );
