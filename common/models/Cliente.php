@@ -57,6 +57,18 @@ class Cliente extends ActiveRecord
         ];
     }
 
+    public function updatePIN($pin)
+    {
+        $this->pin = $pin;
+
+        if($this->save())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

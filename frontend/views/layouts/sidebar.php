@@ -23,7 +23,7 @@ use yii\helpers\Html;
                     <?= Html::a('Histórico', 'historico', ['class' => 'nav-link'])?>
                 </li>
                 <li class="nav-item">
-                    <?= Html::a('Gerar PIN Móvel', '#', ['class' => 'nav-link'])?>
+                    <?= Html::a('Gerar PIN Móvel', 'pin', ['class' => 'nav-link'])?>
                 </li>
             </ul>
         </div>

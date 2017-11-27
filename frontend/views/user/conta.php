@@ -12,30 +12,29 @@ use yii\bootstrap\ActiveForm;
 <div class="col-12 col-md-8">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <p>Dados de utilizador</p>
+            <h4>Dados de utilizador</h4>
         </div>
 
-        <div class="box-body">
+        <div class="panel-body">
 
             <?php $form = ActiveForm::begin(['id' => 'conta-form']); ?>
 
-            <div class="row" style="padding-bottom: 5%">
-
-                <div class="col-md-4" >
-                    <img src="" width="125px" height="125px" >
-                    <button class="btn btn-default btn-sm">Escolher Imagem...</button>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="" width="100%" height="75%">
+                    <button class="btn btn-default btn-sm">Escolher Imagem</button>
                 </div>
 
                 <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <?= $form->field($model, 'nome_completo')->textInput() ?>
 
-                    <label for="nomeUser">Nome:</label>
-                    <?= $form->field($model, 'nome_completo')->textInput() ?>
+                            <?= $form->field($model, 'telefone')->textInput(['type' => 'number']) ?>
 
-                    <label for="telefone">Nº Telemóvel:</label>
-                    <?= $form->field($model, 'telefone')->textInput(['type' => 'number']) ?>
-
-                    <label for="regiaoUser">Região:</label>
-                    <?= $form->field($model, 'regiao')->dropDownList($regioes, ['prompt' => '']) ?>
+                            <?= $form->field($model, 'regiao')->dropDownList($regioes, ['prompt' => 'N/A']) ?>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -43,10 +42,9 @@ use yii\bootstrap\ActiveForm;
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <p>Categoria(s) preferida(s)</p>
+                            <h4>Categoria(s) preferida(s)</h4>
                         </div>
                         <div class="panel-body">
-                            <?/*= $form->field()->checkboxList()*/?>
                             <div class="checkbox">
                                 <label><input type="checkbox" value="brinquedos">Brinquedos</label>
                             </div>
@@ -69,12 +67,12 @@ use yii\bootstrap\ActiveForm;
                                 <label><input type="checkbox" value="roupa">Roupa</label>
                             </div>
                         </div>
+
+                        <div class="panel-footer" align="right">
+                            <?= Html::submitButton('Concluido', ['class' => 'btn btn-default btn-lg']) ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="panel-footer" align="right">
-                <?= Html::submitButton('Concluido', ['class' => 'btn btn-default btn-lg']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>
