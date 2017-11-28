@@ -82,14 +82,12 @@ class AnuncioController extends Controller
      * @param array $params Os parâmetros de pesquisa
      * @return mixed
      */
-    public function actionSearch($params)
+    public function actionSearch($titulo, $categoria = null, $regiao = null)
     {
-        $searchModel = new AnuncioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $anuncios = Anuncio::findAll(['titulo' => $titulo]);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        return $this->render('pesquisa', [
+            'anuncios' => $anuncios,
         ]);
     }
 
