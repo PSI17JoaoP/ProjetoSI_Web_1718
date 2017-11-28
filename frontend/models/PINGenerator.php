@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use common\models\Cliente;
 
 class PINGenerator
 {

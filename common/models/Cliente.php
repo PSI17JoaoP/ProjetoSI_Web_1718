@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
  * @property string $data_nasc
  * @property integer $telefone
  * @property string $regiao
- * @property integer $pin
+ * @property string $pin
  *
  * @property Anuncio[] $anuncios
  * @property User $idUser
@@ -36,9 +36,10 @@ class Cliente extends ActiveRecord
     {
         return [
             [['nome_completo', 'data_nasc', 'telefone', 'regiao'], 'required'],
-            [['telefone', 'pin'], 'integer'],
+            [['telefone'], 'integer'],
             [['data_nasc'], 'safe'],
             [['nome_completo'], 'string', 'max' => 50],
+            [['pin'], 'string', 'max' => 15],
             [['regiao'], 'string', 'max' => 10],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
@@ -55,18 +56,6 @@ class Cliente extends ActiveRecord
             'telefone' => 'Telefone',
             'regiao' => 'Região',
         ];
-    }
-
-    public function updatePIN($pin)
-    {
-        $this->pin = $pin;
-
-        if($this->save())
-        {
-            return true;
-        }
-
-        return false;
     }
 
     /**

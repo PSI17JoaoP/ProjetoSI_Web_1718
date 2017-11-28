@@ -118,8 +118,8 @@ class UserController extends Controller
 
         $model = Cliente::findOne(['id_user' => Yii::$app->user->getId()]);
 
-        if(Yii::$app->request->post())
-        {
+        if(Yii::$app->request->get('id') !== null) {
+
             $pinGenerator = new PINGenerator();
 
             do
@@ -128,13 +128,16 @@ class UserController extends Controller
             }
             while (Cliente::findOne(['pin' => $keyPIN]));
 
-            if($model->updatePIN($keyPIN))
-            {
-                return $this->render('pin', ['pin' => $model->pin]);
+            $model->pin = $keyPIN;
+
+            if($model->save()) {
+                return $this->render('pin', ['model' => $model]);
+            } else {
+                return $this->render('pin', ['model' => $model]);
             }
         }
 
-        return $this->render('pin');
+        return $this->render('pin', ['model' => $model]);
     }
 
     public function actionCliente($model, $viewPath)
