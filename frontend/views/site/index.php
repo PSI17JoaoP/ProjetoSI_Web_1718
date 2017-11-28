@@ -22,9 +22,9 @@ $this->title = 'Página Inicial';
             <div class="col-md-8">
                 <div class="panel panel-primary">
                     <div class="panel-body">
-                        <form class="form" role="search">
-                            <div class="col-md-12" style="margin-bottom: 10px">
-                                <input type="text" class="form-control" placeholder="Pesquisar...">
+                        <?= Html::beginForm(['anuncio/search'], 'get', ['class' => 'form', 'role' => 'search'])?>
+                            <div class="col-md-12" style="margin-bottom: 10px">                                
+                                <?= Html::textInput('titulo', null, ['class' => 'form-control', 'placeholder' => 'Pesquisar...']) ?>
                             </div>
 
                             <div class="col-md-5">
@@ -38,9 +38,9 @@ $this->title = 'Página Inicial';
                             </div>
 
                             <div class="col-md-3">
-                                <button type="submit" class="btn btn-primary">Pesquisar</button>
+                                <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-primary'])?>
                             </div>
-                        </form>
+                        <?= Html::endForm() ?>
                     </div>
                 </div>
             </div>
