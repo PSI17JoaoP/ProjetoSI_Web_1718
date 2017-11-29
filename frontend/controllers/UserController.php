@@ -2,14 +2,14 @@
 
 namespace frontend\controllers;
 
-
-use frontend\models\GestorCategorias;
+use frontend\models\PINGenerator;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use common\models\Cliente;
 use common\models\Anuncio;
+use common\models\Cliente;
 use frontend\models\ClienteForm;
+use frontend\models\GestorCategorias;
 
 class UserController extends Controller
 {
@@ -26,7 +26,7 @@ class UserController extends Controller
                     [
                         'actions' => ['index', 'history', 'anuncios', 'propostas', 'conta'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['cliente'],
                     ],
                 ],
 
@@ -35,37 +35,6 @@ class UserController extends Controller
                 }
             ],
         ];
-    }
-
-    public function actionHistory()
-    {
-        $this->layout = "main-user";
-
-        return $this->render('history');
-    }
-
-    public function actionPropostas()
-    {
-        $this->layout = "main-user";
-
-        $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->getId()]);
-
-        $gestorCategorias = new GestorCategorias();
-
-        $propostas = [];
-
-        foreach($anuncios as $anuncio)
-        {
-            $propostasAnuncio = $anuncio->propostas;
-
-            if(!empty($propostasAnuncio)) {
-                $propostas = array_merge($propostas, $propostasAnuncio);
-            }
-        }
-
-        $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');
-
-        return $this->render('propostas', ['propostas' => $categorias]);
     }
 
     public function actionConta()
@@ -110,6 +79,65 @@ class UserController extends Controller
         $categorias = $gestorCategorias->getCategoriasDados($anuncios, 'cat_oferecer');
 
         return $this->render('anuncios', ['anuncios' => $categorias]);
+    }
+
+    public function actionPropostas()
+    {
+        $this->layout = "main-user";
+
+        $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->getId()]);
+
+        $gestorCategorias = new GestorCategorias();
+
+        $propostas = [];
+
+        foreach($anuncios as $anuncio)
+        {
+            $propostasAnuncio = $anuncio->propostas;
+
+            if(!empty($propostasAnuncio)) {
+                $propostas = array_merge($propostas, $propostasAnuncio);
+            }
+        }
+
+        $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');
+
+        return $this->render('propostas', ['propostas' => $categorias]);
+    }
+
+    public function actionHistory()
+    {
+        $this->layout = "main-user";
+
+        return $this->render('history');
+    }
+
+    public function actionPin()
+    {
+        $this->layout = "main-user";
+
+        $model = Cliente::findOne(['id_user' => Yii::$app->user->getId()]);
+
+        if(Yii::$app->request->get('id') !== null) {
+
+            $pinGenerator = new PINGenerator();
+
+            do
+            {
+                $keyPIN = $pinGenerator->generate();
+            }
+            while (Cliente::findOne(['pin' => $keyPIN]));
+
+            $model->pin = $keyPIN;
+
+            if($model->save()) {
+                return $this->render('pin', ['model' => $model]);
+            } else {
+                return $this->render('pin', ['model' => $model]);
+            }
+        }
+
+        return $this->render('pin', ['model' => $model]);
     }
 
     public function actionCliente($model, $viewPath)
