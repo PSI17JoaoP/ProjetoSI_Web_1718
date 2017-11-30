@@ -13,6 +13,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use common\models\Anuncio;
 use common\models\Proposta;
+use common\models\Tools;
 use frontend\models\PropostaForm;
 use frontend\controllers\UserController;
 

@@ -82,10 +82,12 @@ class SiteController extends Controller
 
             $anunciosRecentes = Anuncio::find()
                 ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+                ->limit(5)
                 ->all();
 
             $anunciosDestaques = Anuncio::find()
                 ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+                ->limit(5)
                 ->all();
         }
 
