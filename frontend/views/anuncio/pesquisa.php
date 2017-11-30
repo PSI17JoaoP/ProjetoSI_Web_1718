@@ -9,6 +9,27 @@ use yii\widgets\ActiveForm;
 
 ?>
 
+<div class="col-md-12">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+                <div class="col-md-12" style="margin-bottom: 10px">                                
+                    <?= Html::textInput('titulo', null, ['class' => 'form-control', 'placeholder' => 'Pesquisar...']) ?>
+                </div>
+
+                <div class="col-md-6">
+                    <?= Html::dropDownList('categoria', 'categoria', $categorias,
+                        ['class' => 'form-control', 'style' => "margin-bottom: 10px", 'prompt' => 'Categoria ...'])?>
+                </div>
+
+                <div class="col-md-6">
+                    <?= Html::dropDownList('regiao', 'regiao', $regioes,
+                        ['class'=>'form-control', 'style' => "margin-bottom: 10px", 'prompt' => 'Região ...'])?>
+                </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="anuncio-search">
 
 <?php
@@ -37,11 +58,6 @@ use yii\widgets\ActiveForm;
                         </div>
                     </div>
                 </div>
-
-                <?php /*echo $this->renderAjax('//modals/modal',[
-                            'header' => $anuncio->titulo,
-                            'model' => $anuncio,
-                            'content' => '//modals/anuncio'])*/ ?>
 
             <?php } ?>
         <?php } ?>

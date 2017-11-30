@@ -83,12 +83,36 @@ class AnuncioController extends Controller
      * @param array $params Os parâmetros de pesquisa
      * @return mixed
      */
-    public function actionSearch($titulo, $categoria = null, $regiao = null)
+    public function actionSearch($titulo = null, $categoria = null, $regiao = null)
     {
-        $anuncios = Anuncio::findAll(['titulo' => $titulo]);
+        $anuncios = Anuncio::find()->where(['like', 'titulo', $titulo])->all();
 
+        /*
+        $query = "SELECT * FROM ". Anuncio::tableName();
+
+        if ($titulo != null)
+        {
+            $query = $query. " WHERE titulo LIKE %".$titulo."%";
+        }
+
+        if ($categoria != null)
+        {   
+            if ($titulo != null)
+            {
+                $query = $query. " AND "
+            }
+
+            //$anuncios = $anuncios->where(['categoria' => $categoria]);
+        }
+
+        if ($regiao) {
+            //$anuncios = $anuncios->where([''])
+        }
+*/
         return $this->render('pesquisa', [
             'anuncios' => $anuncios,
+            'regioes' => Tools::listaRegioes(),
+            'categorias' => Tools::listaCategorias()
         ]);
     }
 
