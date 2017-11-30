@@ -93,9 +93,13 @@ class SiteController extends Controller
 
         else {
 
-            $anunciosRecentes = Anuncio::find()->all();
+            $anunciosRecentes = Anuncio::find()
+                ->limit(5)
+                ->all();
 
-            $anunciosDestaques = Anuncio::find()->all();
+            $anunciosDestaques = Anuncio::find()
+                ->limit(5)
+                ->all();
         }
 
         return $this->render('index', [
