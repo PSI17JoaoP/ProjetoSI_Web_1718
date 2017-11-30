@@ -15,36 +15,3 @@ $(function(){
         }
     });
 });
-
-
-/*function addParameter (baseURL, idForm) {
-
-    var categoriaOferta = $('#field-cat-oferta').val();
-    var categoriaProcura = $('#field-cat-procura').val();
-
-    if (categoriaOferta !== null && categoriaProcura === null){
-        $.pjax.reload({
-            url: baseURL + "?catOferta=" + categoriaOferta,
-            container: idForm,
-            timeout: 1000
-        });
-    }
-
-    else if(categoriaProcura !== null && categoriaOferta === null) {
-        $.pjax.reload({
-            url:  baseURL + "?catProcura=" + categoriaProcura,
-            container: idForm,
-            timeout: 1000
-        });
-    }
-
-    else {
-        $.pjax.reload({
-            url:  baseURL + "?catOferta=" + categoriaOferta + "&catProcura=" + categoriaProcura,
-            container: idForm,
-            timeout: 1000
-        });
-    }
-}*/
-
-

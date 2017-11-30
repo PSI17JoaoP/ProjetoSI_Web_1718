@@ -45,6 +45,7 @@ use yii\bootstrap\ActiveForm;
                             <h4>Categoria(s) preferida(s)</h4>
                         </div>
                         <div class="panel-body">
+                            
                             <div class="checkbox">
                                 <label><input type="checkbox" value="brinquedos">Brinquedos</label>
                             </div>
@@ -66,6 +67,7 @@ use yii\bootstrap\ActiveForm;
                             <div class="checkbox">
                                 <label><input type="checkbox" value="roupa">Roupa</label>
                             </div>
+                            
                         </div>
 
                         <div class="panel-footer" align="right">

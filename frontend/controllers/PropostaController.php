@@ -70,14 +70,6 @@ class PropostaController extends Controller
      */
     public function actionCreate($anuncio)
     {
-        $listaCategorias = array('brinquedos' => "Brinquedos" ,
-            'jogos' => "Jogos",
-            'eletronica' => "Eletrónica",
-            'computadores' => "Computadores",
-            'smartphones' => "Smartphones",
-            'livros' => "Livros",
-            'roupa' => "Roupa");
-
         $modelForm = new PropostaForm();
 
         //Valicação da escolha da categoria no evento Pjax do _form.php
@@ -156,7 +148,7 @@ class PropostaController extends Controller
                                 return $this->render('create', [
                                     'model' => $modelForm,
                                     'anuncio' => $anuncio,
-                                    'listaCategorias' => $listaCategorias,
+                                    'listaCategorias' => Tools::listaCategorias(),
                                 ]);
                             }
                         }
@@ -168,7 +160,7 @@ class PropostaController extends Controller
         return $this->render('create', [
             'model' => $modelForm,
             'anuncio' => $anuncio,
-            'listaCategorias' => $listaCategorias,
+            'listaCategorias' => Tools::listaCategorias(),
         ]);
     }
 

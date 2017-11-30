@@ -13,6 +13,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use frontend\models\AnuncioForm;
 use common\models\Cliente;
+use common\models\Tools;
 
 use yii\base\Model;
 
@@ -98,14 +99,6 @@ class AnuncioController extends Controller
      */
     public function actionCreate()
     {
-        $listaCategorias = array('brinquedos' => "Brinquedos" , 
-                                'jogos' => "Jogos",
-                                'eletronica' => "Eletrónica",
-                                'computadores' => "Computadores",
-                                'smartphones' => "Smartphones",
-                                'livros' => "Livros",
-                                'roupa' => "Roupa");
-
         $model = new AnuncioForm();
 
         //Validar estado de conta do cliente. SE for o seu 1º anúncio, mostrar popup de informações extra
@@ -195,7 +188,7 @@ class AnuncioController extends Controller
                 } else {
                     return $this->render('create', [
                         'model' => $model,
-                        'catList' => $listaCategorias,
+                        'catList' => Tools::listaCategorias(),
                     ]);
                 }
             }
@@ -204,7 +197,7 @@ class AnuncioController extends Controller
             {
                 return $this->render('create', [
                     'model' => $model,
-                    'catList' => $listaCategorias,
+                    'catList' => Tools::listaCategorias(),
                 ]);
             }
         }
@@ -213,7 +206,7 @@ class AnuncioController extends Controller
         {
             return $this->render('create', [
                 'model' => $model,
-                'catList' => $listaCategorias,
+                'catList' => Tools::listaCategorias(),
             ]);
         }
     }
