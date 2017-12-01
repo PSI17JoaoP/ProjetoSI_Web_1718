@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use common\models\Anuncio;
 use common\models\Cliente;
+use common\models\Tools;
 use frontend\models\ClienteForm;
 use frontend\models\GestorCategorias;
 
@@ -40,32 +41,11 @@ class UserController extends Controller
     public function actionConta()
     {
         $this->layout = "main-user";
-
-        $arrayRegiao = array('aveiro' => "Aveiro",
-                            'beja' => "Beja",
-                            'braga' => "Braga",
-                            'bragança' => "Bragança",
-                            'castelo branco' => "Castelo Branco",
-                            'coimbra' => "Coimbra",
-                            'evora' => "Évora",
-                            'faro' => "Faro",
-                            'guarda' => "Guarda",
-                            'leiria' => "Leiria",
-                            'lisboa' => "Lisboa",
-                            'portalegre' => "Portalegre",
-                            'porto' => "Porto",
-                            'santarem' => "Santarém",
-                            'setubal' => "Setúbal",
-                            'viana do castelo' => "Viana do Castelo",
-                            'vila real' => "Vila Real",
-                            'viseu' => "Viseu",
-                            'acores' => "Açores",
-                            'madeira' => "Madeira"
-                            );
         
-        $model = new Cliente();
+        //$model = new Cliente();
+        $model = Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]);
 
-        return $this->render('conta', ['model' => $model, 'regioes' => $arrayRegiao]);
+        return $this->render('conta', ['model' => $model, 'regioes' => Tools::listaRegioes()]);
     }
 
     public function actionAnuncios()
@@ -142,14 +122,6 @@ class UserController extends Controller
 
     public function actionCliente($model, $viewPath)
     {
-        $listaCategorias = array('brinquedos' => "Brinquedos" ,
-            'jogos' => "Jogos",
-            'eletronica' => "Eletrónica",
-            'computadores' => "Computadores",
-            'smartphones' => "Smartphones",
-            'livros' => "Livros",
-            'roupa' => "Roupa");
-
         $modalModel = new ClienteForm();
 
         if($modalModel->load(Yii::$app->request->post()))
@@ -158,7 +130,7 @@ class UserController extends Controller
             {
                 return $this->render($viewPath, [
                     'model' => $model,
-                    'catList' => $listaCategorias,
+                    'catList' => Tools::listaCategorias(),
                 ]);
             }
         }

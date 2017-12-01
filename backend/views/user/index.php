@@ -54,11 +54,3 @@ dmstr\web\AdminLteAsset::register($this);
         </div>
     </div>
 </div>
-<?php 
-    $this->registerJs(
-        '$(".rowListaUsers").click(function() {
-            var testID = $(this).data("info");
-            $("#userProfileName").html("Nome " + testID);
-        })'
-    );
-?>

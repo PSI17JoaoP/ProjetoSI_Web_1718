@@ -25,7 +25,8 @@ class AppAsset extends AssetBundle
 
     public $sourcePath = '@vendor/almasaeed2010/adminlte/';
     public $js = [
-        'bower_components/chart.js/Chart.min'
+        'bower_components/chart.js/Chart.min',
+        '../../../web/js/custom.js'
     ];
     public $css = [
 

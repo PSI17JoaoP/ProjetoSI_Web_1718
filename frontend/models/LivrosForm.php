@@ -27,7 +27,7 @@ class LivrosForm extends Model
             [['nome','titulo', 'editora', 'autor', 'isbn'], 'required'],
             
             ['isbn', 'integer'],
-            [['nome', 'editora'], 'string', 'max' => 25],
+            [['nome', 'editora', 'autor'], 'string', 'max' => 25],
             [['titulo'], 'string', 'max' => 30],
         ];
     }
@@ -58,6 +58,7 @@ class LivrosForm extends Model
             $categoria->titulo = $this->titulo;
             $categoria->editora = $this->editora;
             $categoria->autor = $this->autor;
+            $categoria->isbn = $this->isbn;
             $categoria->save();
 
             return $categoria->id_categoria;

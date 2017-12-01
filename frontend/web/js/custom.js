@@ -14,37 +14,101 @@ $(function(){
             });
         }
     });
+
+    //##########################################
+    //Pesquisa
+    //##########################################
+
+    var rowModel = null;
+
+    $('#pesquisa_titulo').on('input',function(){
+
+        if (rowModel == null)
+            rowModel = $('.pesquisa-row:first').clone();
+        
+        $('.anuncio-search').empty();
+
+        $.ajax($('.pesquisa-control').data("info"), 
+        {
+            method: 'GET',
+            type: 'json',
+            data: 
+                {
+                    "titulo" : $("#pesquisa_titulo").val(), 
+                    "categoria" : $("#pesquisa_categoria :selected").val(),
+                    "regiao" : $("#pesquisa_regiao :selected").text(),
+                },
+        }).then(function(anuncios)
+        {
+            $.each(anuncios, function(i, anuncio) 
+            {
+                var row = rowModel.clone();
+
+                $('#pesquisa_row_titulo', row).text(anuncio.titulo);
+                
+                $('.anuncio-search').append(row);
+            });
+        });
+    });
+
+    $('#pesquisa_categoria').on('change',function(){
+        
+        if (rowModel == null)
+            rowModel = $('.pesquisa-row:first').clone();
+        
+        $('.anuncio-search').empty();
+
+        $.ajax($('.pesquisa-control').data("info"), 
+        {
+            method: 'GET',
+            type: 'json',
+            data: 
+                {
+                    "titulo" : $("#pesquisa_titulo").val(), 
+                    "categoria" : $("#pesquisa_categoria :selected").val(),
+                    "regiao" : $("#pesquisa_regiao :selected").text(),
+                },
+        }).then(function(anuncios)
+        {
+            $.each(anuncios, function(i, anuncio) 
+            {
+                var row = rowModel.clone();
+
+                $('#pesquisa_row_titulo', row).text(anuncio.titulo);
+                
+                $('.anuncio-search').append(row);
+            });
+        });
+    });
+
+    $('#pesquisa_regiao').on('change',function(){
+        
+        if (rowModel == null)
+            rowModel = $('.pesquisa-row:first').clone();
+        
+        $('.anuncio-search').empty();
+
+        $.ajax($('.pesquisa-control').data("info"), 
+        {
+            method: 'GET',
+            type: 'json',
+            data: 
+                {
+                    "titulo" : $("#pesquisa_titulo").val(), 
+                    "categoria" : $("#pesquisa_categoria :selected").val(),
+                    "regiao" : $("#pesquisa_regiao :selected").text(),
+                },
+        }).then(function(anuncios)
+        {
+            $.each(anuncios, function(i, anuncio) 
+            {
+                var row = rowModel.clone();
+
+                $('#pesquisa_row_titulo', row).text(anuncio.titulo);
+                
+                $('.anuncio-search').append(row);
+            });
+        });
+    });
+    
 });
-
-
-/*function addParameter (baseURL, idForm) {
-
-    var categoriaOferta = $('#field-cat-oferta').val();
-    var categoriaProcura = $('#field-cat-procura').val();
-
-    if (categoriaOferta !== null && categoriaProcura === null){
-        $.pjax.reload({
-            url: baseURL + "?catOferta=" + categoriaOferta,
-            container: idForm,
-            timeout: 1000
-        });
-    }
-
-    else if(categoriaProcura !== null && categoriaOferta === null) {
-        $.pjax.reload({
-            url:  baseURL + "?catProcura=" + categoriaProcura,
-            container: idForm,
-            timeout: 1000
-        });
-    }
-
-    else {
-        $.pjax.reload({
-            url:  baseURL + "?catOferta=" + categoriaOferta + "&catProcura=" + categoriaProcura,
-            container: idForm,
-            timeout: 1000
-        });
-    }
-}*/
-
-

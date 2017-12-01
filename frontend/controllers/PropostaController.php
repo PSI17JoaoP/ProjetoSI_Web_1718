@@ -13,6 +13,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use common\models\Anuncio;
 use common\models\Proposta;
+use common\models\Tools;
 use frontend\models\PropostaForm;
 use frontend\controllers\UserController;
 
@@ -70,14 +71,6 @@ class PropostaController extends Controller
      */
     public function actionCreate($anuncio)
     {
-        $listaCategorias = array('brinquedos' => "Brinquedos" ,
-            'jogos' => "Jogos",
-            'eletronica' => "Eletrónica",
-            'computadores' => "Computadores",
-            'smartphones' => "Smartphones",
-            'livros' => "Livros",
-            'roupa' => "Roupa");
-
         $modelForm = new PropostaForm();
 
         //Valicação da escolha da categoria no evento Pjax do _form.php
@@ -156,7 +149,7 @@ class PropostaController extends Controller
                                 return $this->render('create', [
                                     'model' => $modelForm,
                                     'anuncio' => $anuncio,
-                                    'listaCategorias' => $listaCategorias,
+                                    'listaCategorias' => Tools::listaCategorias(),
                                 ]);
                             }
                         }
@@ -168,7 +161,7 @@ class PropostaController extends Controller
         return $this->render('create', [
             'model' => $modelForm,
             'anuncio' => $anuncio,
-            'listaCategorias' => $listaCategorias,
+            'listaCategorias' => Tools::listaCategorias(),
         ]);
     }
 

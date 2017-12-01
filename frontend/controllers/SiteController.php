@@ -10,9 +10,11 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Tools;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
+
 
 /**
  * Site controller
@@ -76,62 +78,35 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $listaCategorias = array(
-            'brinquedos' => "Brinquedos",
-            'jogos' => "Jogos",
-            'eletronica' => "Eletrónica",
-            'computadores' => "Computadores",
-            'smartphones' => "Smartphones",
-            'livros' => "Livros",
-            'roupa' => "Roupa"
-        );
-
-        $listaRegioes = array(
-            'Aveiro' => "Aveiro",
-            'Beja' => "Beja",
-            'Braga' => "Braga",
-            'Bragança' => "Bragança",
-            'Castelo Branco' => "Castelo Branco",
-            'Coimbra' => "Coimbra",
-            'Évora' => "Évora",
-            'Faro' => "Faro",
-            'Guarda' => "Guarda",
-            'Leiria' => "Leiria",
-            'Lisboa' => "Lisboa",
-            'Portalegre' => "Portalegre",
-            'Porto' => "Porto",
-            'Santarém' => "Santarém",
-            'Setúbal' => "Setúbal",
-            'Viana do Castelo' => "Viana do Castelo",
-            'Vila Real' => "Vila Real",
-            'Viseu' => "Viseu",
-            'Açores' => "Açores",
-            'Madeira' => "Madeira",
-        );
-
         if(!Yii::$app->user->isGuest) {
 
             $anunciosRecentes = Anuncio::find()
                 ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+                ->limit(5)
                 ->all();
 
             $anunciosDestaques = Anuncio::find()
                 ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+                ->limit(5)
                 ->all();
         }
 
         else {
 
-            $anunciosRecentes = Anuncio::find()->all();
+            $anunciosRecentes = Anuncio::find()
+                ->limit(5)
+                ->all();
 
-            $anunciosDestaques = Anuncio::find()->all();
+            $anunciosDestaques = Anuncio::find()
+                ->limit(5)
+                ->all();
         }
 
         return $this->render('index', [
             'anunciosRecentes' => $anunciosRecentes,
             'anunciosDestaques' => $anunciosDestaques,
-            'categorias' => $listaCategorias,
-            'regioes' => $listaRegioes,
+            'categorias' => Tools::listaCategorias(),
+            'regioes' => Tools::listaRegioes(),
         ]);
     }
 

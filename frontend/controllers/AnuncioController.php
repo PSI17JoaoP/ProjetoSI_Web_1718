@@ -3,8 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Anuncio;
-use common\models\AnuncioSearch;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +11,17 @@ use yii\filters\AccessControl;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use frontend\models\AnuncioForm;
+use common\models\Anuncio;
+use common\models\AnuncioSearch;
 use common\models\Cliente;
+use common\models\Tools;
+use common\models\CategoriaBrinquedos;
+use common\models\CategoriaComputadores;
+use common\models\CategoriaEletronica;
+use common\models\CategoriaJogos;
+use common\models\CategoriaLivros;
+use common\models\CategoriaRoupa;
+use common\models\CategoriaSmartphones;
 
 use yii\base\Model;
 
@@ -82,13 +91,70 @@ class AnuncioController extends Controller
      * @param array $params Os parâmetros de pesquisa
      * @return mixed
      */
-    public function actionSearch($titulo, $categoria = null, $regiao = null)
+    public function actionSearch($titulo = null, $categoria = null, $regiao = null)
     {
-        $anuncios = Anuncio::findAll(['titulo' => $titulo]);
+        $query = "SELECT * FROM ". Anuncio::tableName();
+                
+        //Filtrar categoria
+        switch ($categoria)
+        {
+            case 'brinquedos':
+                $query = $query." JOIN ". CategoriaBrinquedos::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaBrinquedos::tableName() .".id_categoria";
+                break;
+            case 'jogos':
+                $query = $query." JOIN ". CategoriaJogos::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaJogos::tableName() .".id_brinquedo";            
+                break;
+            case 'eletronica':
+                $query = $query." JOIN ". CategoriaEletronica::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaEletronica::tableName() .".id_categoria";
+                break;
+            case 'computadores':
+                $query = $query." JOIN ". CategoriaComputadores::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaComputadores::tableName() .".id_eletronica";
+                break;
+            case 'smartphones':
+                $query = $query." JOIN ". CategoriaSmartphones::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaSmartphones::tableName() .".id_eletronica";
+                break;
+            case 'livros':
+                $query = $query." JOIN ". CategoriaLivros::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaLivros::tableName() .".id_categoria";
+                break;
+            case 'roupa':
+                $query = $query." JOIN ". CategoriaRoupa::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaRoupa::tableName() .".id_categoria";
+                break;
+        
+        }
+        //Filtrar região
 
-        return $this->render('pesquisa', [
-            'anuncios' => $anuncios,
-        ]);
+        if(\in_array($regiao, Tools::listaRegioes()))
+        {
+            $query = $query." JOIN ". Cliente::tableName()." ON ". Anuncio::tableName() .".id_user = ". CLiente::tableName() .".id_user";
+            $query = $query." WHERE regiao = '". $regiao."'";
+
+            if ($titulo != null) 
+            {    
+                $query = $query." AND titulo LIKE '%".$titulo."%'";
+            }
+        //Filtrar título
+        }else if ($titulo != null)  
+        {            
+            $query = $query." WHERE titulo LIKE '%".$titulo."%'";
+        }
+
+        //Pesquisa
+        $anuncios = Anuncio::findBySql($query)->all();
+        
+
+
+        if (Yii::$app->request->isAjax)
+        {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $anuncios;
+        }else
+        {
+            return $this->render('pesquisa', [
+                'anuncios' => $anuncios,
+                'regioes' => Tools::listaRegioes(),
+                'categorias' => Tools::listaCategorias()
+            ]);
+        }
     }
 
     /**
@@ -98,14 +164,6 @@ class AnuncioController extends Controller
      */
     public function actionCreate()
     {
-        $listaCategorias = array('brinquedos' => "Brinquedos" , 
-                                'jogos' => "Jogos",
-                                'eletronica' => "Eletrónica",
-                                'computadores' => "Computadores",
-                                'smartphones' => "Smartphones",
-                                'livros' => "Livros",
-                                'roupa' => "Roupa");
-
         $model = new AnuncioForm();
 
         //Validar estado de conta do cliente. SE for o seu 1º anúncio, mostrar popup de informações extra
@@ -195,7 +253,7 @@ class AnuncioController extends Controller
                 } else {
                     return $this->render('create', [
                         'model' => $model,
-                        'catList' => $listaCategorias,
+                        'catList' => Tools::listaCategorias(),
                     ]);
                 }
             }
@@ -204,7 +262,7 @@ class AnuncioController extends Controller
             {
                 return $this->render('create', [
                     'model' => $model,
-                    'catList' => $listaCategorias,
+                    'catList' => Tools::listaCategorias(),
                 ]);
             }
         }
@@ -213,7 +271,7 @@ class AnuncioController extends Controller
         {
             return $this->render('create', [
                 'model' => $model,
-                'catList' => $listaCategorias,
+                'catList' => Tools::listaCategorias(),
             ]);
         }
     }
