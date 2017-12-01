@@ -123,7 +123,7 @@ class AnuncioController extends Controller
         }
         //Filtrar região
 
-        if ($regiao != null) 
+        if(\in_array($regiao, Tools::listaRegioes()))
         {
             $query = $query." JOIN ". Cliente::tableName()." ON ". Anuncio::tableName() .".id_user = ". CLiente::tableName() .".id_user";
             $query = $query." WHERE regiao = '". $regiao."'";
@@ -142,13 +142,19 @@ class AnuncioController extends Controller
         $anuncios = Anuncio::findBySql($query)->all();
         
 
-        //validar para pedidos AJAX
 
-        return $this->render('pesquisa', [
-            'anuncios' => $anuncios,
-            'regioes' => Tools::listaRegioes(),
-            'categorias' => Tools::listaCategorias()
-        ]);
+        if (Yii::$app->request->isAjax)
+        {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $anuncios;
+        }else
+        {
+            return $this->render('pesquisa', [
+                'anuncios' => $anuncios,
+                'regioes' => Tools::listaRegioes(),
+                'categorias' => Tools::listaCategorias()
+            ]);
+        }
     }
 
     /**
