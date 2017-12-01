@@ -12,6 +12,7 @@ use common\models\CategoriaSmartphones;
 use common\models\Cliente;
 use frontend\models\GestorCategorias;
 use yii\rest\ActiveController;
+use yii\web\NotFoundHttpException;
 
 class AnunciosController extends ActiveController
 {
@@ -25,7 +26,7 @@ class AnunciosController extends ActiveController
         }
 
         //return ['id' => $id, 'Propostas' => null];
-        return null;
+        return new NotFoundHttpException('Não foi encontrado um anuncio com o ID desejado.', 404);
     }
 
     public function actionPesquisa($titulo = null, $regiao = null, $categoria = null)
@@ -34,7 +35,7 @@ class AnunciosController extends ActiveController
 
         if($regiao !== null)
         {
-            $clientesIDs = Cliente::find()->where(['regiao' => $regiao])->select('id_user')/*->asArray()*/->all();
+            $clientesIDs = Cliente::find()->where(['regiao' => $regiao])->select('id_user')->all();
 
             $params[] = ['id_user' => $clientesIDs];
         }
@@ -94,7 +95,7 @@ class AnunciosController extends ActiveController
         }
 
         //return ['Dados' => ['Titulo' => $titulo, 'Região' => $regiao, 'Categoria' => $categoria], 'Anuncios' => null];
-        return null;
+        return new NotFoundHttpException('Não foi encontradas categorias com os dados introduzidos.', 404);
     }
 
     public function actionCategorias($id)
@@ -112,6 +113,6 @@ class AnunciosController extends ActiveController
         }
 
         //return ['id' => $id, 'Categorias' => null];
-        return null;
+        return new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
     }
 }

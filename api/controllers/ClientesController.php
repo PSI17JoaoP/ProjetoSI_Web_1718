@@ -3,24 +3,25 @@
 namespace api\controllers;
 
 use common\models\Cliente;
+use common\models\User;
 use yii\rest\ActiveController;
+use yii\web\NotFoundHttpException;
 
 class ClientesController extends ActiveController
 {
     public $modelClass = 'common\models\Cliente';
 
-    public function actionPin($id)
+    public function actionPin($pin)
     {
-        if(($cliente = Cliente::findOne(['id_user' => $id])))
+        if(($cliente = Cliente::findOne(['pin' => $pin])))
         {
-            if($cliente->pin !== null)
-            {
-                return ['id_user' => $id, 'PIN' => $cliente->pin];
-            }
+            $user = User::findOne(['id' => $cliente->id_user]);
+
+            return ['PIN' => $pin, 'User' => ['Username' => $user->username, 'Email' => $user->email]];
         }
 
-        //return ['id_user' => $id, 'PIN' => null];
-        return null;
+        //return ['PIN' => null, 'User' => null];
+        return new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);
     }
 
     public function actionPreferidas($id)

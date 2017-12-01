@@ -1066,3 +1066,622 @@ Stack trace:
     'REQUEST_TIME_FLOAT' => 1511558242.0607
     'REQUEST_TIME' => 1511558242
 ]
+2017-11-30 11:10:06 [::1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: email in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('email', Array)
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('users/email', Array)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2017-11-30 11:10:06 [::1][-][-][info][application] $_GET = [
+    'id' => '2'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '49648'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/users/2/email'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/users/2/email'
+    'PHP_SELF' => '/index.php/users/2/email'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512040206.0578
+    'REQUEST_TIME' => 1512040206
+]
+2017-11-30 11:22:56 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "users/2/email". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('users/2/email', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-30 11:22:56 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '49739'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/users/2/email'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/users/2/email'
+    'PHP_SELF' => '/index.php/users/2/email'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512040976.4688
+    'REQUEST_TIME' => 1512040976
+]
+2017-11-30 11:52:54 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "users/email/user@mailcom". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('users/email/use...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-30 11:52:54 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '49910'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/users/email/user@mailcom'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/users/email/user@mailcom'
+    'PHP_SELF' => '/index.php/users/email/user@mailcom'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512042774.5337
+    'REQUEST_TIME' => 1512042774
+]
+2017-11-30 12:10:06 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "users/email/user@mailcom". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('users/email/use...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-30 12:10:06 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50141'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/users/email/user%40mailcom'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/users/email/user@mailcom'
+    'PHP_SELF' => '/index.php/users/email/user@mailcom'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CONTENT_ENCODING' => ''
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512043806.2797
+    'REQUEST_TIME' => 1512043806
+]
+2017-11-30 12:10:23 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "users/email/user@mail%com". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('users/email/use...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-30 12:10:23 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50145'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/users/email/user%40mail%com'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/users/email/user@mail%com'
+    'PHP_SELF' => '/index.php/users/email/user@mail%com'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CONTENT_ENCODING' => ''
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512043823.6937
+    'REQUEST_TIME' => 1512043823
+]
+2017-11-30 12:15:17 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "users/email/user@mail com". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('users/email/use...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-11-30 12:15:17 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50168'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/users/email/user%40mail%20com'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/users/email/user@mail com'
+    'PHP_SELF' => '/index.php/users/email/user@mail com'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CONTENT_ENCODING' => ''
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512044117.0969
+    'REQUEST_TIME' => 1512044117
+]
+2017-12-01 16:28:54 [::1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: pin in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2017-12-01 16:28:52 [::1][-][-][info][application] $_GET = [
+    'titulo' => 'cZpBCoyX049f9P8'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50053'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/clientes/pin/cZpBCoyX049f9P8'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/clientes/pin/cZpBCoyX049f9P8'
+    'PHP_SELF' => '/index.php/clientes/pin/cZpBCoyX049f9P8'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512145732.4124
+    'REQUEST_TIME' => 1512145732
+]
+2017-12-01 16:31:56 [::1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: pin in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2017-12-01 16:31:56 [::1][-][-][info][application] $_GET = [
+    'titulo' => 'cZpBCoyX049f9P8'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50080'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/clientes/pin/cZpBCoyX049f9P8'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/clientes/pin/cZpBCoyX049f9P8'
+    'PHP_SELF' => '/index.php/clientes/pin/cZpBCoyX049f9P8'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512145916.88
+    'REQUEST_TIME' => 1512145916
+]
+2017-12-01 16:32:25 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_user' in 'where clause' in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php:1067
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1067): PDOStatement->execute()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\ClientesController.php(18): yii\db\BaseActiveRecord::findOne(Array)
+#6 [internal function]: api\controllers\ClientesController->actionPin(NULL)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#13 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_user' in 'where clause'
+The SQL being executed was: SELECT * FROM `user` WHERE `id_user`=3 in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php:594
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1082): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\ClientesController.php(18): yii\db\BaseActiveRecord::findOne(Array)
+#6 [internal function]: api\controllers\ClientesController->actionPin(NULL)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#13 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'id_user' in 'where clause'
+)
+
+2017-12-01 16:32:24 [::1][-][-][info][application] $_GET = [
+    'titulo' => 'cZpBCoyX049f9P8'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50085'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/clientes/pin/cZpBCoyX049f9P8'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/clientes/pin/cZpBCoyX049f9P8'
+    'PHP_SELF' => '/index.php/clientes/pin/cZpBCoyX049f9P8'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512145944.3826
+    'REQUEST_TIME' => 1512145944
+]
+2017-12-01 16:33:52 [::1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: pin in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2017-12-01 16:33:52 [::1][-][-][info][application] $_GET = [
+    'titulo' => 'cZpBCoyX049f9P8'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50089'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/clientes/pin/cZpBCoyX049f9P8'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/clientes/pin/cZpBCoyX049f9P8'
+    'PHP_SELF' => '/index.php/clientes/pin/cZpBCoyX049f9P8'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512146032.4976
+    'REQUEST_TIME' => 1512146032
+]
+2017-12-01 16:38:30 [::1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: pin in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2017-12-01 16:38:30 [::1][-][-][info][application] $_GET = [
+    'titulo' => 'cZpBCoyX049f9P8'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50098'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/clientes/pin/cZpBCoyX049f9P8'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/clientes/pin/cZpBCoyX049f9P8'
+    'PHP_SELF' => '/index.php/clientes/pin/cZpBCoyX049f9P8'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512146310.6295
+    'REQUEST_TIME' => 1512146310
+]
+2017-12-01 16:41:11 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_user' in 'where clause' in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php:1067
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1067): PDOStatement->execute()
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\ClientesController.php(18): yii\db\BaseActiveRecord::findOne(Array)
+#6 [internal function]: api\controllers\ClientesController->actionPin('cZpBCoyX049f9P8')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#13 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_user' in 'where clause'
+The SQL being executed was: SELECT * FROM `user` WHERE `id_user`=2 in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Schema.php:594
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(1082): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Command.php(400): yii\db\Command->queryInternal('fetch', NULL)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\Query.php(259): yii\db\Command->queryOne()
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\db\BaseActiveRecord.php(107): yii\db\ActiveQuery->one()
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\controllers\ClientesController.php(18): yii\db\BaseActiveRecord::findOne(Array)
+#6 [internal function]: api\controllers\ClientesController->actionPin('cZpBCoyX049f9P8')
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#10 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#11 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#13 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'id_user' in 'where clause'
+)
+
+2017-12-01 16:41:11 [::1][-][-][info][application] $_GET = [
+    'pin' => 'cZpBCoyX049f9P8'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50108'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/clientes/pin?pin=cZpBCoyX049f9P8'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/clientes/pin'
+    'PHP_SELF' => '/index.php/clientes/pin'
+    'QUERY_STRING' => 'pin=cZpBCoyX049f9P8'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512146471.5007
+    'REQUEST_TIME' => 1512146471
+]
+2017-12-01 16:41:35 [::1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: pin in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2017-12-01 16:41:35 [::1][-][-][info][application] $_GET = [
+    'titulo' => 'cZpBCoyX049f9P8'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50111'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/clientes/pin/cZpBCoyX049f9P8'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/clientes/pin/cZpBCoyX049f9P8'
+    'PHP_SELF' => '/index.php/clientes/pin/cZpBCoyX049f9P8'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512146495.6581
+    'REQUEST_TIME' => 1512146495
+]
+2017-12-01 16:42:18 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "users/2/anuncios". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('users/2/anuncio...', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-12-01 16:42:18 [::1][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50117'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/users/2/anuncios'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/users/2/anuncios'
+    'PHP_SELF' => '/index.php/users/2/anuncios'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512146538.7566
+    'REQUEST_TIME' => 1512146538
+]
+2017-12-01 16:43:45 [::1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: pin in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pin', Array)
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('clientes/pin', Array)
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2017-12-01 16:43:45 [::1][-][-][info][application] $_GET = [
+    'titulo' => 'cZpBCoyX049f9P8'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '50122'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/clientes/pin/cZpBCoyX049f9P8'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/clientes/pin/cZpBCoyX049f9P8'
+    'PHP_SELF' => '/index.php/clientes/pin/cZpBCoyX049f9P8'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1512146625.6035
+    'REQUEST_TIME' => 1512146625
+]

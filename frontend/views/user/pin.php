@@ -30,10 +30,8 @@ $this->title = 'PIN Móvel'
 
                         <div class="col-md-6" style="border: 4px #0a0a0a;">
 
-                            <?php if($model->pin !== null) { ?>
-                                    <p><?= Html::encode($model->pin) ?></p>
-                                <?php } else {
-                                Html::encode('');
+                            <?php if($model->pin !== null) {
+                                echo Html::tag('p', $model->pin);
                             }
 
                             echo Html::a('Gerar PIN', ['pin', 'id' => $model->id_user], [
