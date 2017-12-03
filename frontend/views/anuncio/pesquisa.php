@@ -48,7 +48,7 @@ use yii\helpers\Url;
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <p style="margin-top: 8px; margin-left: 5px" id="pesquisa_row_titulo"><?= Html::encode($anuncio->titulo) ?></p>
+                                        <p style="margin-top: 8px; margin-left: 5px" id="pesquisa_row_titulo"><?= Html::encode($anuncio['titulo']) ?></p>
                                     </div>
 
                                     <div class="col-md-2">

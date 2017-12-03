@@ -32,7 +32,7 @@ use yii\bootstrap\ActiveForm;
 
                             <?= $form->field($model, 'telefone')->textInput(['type' => 'number']) ?>
 
-                            <?= $form->field($model, 'regiao')->dropDownList($regioes, ['prompt' => 'N/A']) ?>
+                            <?= $form->field($model, 'regiao')->dropDownList($regioes, ['prompt' => 'Região ...']) ?>
                         </div>
                     </div>
                 </div>
@@ -46,27 +46,7 @@ use yii\bootstrap\ActiveForm;
                         </div>
                         <div class="panel-body">
                             
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="brinquedos">Brinquedos</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="jogos">Jogos</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="eletronica">Eletrónica</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="computadores">Computadores</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="smartphones">Smartphones</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="livros">Livros</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="roupa">Roupa</label>
-                            </div>
+                            <?= $form->field($model->user, 'categoriasPreferidas')->checkBoxList($categorias); ?>
                             
                         </div>
 
