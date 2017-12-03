@@ -43,14 +43,31 @@ class UserController extends Controller
         $this->layout = "main-user";
         
         //$model = new Cliente();
-        $model = Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]);
+        //$model = Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]);
+        
+        $cliente = Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]);
+        $model = new ClienteForm();
 
-        return $this->render('conta', 
+
+        if ($model->load(Yii::$app->request->post()) && $model->atualizar($cliente)) 
+        {
+            return $this->render('conta', 
             [
                 'model' => $model, 
                 'regioes' => Tools::listaRegioes(),
                 'categorias' => Tools::listaCategorias()
             ]);
+        }else {
+            $model->carregar($cliente);
+
+            return $this->render('conta', 
+            [
+                'model' => $model, 
+                'regioes' => Tools::listaRegioes(),
+                'categorias' => Tools::listaCategorias()
+            ]);
+        }
+        
     }
 
     public function actionAnuncios()

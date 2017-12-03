@@ -28,7 +28,7 @@ use yii\bootstrap\ActiveForm;
                 <div class="col-md-8">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <?= $form->field($model, 'nome_completo')->textInput() ?>
+                            <?= $form->field($model, 'nomeCompleto')->textInput() ?>
 
                             <?= $form->field($model, 'telefone')->textInput(['type' => 'number']) ?>
 
@@ -46,7 +46,7 @@ use yii\bootstrap\ActiveForm;
                         </div>
                         <div class="panel-body">
                             
-                            <?= $form->field($model->user, 'categoriasPreferidas')->checkBoxList($categorias); ?>
+                            <?= $form->field($model, 'catPref')->checkboxList($categorias); ?>
                             
                         </div>
 
