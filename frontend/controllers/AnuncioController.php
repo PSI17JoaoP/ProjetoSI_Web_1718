@@ -93,54 +93,54 @@ class AnuncioController extends Controller
      */
     public function actionSearch($titulo = null, $categoria = null, $regiao = null)
     {
-        $query = "SELECT * FROM ". Anuncio::tableName();
-                
+        $anuncios = (new \yii\db\Query())
+            ->from(Anuncio::tableName());
+
         //Filtrar categoria
         switch ($categoria)
         {
             case 'brinquedos':
-                $query = $query." JOIN ". CategoriaBrinquedos::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaBrinquedos::tableName() .".id_categoria";
+                $anuncios = $anuncios->join('JOIN', CategoriaBrinquedos::tableName(), Anuncio::tableName().".cat_oferecer = ". CategoriaBrinquedos::tableName().".id_categoria");
                 break;
             case 'jogos':
-                $query = $query." JOIN ". CategoriaJogos::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaJogos::tableName() .".id_brinquedo";            
+                $anuncios = $anuncios->join('JOIN', CategoriaJogos::tableName(), Anuncio::tableName().".cat_oferecer = ". CategoriaJogos::tableName().".id_brinquedo");
                 break;
             case 'eletronica':
-                $query = $query." JOIN ". CategoriaEletronica::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaEletronica::tableName() .".id_categoria";
+                $anuncios = $anuncios->join('JOIN', CategoriaEletronica::tableName(), Anuncio::tableName().".cat_oferecer = ". CategoriaEletronica::tableName().".id_categoria");
                 break;
             case 'computadores':
-                $query = $query." JOIN ". CategoriaComputadores::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaComputadores::tableName() .".id_eletronica";
+                $anuncios = $anuncios->join('JOIN', CategoriaComputadores::tableName(), Anuncio::tableName().".cat_oferecer = ". CategoriaComputadores::tableName().".id_eletronica");
                 break;
             case 'smartphones':
-                $query = $query." JOIN ". CategoriaSmartphones::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaSmartphones::tableName() .".id_eletronica";
+                $anuncios = $anuncios->join('JOIN', CategoriaSmartphones::tableName(), Anuncio::tableName().".cat_oferecer = ". CategoriaSmartphones::tableName().".id_eletronica");
                 break;
             case 'livros':
-                $query = $query." JOIN ". CategoriaLivros::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaLivros::tableName() .".id_categoria";
+                $anuncios = $anuncios->join('JOIN', CategoriaLivros::tableName(), Anuncio::tableName().".cat_oferecer = ". CategoriaLivros::tableName().".id_categoria");
                 break;
             case 'roupa':
-                $query = $query." JOIN ". CategoriaRoupa::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaRoupa::tableName() .".id_categoria";
+                $anuncios = $anuncios->join('JOIN', CategoriaRoupa::tableName(), Anuncio::tableName().".cat_oferecer = ". CategoriaRoupa::tableName().".id_categoria");
                 break;
         
         }
-        //Filtrar região
 
+        //Filtrar região
         if(\in_array($regiao, Tools::listaRegioes()))
         {
-            $query = $query." JOIN ". Cliente::tableName()." ON ". Anuncio::tableName() .".id_user = ". CLiente::tableName() .".id_user";
-            $query = $query." WHERE regiao = '". $regiao."'";
+            $anuncios = $anuncios->join('JOIN', Cliente::tableName(), Anuncio::tableName().".id_user = ". Cliente::tableName().".id_user");
+            $anuncios = $anuncios->where('regiao=:regiao', [':regiao' => $regiao]);
 
             if ($titulo != null) 
             {    
-                $query = $query." AND titulo LIKE '%".$titulo."%'";
+                $anuncios = $anuncios->andWhere(['like', 'titulo', $titulo]);
             }
         //Filtrar título
         }else if ($titulo != null)  
         {            
-            $query = $query." WHERE titulo LIKE '%".$titulo."%'";
+            $anuncios = $anuncios->Where(['like', 'titulo', $titulo]);
         }
 
-        //Pesquisa
-        $anuncios = Anuncio::findBySql($query)->all();
-        
+        $anuncios = $anuncios->all();
+
 
 
         if (Yii::$app->request->isAjax)
