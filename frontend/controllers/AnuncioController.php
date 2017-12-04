@@ -88,7 +88,9 @@ class AnuncioController extends Controller
 
     /**
      * Searches for Anuncio models.
-     * @param array $params Os parâmetros de pesquisa
+     * @param string $titulo
+     * @param string $categoria
+     * @param string $regiao
      * @return mixed
      */
     public function actionSearch($titulo = null, $categoria = null, $regiao = null)
@@ -118,12 +120,10 @@ class AnuncioController extends Controller
                 break;
             case 'roupa':
                 $query = $query." JOIN ". CategoriaRoupa::tableName()." ON ". Anuncio::tableName() .".cat_oferecer = ". CategoriaRoupa::tableName() .".id_categoria";
-                break;
-        
         }
-        //Filtrar região
 
-        if(\in_array($regiao, Tools::listaRegioes()))
+        //Filtrar região
+        if(in_array($regiao, Tools::listaRegioes()))
         {
             $query = $query." JOIN ". Cliente::tableName()." ON ". Anuncio::tableName() .".id_user = ". CLiente::tableName() .".id_user";
             $query = $query." WHERE regiao = '". $regiao."'";
@@ -132,22 +132,24 @@ class AnuncioController extends Controller
             {    
                 $query = $query." AND titulo LIKE '%".$titulo."%'";
             }
+        }
+
         //Filtrar título
-        }else if ($titulo != null)  
+        else if ($titulo != null)
         {            
             $query = $query." WHERE titulo LIKE '%".$titulo."%'";
         }
 
         //Pesquisa
         $anuncios = Anuncio::findBySql($query)->all();
-        
-
 
         if (Yii::$app->request->isAjax)
         {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return $anuncios;
-        }else
+        }
+
+        else
         {
             return $this->render('pesquisa', [
                 'anuncios' => $anuncios,
