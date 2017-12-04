@@ -62,12 +62,12 @@ $this->title = 'Pesquisa de Anúncios';
                 </div>
 
                 <?= $this->renderAjax('//modals/modal',[
-                    'header' => $anuncio->titulo,
+                    'header' => $anuncio['titulo'],
                     'backdrop' => 'true',
                     'keyboard' => 'true',
                     'content' => '//modals/anuncio',
                     'options' => [
-                        'model' => $anuncio,
+                        //'model' => $anuncio,
                         //'categorias' => $dados[1],
                     ],
                 ]) ?>
