@@ -38,8 +38,7 @@ $this->title = 'Pesquisa de Anúncios';
 
 <div class="anuncio-search">
 
-<?php
-        foreach($anuncios as $anuncio) {
+    <?php foreach($anuncios as $anuncio) {
 
             if($anuncio !== null) { ?>
 
@@ -49,7 +48,7 @@ $this->title = 'Pesquisa de Anúncios';
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <p style="margin-top: 8px; margin-left: 5px" id="pesquisa_row_titulo"><?= Html::encode($anuncio->titulo) ?></p>
+                                    <p style="margin-top: 8px; margin-left: 5px" id="pesquisa_row_titulo"><?= Html::encode($anuncio['titulo']) ?></p>
                                 </div>
 
                                 <div class="col-md-4">
@@ -57,7 +56,6 @@ $this->title = 'Pesquisa de Anúncios';
                                         <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary view_model'])?>
                                     </span>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -76,5 +74,6 @@ $this->title = 'Pesquisa de Anúncios';
 
             </div>
 
+        <?php } ?>
     <?php } ?>
 </div>
