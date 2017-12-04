@@ -4,6 +4,8 @@ namespace frontend\controllers;
 
 use Yii;
 
+use yii\base\Exception;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +14,6 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use frontend\models\AnuncioForm;
 use common\models\Anuncio;
-use common\models\AnuncioSearch;
 use common\models\Cliente;
 use common\models\Tools;
 use common\models\CategoriaBrinquedos;
@@ -38,16 +39,20 @@ class AnuncioController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create'],
+                'only' => ['create', 'search'],
                 'rules' => [
                     [
                         'actions' => ['create'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'actions' => ['search'],
+                        'allow' => true,
+                    ],
                 ],
                 'denyCallback' => function ($rule, $action) {
-                    //throw new \Exception('You are not allowed to access this page');
+                    throw new Exception('You are not allowed to access this page');
                 }
             ],
             'verbs' => [
@@ -79,12 +84,12 @@ class AnuncioController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    /*public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+    }*/
 
     /**
      * Searches for Anuncio models.
@@ -95,7 +100,7 @@ class AnuncioController extends Controller
      */
     public function actionSearch($titulo = null, $categoria = null, $regiao = null)
     {
-        $anuncios = (new \yii\db\Query())
+        $anuncios = (new Query())
             ->from(Anuncio::tableName());
 
         //Filtrar categoria
@@ -284,7 +289,7 @@ class AnuncioController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    /*public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
@@ -295,7 +300,7 @@ class AnuncioController extends Controller
                 'model' => $model,
             ]);
         }
-    }
+    }*/
 
     /**
      * Deletes an existing Anuncio model.
@@ -303,12 +308,12 @@ class AnuncioController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    /*public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     /**
      * Finds the Anuncio model based on its primary key value.
