@@ -11,9 +11,18 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Tools;
+use common\models\CategoriaPreferida;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
+use yii\db\Query;
+use common\models\CategoriaBrinquedos;
+use common\models\CategoriaComputadores;
+use common\models\CategoriaEletronica;
+use common\models\CategoriaJogos;
+use common\models\CategoriaLivros;
+use common\models\CategoriaRoupa;
+use common\models\CategoriaSmartphones;
 
 
 /**
@@ -80,24 +89,82 @@ class SiteController extends Controller
     {
         if(!Yii::$app->user->isGuest) {
 
+            //RECENTES
             $anunciosRecentes = Anuncio::find()
-                ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
-                ->limit(5)
+            ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+            ->orderBy('id DESC')
+            ->limit(5)
+            ->all();
+
+
+            //SUGERIDOS
+
+            $catPreferidas = CategoriaPreferida::find()
+                ->select('categoria')
+                ->where('id_user = :id_user', [':id_user' => Yii::$app->user->getId()])
+                ->asArray()
                 ->all();
 
-            $anunciosDestaques = Anuncio::find()
-                ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
-                ->limit(5)
-                ->all();
+
+            $anunciosNotUser = (new Query())
+                ->from(Anuncio::tableName())
+                ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()]);
+                
+            $anunciosDestaques = (new Query())
+                ->from(['table' => $anunciosNotUser]);
+
+            foreach ($catPreferidas as $key => $value) 
+            {
+                $stupidList = (new Query());
+                $goodList = array();
+
+                switch ($value['categoria']) 
+                {
+                    case 'brinquedos':
+                        $stupidList = $stupidList->select('id_categoria')->from(CategoriaBrinquedos::tableName())->all();
+                        break;
+                    case 'jogos':
+                        $stupidList = $stupidList->select('id_brinquedo')->from(CategoriaJogos::tableName())->all();
+                        break;
+                    case 'eletronica':
+                        $stupidList = $stupidList->select('id_categoria')->from(CategoriaEletronica::tableName())->all();
+                        break;
+                    case 'computadores':
+                        $stupidList = $stupidList->select('id_eletronica')->from(CategoriaComputadores::tableName())->all();                    
+                        break;
+                    case 'smartphones':
+                        $stupidList = $stupidList->select('id_eletronica')->from(CategoriaSmartphones::tableName())->all();                    
+                        break;
+                    case 'livros':
+                        $stupidList = $stupidList->select('id_categoria')->from(CategoriaLivros::tableName())->all();
+                        break;
+                    case 'roupa':
+                        $stupidList = $stupidList->select('id_categoria')->from(CategoriaRoupa::tableName())->all();
+                }
+
+                
+                foreach ($stupidList as $key => $value) {
+                    \array_push($goodList,  $value[\key($value)]);
+                    
+                }
+
+                $anunciosDestaques = $anunciosDestaques->orWhere(['IN', 'cat_oferecer', $goodList]);
+            }
+
+            
+        
+            $anunciosDestaques = $anunciosDestaques->orderBy('id DESC')->distinct()->limit(5)->all();
+
         }
 
         else {
-
             $anunciosRecentes = Anuncio::find()
+                ->orderBy('id DESC')
                 ->limit(5)
                 ->all();
 
             $anunciosDestaques = Anuncio::find()
+                ->orderBy('id DESC')
                 ->limit(5)
                 ->all();
         }
