@@ -66,7 +66,7 @@ $this->title = 'Pesquisa de Anúncios';
 
                                 <div class="col-md-4">
                                     <span class="pull-right">
-                                        <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary view_model', 'data-id' => $anuncio['id']])?>
+                                        <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary view_model', 'data-detail' => Url::toRoute(['anuncio/detalhes', 'id' => $anuncio['id']])])?>
                                     </span>
                                 </div>
                             </div>

@@ -13,6 +13,7 @@ use yii\filters\AccessControl;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use frontend\models\AnuncioForm;
+use frontend\models\GestorCategorias;
 use common\models\Anuncio;
 use common\models\Cliente;
 use common\models\Tools;
@@ -169,13 +170,27 @@ class AnuncioController extends Controller
      */
     public function actionDetalhes($id)
     {
+
+        $gestor = new GestorCategorias();
+
+        //$anuncio = (new Query())->from(Anuncio::tableName())->where('id = :id', [':id' => $id])->all();
+        $anuncio = Anuncio::findOne('id = ' + $id);
+
+        $categoriaO = $gestor->getCategorias($anuncio, 'cat_oferecer');
+        $categoriaOBase = array_shift($categoriaO);
+
         
-    
-        //$anuncio = Anuncio::findOne(['id' => $id]);
+        $categoriaR = $gestor->getCategorias($anuncio, 'cat_receber');
+        if($categoriaR)
+        {
+            $categoriaRBase = array_shift($categoriaR);
+        }else{
+            $categoriaRBase = ['nome' => "Aberto a sugestões"];
+        }
 
-        //Oferecer
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR];
 
-        //Receber
     }
 
     /**

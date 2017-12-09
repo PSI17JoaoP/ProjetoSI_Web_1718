@@ -54,6 +54,11 @@ class GestorCategorias
 
         array_push($categorias, $categoriaMae);
 
+        if($categoriaMae == null)
+        {
+            return null;
+        }
+
         if(($categoriaFilha = $categoriaMae->cRoupa))
         {
             array_push($categorias, $categoriaFilha);
