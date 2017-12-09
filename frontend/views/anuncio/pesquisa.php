@@ -1,16 +1,16 @@
 <?php
 
-use yii\helpers\Html;
-use yii\helpers\Url;
-
-$this->title = 'Pesquisa de Anúncios';
-
 /* @var $this yii\web\View */
 /* @var $model common\models\AnuncioSearch */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $categorias array */
 /* @var $regioes array */
 /* @var $anuncios array */
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+$this->title = 'Pesquisa de Anúncios';
 
 ?>
 
