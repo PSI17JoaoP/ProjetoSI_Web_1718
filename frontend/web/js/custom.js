@@ -10,6 +10,8 @@ $(function(){
 
         else {
             $('.view_model').click(function () {
+                var anuncioID = $(this).data("id");
+
                 $('#modal_geral').modal('toggle');
             });
         }
@@ -27,6 +29,7 @@ $(function(){
             rowModel = $('.pesquisa-row:first').clone();
         
         $('.anuncio-search').empty();
+        $('.pesquisa_loading').css('display', 'block');
 
         $.ajax($('.pesquisa-control').data("info"), 
         {
@@ -47,6 +50,8 @@ $(function(){
                 $('#pesquisa_row_titulo', row).text(anuncio.titulo);
                 
                 $('.anuncio-search').append(row);
+
+                $('.pesquisa_loading').css('display', 'none');
             });
         });
     });
@@ -57,6 +62,7 @@ $(function(){
             rowModel = $('.pesquisa-row:first').clone();
         
         $('.anuncio-search').empty();
+        $('.pesquisa_loading').css('display', 'block');
 
         $.ajax($('.pesquisa-control').data("info"), 
         {
@@ -77,6 +83,8 @@ $(function(){
                 $('#pesquisa_row_titulo', row).text(anuncio.titulo);
                 
                 $('.anuncio-search').append(row);
+
+                $('.pesquisa_loading').css('display', 'none');
             });
         });
     });
@@ -87,6 +95,7 @@ $(function(){
             rowModel = $('.pesquisa-row:first').clone();
         
         $('.anuncio-search').empty();
+        $('.pesquisa_loading').css('display', 'block');
 
         $.ajax($('.pesquisa-control').data("info"), 
         {
@@ -107,6 +116,8 @@ $(function(){
                 $('#pesquisa_row_titulo', row).text(anuncio.titulo);
                 
                 $('.anuncio-search').append(row);
+
+                $('.pesquisa_loading').css('display', 'none');
             });
         });
     });

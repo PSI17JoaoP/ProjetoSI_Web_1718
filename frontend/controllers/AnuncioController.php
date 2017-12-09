@@ -23,7 +23,7 @@ use common\models\CategoriaJogos;
 use common\models\CategoriaLivros;
 use common\models\CategoriaRoupa;
 use common\models\CategoriaSmartphones;
-
+use common\models\Categoria;
 use yii\base\Model;
 
 /**
@@ -162,6 +162,20 @@ class AnuncioController extends Controller
                 'categorias' => Tools::listaCategorias()
             ]);
         }
+    }
+
+    /**
+     * Retorna os detalhes de um anúncio com base no id recebido
+     */
+    public function actionDetalhes($id)
+    {
+        
+    
+        //$anuncio = Anuncio::findOne(['id' => $id]);
+
+        //Oferecer
+
+        //Receber
     }
 
     /**

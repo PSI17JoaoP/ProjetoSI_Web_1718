@@ -36,8 +36,21 @@ $this->title = 'Pesquisa de Anúncios';
     </div>
 </div>
 
-<div class="anuncio-search">
+<div class="pesquisa_loading" align="center" style="display:none">
+    <img src="../../web/assets/loading.gif" style="padding-top:10%"/>
+</div>
 
+<div class="anuncio-search">
+    <?= $this->renderAjax('//modals/modal',[
+            'header' => "Detalhes",
+            'backdrop' => 'true',
+            'keyboard' => 'true',
+            'content' => '//modals/anuncio',
+            'options' => [
+                //'model' => $anuncio,
+                //'categorias' => $dados[1],
+            ],
+        ]) ?>
     <?php foreach($anuncios as $anuncio) {
 
             if($anuncio !== null) { ?>
@@ -53,25 +66,13 @@ $this->title = 'Pesquisa de Anúncios';
 
                                 <div class="col-md-4">
                                     <span class="pull-right">
-                                        <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary view_model'])?>
+                                        <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary view_model', 'data-id' => $anuncio['id']])?>
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <?= $this->renderAjax('//modals/modal',[
-                    'header' => $anuncio['titulo'],
-                    'backdrop' => 'true',
-                    'keyboard' => 'true',
-                    'content' => '//modals/anuncio',
-                    'options' => [
-                        //'model' => $anuncio,
-                        //'categorias' => $dados[1],
-                    ],
-                ]) ?>
-
             </div>
 
         <?php } ?>
