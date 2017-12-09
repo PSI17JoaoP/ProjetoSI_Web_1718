@@ -40,8 +40,7 @@ $this->title = 'Pesquisa de Anúncios';
     <img src="../../web/assets/loading.gif" style="padding-top:10%"/>
 </div>
 
-<div class="anuncio-search">
-    <?= $this->renderAjax('//modals/modal',[
+<?= $this->renderAjax('//modals/modal',[
             'header' => "Detalhes",
             'backdrop' => 'true',
             'keyboard' => 'true',
@@ -51,6 +50,9 @@ $this->title = 'Pesquisa de Anúncios';
                 //'categorias' => $dados[1],
             ],
         ]) ?>
+
+<div class="anuncio-search">
+    
     <?php foreach($anuncios as $anuncio) {
 
             if($anuncio !== null) { ?>
@@ -61,12 +63,39 @@ $this->title = 'Pesquisa de Anúncios';
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <p style="margin-top: 8px; margin-left: 5px" id="pesquisa_row_titulo"><?= Html::encode($anuncio['titulo']) ?></p>
+                                    <p style="margin-top: 8px; margin-left: 5px" id="pesquisa_row_titulo"><b>Título:</b> <?= Html::encode($anuncio['titulo']) ?></p>
                                 </div>
 
                                 <div class="col-md-4">
                                     <span class="pull-right">
-                                        <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary view_model', 'data-detail' => Url::toRoute(['anuncio/detalhes', 'id' => $anuncio['id']])])?>
+                                        <?= Html::a('Detalhes', 'javascript:', [
+                                            'id' => 'pesquisa_row_detalhes', 
+                                            'class' => 'btn btn-primary view_model', 
+                                            'data-detail' => Url::toRoute(['anuncio/detalhes']), 
+                                            'data-id' => $anuncio['id']])?>
+                                        <?php 
+                                            if($anuncio['cat_receber'] !== null) 
+                                            {
+                                                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncio' => $anuncio['id']], [
+                                                    'id' => 'pesquisa_row_proposta',
+                                                    'class' => 'btn btn-info',
+                                                    'data' => [
+                                                        'method' => 'post',
+                                                        'baseUrl' => Url::toRoute(['proposta/create']),
+                                                        'params' => [
+                                                            'id_anuncio' => $anuncio['id'],
+                                                        ],
+                                                    ]
+                                                ]);
+                                            }
+                                            else {
+                                                echo Html::a('Enviar Proposta', ['proposta/create', 'anuncio' => $anuncio['id']],[
+                                                    'id' => 'pesquisa_row_proposta',
+                                                    'class' => 'btn btn-info',
+                                                    'data-baseUrl' => Url::toRoute(['proposta/create'])
+                                                ]);
+                                            } 
+                                        ?>
                                     </span>
                                 </div>
                             </div>

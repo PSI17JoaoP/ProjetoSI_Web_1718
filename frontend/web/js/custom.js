@@ -9,16 +9,20 @@ $(function(){
         }
 
         else {
-            $('.view_model').click(function () {
+            $('.anuncio-search').on('click', '.view_model' ,function () {
                 var detalhesUrl = $(this).data("detail");
+                var detalhesId = $(this).data("id");
 
                 $('.modal_detalhes').empty();
 
                 $.ajax(detalhesUrl, {
                     method: 'GET',
                     type: 'json',
+                    data: 
+                    {
+                        "id" : detalhesId,
+                    }
                 }).then(function(data){
-                    //$('#modal_detalhes_titulo').text(data[0].titulo);
                     var content = "<h3>Título: "+data[0].titulo+"<small>  Criado a: "+data[0].data_criacao+"</small></h3>";
 
                     content += "<br>";
@@ -90,7 +94,19 @@ $(function(){
                 var row = rowModel.clone();
 
                 $('#pesquisa_row_titulo', row).text(anuncio.titulo);
+                $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
                 
+
+                var baseUrl = $('#pesquisa_row_proposta', row).attr('data-baseUrl');
+            
+                $('#pesquisa_row_proposta', row).attr('href', baseUrl+"?anuncio="+anuncio.id);
+            
+                if (anuncio.cat_receber != null) 
+                {
+                    $('#pesquisa_row_proposta', row).attr('data-params', "{id_anuncio: "+anuncio.id+"}");
+                }
+                
+
                 $('.anuncio-search').append(row);
 
                 $('.pesquisa_loading').css('display', 'none');
@@ -123,6 +139,19 @@ $(function(){
                 var row = rowModel.clone();
 
                 $('#pesquisa_row_titulo', row).text(anuncio.titulo);
+                $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
+                
+
+                var baseUrl = $('#pesquisa_row_proposta', row).attr('data-baseUrl');
+            
+                $('#pesquisa_row_proposta', row).attr('href', baseUrl+"?anuncio="+anuncio.id);
+
+                if (anuncio.cat_receber != null) 
+                {
+                    $('#pesquisa_row_proposta', row).attr('data-params', "{id_anuncio: "+anuncio.id+"}");
+                }else{
+                    $('#pesquisa_row_proposta', row).attr('data-params', "");
+                }
                 
                 $('.anuncio-search').append(row);
 
@@ -156,6 +185,17 @@ $(function(){
                 var row = rowModel.clone();
 
                 $('#pesquisa_row_titulo', row).text(anuncio.titulo);
+                $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
+                
+
+                var baseUrl = $('#pesquisa_row_proposta', row).attr('data-baseUrl');
+            
+                $('#pesquisa_row_proposta', row).attr('href', baseUrl+"?anuncio="+anuncio.id);
+                
+                if (anuncio.cat_receber != null) 
+                {
+                    $('#pesquisa_row_proposta', row).attr('data-params', "{id_anuncio: "+anuncio.id+"}");
+                }
                 
                 $('.anuncio-search').append(row);
 
