@@ -49,10 +49,12 @@ $(function(){
 
                     $('.modal_detalhes').append(content);
 
-                    $('#modal_geral').modal('toggle');
+                    $('.pesquisa_loading_modal').css('display', 'none');
                 });
 
-                
+                $('#modal_geral').modal('toggle');
+
+                $('.pesquisa_loading_modal').css('display', 'block');
             });
         }
     });
