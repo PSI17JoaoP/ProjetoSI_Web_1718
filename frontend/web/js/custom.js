@@ -89,28 +89,35 @@ $(function(){
                 },
         }).then(function(anuncios)
         {
-            $.each(anuncios, function(i, anuncio) 
+            if (anuncios.length == 0) 
             {
-                var row = rowModel.clone();
+                var noResults = "<div align='center'><p>Parece que não há nenhum anúncio...</p><p>Tente pesquisar com outros filtros</p></div>"
+                $('.anuncio-search').append(noResults);
 
-                $('#pesquisa_row_titulo', row).text(anuncio.titulo);
-                $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
-                
-
-                var baseUrl = $('#pesquisa_row_proposta', row).attr('data-baseUrl');
-            
-                $('#pesquisa_row_proposta', row).attr('href', baseUrl+"?anuncio="+anuncio.id);
-            
-                if (anuncio.cat_receber != null) 
+                $('.pesquisa_loading').css('display', 'none');    
+            } else {
+                $.each(anuncios, function(i, anuncio) 
                 {
-                    $('#pesquisa_row_proposta', row).attr('data-params', "{id_anuncio: "+anuncio.id+"}");
-                }
+                    var row = rowModel.clone();
+    
+                    $('#pesquisa_row_titulo', row).text(anuncio.titulo);
+                    $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
+                    
+    
+                    var baseUrl = $('#pesquisa_row_proposta', row).attr('data-baseUrl');
                 
-
-                $('.anuncio-search').append(row);
-
-                $('.pesquisa_loading').css('display', 'none');
-            });
+                    $('#pesquisa_row_proposta', row).attr('href', baseUrl+"?anuncio="+anuncio.id);
+                    
+                    if (anuncio.cat_receber != null) 
+                    {
+                        $('#pesquisa_row_proposta', row).attr('data-params', "{id_anuncio: "+anuncio.id+"}");
+                    }
+                    
+                    $('.anuncio-search').append(row);
+    
+                    $('.pesquisa_loading').css('display', 'none');
+                });
+            }
         });
     });
 
@@ -134,29 +141,35 @@ $(function(){
                 },
         }).then(function(anuncios)
         {
-            $.each(anuncios, function(i, anuncio) 
+            if (anuncios.length == 0) 
             {
-                var row = rowModel.clone();
+                var noResults = "<div align='center'><p>Parece que não há nenhum anúncio...</p><p>Tente pesquisar com outros filtros</p></div>"
+                $('.anuncio-search').append(noResults);
 
-                $('#pesquisa_row_titulo', row).text(anuncio.titulo);
-                $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
-                
-
-                var baseUrl = $('#pesquisa_row_proposta', row).attr('data-baseUrl');
-            
-                $('#pesquisa_row_proposta', row).attr('href', baseUrl+"?anuncio="+anuncio.id);
-
-                if (anuncio.cat_receber != null) 
+                $('.pesquisa_loading').css('display', 'none');    
+            } else {
+                $.each(anuncios, function(i, anuncio) 
                 {
-                    $('#pesquisa_row_proposta', row).attr('data-params', "{id_anuncio: "+anuncio.id+"}");
-                }else{
-                    $('#pesquisa_row_proposta', row).attr('data-params', "");
-                }
+                    var row = rowModel.clone();
+    
+                    $('#pesquisa_row_titulo', row).text(anuncio.titulo);
+                    $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
+                    
+    
+                    var baseUrl = $('#pesquisa_row_proposta', row).attr('data-baseUrl');
                 
-                $('.anuncio-search').append(row);
-
-                $('.pesquisa_loading').css('display', 'none');
-            });
+                    $('#pesquisa_row_proposta', row).attr('href', baseUrl+"?anuncio="+anuncio.id);
+                    
+                    if (anuncio.cat_receber != null) 
+                    {
+                        $('#pesquisa_row_proposta', row).attr('data-params', "{id_anuncio: "+anuncio.id+"}");
+                    }
+                    
+                    $('.anuncio-search').append(row);
+    
+                    $('.pesquisa_loading').css('display', 'none');
+                });
+            }
         });
     });
 
@@ -180,27 +193,35 @@ $(function(){
                 },
         }).then(function(anuncios)
         {
-            $.each(anuncios, function(i, anuncio) 
+            if (anuncios.length == 0) 
             {
-                var row = rowModel.clone();
+                var noResults = "<div align='center'><p>Parece que não há nenhum anúncio...</p><p>Tente pesquisar com outros filtros</p></div>"
+                $('.anuncio-search').append(noResults);
 
-                $('#pesquisa_row_titulo', row).text(anuncio.titulo);
-                $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
-                
-
-                var baseUrl = $('#pesquisa_row_proposta', row).attr('data-baseUrl');
-            
-                $('#pesquisa_row_proposta', row).attr('href', baseUrl+"?anuncio="+anuncio.id);
-                
-                if (anuncio.cat_receber != null) 
+                $('.pesquisa_loading').css('display', 'none');    
+            } else {
+                $.each(anuncios, function(i, anuncio) 
                 {
-                    $('#pesquisa_row_proposta', row).attr('data-params', "{id_anuncio: "+anuncio.id+"}");
-                }
+                    var row = rowModel.clone();
+    
+                    $('#pesquisa_row_titulo', row).text(anuncio.titulo);
+                    $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
+                    
+    
+                    var baseUrl = $('#pesquisa_row_proposta', row).attr('data-baseUrl');
                 
-                $('.anuncio-search').append(row);
-
-                $('.pesquisa_loading').css('display', 'none');
-            });
+                    $('#pesquisa_row_proposta', row).attr('href', baseUrl+"?anuncio="+anuncio.id);
+                    
+                    if (anuncio.cat_receber != null) 
+                    {
+                        $('#pesquisa_row_proposta', row).attr('data-params', "{id_anuncio: "+anuncio.id+"}");
+                    }
+                    
+                    $('.anuncio-search').append(row);
+    
+                    $('.pesquisa_loading').css('display', 'none');
+                });
+            }
         });
     });
     
