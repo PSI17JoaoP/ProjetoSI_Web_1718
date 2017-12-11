@@ -3,13 +3,26 @@
 /* @var $anuncios array */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+
 
 $this->title = 'Os meus anúncios';
 ?>
 
+<?= $this->renderAjax('//modals/modal',[
+    'header' => "Detalhes",
+    'backdrop' => 'true',
+    'keyboard' => 'true',
+    'content' => '//modals/anuncio',
+    'options' => [
+        //'model' => $anuncio,
+        //'categorias' => $dados[1],
+    ],
+]) ?>
+
 <div class="col-12 col-md-8">
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-body anuncio-detalhes">
 
             <?php foreach($anuncios as $dados) { ?>
 
@@ -24,7 +37,11 @@ $this->title = 'Os meus anúncios';
 
                                     <div class="col-md-2">
                                         <span class="pull-right">
-                                            <?= Html::a('Detalhes', '#', ['class' => 'btn btn-primary view_model'])?>
+                                            <?= Html::a('Detalhes', 'javascript:', [
+                                                'class' => 'btn btn-primary view_model',
+                                                'data-detail' => Url::toRoute(['anuncio/detalhes']), 
+                                                'data-id' => $dados[0]->id
+                                                ])?>
                                         </span>
                                     </div>
 
@@ -37,18 +54,6 @@ $this->title = 'Os meus anúncios';
                             </div>
                         </div>
                     </div>
-
-                    <?= $this->renderAjax('//modals/modal',[
-                        'header' => $dados[0]->titulo,
-                        'backdrop' => 'true',
-                        'keyboard' => 'true',
-                        'content' => '//modals/anuncio',
-                        'options' => [
-                            'model' => $dados[0],
-                            'categorias' => $dados[1],
-                        ],
-                    ]) ?>
-
                 </div>
 
             <?php } ?>

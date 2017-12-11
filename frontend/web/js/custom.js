@@ -9,7 +9,7 @@ $(function(){
         }
 
         else {
-            $('.anuncio-search').on('click', '.view_model' ,function () {
+            // $('.anuncio-detalhes').on('click', '.view_model' ,function () {
                 var detalhesUrl = $(this).data("detail");
                 var detalhesId = $(this).data("id");
 

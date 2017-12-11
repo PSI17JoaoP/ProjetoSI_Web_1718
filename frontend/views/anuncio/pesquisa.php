@@ -51,7 +51,7 @@ $this->title = 'Pesquisa de Anúncios';
             ],
         ]) ?>
 
-<div class="anuncio-search">
+<div class="anuncio-search anuncio-detalhes">
     
     <?php foreach($anuncios as $anuncio) {
 
