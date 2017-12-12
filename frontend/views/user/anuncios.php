@@ -35,21 +35,19 @@ $this->title = 'Os meus anúncios';
                                         <p style="margin-top: 8px; margin-left: 5px"><?= Html::encode($dados[0]->titulo) ?></p>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div class="col-md-4">
                                         <span class="pull-right">
                                             <?= Html::a('Detalhes', 'javascript:', [
                                                 'class' => 'btn btn-primary view_model',
                                                 'data-detail' => Url::toRoute(['anuncio/detalhes']), 
                                                 'data-id' => $dados[0]->id
                                                 ])?>
-                                        </span>
-                                    </div>
 
-                                    <div class="col-md-2">
-                                        <span class="pull-right">
                                             <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
                                         </span>
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
