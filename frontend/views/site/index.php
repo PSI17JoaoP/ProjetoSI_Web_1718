@@ -27,7 +27,7 @@ $this->title = 'Página Inicial';
                                 <?= Html::textInput('titulo', null, ['class' => 'form-control', 'placeholder' => 'Pesquisar...']) ?>
                             </div>
 
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <?= Html::dropDownList('categoria', 'categoria', $categorias,
                                     ['class' => 'form-control', 'style' => "margin-bottom: 10px", 'prompt' => 'Categoria ...'])?>
                             </div>
@@ -37,7 +37,7 @@ $this->title = 'Página Inicial';
                                     ['class'=>'form-control', 'style' => "margin-bottom: 10px", 'prompt' => 'Região ...'])?>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-primary'])?>
                             </div>
                         <?= Html::endForm() ?>
