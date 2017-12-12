@@ -203,8 +203,13 @@ class SiteController extends Controller
                         'model' => $model,
                     ]);
                 }
-            } else {
+            } else if($model->validateUser(Yii::$app->authManager->getRole('admin'))){
                 return $this->redirect(Yii::$app->urlManagerBackEnd->createUrl('site/login'));
+            }else{
+                return $this->render('login', [
+                    'model' => $model,
+                    
+                ]);
             }
         } else {
             return $this->render('login', [

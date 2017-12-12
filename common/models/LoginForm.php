@@ -70,9 +70,17 @@ class LoginForm extends Model
     public function validateUser($role)
     {
         $auth = Yii::$app->authManager;
-        $roles = $auth->getRolesByUser($this->getUser()->getId());
 
-        return ArrayHelper::isIn($role, $roles);
+        $user = $this->getUser();
+        
+        if ($user != null) 
+        {
+            $roles = $auth->getRolesByUser($user->getId());
+
+            return ArrayHelper::isIn($role, $roles);
+        }
+        
+        return null;
     }
 
     /**
