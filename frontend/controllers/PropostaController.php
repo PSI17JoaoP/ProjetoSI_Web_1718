@@ -116,7 +116,11 @@ class PropostaController extends Controller
 
                         if ($model->save()) 
                         {
-                            return $this->redirect(['user/propostas']);
+                            return $this->redirect(['user/propostas', 
+                                'tipo' => "success",
+                                'titulo' => "Sucesso!",
+                                'mensagem' => "A sua proposta foi enviada com sucesso"
+                            ]);
                         } else {
                             return $this->goBack();
                         }
@@ -154,7 +158,11 @@ class PropostaController extends Controller
                         {
                             if($modelForm->enviar($categoriaPropostoID))
                             {
-                                return $this->redirect(['user/propostas']);
+                                return $this->redirect(['user/propostas', 
+                                    'tipo' => "success",
+                                    'titulo' => "Sucesso!",
+                                    'mensagem' => "A sua proposta foi enviada com sucesso"
+                                ]);
                             } else {
                                 return $this->render('create', [
                                     'model' => $modelForm,

@@ -89,7 +89,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionPropostas()
+    public function actionPropostas($tipo = null, $titulo = null, $mensagem = null)
     {
         $this->layout = "main-user";
 
@@ -115,7 +115,12 @@ class UserController extends Controller
 
         $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');
 
-        return $this->render('propostas', ['propostas' => $categorias]);
+        return $this->render('propostas', [
+            'propostas' => $categorias,
+            'tipo' => $tipo, 
+            'titulo' => $titulo, 
+            'mensagem' => $mensagem
+        ]);
     }
 
     public function actionHistory()

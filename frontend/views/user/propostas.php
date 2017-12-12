@@ -21,6 +21,16 @@ $this->title = 'Propostas Recebidas';
     ]) ?>
 
 <div class="col-12 col-md-8">
+<?php
+    if($tipo != null)
+    {
+        echo $this->render('//alerts/alert', [
+            'tipo' => $tipo,
+            'titulo' => $titulo,
+            'mensagem' => $mensagem
+        ]);
+    }
+?>  
     <div class="panel panel-default">
         <div class="panel-body anuncio-detalhes">
 
