@@ -55,7 +55,10 @@ class UserController extends Controller
             [
                 'model' => $model, 
                 'regioes' => Tools::listaRegioes(),
-                'categorias' => Tools::listaCategorias()
+                'categorias' => Tools::listaCategorias(),
+                'tipo' => "success", 
+                'titulo' => "Sucesso!", 
+                'mensagem' => "As suas informações de conta foram atualizadas com sucesso"
             ]);
         }else {
             $model->carregar($cliente);
@@ -64,7 +67,10 @@ class UserController extends Controller
             [
                 'model' => $model, 
                 'regioes' => Tools::listaRegioes(),
-                'categorias' => Tools::listaCategorias()
+                'categorias' => Tools::listaCategorias(),
+                'tipo' => null, 
+                'titulo' => null, 
+                'mensagem' => null
             ]);
         }
         
