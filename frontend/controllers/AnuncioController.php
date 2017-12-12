@@ -284,8 +284,15 @@ class AnuncioController extends Controller
 
             else if (($modeloOferta = $model->mOferta->guardar()) && ($modeloProcura = $model->mProcura->guardar()))
             {
-                if (($modelo = $model->guardar(Yii::$app->user->identity->getId(), $modeloOferta, $modeloProcura))) {
-                    return $this->redirect(['user/anuncios', 'model' => $modelo]);
+                if (($modelo = $model->guardar(Yii::$app->user->identity->getId(), $modeloOferta, $modeloProcura))) 
+                {
+                    return $this->redirect(['user/anuncios', 
+                        'tipo' => "success",
+                        'titulo' => "Sucesso!",
+                        'mensagem' => "O seu anúncio foi criado com sucesso"
+                        
+                    ]);
+                      
                 } else {
                     return $this->render('create', [
                         'model' => $model,

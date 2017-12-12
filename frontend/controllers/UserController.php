@@ -70,7 +70,7 @@ class UserController extends Controller
         
     }
 
-    public function actionAnuncios()
+    public function actionAnuncios($tipo = null, $titulo = null, $mensagem = null)
     {
         $this->layout = "main-user";
 
@@ -80,7 +80,13 @@ class UserController extends Controller
 
         $categorias = $gestorCategorias->getCategoriasDados($anuncios, 'cat_oferecer');
 
-        return $this->render('anuncios', ['anuncios' => $categorias]);
+
+        return $this->render('anuncios', [
+            'anuncios' => $categorias,
+            'tipo' => $tipo, 
+            'titulo' => $titulo, 
+            'mensagem' => $mensagem
+        ]);
     }
 
     public function actionPropostas()
