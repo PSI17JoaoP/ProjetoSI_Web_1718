@@ -73,13 +73,7 @@ class PropostaController extends Controller
     {
         $modelForm = new PropostaForm();
 
-        //Valicação da escolha da categoria no evento Pjax do _form.php
-        if(($categoriaProposto = Yii::$app->request->get('catProposto')) !== null)
-        {
-            $modelForm->catProposto = $categoriaProposto;
-            $modelForm->modelProposto = $modelForm->selecionarCategoria($categoriaProposto);
-        }
-
+        //Validar estado de conta do cliente. SE ainda não tiver o perfil de cliente completo, mostrar popup de informações extra
         if (Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]) === null)
         {
             Yii::$app->runAction('user/cliente', [
@@ -88,18 +82,30 @@ class PropostaController extends Controller
             ]);
         }
 
+        //Valicação da escolha da categoria no evento Pjax do _form.php
+        if(($categoriaProposto = Yii::$app->request->get('catProposto')) !== null)
+        {
+            $modelForm->catProposto = $categoriaProposto;
+            $modelForm->modelProposto = $modelForm->selecionarCategoria($categoriaProposto);
+        }
+
+        
+
         if (Yii::$app->request->post()) {
 
             //Entra neste if, se o anúncio especificar o bem que quer receber.
             //O botão de Enviar Proposta no tipo de anúncios anteriores executa um pedido do tipo POST,
             //no qual envia o id do anúncio (id_anuncio).
-            if(($anuncioID = Yii::$app->request->post('id_anuncio'))) {
+            if(($anuncioID = Yii::$app->request->post('id_anuncio'))) 
+            {
 
                 $model = new Proposta();
 
-                if (($anuncio = Anuncio::findOne($anuncioID)) !== null) {
+                if (($anuncio = Anuncio::findOne($anuncioID)) !== null) 
+                {
 
-                    if ($anuncio->cat_receber !== null) {
+                    if ($anuncio->cat_receber !== null) 
+                    {
 
                         $model->cat_proposto = $anuncio->cat_receber;
                         $model->quant = $anuncio->quant_receber;
@@ -108,7 +114,8 @@ class PropostaController extends Controller
                         $model->data_proposta = date("Y-m-d h:i:s");
                         $model->estado = 'PENDENTE';
 
-                        if ($model->save()) {
+                        if ($model->save()) 
+                        {
                             return $this->redirect(['user/propostas']);
                         } else {
                             return $this->goBack();
@@ -116,17 +123,20 @@ class PropostaController extends Controller
                     }
                 }
             }
-
             //Caso o pedido POST não contém o id_anuncio, ou seja, o anúncio não especifica o bem a receber,
             //executa o código seguinte.
             else {
 
                 if ($modelForm->load(Yii::$app->request->post()))
                 {
+
+                    $catProposto = $modelForm->catProposto;
+                    $modelForm->modelProposto = $modelForm->selecionarCategoria($catProposto);
+
                     //Definição de um modelo da categoria escolhida para carregamento de dados.
                     //Implementado de forma a se poder usar os mesmos forms que o AnúncioForm utiliza.
                     $models = array(
-                        '0' => $modelForm->selecionarCategoria($categoriaProposto),
+                        '0' => $modelForm->selecionarCategoria($catProposto),
                     );
 
                     if (Model::loadMultiple($models, Yii::$app->request->post()))
