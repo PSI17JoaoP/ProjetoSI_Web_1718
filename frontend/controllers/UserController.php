@@ -98,7 +98,12 @@ class UserController extends Controller
             $propostasAnuncio = $anuncio->propostas;
 
             if(!empty($propostasAnuncio)) {
-                $propostas = array_merge($propostas, $propostasAnuncio);
+
+                foreach ($propostasAnuncio as $key => $value) {
+                    if ($value->estado == "PENDENTE") {
+                        \array_push($propostas, $value);
+                    }
+                }
             }
         }
 
