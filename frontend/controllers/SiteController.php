@@ -194,7 +194,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
 
-        if($model->load(Yii::$app->request->post())) {
+        if($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->validateUser(Yii::$app->authManager->getRole('cliente'))) {
                 if ($model->login()) {
                     return $this->goBack();

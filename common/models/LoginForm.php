@@ -28,7 +28,10 @@ class LoginForm extends Model
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
+            ['username', 'validateUsername'],
             ['password', 'validatePassword'],
+            
+            
         ];
     }
 
@@ -57,6 +60,16 @@ class LoginForm extends Model
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'A palavra-passe está incorreta.');
+            }
+        }
+    }
+
+    public function validateUsername($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $user = $this->getUser();
+            if (!$user) {
+                $this->addError($attribute, 'Este utilizador não existe.');
             }
         }
     }
