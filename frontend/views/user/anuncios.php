@@ -13,7 +13,7 @@ $this->title = 'Os meus anúncios';
     'header' => "Detalhes",
     'backdrop' => 'true',
     'keyboard' => 'true',
-    'content' => '//modals/anuncio',
+    'content' => '//modals/contacto',
     'options' => [
         //'model' => $anuncio,
         //'categorias' => $dados[1],
@@ -35,7 +35,7 @@ $this->title = 'Os meus anúncios';
         <div class="panel-heading">
             <strong>Anúncios concluídos</strong>                            
         </div>
-        <div class="panel-body">
+        <div class="panel-body contactos-detalhes">
             <?php foreach($anunciosConcluidos as $dados) { ?>
 
                     <div class="row">
@@ -43,15 +43,17 @@ $this->title = 'Os meus anúncios';
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-4">
                                             <p style="margin-top: 12px; margin-left: 5px"><b>Título:</b><?= Html::encode($dados["titulo"]) ?></p>
                                         </div>
-
+                                        <div class="col-md-4">
+                                            <p style="margin-top: 12px; margin-left: 5px"><b>Concluído em:</b><?= Html::encode($dados["dataConclusao"]) ?></p>
+                                        </div>
                                         <div class="col-md-4">
                                             <span class="pull-right">
                                                 <?= Html::a('Detalhes de Contato', 'javascript:', [
-                                                    'class' => 'btn btn-primary ',
-                                                    'data-detail' => Url::toRoute(['/']), 
+                                                    'class' => 'btn btn-primary view_details',
+                                                    'data-detail' => Url::toRoute(['user/detalhes-contacto']), 
                                                     'data-idUser' => $dados["idUser"],
                                                     'data-idUserProposta' => $dados["idUserProposta"],
                                                     ])?>

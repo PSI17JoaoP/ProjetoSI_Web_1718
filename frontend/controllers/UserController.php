@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use frontend\models\PINGenerator;
 use Yii;
 use yii\web\Controller;
+use yii\web\Response;
 use yii\filters\AccessControl;
 use common\models\Anuncio;
 use common\models\Cliente;
@@ -76,6 +77,16 @@ class UserController extends Controller
         
     }
 
+    public function actionDetalhesContacto($idUser, $idUserProposta)
+    {
+        $user1 = Cliente::findOne(['id_user' => $idUser]);
+        $user2 = Cliente::findOne(['id_user' => $idUserProposta]);
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return [$user1, $user2];
+    }
+
+
     public function actionAnuncios($tipo = null, $titulo = null, $mensagem = null)
     {
         $this->layout = "main-user";
@@ -107,6 +118,7 @@ class UserController extends Controller
 
                 $contacto = [
                     "titulo" => $anuncio->titulo, 
+                    "dataConclusao" => $anuncio->data_conclusao,
                     "idUser" => Yii::$app->user->getId(),
                     "idUserProposta" => $propostaAceite->id_user,
                 ];

@@ -92,6 +92,7 @@ class SiteController extends Controller
             //RECENTES
             $anunciosRecentes = Anuncio::find()
             ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+            ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"])
             ->orderBy('id DESC')
             ->limit(5)
             ->all();

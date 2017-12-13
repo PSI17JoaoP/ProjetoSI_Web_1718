@@ -61,6 +61,38 @@ $(function(){
                 $('.pesquisa_loading_modal').css('display', 'block');
             });
         }
+
+        $('.contactos-detalhes').on('click', '.view_details' ,function () {
+            var idUser = $(this).data("iduser");
+            var idUserProposta = $(this).data("iduserproposta");
+            var url = $(this).data("detail");
+
+            $('.modal_detalhes').empty();
+
+            $.ajax(url, {
+                method: 'GET',
+                type: 'json',
+                data: 
+                {
+                    "idUser" : idUser,
+                    "idUserProposta" : idUserProposta,
+                }
+            }).then(function(data){
+                var content = "<h3>Detalhes de contato</h3>";
+
+                content += "Meu nome: "+data[0].nome_completo;
+                content += "<br>";
+                content += "Nome do autor da proposta: "+data[1].nome_completo;
+
+                $('.modal_detalhes').append(content);
+
+                $('.pesquisa_loading_modal').css('display', 'none');
+            });
+
+            $('#modal_geral').modal('toggle');
+            
+            $('.pesquisa_loading_modal').css('display', 'block');
+        });
     });
 
     //##########################################
