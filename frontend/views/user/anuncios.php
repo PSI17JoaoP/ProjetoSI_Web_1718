@@ -54,8 +54,8 @@ $this->title = 'Os meus anúncios';
                                                 <?= Html::a('Detalhes de Contato', 'javascript:', [
                                                     'class' => 'btn btn-primary view_details',
                                                     'data-detail' => Url::toRoute(['user/detalhes-contacto']), 
-                                                    'data-idUser' => $dados["idUser"],
-                                                    'data-idUserProposta' => $dados["idUserProposta"],
+                                                    'data-iduser' => $dados["idUser"],
+                                                    'data-iduserproposta' => $dados["idUserProposta"],
                                                     ])?>
                                             </span>
                                         </div>

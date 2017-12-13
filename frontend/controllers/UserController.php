@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\AccessControl;
 use common\models\Anuncio;
 use common\models\Cliente;
+use common\models\Proposta;
 use common\models\Tools;
 use frontend\models\ClienteForm;
 use frontend\models\GestorCategorias;
@@ -150,26 +151,44 @@ class UserController extends Controller
         $gestorCategorias = new GestorCategorias();
 
         $propostas = [];
+        $contactos = [];
 
         foreach($anuncios as $anuncio)
         {
             $propostasAnuncio = $anuncio->propostas;
 
-            if(!empty($propostasAnuncio)) {
+            if(!empty($propostasAnuncio)) 
+            {
 
-                foreach ($propostasAnuncio as $key => $value) {
-                    if ($value->estado == "PENDENTE") {
+                foreach ($propostasAnuncio as $key => $value)
+                {
+                    if ($value->estado == "PENDENTE") 
+                    {
                         \array_push($propostas, $value);
                     }
                 }
             }
-            
+        }
+
+        $minhasPropostas = Proposta::findAll(['id_user' => Yii::$app->user->getId(), 'estado' => "ACEITE"]);
+
+        foreach($minhasPropostas as $minhaProposta)
+        {
+            $contacto = [
+                "titulo" => $minhaProposta->idAnuncio->titulo, 
+                "dataConclusao" => $minhaProposta->idAnuncio->data_conclusao,
+                "idUser" => Yii::$app->user->getId(),
+                "idUserAnuncio" =>$minhaProposta->idAnuncio->id_user,
+            ];
+
+            \array_push($contactos, $contacto);
         }
 
         $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');
 
         return $this->render('propostas', [
             'propostas' => $categorias,
+            'propostasAceites' => $contactos,
             'tipo' => $tipo, 
             'titulo' => $titulo, 
             'mensagem' => $mensagem

@@ -87,3 +87,43 @@ $this->title = 'Propostas Recebidas';
         </div>
     </div>
 </div>
+
+<div class="col-12 col-md-8">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Propostas aceites</strong>                            
+        </div>
+        <div class="panel-body contactos-detalhes">
+            <?php foreach($propostasAceites as $dados) { ?>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p style="margin-top: 12px; margin-left: 5px"><b>Anúncio:</b><?= Html::encode($dados["titulo"]) ?></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p style="margin-top: 12px; margin-left: 5px"><b>Aceite em:</b><?= Html::encode($dados["dataConclusao"]) ?></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span class="pull-right">
+                                                <?= Html::a('Detalhes de Contato', 'javascript:', [
+                                                    'class' => 'btn btn-primary view_details',
+                                                    'data-detail' => Url::toRoute(['user/detalhes-contacto']), 
+                                                    'data-idUser' => $dados["idUser"],
+                                                    'data-idUserProposta' => $dados["idUserAnuncio"],
+                                                    ])?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>

@@ -109,7 +109,8 @@ class SiteController extends Controller
 
             $anunciosNotUser = (new Query())
                 ->from(Anuncio::tableName())
-                ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()]);
+                ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+                ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"]);
                 
             $anunciosDestaques = (new Query())
                 ->from(['table' => $anunciosNotUser]);
