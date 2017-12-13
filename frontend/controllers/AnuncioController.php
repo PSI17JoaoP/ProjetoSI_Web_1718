@@ -147,6 +147,7 @@ class AnuncioController extends Controller
             $anuncios = $anuncios->Where(['like', 'titulo', $titulo]);
         }
 
+        $anuncios = $anuncios->andWhere(['not', 'estado=:estado'], [':estado' => "CONCLUIDO"]);
         $anuncios = $anuncios->all();
 
         if (Yii::$app->request->isAjax)

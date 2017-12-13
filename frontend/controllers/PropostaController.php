@@ -200,6 +200,11 @@ class PropostaController extends Controller
 
             if ($propostaEstado === 'ACEITE') {
                 $model->estado = 'ACEITE';
+
+                $anuncio = Anuncio::findOne(['id' => $model->id_anuncio]);
+                $anuncio->estado = "CONCLUIDO";
+                $anuncio->data_conclusao = date("Y-m-d h:i:s");
+                $anuncio->save();
             }
 
             elseif($propostaEstado === 'RECUSADO') {

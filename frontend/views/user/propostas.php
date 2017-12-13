@@ -32,6 +32,9 @@ $this->title = 'Propostas Recebidas';
     }
 ?>  
     <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Propostas pendentes</strong>
+        </div>
         <div class="panel-body anuncio-detalhes">
 
             <?php foreach($propostas as $dados) { ?>
@@ -42,7 +45,7 @@ $this->title = 'Propostas Recebidas';
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p style="margin-top: 12px; margin-left: 5px"><?= Html::encode($dados[1][0]->nome) ?></p>
+                                        <p style="margin-top: 12px; margin-left: 5px"><b>Título:</b><?= Html::encode($dados[1][0]->nome) ?></p>
                                     </div>
 
                                     <div class="col-md-6">
@@ -81,5 +84,6 @@ $this->title = 'Propostas Recebidas';
 
                 </div>
         <?php } ?>
+        </div>
     </div>
 </div>

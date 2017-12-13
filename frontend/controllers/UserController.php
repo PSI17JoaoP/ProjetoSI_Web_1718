@@ -84,11 +84,45 @@ class UserController extends Controller
 
         $gestorCategorias = new GestorCategorias();
 
-        $categorias = $gestorCategorias->getCategoriasDados($anuncios, 'cat_oferecer');
+        //$categorias = $gestorCategorias->getCategoriasDados($anuncios, 'cat_oferecer');
+        $anunciosAtivos = [];
+        $contactos = [];
 
+        foreach($anuncios as $anuncio)
+        {
+            if ($anuncio->estado == "CONCLUIDO") 
+            {
+                $propostasAnuncio = $anuncio->propostas;
+
+                if(!empty($propostasAnuncio)) 
+                {
+                    foreach ($propostasAnuncio as $key => $value)
+                    {
+                        if ($value->estado == "ACEITE")
+                        {
+                            $propostaAceite = $value;
+                        }
+                    }
+                }
+
+                $contacto = [
+                    "titulo" => $anuncio->titulo, 
+                    "idUser" => Yii::$app->user->getId(),
+                    "idUserProposta" => $propostaAceite->id_user,
+                ];
+
+                \array_push($contactos, $contacto);
+            }else 
+            {
+                \array_push($anunciosAtivos, $anuncio);
+            }
+        }
+
+        $categorias = $gestorCategorias->getCategoriasDados($anunciosAtivos, 'cat_oferecer');
 
         return $this->render('anuncios', [
             'anuncios' => $categorias,
+            'anunciosConcluidos' => $contactos,            
             'tipo' => $tipo, 
             'titulo' => $titulo, 
             'mensagem' => $mensagem
@@ -117,6 +151,7 @@ class UserController extends Controller
                     }
                 }
             }
+            
         }
 
         $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');
