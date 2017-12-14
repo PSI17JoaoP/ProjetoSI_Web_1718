@@ -40,16 +40,14 @@ class UserController extends Controller
         ];
     }
 
-    public function actionConta()
+    public function actionConta($tipo = null, $titulo = null, $mensagem = null)
     {
         $this->layout = "main-user";
-        
-        //$model = new Cliente();
-        //$model = Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]);
+
         
         $cliente = Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]);
-        $model = new ClienteForm();
 
+        $model = new ClienteForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->atualizar($cliente)) 
         {
@@ -63,16 +61,20 @@ class UserController extends Controller
                 'mensagem' => "As suas informações de conta foram atualizadas com sucesso"
             ]);
         }else {
-            $model->carregar($cliente);
 
+            if ($cliente !== null) 
+            {
+                $model->carregar($cliente);
+            }
+            
             return $this->render('conta', 
             [
                 'model' => $model, 
                 'regioes' => Tools::listaRegioes(),
                 'categorias' => Tools::listaCategorias(),
-                'tipo' => null, 
-                'titulo' => null, 
-                'mensagem' => null
+                'tipo' => $tipo, 
+                'titulo' => $titulo, 
+                'mensagem' => $mensagem
             ]);
         }
         
@@ -208,6 +210,15 @@ class UserController extends Controller
 
         $model = Cliente::findOne(['id_user' => Yii::$app->user->getId()]);
 
+        if ($model === null)
+        {
+           return $this->redirect(['conta', 
+                'tipo' => "warning", 
+                'titulo' => "Aviso!", 
+                'mensagem' => "Complete o seu perfil de cliente antes de gerar um pin"
+           ]);
+        }
+
         if(Yii::$app->request->get('id') !== null) {
 
             $pinGenerator = new PINGenerator();
@@ -230,7 +241,7 @@ class UserController extends Controller
         return $this->render('pin', ['model' => $model]);
     }
 
-    public function actionCliente($model, $viewPath)
+    public function actionCliente($model = null, $viewPath)
     {
         $modalModel = new ClienteForm();
 
