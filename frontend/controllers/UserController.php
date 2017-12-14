@@ -83,6 +83,9 @@ class UserController extends Controller
         $user1 = Cliente::findOne(['id_user' => $idUser]);
         $user2 = Cliente::findOne(['id_user' => $idUserProposta]);
 
+        $regioes = Tools::listaRegioes();
+        $user2->regiao = $regioes[$user2->regiao];
+
         Yii::$app->response->format = Response::FORMAT_JSON;
         return [$user1, $user2];
     }
