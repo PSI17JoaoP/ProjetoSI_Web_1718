@@ -83,6 +83,11 @@ $(function(){
                 content += "Meu nome: "+data[0].nome_completo;
                 content += "<br>";
                 content += "Nome do autor da proposta: "+data[1].nome_completo;
+                content += "<br>";
+                content += "Telefone: "+data[1].telefone;
+                content += "<br>";
+                content += "Região: "+data[1].regiao;
+
 
                 $('.modal_detalhes').append(content);
 
