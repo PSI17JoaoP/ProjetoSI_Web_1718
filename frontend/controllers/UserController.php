@@ -13,6 +13,7 @@ use common\models\Proposta;
 use common\models\Tools;
 use frontend\models\ClienteForm;
 use frontend\models\GestorCategorias;
+use yii\web\UploadedFile;
 
 class UserController extends Controller
 {
@@ -49,17 +50,54 @@ class UserController extends Controller
 
         $model = new ClienteForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->atualizar($cliente)) 
+
+        /*if(Yii::$app->request->isPost)
         {
-            return $this->render('conta', 
-            [
-                'model' => $model, 
-                'regioes' => Tools::listaRegioes(),
-                'categorias' => Tools::listaCategorias(),
-                'tipo' => "success", 
-                'titulo' => "Sucesso!", 
-                'mensagem' => "As suas informações de conta foram atualizadas com sucesso"
-            ]);
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            
+        }*/
+
+        if ($model->load(Yii::$app->request->post())) 
+        {
+            //$model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            
+            /*if($model->upload())
+            {*/
+                if($model->atualizar($cliente))
+                {
+                    return $this->render('conta', 
+                    [
+                        'model' => $model, 
+                        'regioes' => Tools::listaRegioes(),
+                        'categorias' => Tools::listaCategorias(),
+                        'tipo' => "success", 
+                        'titulo' => "Sucesso!", 
+                        'mensagem' => "As suas informações de conta foram atualizadas com sucesso"
+                    ]);
+                }else
+                {
+                    return $this->render('conta', 
+                    [
+                        'model' => $model, 
+                        'regioes' => Tools::listaRegioes(),
+                        'categorias' => Tools::listaCategorias(),
+                        'tipo' => "warning", 
+                        'titulo' => "Erro!", 
+                        'mensagem' => "Não foi possível atualizar o seu perfil de cliente"
+                    ]);
+                }
+            /*}else
+            {
+                return $this->render('conta', 
+                [
+                    'model' => $model, 
+                    'regioes' => Tools::listaRegioes(),
+                    'categorias' => Tools::listaCategorias(),
+                    'tipo' => "warning", 
+                    'titulo' => "Erro!", 
+                    'mensagem' => "Não foi possível submeter a sua foto de perfil"
+                ]);
+            }*/
         }else {
 
             if ($cliente !== null) 

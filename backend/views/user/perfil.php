@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 
-$this->title = 'Gestão de Utilizadores';
+$this->title = 'Gestão de Perfil';
 dmstr\web\AdminLteAsset::register($this);
 ?>
 <div class="site-index">
