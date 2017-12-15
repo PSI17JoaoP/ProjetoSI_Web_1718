@@ -105,9 +105,10 @@ class ClienteForm extends Model
         //static
         $this->dataNasc = $cliente->data_nasc;
         
-        if ($this->imageFile != null) {
-            $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
+        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
 
+        if ($this->imageFile != null) {
+            
             $uploadStatus = $this->upload($cliente->id_user, $cliente->path_imagem);
             if(!$uploadStatus)
             {

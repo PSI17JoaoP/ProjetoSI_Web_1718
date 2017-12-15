@@ -33,7 +33,6 @@ use yii\bootstrap\ActiveForm;
                 <div class="col-md-4">
                     <img src="../../../common/images/<?= $model->pathImage?>" width="200px" height="200px">
                     <?= $form->field($model, 'imageFile')->fileInput(['class'=>'sr-only'])->label(null,['class'=>'btn btn-success btn-sm']) ?>
-                    <!---->
                 </div>
 
                 <div class="col-md-8">
