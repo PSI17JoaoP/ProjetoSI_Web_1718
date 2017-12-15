@@ -105,12 +105,16 @@ class ClienteForm extends Model
         //static
         $this->dataNasc = $cliente->data_nasc;
         
-        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
+        if ($this->imageFile != null) {
+            $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
 
-        $uploadStatus = $this->upload($cliente->id_user, $cliente->path_imagem);
-        if(!$uploadStatus){
-            return null;
+            $uploadStatus = $this->upload($cliente->id_user, $cliente->path_imagem);
+            if(!$uploadStatus)
+            {
+                return null;
+            }
         }
+        
 
         if ($this->validate()) {
 
@@ -119,9 +123,12 @@ class ClienteForm extends Model
             $cliente->telefone = $this->telefone;
             $cliente->regiao = $this->regiao;
             
-            $cliente->path_imagem = $cliente->id_user . '.' . $this->imageFile->extension;
+            if ($this->imageFile != null)
+            {
+                $cliente->path_imagem = $cliente->id_user . '.' . $this->imageFile->extension;
+            }
             $this->pathImage = $cliente->path_imagem;
-            
+
             $cliente->save(false);
 
             CategoriaPreferida::deleteAll("id_user = $cliente->id_user");

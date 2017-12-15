@@ -51,42 +51,21 @@ class UserController extends Controller
         $model = new ClienteForm();
 
 
-        /*if(Yii::$app->request->isPost)
-        {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            
-        }*/
-
         if ($model->load(Yii::$app->request->post())) 
         {
-            //$model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            
-            /*if($model->upload())
-            {*/
-                if($model->atualizar($cliente))
-                {
-                    return $this->render('conta', 
-                    [
-                        'model' => $model, 
-                        'regioes' => Tools::listaRegioes(),
-                        'categorias' => Tools::listaCategorias(),
-                        'tipo' => "success", 
-                        'titulo' => "Sucesso!", 
-                        'mensagem' => "As suas informações de conta foram atualizadas com sucesso"
-                    ]);
-                }else
-                {
-                    return $this->render('conta', 
-                    [
-                        'model' => $model, 
-                        'regioes' => Tools::listaRegioes(),
-                        'categorias' => Tools::listaCategorias(),
-                        'tipo' => "warning", 
-                        'titulo' => "Erro!", 
-                        'mensagem' => "Não foi possível atualizar o seu perfil de cliente"
-                    ]);
-                }
-            /*}else
+
+            if($model->atualizar($cliente))
+            {
+                return $this->render('conta', 
+                [
+                    'model' => $model, 
+                    'regioes' => Tools::listaRegioes(),
+                    'categorias' => Tools::listaCategorias(),
+                    'tipo' => "success", 
+                    'titulo' => "Sucesso!", 
+                    'mensagem' => "As suas informações de conta foram atualizadas com sucesso"
+                ]);
+            }else
             {
                 return $this->render('conta', 
                 [
@@ -95,9 +74,9 @@ class UserController extends Controller
                     'categorias' => Tools::listaCategorias(),
                     'tipo' => "warning", 
                     'titulo' => "Erro!", 
-                    'mensagem' => "Não foi possível submeter a sua foto de perfil"
+                    'mensagem' => "Não foi possível atualizar o seu perfil de cliente"
                 ]);
-            }*/
+            }
         }else {
 
             if ($cliente !== null) 
