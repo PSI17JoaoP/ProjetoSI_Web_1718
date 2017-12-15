@@ -27,12 +27,12 @@ use yii\bootstrap\ActiveForm;
 
         <div class="panel-body">
 
-            <?php $form = ActiveForm::begin(['id' => 'conta-form']); ?>
+            <?php $form = ActiveForm::begin(['id' => 'conta-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
             <div class="row">
                 <div class="col-md-4">
-                    <img src="" width="100%" height="75%">
-                    <button class="btn btn-default btn-sm">Escolher Imagem</button>
+                    <img src="../../../common/images/<?= $model->pathImage?>" width="200px" height="200px">
+                    <?= $form->field($model, 'imageFile')->fileInput(['class'=>'sr-only'])->label(null,['class'=>'btn btn-success btn-sm']) ?>
                 </div>
 
                 <div class="col-md-8">
