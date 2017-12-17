@@ -20,20 +20,21 @@ dmstr\web\AdminLteAsset::register($this);
                         <table id="tableListaUsers" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Nome</th>
+                                    <th>Nome do cliente</th>
                                     <th>Email</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- TEMP! -->
-                                <tr class="rowListaUsers" data-info="1">
-                                    <td>Nome1</td>
-                                    <td>Email1</td>
-                                </tr>
-                                <tr class="rowListaUsers" data-info="2">
-                                    <td>Nome2</td>
-                                    <td>Email2</td>
-                                </tr>
+                                <?php
+                                    foreach ($clientes as $key => $cliente) 
+                                    { 
+                                        echo "
+                                        <tr class='rowListaUsers' data-url='". Url::toRoute(['user/detalhes']) ."' data-id='". $cliente['id'] ."'>
+                                            <td>". $cliente['nome_completo'] ."</td>
+                                            <td>". $cliente['email'] ."</td>
+                                        </tr>";
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </div>
