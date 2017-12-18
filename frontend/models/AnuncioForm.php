@@ -64,9 +64,16 @@ class AnuncioForm extends Model
 
     public function upload($idAnuncio)
     {
-        if ($this->validate()) { 
-            foreach ($this->imageFiles as $key => $file) {
-                $file->saveAs('uploads/' . $idAnuncio .'_'. $key . '.' . $file->extension);
+        if ($this->validate()) 
+        { 
+            foreach ($this->imageFiles as $key => $file) 
+            {
+                $imgAnuncio = new ImagensAnuncio();
+                $imgAnuncio->anuncio_id = $idAnuncio;
+                $imgAnuncio->path_relativo = $idAnuncio .'_'. $key . '.' . $file->extension;
+                $imgAnuncio->save();
+
+                $file->saveAs('../../common/images/' . $idAnuncio .'_'. $key . '.' . $file->extension);
             }
             return true;
         } else {
@@ -76,8 +83,6 @@ class AnuncioForm extends Model
 
     public function guardar($idUser, $modeloOferta, $modeloProcura)
     {
-        $this->imageFiles = UploadedFile::getInstances($this, 'imageFiles');
-
 
         if ($this->validate()) 
         {
@@ -95,17 +100,23 @@ class AnuncioForm extends Model
             }
 
             $anuncio->data_criacao = date("Y-m-d h:i:s");
+            
+            $anuncio->save();
 
+
+            $this->imageFiles = UploadedFile::getInstances($this, 'imageFiles');
+            
             $uploadStatus = $this->upload($anuncio->id);
+            
             if(!$uploadStatus)
             {
                 return null;
             }
 
-            $anuncio->save();
-
             return $anuncio;
         }
+
+        
 
         return null;
     }

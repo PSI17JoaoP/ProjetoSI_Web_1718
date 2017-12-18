@@ -15,7 +15,7 @@ use yii\helpers\Url;
     <div class="col-md-8">
         <div class="panel panel-default">
 
-            <?php $form = ActiveForm::begin(['id' => 'anuncio-form']); ?>
+            <?php $form = ActiveForm::begin(['id' => 'anuncio-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
             <div class="panel-heading">
                 <h3><?= $form->field($model, 'titulo')->textInput(['class' => 'form-control']) ?></h3>
@@ -255,6 +255,11 @@ use yii\helpers\Url;
                                                  ->textArea(['rows' => '4', 'style' => 'resize: none']) ?>
                                          </h4>
                                         <span class="help-block">Adicione aqui comentários adicionais referentes ao anuncio.</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <?= $form->field($model, 'imageFiles')->fileInput(['multiple' => true]) ?>
                                     </div>
                                 </div>
                             </div>
