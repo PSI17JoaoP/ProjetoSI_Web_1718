@@ -103,7 +103,7 @@ class AnuncioController extends Controller
     public function actionSearch($titulo = null, $categoria = null, $regiao = null)
     {
         $anuncios = (new Query())
-            ->select('anuncios.id, titulo, anuncios.id_user, cat_oferecer, cat_receber')
+            ->select('anuncios.id, anuncios.titulo, anuncios.id_user, cat_oferecer, cat_receber')
             ->from(Anuncio::tableName())
             ->join('JOIN', ImagensAnuncio::tableName(), Anuncio::tableName().'.id = '.ImagensAnuncio::tableName().'.anuncio_id')
             ->addSelect('path_relativo');
