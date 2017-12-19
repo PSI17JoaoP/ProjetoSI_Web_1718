@@ -43,7 +43,15 @@ $this->title = 'Os meus anúncios';
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                    <div class="col-md-2">
+                                            <?php
+                                            if($dados['path'] != null)
+                                            {
+                                                echo "<img id='pesquisa_row_imagem' src='../../../common/images/". $dados['path'] ."' alt='' width = '75px' height = '75px'>";
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="col-md-2">
                                             <p style="margin-top: 12px; margin-left: 5px"><b>Título:</b><?= Html::encode($dados["titulo"]) ?></p>
                                         </div>
                                         <div class="col-md-4">
@@ -84,7 +92,15 @@ $this->title = 'Os meus anúncios';
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-2">
+                                            <?php
+                                            if($dados[0]->imagensAnuncios != null)
+                                            {
+                                                echo "<img id='pesquisa_row_imagem' src='../../../common/images/". $dados[0]->imagensAnuncios[0]->path_relativo ."' alt='' width = '75px' height = '75px'>";
+                                            }
+                                            ?>
+                                        </div>
+                                    <div class="col-md-6">
                                         <p style="margin-top: 8px; margin-left: 5px"><b>Título:</b><?= Html::encode($dados[0]->titulo) ?></p>
                                     </div>
 

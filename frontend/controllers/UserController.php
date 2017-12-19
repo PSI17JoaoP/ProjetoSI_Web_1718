@@ -144,7 +144,12 @@ class UserController extends Controller
                     "dataConclusao" => $anuncio->data_conclusao,
                     "idUser" => Yii::$app->user->getId(),
                     "idUserProposta" => $propostaAceite->id_user,
+                    "path" => "",
                 ];
+
+                if ($anuncio->imagensAnuncios != null) {
+                    $contacto["path"] = $anuncio->imagensAnuncios[0]->path_relativo;
+                }
 
                 \array_push($contactos, $contacto);
             }else 
