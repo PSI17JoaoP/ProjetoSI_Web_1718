@@ -62,7 +62,10 @@ $this->title = 'Pesquisa de Anúncios';
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-2">
+                                    <img id="pesquisa_row_imagem" src="../../../common/images/<?= $anuncio['path_relativo']?>" alt="" width = '75px' height = '75px'>
+                                </div >
+                                <div class="col-md-6">
                                     <p style="margin-top: 8px; margin-left: 5px" id="pesquisa_row_titulo"><b>Título:</b> <?= Html::encode($anuncio['titulo']) ?></p>
                                 </div>
 

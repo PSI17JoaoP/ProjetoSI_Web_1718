@@ -23,6 +23,7 @@ use common\models\CategoriaJogos;
 use common\models\CategoriaLivros;
 use common\models\CategoriaRoupa;
 use common\models\CategoriaSmartphones;
+use common\models\ImagensAnuncio;
 
 
 /**
@@ -90,12 +91,23 @@ class SiteController extends Controller
         if(!Yii::$app->user->isGuest) {
 
             //RECENTES
-            $anunciosRecentes = Anuncio::find()
+            /*$anunciosRecentes = Anuncio::find()
             ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
             ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"])
             ->orderBy('id DESC')
             ->limit(5)
-            ->all();
+            ->all();*/
+
+            $anunciosRecentes = (new Query())
+                ->select(['anuncios.id', 'cat_oferecer', 'cat_receber'])
+                ->from(Anuncio::tableName())
+                ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
+                ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"])
+                ->join('JOIN', ImagensAnuncio::tableName(), Anuncio::tableName().'.id = '.ImagensAnuncio::tableName().'.anuncio_id')
+                ->addSelect('path_relativo')
+                ->orderBy(Anuncio::tableName().'.id DESC')
+                ->limit(5)
+                ->all();
 
 
             //SUGERIDOS
@@ -108,9 +120,12 @@ class SiteController extends Controller
 
 
             $anunciosNotUser = (new Query())
+                ->select(['anuncios.id', 'cat_oferecer', 'cat_receber'])
                 ->from(Anuncio::tableName())
                 ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
-                ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"]);
+                ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"])
+                ->join('JOIN', ImagensAnuncio::tableName(), Anuncio::tableName().'.id = '.ImagensAnuncio::tableName().'.anuncio_id')
+                ->addSelect(ImagensAnuncio::tableName().'.path_relativo');
                 
             $anunciosDestaques = (new Query())
                 ->from(['table' => $anunciosNotUser]);
@@ -153,9 +168,8 @@ class SiteController extends Controller
                 $anunciosDestaques = $anunciosDestaques->orWhere(['IN', 'cat_oferecer', $goodList]);
             }
 
-            
         
-            $anunciosDestaques = $anunciosDestaques->orderBy('id DESC')->distinct()->limit(5)->all();
+            $anunciosDestaques = $anunciosDestaques->orderBy('table.id DESC')->distinct()->limit(5)->all();
 
         }
 

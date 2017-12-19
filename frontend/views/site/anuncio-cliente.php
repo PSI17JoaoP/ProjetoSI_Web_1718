@@ -11,7 +11,12 @@ use yii\materialicons\MD;
 <div class="panel panel-primary">
     <div class="panel-body">
         <div class="col-md-3">
-            <?= Html::img('', ['width' => '75px', 'height' => '75px']) ?>
+            <?php
+            if( $anuncio['path_relativo'] != null)
+            {
+               echo Html::img('../../common/images/'.$anuncio['path_relativo'], ['width' => '75px', 'height' => '75px']);
+            }
+            ?>
         </div>
 
         <div class="col-md-2" style="text-align: center">
