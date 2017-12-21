@@ -2,8 +2,8 @@
 
 namespace frontend\controllers;
 
-use frontend\models\PINGenerator;
 use Yii;
+use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\AccessControl;
@@ -224,11 +224,9 @@ class UserController extends Controller
 
         if(Yii::$app->request->get('id') !== null) {
 
-            $pinGenerator = new PINGenerator();
-
             do
             {
-                $keyPIN = $pinGenerator->generate();
+                $keyPIN = strtoupper(Yii::$app->getSecurity()->generateRandomString(5));
             }
             while (Cliente::findOne(['pin' => $keyPIN]));
 
