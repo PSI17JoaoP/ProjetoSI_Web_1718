@@ -6,6 +6,8 @@ use common\models\Cliente;
 use common\models\User;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
+use yii\filters\auth\HttpBasicAuth;
+
 
 class ClientesController extends ActiveController
 {

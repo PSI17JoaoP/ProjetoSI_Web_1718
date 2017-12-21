@@ -5,6 +5,8 @@ namespace api\controllers;
 use yii\rest\ActiveController;
 use common\models\Cliente;
 use common\models\User;
+use yii\filters\auth\HttpBasicAuth;
+
 
 class PropostasController extends ActiveController
 {
