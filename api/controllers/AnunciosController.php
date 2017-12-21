@@ -10,13 +10,40 @@ use common\models\CategoriaJogos;
 use common\models\CategoriaLivros;
 use common\models\CategoriaSmartphones;
 use common\models\Cliente;
+use common\models\User;
 use frontend\models\GestorCategorias;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
+use yii\filters\auth\HttpBasicAuth;
 
 class AnunciosController extends ActiveController
 {
     public $modelClass = 'common\models\Anuncio';
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['authenticator'] = [
+            'class' => HttpBasicAuth::className(),
+            'auth' => [$this, 'auth']
+        ];
+
+        return $behaviors;
+    }
+
+    public function auth($pin)
+    {
+    
+        $cliente = User::find()
+                ->join('JOIN', Cliente::tableName(), User::tableName().'.id = '.Cliente::tableName().'.id_user')
+                ->where(['pin' => $pin])
+                ->one();
+
+        return $cliente;
+    }
+
+
 
     public function actionPropostas($id)
     {

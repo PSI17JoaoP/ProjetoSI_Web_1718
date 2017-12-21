@@ -4,6 +4,8 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use common\models\Anuncio;
+use common\models\ImagensAnuncio;
+use yii\web\UploadedFile;
 
 /**
  * Anuncio form
@@ -21,6 +23,11 @@ class AnuncioForm extends Model
     public $mOferta;
     public $mProcura;
 
+    /**
+     * @var UploadedFile[]
+     */
+    public $imageFiles;
+
     //Constantes de Estado do Anúncio
     //const ESTADO_ATIVO = 'ATIVO';
     //const ESTADO_FECHADO = 'FECHADO';
@@ -36,6 +43,7 @@ class AnuncioForm extends Model
             [['quantProcura', 'quantOferta'], 'integer'],
             ['titulo', 'string', 'min' => 2, 'max' => 25],
             [['comentarios'], 'string', 'max' => 256],
+            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'on' => 'upload', 'maxFiles' => 3],
         ];
     }
 
@@ -50,11 +58,32 @@ class AnuncioForm extends Model
             'catProcura' => 'Categoria',
             'quantOferta' => 'Quantidade',
             'quantProcura' => 'Quantidade',
+            'imageFiles' => 'Imagens'
         ];
+    }
+
+    public function upload($idAnuncio)
+    {
+        if ($this->validate()) 
+        { 
+            foreach ($this->imageFiles as $key => $file) 
+            {
+                $imgAnuncio = new ImagensAnuncio();
+                $imgAnuncio->anuncio_id = $idAnuncio;
+                $imgAnuncio->path_relativo = $idAnuncio .'_'. $key . '.' . $file->extension;
+                $imgAnuncio->save();
+
+                $file->saveAs('../../common/images/' . $idAnuncio .'_'. $key . '.' . $file->extension);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function guardar($idUser, $modeloOferta, $modeloProcura)
     {
+
         if ($this->validate()) 
         {
             $anuncio = new Anuncio();
@@ -71,10 +100,23 @@ class AnuncioForm extends Model
             }
 
             $anuncio->data_criacao = date("Y-m-d h:i:s");
+            
             $anuncio->save();
+
+
+            $this->imageFiles = UploadedFile::getInstances($this, 'imageFiles');
+            
+            $uploadStatus = $this->upload($anuncio->id);
+            
+            if(!$uploadStatus)
+            {
+                return null;
+            }
 
             return $anuncio;
         }
+
+        
 
         return null;
     }

@@ -26,6 +26,7 @@ use common\models\CategoriaRoupa;
 use common\models\CategoriaSmartphones;
 use common\models\Categoria;
 use yii\base\Model;
+use common\models\ImagensAnuncio;
 
 /**
  * AnuncioController implements the CRUD actions for Anuncio model.
@@ -102,7 +103,10 @@ class AnuncioController extends Controller
     public function actionSearch($titulo = null, $categoria = null, $regiao = null)
     {
         $anuncios = (new Query())
-            ->from(Anuncio::tableName());
+            ->select('anuncios.id, anuncios.titulo, anuncios.id_user, cat_oferecer, cat_receber')
+            ->from(Anuncio::tableName())
+            ->join('JOIN', ImagensAnuncio::tableName(), Anuncio::tableName().'.id = '.ImagensAnuncio::tableName().'.anuncio_id')
+            ->addSelect('path_relativo');
 
         //Filtrar categoria
         switch ($categoria)

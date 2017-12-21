@@ -3,8 +3,10 @@
 namespace frontend\models;
 
 use common\models\Proposta;
+use common\models\ImagensProposta;
 use Yii;
 use yii\base\Model;
+use yii\web\UploadedFile;
 
 class PropostaForm extends Model
 {
@@ -14,6 +16,11 @@ class PropostaForm extends Model
 
     //Modelo da categoria do bem a oferecer
     public $modelProposto;
+
+    /**
+     * @var UploadedFile[]
+     */
+    public $imageFiles;
 
     //Constantes de Estado da Proposta
     //const ESTADO_ACEITE = 'ACEITE';
@@ -28,6 +35,7 @@ class PropostaForm extends Model
         return [
             [['catProposto', 'quantProposto', 'anuncioID'], 'required'],
             [['quantProposto', 'anuncioID'], 'integer'],
+            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'on' => 'upload', 'maxFiles' => 3],
         ];
     }
 
@@ -39,7 +47,27 @@ class PropostaForm extends Model
         return [
             'catProposto' => 'Categoria',
             'quantProposto' => 'Quantidade',
+            'imageFiles' => 'Imagens'
         ];
+    }
+
+    public function upload($idAnuncio, $idProposta)
+    {
+        if ($this->validate()) 
+        { 
+            foreach ($this->imageFiles as $key => $file) 
+            {
+                $imgAnuncio = new ImagensProposta();
+                $imgAnuncio->proposta_id = $idProposta;
+                $imgAnuncio->path_relativo = $idProposta .'_'. $key . '.' . $file->extension;
+                $imgAnuncio->save();
+
+                $file->saveAs('../../common/images/' . $idAnuncio .'_' . $idProposta .'_'. $key . '.' . $file->extension);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function enviar($categoriaPropostoID)
@@ -56,6 +84,16 @@ class PropostaForm extends Model
             $proposta->data_proposta = date("Y-m-d h:i:s");
 
             $proposta->save();
+
+
+            $this->imageFiles = UploadedFile::getInstances($this, 'imageFiles');
+            
+            $uploadStatus = $this->upload($this->anuncioID, $proposta->id);
+            
+            if(!$uploadStatus)
+            {
+                return null;
+            }
 
             return $proposta;
         }

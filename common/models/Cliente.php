@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property integer $telefone
  * @property string $regiao
  * @property string $pin
+ * @property string $path_imagem 
  *
  * @property Anuncio[] $anuncios
  * @property User $idUser
@@ -41,6 +42,7 @@ class Cliente extends ActiveRecord
             [['nome_completo'], 'string', 'max' => 50],
             [['pin'], 'string', 'max' => 15],
             [['regiao'], 'string', 'max' => 10],
+            [['path_imagem'], 'string', 'max' => 255],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
@@ -55,6 +57,8 @@ class Cliente extends ActiveRecord
             'data_nasc' => 'Data de Nascimento',
             'telefone' => 'Telefone',
             'regiao' => 'Região',
+            'pin' => 'Pin',
+            'path_imagem' => 'Imagem',
         ];
     }
 

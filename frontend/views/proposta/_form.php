@@ -17,7 +17,7 @@ use yii\helpers\Url;
     <div class="col-md-8">
         <div class="panel panel-default">
 
-            <?php $form = ActiveForm::begin(['id' => 'proposta-form']); ?>
+            <?php $form = ActiveForm::begin(['id' => 'proposta-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
             <?= $form->field($model, 'anuncioID')->hiddenInput(['value' => $anuncio])->label(false) ?>
 
@@ -124,6 +124,9 @@ use yii\helpers\Url;
 
                                         <?php Pjax::end() ?>
 
+                                    </div>
+                                    <div class="row">
+                                        <?= $form->field($model, 'imageFiles')->fileInput(['multiple' => true]) ?>
                                     </div>
                                 </div>
                             </div>
