@@ -51,6 +51,7 @@ return [
                     'controller' => 'anuncios',
                     'extraPatterns' => [
                         'GET propostas/{username}' => 'todas-propostas',
+                        'GET sugeridos/{username}' => 'sugeridos',
                         'GET {id}/propostas' => 'propostas',
                         'GET {id}/categorias' => 'categorias',
                         'GET titulo/{titulo}' => 'pesquisa',

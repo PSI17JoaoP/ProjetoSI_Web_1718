@@ -91,12 +91,6 @@ class SiteController extends Controller
         if(!Yii::$app->user->isGuest) {
 
             //RECENTES
-            /*$anunciosRecentes = Anuncio::find()
-            ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
-            ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"])
-            ->orderBy('id DESC')
-            ->limit(5)
-            ->all();*/
 
             $anunciosRecentes = (new Query())
                 ->select(['anuncios.id', 'cat_oferecer', 'cat_receber'])

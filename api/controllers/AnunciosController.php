@@ -9,13 +9,17 @@ use common\models\CategoriaEletronica;
 use common\models\CategoriaJogos;
 use common\models\CategoriaLivros;
 use common\models\CategoriaSmartphones;
+use common\models\CategoriaRoupa;
 use common\models\Cliente;
 use common\models\User;
 use common\models\Proposta;
+use common\models\CategoriaPreferida;
+use common\models\ImagensAnuncio;
 use frontend\models\GestorCategorias;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
 use yii\filters\auth\HttpBasicAuth;
+use yii\db\Query;
 
 class AnunciosController extends ActiveController
 {
@@ -161,4 +165,76 @@ class AnunciosController extends ActiveController
         //return ['id' => $id, 'Categorias' => null];
         return new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
     }
+
+    public function actionSugeridos($username)
+    {
+        $user = User::findOne(['username' => $username]);
+
+        if($user)
+        {
+            $catPreferidas = CategoriaPreferida::find()
+                ->select('categoria')
+                ->where('id_user = :id_user', [':id_user' => $user->id])
+                ->asArray()
+                ->all();
+
+
+            $anunciosNotUser = (new Query())
+                ->select(['anuncios.*'])
+                ->from(Anuncio::tableName())
+                ->where('id_user != :id_user', [':id_user' => $user->id])
+                ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"])
+                ->join('JOIN', ImagensAnuncio::tableName(), Anuncio::tableName().'.id = '.ImagensAnuncio::tableName().'.anuncio_id')
+                ->addSelect(ImagensAnuncio::tableName().'.path_relativo');
+                
+            $anunciosDestaques = (new Query())
+                ->from(['table' => $anunciosNotUser]);
+
+            foreach ($catPreferidas as $key => $value) 
+            {
+                $stupidList = (new Query());
+                $goodList = array();
+
+                switch ($value['categoria']) 
+                {
+                    case 'brinquedos':
+                        $stupidList = $stupidList->select('id_categoria')->from(CategoriaBrinquedos::tableName())->all();
+                        break;
+                    case 'jogos':
+                        $stupidList = $stupidList->select('id_brinquedo')->from(CategoriaJogos::tableName())->all();
+                        break;
+                    case 'eletronica':
+                        $stupidList = $stupidList->select('id_categoria')->from(CategoriaEletronica::tableName())->all();
+                        break;
+                    case 'computadores':
+                        $stupidList = $stupidList->select('id_eletronica')->from(CategoriaComputadores::tableName())->all();                    
+                        break;
+                    case 'smartphones':
+                        $stupidList = $stupidList->select('id_eletronica')->from(CategoriaSmartphones::tableName())->all();                    
+                        break;
+                    case 'livros':
+                        $stupidList = $stupidList->select('id_categoria')->from(CategoriaLivros::tableName())->all();
+                        break;
+                    case 'roupa':
+                        $stupidList = $stupidList->select('id_categoria')->from(CategoriaRoupa::tableName())->all();
+                }
+
+                
+                foreach ($stupidList as $key => $value) {
+                    \array_push($goodList,  $value[\key($value)]);
+                    
+                }
+
+                $anunciosDestaques = $anunciosDestaques->orWhere(['IN', 'cat_oferecer', $goodList]);
+            }
+
+        
+            $anunciosDestaques = $anunciosDestaques->orderBy('table.id DESC')->distinct()->limit(5)->all();
+
+            return $anunciosDestaques;
+        }
+
+        return new NotFoundHttpException('Utilizador não encontrado.', 404);
+    }
+
 }
