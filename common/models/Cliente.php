@@ -40,7 +40,7 @@ class Cliente extends ActiveRecord
             [['telefone'], 'integer'],
             [['data_nasc'], 'safe'],
             [['nome_completo'], 'string', 'max' => 50],
-            [['pin'], 'string', 'max' => 15],
+            [['pin'], 'string', 'max' => 5],
             [['regiao'], 'string', 'max' => 10],
             [['path_imagem'], 'string', 'max' => 255],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
