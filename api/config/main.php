@@ -50,6 +50,7 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'anuncios',
                     'extraPatterns' => [
+                        'GET propostas/{username}' => 'todas-propostas',
                         'GET {id}/propostas' => 'propostas',
                         'GET {id}/categorias' => 'categorias',
                         'GET titulo/{titulo}' => 'pesquisa',
@@ -62,6 +63,7 @@ return [
                         '{titulo}' => '<titulo:\\w+>',
                         '{regiao}' => '<regiao:\\w+>',
                         '{categoria}' => '<categoria:\\w+>',
+                        '{username}' => '<username:\\w+>',
                     ]
                 ],
                 [

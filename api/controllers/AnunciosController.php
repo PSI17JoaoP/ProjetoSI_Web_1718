@@ -11,6 +11,7 @@ use common\models\CategoriaLivros;
 use common\models\CategoriaSmartphones;
 use common\models\Cliente;
 use common\models\User;
+use common\models\Proposta;
 use frontend\models\GestorCategorias;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
@@ -54,6 +55,24 @@ class AnunciosController extends ActiveController
 
         //return ['id' => $id, 'Propostas' => null];
         return new NotFoundHttpException('Não foi encontrado um anuncio com o ID desejado.', 404);
+    }
+
+    public function actionTodasPropostas($username)
+    {
+        $user = User::findOne(['username' => $username]);
+
+        if($user)
+        {
+            $propostas = Proposta::find()
+                    ->join('JOIN', Anuncio::tableName(), Proposta::tableName().'.id_anuncio = '.Anuncio::tableName().'.id')
+                    ->where('anuncios.id_user = :user', [':user' => $user->id])
+                    ->andWhere('anuncios.estado = :estado', [':estado' => 'ATIVO'])
+                    ->all();
+
+            return ['Propostas' => $propostas];
+        }
+
+        return new NotFoundHttpException('Não foi encontrado o utilizador', 404);
     }
 
     public function actionPesquisa($titulo = null, $regiao = null, $categoria = null)
