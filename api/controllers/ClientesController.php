@@ -51,6 +51,17 @@ class ClientesController extends ActiveController
 
     public function actionPreferidas($id)
     {
+        if($user = User::findOne(['id' => $id]))
+        {
+            $preferidas = [];
 
+            foreach ($user->categoriasPreferidas as $key => $value) {
+                \array_push($preferidas, $value->categoria);
+            }
+
+            return ['ID_User' => $id, 'CategoriasPreferidas' => $preferidas];
+        }
+
+        return new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);
     }
 }
