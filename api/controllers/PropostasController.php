@@ -2,10 +2,12 @@
 
 namespace api\controllers;
 
-use yii\rest\ActiveController;
-use common\models\Cliente;
 use common\models\User;
+use common\models\Cliente;
+use common\models\Proposta;
+use yii\rest\ActiveController;
 use yii\filters\auth\HttpBasicAuth;
+use frontend\models\GestorCategorias;
 
 
 class PropostasController extends ActiveController
@@ -35,8 +37,21 @@ class PropostasController extends ActiveController
         return $cliente;
     }
 
-    public function actionCategorias()
+    public function actionCategorias($id)
     {
+        $gestor = new GestorCategorias();
+
+        if($proposta = Proposta::findOne(['id' => $id]))
+        {
+            if($categorias = $gestor->getCategorias($proposta, 'cat_proposto'))
+            {
+                $categoriaMae = array_shift($categorias);
+
+                return ['id' => $id, 'Categorias' => ['Base' => $categoriaMae, 'Filhas' => $categorias]];
+            }
+        }
+
+        return new NotFoundHttpException('Não foi encontradas categorias da proposta desejada.', 404);
 
     }
 }
