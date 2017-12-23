@@ -71,7 +71,7 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'categorias',
                     'extraPatterns' => [
-
+                        'POST /' => 'criar',
                     ],
                 ],
                 [
