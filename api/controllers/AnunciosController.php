@@ -81,7 +81,7 @@ class AnunciosController extends ActiveController
 
     public function actionPesquisa($titulo = null, $regiao = null, $categoria = null)
     {
-        $params = ['titulo' => $titulo];
+        $params = ['like', 'titulo', $titulo];
 
         if($regiao !== null)
         {
@@ -140,7 +140,8 @@ class AnunciosController extends ActiveController
             $params[] = ['cat_oferecer' => $categoriasIDs];
         }
 
-        if($anuncios = Anuncio::findAll($params)) {
+        //if($anuncios = Anuncio::findAll($params)) {
+        if($anuncios = Anuncio::find()->where($params)->all()) {
             return ['Dados' => ['Titulo' => $titulo, 'Região' => $regiao, 'Categoria' => $categoria], 'Anuncios' => $anuncios];
         }
 

@@ -61,10 +61,10 @@ return [
                     ],
                     'tokens' => [
                         '{id}' => '<id:\\d+>',
-                        '{titulo}' => '<titulo:\\w+>',
+                        '{titulo}' => '<titulo:[\\w\s]+>',
                         '{regiao}' => '<regiao:\\w+>',
                         '{categoria}' => '<categoria:\\w+>',
-                        '{username}' => '<username:\\w+>',
+                        '{username}' => '<username:[\\w\s]+>',
                     ]
                 ],
                 [
