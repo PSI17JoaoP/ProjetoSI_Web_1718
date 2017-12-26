@@ -21,21 +21,29 @@ dmstr\web\AdminLteAsset::register($this);
         <div class="row">
             <div class="box box-info">
                 <div class="box-header">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#" data-toggle="tab">Todos</a></li>
-                        <li><a href="#" data-toggle="tab">Anúncios</a></li>
-                        <li><a href="#" data-toggle="tab">Propostas</a></li>
-                        <li><a href="#" data-toggle="tab">Utilizadores</a></li>
-                    </ul>
+                    <h4>Estatísticas</h4>
                 </div>
                 <!-- /.box-header -->
+                <div class="box-body nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#todos" data-toggle="tab">Todos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#anuncios" data-toggle="tab">Anúncios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#propostas" data-toggle="tab">Propostas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#utilizadores" data-toggle="tab">Utilizadores</a>
+                        </li>
+                    </ul>
 
-                <div class="box-body">
-                    <div class="col-6 col-md-10">
-
+                    <div class="tab-content">
                         <!--TODOS-->
-
-                            <!--<div class="info-box">
+                        <div class="tab-pane fade active" id="todos">
+                            <div class="info-box">
                                 <span class="info-box-icon bg-red"></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Nº Anuncios</span>
@@ -57,125 +65,117 @@ dmstr\web\AdminLteAsset::register($this);
                                     <span class="info-box-text">Nº Utilizadores</span>
                                     <span class="info-box-number">41,410</span>
                                 </div>
-                            </div>-->
-
-                        <!--/TODOS-->
-
-                        <!--ANUNCIOS-->
-
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Column heading</th>
-                                <th>Column heading</th>
-                                <th>Column heading</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <!--/ANUNCIOS-->
-
-                        <!--PROPOSTAS-->
-
-                        <!--<table class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Column heading</th>
-                                <th>Column heading</th>
-                                <th>Column heading</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            </tbody>
-                        </table>-->
-
-                        <!--/PROPOSTAS-->
-
-                        <!--UTILIZADORES-->
-
-                        <!--<div class="panel panel-default">
-                            <div class="panel-body">
-                                User 1
                             </div>
                         </div>
+                            <!--/TODOS-->
 
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                User 2
-                            </div>
+                            <!--ANUNCIOS-->
+                        <div class="tab-pane fade" id="anuncios">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Column heading</th>
+                                        <th>Column heading</th>
+                                        <th>Column heading</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+                            <!--/ANUNCIOS-->
+                        <div class="tab-pane fade" id="propostas">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Column heading</th>
+                                        <th>Column heading</th>
+                                        <th>Column heading</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                        <td>Column content</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                User 3
+                            <!--/PROPOSTAS-->
+                        </div>
+                            <!--UTILIZADORES-->
+                        <div class="tab-pane fade" id="utilizadores">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    User 1
+                                </div>
                             </div>
-                        </div>-->
 
-                        <!--/UTILIZADORES-->
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    User 2
+                                </div>
+                            </div>
 
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    User 3
+                                </div>
+                            </div>
+
+                            <!--/UTILIZADORES-->
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="box box-info">
-                <div class="box-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
+    </div>      
 </div>
