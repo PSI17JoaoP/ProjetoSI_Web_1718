@@ -44,7 +44,7 @@ dmstr\web\AdminLteAsset::register($this);
                         <!--TODOS-->
                         <div class="tab-pane fade active" id="todos">
                             <div class="info-box">
-                                <span class="info-box-icon bg-red"></span>
+                                <span class="info-box-icon bg-red"><i class="fa fa-newspaper-o"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Nº Anuncios</span>
                                     <span class="info-box-number">41,410</span>
@@ -52,7 +52,7 @@ dmstr\web\AdminLteAsset::register($this);
                             </div>
 
                             <div class="info-box">
-                                <span class="info-box-icon bg-green"></span>
+                                <span class="info-box-icon bg-green"><i class="fa fa-list-ul"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Nº Propostas</span>
                                     <span class="info-box-number">41,410</span>
@@ -60,7 +60,7 @@ dmstr\web\AdminLteAsset::register($this);
                             </div>
 
                             <div class="info-box">
-                                <span class="info-box-icon bg-blue"></span>
+                                <span class="info-box-icon bg-blue"><i class="fa fa-users"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Nº Utilizadores</span>
                                     <span class="info-box-number">41,410</span>
