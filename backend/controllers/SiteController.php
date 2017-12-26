@@ -3,8 +3,9 @@ namespace backend\controllers;
 
 use Yii;
 use yii\db\Query;
-use yii\web\Controller;
+use yii\web\Response;
 use common\models\User;
+use yii\web\Controller;
 use common\models\Tools;
 use common\models\Anuncio;
 use common\models\Cliente;
@@ -39,7 +40,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'pie-info'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
@@ -121,7 +122,7 @@ class SiteController extends Controller
                     ->all();
             
             $lista = [];
-            foreach ($subQuery as $key => $value) {
+            foreach ($subQuery as $i => $value) {
                 array_push($lista, \array_values($value)[0]);
             }
 
@@ -171,6 +172,38 @@ class SiteController extends Controller
         $this->layout = 'main';
 
         return $this->render('index', ['stats' => $estatisticas]);
+    }
+
+    public function actionPieInfo()
+    {
+        if (Yii::$app->request->isAjax)
+        {
+            $dados = [];
+            $listaCat = Tools::listaCategorias();
+
+            foreach ($listaCat as $key => $cat) 
+            {
+                $subQuery = (new Query())
+                        ->from('c_'.$key)
+                        ->all();
+                
+                $listaID = [];
+                foreach ($subQuery as $i => $value) {
+                    array_push($listaID, \array_values($value)[0]);
+                }
+
+                $catCount = [$key =>(new Query())
+                        ->from(Anuncio::tableName())
+                        ->where(['in', 'cat_oferecer', $listaID])
+                        ->count()];
+                
+                array_push($dados, $catCount);
+            }
+            
+            
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $dados;
+        }
     }
 
     /**

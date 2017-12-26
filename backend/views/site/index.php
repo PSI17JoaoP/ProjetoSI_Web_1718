@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use common\models\Tools;
 
 /* @var $this yii\web\View */
@@ -11,8 +12,11 @@ dmstr\web\AdminLteAsset::register($this);
 <div class="site-index">
     <div class="col-4 col-md-6">
         <div class="box box-info">
+            <div class="box-body with-border">
+                <h4>Popularidade de categorias</h4>
+            </div>
             <div class="box-body">
-
+                <canvas id="indexPieChart" style="height:250px" data-info="<?= Url::toRoute(['site/pie-info']) ?>"></canvas>
             </div>
             <!-- /.box-body -->
         </div>
@@ -22,7 +26,7 @@ dmstr\web\AdminLteAsset::register($this);
     <div class="col-4 col-md-6">
         <div class="row">
             <div class="box box-info">
-                <div class="box-header">
+                <div class="box-header with-border">
                     <h4>Estatísticas</h4>
                 </div>
                 <!-- /.box-header -->
@@ -44,7 +48,7 @@ dmstr\web\AdminLteAsset::register($this);
 
                     <div class="tab-content">
                         <!--TODOS-->
-                        <div class="tab-pane fade active" id="todos">
+                        <div class="tab-pane active" id="todos">
                             <div class="info-box">
                                 <span class="info-box-icon bg-red"><i class="fa fa-newspaper-o"></i></span>
                                 <div class="info-box-content">
