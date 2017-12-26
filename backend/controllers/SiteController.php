@@ -2,11 +2,16 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\helpers\ArrayHelper;
+use yii\db\Query;
 use yii\web\Controller;
+use common\models\User;
+use common\models\Cliente;
+use common\models\Anuncio;
+use common\models\Proposta;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use common\models\LoginForm;
+use yii\filters\AccessControl;
 
 /**
  * Site controller
@@ -66,11 +71,41 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        
+        $estatisticas = [];
+
+        $nAnuncios = (new Query())
+                ->from(Anuncio::tableName())
+                ->where('estado = :estado', [':estado' => 'ATIVO'])
+                ->count();
+        
+        array_push($estatisticas, $nAnuncios);
+        
+
+        $nPropostas = (new Query())
+                ->select('id, id_anuncio')
+                ->from(Proposta::tableName())
+                ->groupBy('id_anuncio, id')
+                ->average('id_anuncio');
+        $nPropostas = round($nPropostas);
+        
+        array_push($estatisticas, $nPropostas);
+
+        
+        $nUtilizadores = (new Query())
+                ->from(User::tableName())
+                ->count();
+        $nUtilizadores = $nUtilizadores-1;
+        
+        array_push($estatisticas, $nUtilizadores);
+
+
         $notifications = ['Notification 1', 'Notification 2'];
 
         $this->view->params['notifications'] = $notifications;
         $this->layout = 'main';
-        return $this->render('index');
+
+        return $this->render('index', ['stats' => $estatisticas]);
     }
 
     /**

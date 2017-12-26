@@ -46,16 +46,16 @@ dmstr\web\AdminLteAsset::register($this);
                             <div class="info-box">
                                 <span class="info-box-icon bg-red"><i class="fa fa-newspaper-o"></i></span>
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Nº Anuncios</span>
-                                    <span class="info-box-number">41,410</span>
+                                    <span class="info-box-text">Nº Anuncios Ativos</span>
+                                    <span class="info-box-number"><?= $stats[0] ?></span>
                                 </div>
                             </div>
 
                             <div class="info-box">
                                 <span class="info-box-icon bg-green"><i class="fa fa-list-ul"></i></span>
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Nº Propostas</span>
-                                    <span class="info-box-number">41,410</span>
+                                    <span class="info-box-text">Nº Propostas p/ Anúncio (+/-)</span>
+                                    <span class="info-box-number"><?= $stats[1] ?></span>
                                 </div>
                             </div>
 
@@ -63,7 +63,7 @@ dmstr\web\AdminLteAsset::register($this);
                                 <span class="info-box-icon bg-blue"><i class="fa fa-users"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Nº Utilizadores</span>
-                                    <span class="info-box-number">41,410</span>
+                                    <span class="info-box-number"><?= $stats[2] ?></span>
                                 </div>
                             </div>
                         </div>
