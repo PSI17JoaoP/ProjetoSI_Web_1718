@@ -74,14 +74,6 @@ dmstr\web\AdminLteAsset::register($this);
                             <!--ANUNCIOS-->
                         <div class="tab-pane fade" id="anuncios">
                             <table class="table table-bordered table-hover">
-                                <!--<thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Column heading</th>
-                                        <th>Column heading</th>
-                                        <th>Column heading</th>
-                                    </tr>
-                                </thead>-->
                                 <tbody>
                                     <tr>
                                         <td>Nº de Anúncios Ativos</td>
@@ -107,40 +99,18 @@ dmstr\web\AdminLteAsset::register($this);
                             </table>
                         </div>
                             <!--/ANUNCIOS-->
+                            <!--Propostas-->
+
                         <div class="tab-pane fade" id="propostas">
                             <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Column heading</th>
-                                        <th>Column heading</th>
-                                        <th>Column heading</th>
-                                    </tr>
-                                </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
+                                        <td>Nº de Propostas p/ Anúncio (+/-)</td>
+                                        <td><?= $stats[1] ?></td>
                                     </tr>
                                     <tr>
-                                        <td>2</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
+                                        <td>Nº de Propostas Pendentes</td>
+                                        <td><?= $stats[5] ?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -149,23 +119,22 @@ dmstr\web\AdminLteAsset::register($this);
                         </div>
                             <!--UTILIZADORES-->
                         <div class="tab-pane fade" id="utilizadores">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    User 1
-                                </div>
-                            </div>
-
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    User 2
-                                </div>
-                            </div>
-
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    User 3
-                                </div>
-                            </div>
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+                                        <td>Nº de Utilizadores</td>
+                                        <td><?= $stats[2] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Utilizador com mais anúncios</td>
+                                        <td><?= $stats[6] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Categoria preferida mais comum</td>
+                                        <td><?= $stats[7] ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
                             <!--/UTILIZADORES-->
                         </div>

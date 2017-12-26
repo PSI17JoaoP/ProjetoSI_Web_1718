@@ -13,6 +13,7 @@ use common\models\Proposta;
 use yii\helpers\ArrayHelper;
 use common\models\LoginForm;
 use yii\filters\AccessControl;
+use common\models\CategoriaPreferida;
 
 /**
  * Site controller
@@ -75,6 +76,7 @@ class SiteController extends Controller
         
         $estatisticas = [];
 
+        //Todos
         $nAnuncios = (new Query())
                 ->from(Anuncio::tableName())
                 ->where('estado = :estado', [':estado' => 'ATIVO'])
@@ -99,9 +101,9 @@ class SiteController extends Controller
         $nUtilizadores = $nUtilizadores-1;
         
         array_push($estatisticas, $nUtilizadores);
+        //---------------------------------------
 
-
-
+        //Anuncios
         $nAnunciosMes = (new Query())
                 ->from(Anuncio::tableName())
                 ->where('MONTH(data_criacao) = MONTH(CURRENT_DATE)')
@@ -131,7 +133,37 @@ class SiteController extends Controller
             array_push($nAnunciosCat, $catCount);
         }
         array_push($estatisticas, $nAnunciosCat);
+        //---------------------------------------
 
+        //Propostas
+
+        $nPropostasPendentes = (new Query())
+                ->from(Proposta::tableName())
+                ->where('estado = :estado', [':estado' => 'PENDENTE'])
+                ->count();
+        
+        array_push($estatisticas, $nPropostasPendentes);
+        //---------------------------------------
+        
+        //Utilizadores
+
+        $idUserMAnuncios = (new Query())
+                    ->select('id_user')
+                    ->from(Anuncio::tableName())
+                    ->groupBy('id_user')
+                    ->count('id_user');
+        
+        $userMAnuncios = User::findOne(['id' => $idUserMAnuncios[0]])->username;
+
+        array_push($estatisticas, $userMAnuncios);
+
+        $catPopular = (new Query())
+                    ->select('categoria')
+                    ->from(CategoriaPreferida::tableName())
+                    ->groupBy('categoria')
+                    ->one();
+
+        array_push($estatisticas, $listaCat[$catPopular['categoria']]);
 
         $notifications = ['Notification 1', 'Notification 2'];
 
