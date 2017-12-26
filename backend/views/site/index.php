@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Tools;
+
 /* @var $this yii\web\View */
 
 $this->title = 'Dashboard - Back Office';
@@ -72,39 +74,35 @@ dmstr\web\AdminLteAsset::register($this);
                             <!--ANUNCIOS-->
                         <div class="tab-pane fade" id="anuncios">
                             <table class="table table-bordered table-hover">
-                                <thead>
+                                <!--<thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Column heading</th>
                                         <th>Column heading</th>
                                         <th>Column heading</th>
                                     </tr>
-                                </thead>
+                                </thead>-->
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
+                                        <td>Nº de Anúncios Ativos</td>
+                                        <td><?= $stats[0] ?></td>
                                     </tr>
                                     <tr>
-                                        <td>2</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
+                                        <td>Nº de Anúncios este Mês</td>
+                                        <td><?= $stats[3] ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
+                                    <?php
+                                        foreach ($stats[4] as $key => $catCount) 
+                                        {
+                                            $cat = array_values(Tools::listaCategorias())[$key];
+                                            $val = array_keys($catCount)[0];
+
+                                            echo "<tr>
+                                                    <td>Nº de Anúncios de $cat</td>
+                                                    <td>$catCount[$val]</td>
+                                                </tr>";
+                                        }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

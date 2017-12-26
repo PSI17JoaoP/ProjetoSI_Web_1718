@@ -5,10 +5,11 @@ use Yii;
 use yii\db\Query;
 use yii\web\Controller;
 use common\models\User;
-use common\models\Cliente;
+use common\models\Tools;
 use common\models\Anuncio;
-use common\models\Proposta;
+use common\models\Cliente;
 use yii\filters\VerbFilter;
+use common\models\Proposta;
 use yii\helpers\ArrayHelper;
 use common\models\LoginForm;
 use yii\filters\AccessControl;
@@ -98,6 +99,38 @@ class SiteController extends Controller
         $nUtilizadores = $nUtilizadores-1;
         
         array_push($estatisticas, $nUtilizadores);
+
+
+
+        $nAnunciosMes = (new Query())
+                ->from(Anuncio::tableName())
+                ->where('MONTH(data_criacao) = MONTH(CURRENT_DATE)')
+                ->count();
+        array_push($estatisticas, $nAnunciosMes);
+
+
+        $nAnunciosCat = [];
+        $listaCat = Tools::listaCategorias();
+
+        foreach ($listaCat as $key => $cat) 
+        {
+            $subQuery = (new Query())
+                    ->from('c_'.$key)
+                    ->all();
+            
+            $lista = [];
+            foreach ($subQuery as $key => $value) {
+                array_push($lista, \array_values($value)[0]);
+            }
+
+            $catCount = [$key =>(new Query())
+                    ->from(Anuncio::tableName())
+                    ->where(['in', 'cat_oferecer', $lista])
+                    ->count()];
+            
+            array_push($nAnunciosCat, $catCount);
+        }
+        array_push($estatisticas, $nAnunciosCat);
 
 
         $notifications = ['Notification 1', 'Notification 2'];
