@@ -193,7 +193,7 @@ $("#areaChart").ready(function()
       //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
       maintainAspectRatio     : true,
       //Boolean - whether to make the chart responsive to window resizing
-      responsive              : true
+      responsive              : false
     }
 
     //Create the line chart
