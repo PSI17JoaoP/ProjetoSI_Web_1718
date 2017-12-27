@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\db\Query;
+
 class Tools
 {
     public static function listaRegioes()
@@ -39,5 +41,42 @@ class Tools
                     'livros' => "Livros",
                     'roupa' => "Roupa"
                 );
+    }
+
+    public static function tipoCategoria($idCategoria)
+    {
+        $base = Categoria::findOne(['id' => $idCategoria]);
+
+        if($base)
+        {
+            if ($base->cRoupa) {
+                return "Roupa";
+            }
+
+            if ($base->cLivros) {
+                return "Livros";
+            }
+
+            if ($base->cEletronica) {
+                if ($base->cEletronica->cComputadores) {
+                    return "Computadores";
+                }else if ($base->cEletronica->cSmartphones) {
+                    return "Smartphones";
+                }else{
+                    return "Eletrónica";
+                }
+
+            }
+
+            if ($base->cBrinquedos) {
+                if ($base->cBrinquedos->cJogos) {
+                    return "Jogos";
+                }else{
+                    return "Brinquedos";
+                }
+            }
+        }
+
+        return "Aberto a sugestões";
     }
 }

@@ -23,10 +23,13 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
             <strong>Anúncios</strong>
         </div>
         <div class="panel-body">
-            <table>
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <td><b>Título</b></td>
+                        <td><b>Troca</b></td>
+                        <td><b>Por</b></td>
+                        <td><b>Nº Propostas</b></td>
                     </tr>
                 </thead>
                 <tbody id="userAnuncios">

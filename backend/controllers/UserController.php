@@ -2,16 +2,17 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\db\Query;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use backend\models\PerfilForm;
-use common\models\Cliente;
+use yii\web\Response;
+use yii\web\Controller;
 use common\models\User;
 use common\models\Tools;
 use common\models\Anuncio;
-use yii\web\Response;
+use common\models\Cliente;
+use yii\filters\VerbFilter;
+use common\models\Proposta;
+use backend\models\PerfilForm;
+use yii\filters\AccessControl;
 
 
 class UserController extends Controller
@@ -84,7 +85,23 @@ class UserController extends Controller
         {
             $cliente->regiao = Tools::listaRegioes()[$cliente->regiao];
 
-            $anuncios = Anuncio::findAll(['id_user' => $id, 'estado' => 'ATIVO']);
+            $anuncios = (new Query())
+                    ->select('id, titulo, cat_oferecer, cat_receber')
+                    ->from(Anuncio::tableName())
+                    ->where(['id_user' => $id, 'estado' => 'ATIVO'])
+                    ->all();
+                
+            foreach ($anuncios as $key => $anuncio) 
+            {
+                $anuncios[$key]['cat_oferecer'] = Tools::tipoCategoria($anuncio['cat_oferecer']);
+                $anuncios[$key]['cat_receber'] = Tools::tipoCategoria($anuncio['cat_receber']);
+
+                $nPropostas = (new Query())
+                            ->from(Proposta::tableName())
+                            ->where(['id_anuncio' => $anuncio['id']])
+                            ->count();
+                $anuncios[$key]["nPropostas"] = $nPropostas;
+            }
         }
         
 

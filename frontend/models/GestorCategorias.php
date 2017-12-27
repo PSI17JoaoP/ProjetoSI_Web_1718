@@ -78,7 +78,7 @@ class GestorCategorias
                 array_push($categorias, $categoriaNeta);
             }
 
-            if(($categoriaNeta = $categoriaFilha->cComputadores))
+            if(($categoriaNeta = $categoriaFilha->cSmartphones))
             {
                 array_push($categorias, $categoriaNeta);
             }

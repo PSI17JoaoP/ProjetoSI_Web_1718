@@ -38,6 +38,9 @@ $(".rowListaUsers").click(function()
                 detalhes['anuncios'].forEach(anuncio => {
                     var anuncioRow = $('<tr>').append(
                         $('<td>').text(anuncio['titulo']),
+                        $('<td>').text(anuncio['cat_oferecer']),
+                        $('<td>').text(anuncio['cat_receber']),
+                        $('<td>').text(anuncio['nPropostas']),
                     ).appendTo('#userAnuncios');
                 });
             }            
@@ -47,7 +50,6 @@ $(".rowListaUsers").click(function()
         });
 
 });
-
 $("#indexPieChart").ready(function () 
 {
     var url = $('#indexPieChart').data('info');
