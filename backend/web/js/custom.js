@@ -13,11 +13,9 @@ $(".rowListaUsers").click(function()
                 },
         }).then(function(detalhes)
         {
-            $('#userAnuncios').empty();
-
             if(detalhes['cliente'] == null)
             {
-                $("#userImage").attr('src', "");
+                $("#userImage").attr('src', "../../web/assets/pic_placeholder.png");
                 $("#userProfileName").html(detalhes['user']['username']);
                 $("#userTelefone").empty();
                 $("#userRegiao").empty();
@@ -28,7 +26,7 @@ $(".rowListaUsers").click(function()
                     $("#userImage").attr('src', "../../../common/images/"+detalhes['cliente']['path_imagem']);
                 }else
                 {
-                    $("#userImage").attr('src', "");
+                    $("#userImage").attr('src', "../../web/assets/pic_placeholder.png");
                 }
 
                 $("#userProfileName").html(detalhes['cliente']['nome_completo']);
@@ -47,8 +45,14 @@ $(".rowListaUsers").click(function()
 
             $("#userEmail").html(detalhes['user']['email']);
             
+            $('.pesquisa_loading').css('display', 'none');
+            $("#userInfo").css('display', "block");
         });
-
+    
+        $('#userAnuncios').empty();
+            
+        $("#userInfo").css('display', "none");
+        $('.pesquisa_loading').css('display', 'block');
 });
 $("#indexPieChart").ready(function () 
 {

@@ -47,8 +47,11 @@ dmstr\web\AdminLteAsset::register($this);
                         <h3 class="box-title">Detalhes do Utilizador</h3>
                     </div>
                     <!-- Detail. Import vista (render) -->
-                    <div class="box-body box-profile">
+                    <div id="userInfo" style="display:none" class="box-body box-profile">
                         <?= $this->render('user-info.php'); ?>
+                    </div>
+                    <div class="pesquisa_loading" align="center" style="display:none">
+                        <img src="../../web/assets/loading.gif" style="padding-top:10%; padding-bottom:10%"/>
                     </div>
                 </div>
             </div>
