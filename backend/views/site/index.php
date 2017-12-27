@@ -11,12 +11,20 @@ dmstr\web\AdminLteAsset::register($this);
 ?>
 <div class="site-index">
     <div class="col-4 col-md-6">
-        <div class="box box-info">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Popularidade de categorias</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
             <div class="box-body with-border">
-                <h4>Popularidade de categorias</h4>
             </div>
             <div class="box-body">
-                <canvas id="indexPieChart" style="height:250px" data-info="<?= Url::toRoute(['site/pie-info']) ?>"></canvas>
+                <canvas id="pieChart" style="height:250px" data-info="<?= Url::toRoute(['site/pie-info']) ?>"></canvas>
             </div>
             <!-- /.box-body -->
         </div>

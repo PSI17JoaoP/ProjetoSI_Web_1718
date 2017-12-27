@@ -40,7 +40,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'pie-info'],
+                        'actions' => ['logout', 'index', 'pie-info', 'anuncios', 'propostas'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
@@ -174,6 +174,9 @@ class SiteController extends Controller
         return $this->render('index', ['stats' => $estatisticas]);
     }
 
+    /**
+     * Informação para alimentar o gráfico circular presente no index
+     */
     public function actionPieInfo()
     {
         if (Yii::$app->request->isAjax)
@@ -205,6 +208,55 @@ class SiteController extends Controller
             return $dados;
         }
     }
+
+    /**
+     * Estatísticas detalhadas sobre anúncios
+     */
+    public function actionAnuncios()
+    {
+
+        if (Yii::$app->request->isAjax) 
+        {
+            $anunciosMes = (new Query())
+                ->select('MONTH(data_criacao) as "mes", COUNT(id) as "count"')
+                ->from(Anuncio::tableName())
+                ->where('MONTH(data_criacao) - MONTH(CURRENT_DATE) < 6')
+                ->groupBy('MONTH(data_criacao)')
+                ->all();
+            
+            $mesesPT = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+            foreach ($anunciosMes as $key => $anuncio) 
+            {
+                $anunciosMes[$key]["mes"] = $mesesPT[$anuncio["mes"] -1];
+            }
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $anunciosMes;
+        }else
+        {
+            $notifications = ['Notification 1', 'Notification 2'];
+
+            $this->view->params['notifications'] = $notifications;
+            $this->layout = 'main';
+    
+            return $this->render('anuncios');
+        }
+    }
+
+    /**
+     * Estatísticas detalhadas sobre propostas
+     */
+    public function actionPropostas()
+    {
+        $notifications = ['Notification 1', 'Notification 2'];
+
+        $this->view->params['notifications'] = $notifications;
+        $this->layout = 'main';
+
+        return $this->render('propostas');
+    }
+
 
     /**
      * Login action.
