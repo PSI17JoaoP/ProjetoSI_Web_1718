@@ -252,6 +252,22 @@ class SiteController extends Controller
     {
         if (Yii::$app->request->isAjax) 
         {
+            //$dados = [];
+            
+            $dados = (new Query())
+                ->select('count(id) as "count"')
+                ->from(Proposta::tableName())
+                ->where('estado = :estado', [':estado' => 'PENDENTE'])
+                ->join('JOIN', Cliente::tableName(), Proposta::tableName().'.id_user = '.Cliente::tableName().'.id_user')
+                ->addSelect('regiao')
+                ->groupBy('regiao')
+                ->all();
+
+            foreach ($dados as $key => $dado) 
+            {
+                $dados[$key]['regiao'] = Tools::listaRegioes()[$dado['regiao']];
+            }
+
             Yii::$app->response->format = Response::FORMAT_JSON;
             return $dados;
         }else

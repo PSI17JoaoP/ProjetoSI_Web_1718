@@ -14,7 +14,7 @@ dmstr\web\AdminLteAsset::register($this);
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Grafico</h3>
+                    <h3 class="box-title">Atividade/Nº de Propostas por Distrito</h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -23,7 +23,7 @@ dmstr\web\AdminLteAsset::register($this);
                     </div>
                 </div>
                 <div class="box-body">
-                    <canvas id="barChart" style="height:230px"></canvas>
+                    <canvas id="barChart" style="height:230px" data-info="<?= Url::toRoute(['site/propostas']) ?>"></canvas>
                 </div>
                 <!-- /.box-body -->
             </div>

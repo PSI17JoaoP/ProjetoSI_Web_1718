@@ -54,7 +54,20 @@ $(".rowListaUsers").click(function()
         $('.pesquisa_loading').css('display', 'block');
 });
 
-$("#pieChart").ready(function () 
+if($('.site-index').length){
+    pieChart();
+};
+
+if($('.site-anuncios').length){
+    pieChart();
+    areaChart();
+};
+
+if($('.site-propostas').length) {
+    barChart();
+}
+
+function pieChart() 
 {
     var url = $('#pieChart').data('info');
 
@@ -140,9 +153,9 @@ $("#pieChart").ready(function ()
        
         pieChart.Doughnut(pieData, pieOptions)
     })
-});
+};
 
-$("#areaChart").ready(function()
+function areaChart()
 {
     var url = $('#areaChart').data('info');
     var areaChartCanvas = $('#areaChart').get(0).getContext('2d');
@@ -219,30 +232,15 @@ $("#areaChart").ready(function()
        
         areaChart.Line(areaChartData, areaChartOptions)
     })
-})
+};
 
-/*$("#barChart").ready(function()
+function barChart()
 {
+    var url = $('#barChart').data('info');
+
     var barChartCanvas                   = $('#barChart').get(0).getContext('2d')
     var barChart                         = new Chart(barChartCanvas)
-    var barChartData                     = {
-                                        labels  : ["teste", "teste"],
-                                        datasets: [
-                                        {
-                                            label               : 'Anúncios',
-                                            fillColor           : 'rgba(60,141,188,0.9)',
-                                            strokeColor         : 'rgba(60,141,188,0.8)',
-                                            pointColor          : '#3b8bba',
-                                            pointStrokeColor    : 'rgba(60,141,188,1)',
-                                            pointHighlightFill  : '#fff',
-                                            pointHighlightStroke: 'rgba(60,141,188,1)',
-                                            data                : [10, 20]
-                                        }
-                                        ]
-                                    }
-    barChartData.datasets[1].fillColor   = '#00a65a'
-    barChartData.datasets[1].strokeColor = '#00a65a'
-    barChartData.datasets[1].pointColor  = '#00a65a'
+
 
     var barChartOptions                  = {
       //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
@@ -273,6 +271,33 @@ $("#areaChart").ready(function()
       datasetFill             : false
     }
 
-    //barChartOptions.datasetFill = false
-    barChart.Bar(barChartData, barChartOptions)
-})*/
+
+    $.ajax(url, {
+        method: 'GET',
+        type: 'json'
+    }).done(function(data)
+    {
+        barChartData = {
+            labels  : [],
+            datasets: [
+              {
+                label               : 'Propostas',
+                fillColor           : 'rgba(60,141,188,0.9)',
+                strokeColor         : 'rgba(60,141,188,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(60,141,188,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(60,141,188,1)',
+                data                : []
+              }
+            ]
+          };
+
+        data.forEach(val => {
+            barChartData.labels.push(val.regiao)
+            barChartData.datasets[0].data.push(val.count)
+        });
+       
+        barChart.Bar(barChartData, barChartOptions)
+    })
+};
