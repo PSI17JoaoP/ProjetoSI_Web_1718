@@ -13,8 +13,7 @@ $(".rowListaUsers").click(function()
                 }
         }).then(function(detalhes)
         {
-            if(detalhes['cliente'] == null)
-            {
+            if(detalhes['cliente'] == null
                 $("#userImage").attr('src', "../../web/assets/pic_placeholder.png");
                 $("#userProfileName").html(detalhes['user']['username']);
                 $("#userTelefone").empty();
