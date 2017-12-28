@@ -3,4 +3,11 @@ bootstrap: false
 modules:
     enabled:
         - Yii2:
-            part: fixtures
+            part: [orm, email, fixtures]
+        - Asserts
+        - Db:
+            dsn :  'mysql:host=localhost;dbname=bd_projsi_sistematrocas_test'
+            user: 'dbdesigner_projetosi'
+            password: 'DBDesignerProjetoSI'
+            cleanup: true
+            reconnect: true
