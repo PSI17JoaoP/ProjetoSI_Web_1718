@@ -219,10 +219,9 @@ $("#areaChart").ready(function()
        
         areaChart.Line(areaChartData, areaChartOptions)
     })
-<<<<<<< HEAD
 })
 
-$("#barChart").ready(function()
+/*$("#barChart").ready(function()
 {
     var barChartCanvas                   = $('#barChart').get(0).getContext('2d')
     var barChart                         = new Chart(barChartCanvas)
@@ -276,7 +275,4 @@ $("#barChart").ready(function()
 
     //barChartOptions.datasetFill = false
     barChart.Bar(barChartData, barChartOptions)
-})
-=======
-});
->>>>>>> 8ab2c7ddf3683e2d2cb5e01e1727214f5ccb5a1e
+})*/

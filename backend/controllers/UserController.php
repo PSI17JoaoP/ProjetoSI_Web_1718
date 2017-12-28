@@ -61,7 +61,8 @@ class UserController extends Controller
         $clientes = (new Query())
                     ->select(['id', 'email'])
                     ->from(User::tableName())
-                    ->join('RIGHT JOIN', Cliente::tableName(), user::TableName().".id = ".Cliente::tableName().".id_user")
+                    ->where('id != 1')
+                    ->join('LEFT JOIN', Cliente::tableName(), user::TableName().".id = ".Cliente::tableName().".id_user")
                     ->addSelect('nome_completo')
                     ->all();
 
