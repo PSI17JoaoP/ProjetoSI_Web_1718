@@ -12,7 +12,7 @@ class CategoriaTest extends \Codeception\Test\Unit
 {
 
     /**
-     * @var \UnitTester
+     * @var \common\tests\UnitTester
      */
     protected $tester;
 
