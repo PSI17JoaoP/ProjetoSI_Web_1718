@@ -5,7 +5,6 @@ use yii\helpers\Url;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-$count_notifications = count($notifications);
 ?>
 
 <header class="main-header">
@@ -21,32 +20,7 @@ $count_notifications = count($notifications);
         <div class="navbar-custom-menu">
 
             <ul class="nav navbar-nav">
-
-                <li class="dropdown notifications-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="label label-danger"><?= $count_notifications ?></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">Tem <?= $count_notifications ?> notificações</li>
-                        <li>
-                            <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
-
-                                <?php
-                                    foreach ($notifications as $key => $notification) {
-                                        echo "<li>
-                                                <a href='#'>
-                                                    <i class='fa fa-info text-aqua'></i> $notification
-                                                </a>
-                                            </li>";
-                                    }
-                                ?>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <!-- User Account: style can be found in dropdown.less -->
+               <!-- User Account: style can be found in dropdown.less -->
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

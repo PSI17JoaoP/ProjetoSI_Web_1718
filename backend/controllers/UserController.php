@@ -58,12 +58,6 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-
-        $notifications = array('Notification 1', 'Notification 2');
-        
-        $this->view->params['notifications'] = $notifications;
-        $this->layout = 'main';
-
         $clientes = (new Query())
                     ->select(['id', 'email'])
                     ->from(User::tableName())
@@ -110,14 +104,7 @@ class UserController extends Controller
     }
 
     public function actionPerfil()
-    {
-
-        $notifications = array('Notification 1', 'Notification 2');
-        
-        $this->view->params['notifications'] = $notifications;
-        $this->layout = 'main';
-
-        
+    {  
         $model = new PerfilForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->update()) {
