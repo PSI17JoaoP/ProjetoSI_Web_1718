@@ -250,7 +250,14 @@ class SiteController extends Controller
      */
     public function actionPropostas()
     {
-        return $this->render('propostas');
+        if (Yii::$app->request->isAjax) 
+        {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $dados;
+        }else
+        {
+            return $this->render('propostas');
+        }
     }
 
 
