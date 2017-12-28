@@ -52,9 +52,10 @@ class AnuncioTest extends \Codeception\Test\Unit
     public function testAnuncioCompleto()
     {
         $model = new Anuncio();
+        $idUser = User::findOne(['username' => 'bayer.hudson'])->id;
 
         $model->titulo = 'Anuncio Teste';
-        $model->id_user = User::findOne(['username' => 'bayer.hudson'])->id;
+        $model->id_user = $idUser;
         $model->cat_oferecer = $this->cat1->id;
         $model->quant_oferecer = 1;
         $model->cat_receber = $this->cat2->id;
@@ -66,13 +67,26 @@ class AnuncioTest extends \Codeception\Test\Unit
 
         expect('Anuncio é criado', $model->save())->true();
 
+        $idAnuncio = $this->tester->haveInDatabase('anuncios', [
+            "titulo" => "Anuncio Teste", 
+            "id_user" => $idUser,
+            "cat_oferecer" => $this->cat1->id,
+            "quant_oferecer" => 1,
+            "cat_receber" => $this->cat2->id,
+            "estado" => "ATIVO",
+            "data_criacao" => $model->data_criacao,
+        ]);
+        $anuncio = Anuncio::findOne(['id' => $idAnuncio]);
+
+        Anuncio::deleteAll("id="+$idAnuncio);
+        $this->tester->dontSeeInDatabase('anuncios', ["id" => $idAnuncio]);
     }
 
     public function testAnuncioBase()
     {
         $model = new Anuncio();
 
-        $model->titulo = 'Anuncio Teste';
+        $model->titulo = 'Anuncio Teste base';
         $model->id_user = User::findOne(['username' => 'bayer.hudson'])->id;
         $model->cat_oferecer = $this->cat1->id;
         $model->quant_oferecer = 1;
