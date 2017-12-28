@@ -6,7 +6,7 @@ modules:
             part: [orm, email, fixtures]
         - Asserts
         - Db:
-            dsn :  'mysql:host=localhost;dbname=bd_projsi_sistematrocas_test'
+            dsn : 'mysql:host=localhost;dbname=bd_projsi_sistematrocas_test'
             user: 'dbdesigner_projetosi'
             password: 'DBDesignerProjetoSI'
             cleanup: true
