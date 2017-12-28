@@ -57,8 +57,8 @@ class LoginFormTest extends \Codeception\Test\Unit
             'password' => 'password_0',
         ]);
 
-        expect('model should login user', $model->login())->true();
-        expect('error message should not be set', $model->errors)->hasntKey('password');
-        expect('user should be logged in', Yii::$app->user->isGuest)->false();
+        expect('Modelo deve logar o utilizador', $model->login())->true();
+        expect('Não deve de haver erros', $model->errors)->hasntKey('password');
+        expect('Utilizador deve ficar logado', Yii::$app->user->isGuest)->false();
     }
 }
