@@ -30,8 +30,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
 
     <?= $this->render(
         'header.php',
-        ['directoryAsset' => $directoryAsset,
-         'notifications' => $this->params['notifications']]
+        ['directoryAsset' => $directoryAsset]
     ) ?>
 
     <?= $this->render(

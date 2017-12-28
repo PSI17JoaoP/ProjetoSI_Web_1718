@@ -166,11 +166,6 @@ class SiteController extends Controller
 
         array_push($estatisticas, $listaCat[$catPopular['categoria']]);
 
-        $notifications = ['Notification 1', 'Notification 2'];
-
-        $this->view->params['notifications'] = $notifications;
-        $this->layout = 'main';
-
         return $this->render('index', ['stats' => $estatisticas]);
     }
 
@@ -217,6 +212,7 @@ class SiteController extends Controller
 
         if (Yii::$app->request->isAjax) 
         {
+            $dados = [];
             $anunciosMes = (new Query())
                 ->select('MONTH(data_criacao) as "mes", COUNT(id) as "count"')
                 ->from(Anuncio::tableName())
@@ -225,21 +221,26 @@ class SiteController extends Controller
                 ->all();
             
             $mesesPT = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            $mesAtual = \date('m');
 
-            foreach ($anunciosMes as $key => $anuncio) 
-            {
-                $anunciosMes[$key]["mes"] = $mesesPT[$anuncio["mes"] -1];
+            for ($i = $mesAtual-5; $i <= $mesAtual ; $i++) 
+            { 
+                $dado = ["mes" => $mesesPT[$i-1], "count" => 0];
+
+                foreach ($anunciosMes as $key => $anuncio) 
+                {
+                    if($anuncio["mes"] == $i)
+                    {
+                        $dado = ["mes" => $mesesPT[$i-1], "count" => $anuncio["count"]];
+                    }
+                }
+                \array_push($dados, $dado);
             }
 
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return $anunciosMes;
+            return $dados;
         }else
         {
-            $notifications = ['Notification 1', 'Notification 2'];
-
-            $this->view->params['notifications'] = $notifications;
-            $this->layout = 'main';
-    
             return $this->render('anuncios');
         }
     }
@@ -249,11 +250,6 @@ class SiteController extends Controller
      */
     public function actionPropostas()
     {
-        $notifications = ['Notification 1', 'Notification 2'];
-
-        $this->view->params['notifications'] = $notifications;
-        $this->layout = 'main';
-
         return $this->render('propostas');
     }
 

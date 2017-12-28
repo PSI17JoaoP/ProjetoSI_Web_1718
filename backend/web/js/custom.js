@@ -13,7 +13,7 @@ $(".rowListaUsers").click(function()
                 }
         }).then(function(detalhes)
         {
-            if(detalhes['cliente'] == null
+            if(detalhes['cliente'] == null) {
                 $("#userImage").attr('src', "../../web/assets/pic_placeholder.png");
                 $("#userProfileName").html(detalhes['user']['username']);
                 $("#userTelefone").empty();
@@ -38,7 +38,7 @@ $(".rowListaUsers").click(function()
                         $('<td>').text(anuncio['cat_oferecer']),
                         $('<td>').text(anuncio['cat_receber']),
                         $('<td>').text(anuncio['nPropostas']),
-                    ).appendTo('#userAnuncios');
+                    ).appendTo('#userAnuncios')
                 });
             }            
 
@@ -188,7 +188,7 @@ $("#areaChart").ready(function()
       //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
       maintainAspectRatio : true,
       //Boolean - whether to make the chart responsive to window resizing
-      responsive : true
+      responsive : false
     };
 
     $.ajax(url, {

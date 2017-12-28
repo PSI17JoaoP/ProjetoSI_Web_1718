@@ -22,8 +22,6 @@ dmstr\web\AdminLteAsset::register($this);
                         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
-                <div class="box-body with-border">
-                </div>
                 <div class="box-body">
                     <canvas id="pieChart" style="height:250px" data-info="<?= Url::toRoute(['site/pie-info']) ?>"></canvas>
                 </div>
