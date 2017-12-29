@@ -228,8 +228,9 @@ class UserController extends Controller
 
         $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->identity->getId()]);
 
+        $propostas = Proposta::findAll(['id_user' => Yii::$app->user->identity->getId()]);
 
-        return $this->render("historico", ['anuncios' => $anuncios]);
+        return $this->render("historico", ['anuncios' => $anuncios,'propostas' => $propostas]);
 
     }
 
