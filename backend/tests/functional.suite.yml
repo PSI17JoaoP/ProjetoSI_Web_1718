@@ -1,4 +1,12 @@
 class_name: FunctionalTester
 modules:
     enabled:
+        - Filesystem
         - Yii2
+        - Db:
+            dsn : 'mysql:host=localhost;dbname=bd_projsi_sistematrocas_test'
+            user: 'dbdesigner_projetosi'
+            password: 'DBDesignerProjetoSI'
+            cleanup: true
+            reconnect: true
+
