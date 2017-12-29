@@ -18,7 +18,7 @@ class CategoriaLivrosTest extends \Codeception\Test\Unit
     protected $tester;
 
 
-    public function testCategoriaLivroCompleto()
+    public function testCategoriaPrefCompleto()
     {
         $categoria = new Categoria();
         $categoria->nome="categoria teste l";

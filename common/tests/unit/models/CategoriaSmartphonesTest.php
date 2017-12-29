@@ -19,7 +19,7 @@ class CategoriaSmartphonesTest extends \Codeception\Test\Unit
     protected $tester;
 
 
-    public function testCategoriaComputadoresCompleto()
+    public function testCategoriaSmartphonesCompleto()
     {
         $categoria = new Categoria();
         $categoria->nome="categoria teste s";
