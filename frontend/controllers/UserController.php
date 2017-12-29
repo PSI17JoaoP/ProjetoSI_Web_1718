@@ -222,11 +222,15 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionHistory()
+    public function actionHistorico($tipo = null, $titulo = null, $mensagem = null)
     {
         $this->layout = "main-user";
 
-        return $this->render('history');
+        $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->identity->getId()]);
+
+
+        return $this->render("historico", ['anuncios' => $anuncios]);
+
     }
 
     public function actionPin()

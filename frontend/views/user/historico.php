@@ -1,5 +1,7 @@
 <?php
 /* @var $this yii\web\View */
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
 $this->title = 'Histórico';
 ?>
@@ -33,39 +35,48 @@ $this->title = 'Histórico';
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3">Anúncio 1</div>
-                        <div class="col-md-3">dd-mm-aaaa</div>
-                        <div class="col-md-3">Aberto</div>
-                        <div class="col-md-3">
-                            <a href="#"><u>Detalhes</u></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="row">                        
+                    
+                    <?php foreach($anuncios as $dados) { ?>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3">Anúncio 2</div>
-                        <div class="col-md-3">dd-mm-aaaa</div>
-                        <div class="col-md-3">Concluido</div>
-                        <div class="col-md-3">
-                            <a href="#"><u>Detalhes</u></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                    <?php
+                                                    if($dados[0]->imagensAnuncios != null)
+                                                    {
+                                                        echo "<img id='pesquisa_row_imagem' src='../../../common/images/". $dados[0]->imagensAnuncios[0]->path_relativo ."' alt='' width = '75px' height = '75px'>";
+                                                    }
+                                                    ?>
+                                                </div>
+                                            <div class="col-md-6">
+                                                <p style="margin-top: 8px; margin-left: 5px"><b>Título:</b><?= Html::encode($dados[0]->titulo) ?></p>
+                                            </div>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3">Anúncio 3</div>
-                        <div class="col-md-3">dd-mm-aaaa</div>
-                        <div class="col-md-3">Expirado</div>
-                        <div class="col-md-3">
-                            <a href="#"><u>Detalhes</u></a>
+                                            <div class="col-md-4">
+                                                <span class="pull-right">
+                                                    <?= Html::a('Detalhes', 'javascript:', [
+                                                        'class' => 'btn btn-primary view_model',
+                                                        'data-detail' => Url::toRoute(['anuncio/detalhes']), 
+                                                        'data-id' => $dados[0]->id
+                                                        ])?>
+
+                                                    
+                                                </span>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <?php } ?>
+
                     </div>
                 </div>
             </div>
