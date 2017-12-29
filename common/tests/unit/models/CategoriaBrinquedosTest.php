@@ -53,7 +53,7 @@ class CategoriaBrinquedosTest extends \Codeception\Test\Unit
 
 
         CategoriaBrinquedos::deleteAll("id_categoria="+$idcat);
-        Categoria::deleteAll("id="+$idcat);
+        Categoria::deleteAll("id=".$idcat);
 
         $this->tester->dontSeeInDatabase('categorias', ["id" => $idcat, "nome" => $categoria->nome]);
     }

@@ -32,7 +32,7 @@ class CategoriaTest extends \Codeception\Test\Unit
 
         $this->tester->haveInDatabase('categorias', ["nome" => "categoria teste 2"]);
 
-        Categoria::deleteAll("nome="+$cat->nome);
+        Categoria::deleteAll("id=".$cat->id);
 
         $this->tester->dontSeeInDatabase('categorias', ["id" => $idcat, "nome" => "categoria teste 2"]);
     }
