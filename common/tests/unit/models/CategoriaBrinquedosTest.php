@@ -24,37 +24,28 @@ class CategoriaBrinquedosTest extends \Codeception\Test\Unit
         $categoria->nome="categoria teste b";
         $categoria->save();
 
+        $this->tester->seeRecord('common\models\Categoria', ["nome" => "categoria teste b"]);
+
         $brinquedo = new CategoriaBrinquedos();
         $brinquedo->id_categoria = $categoria->id;
         $brinquedo->editora = "editora";
         $brinquedo->faixa_etaria = 12;
         $brinquedo->descricao = "descricao";
+        $brinquedo->save();
+
+        $this->tester->seeRecord('common\models\CategoriaBrinquedos', ["id_categoria" => $brinquedo->id_categoria,]);
         
-        expect("Categoria brinquedo criada", $brinquedo->save())->true();
-
-
-        $idcat = $this->tester->haveInDatabase('c_brinquedos', [
-            "id_categoria" => $brinquedo->id_categoria,
-            "editora" => "editora",
-            "faixa_etaria" => 12,
-            "descricao" => "descricao"
-            ]);
-        $cat = CategoriaBrinquedos::findOne(['id_categoria' => $idcat]);
+        $cat = CategoriaBrinquedos::findOne(['id_categoria' => $brinquedo->id_categoria]);
         
         $cat->editora = "editora 2";
         $cat->save();
 
-        $this->tester->haveInDatabase('c_brinquedos', [
-            "id_categoria" => $cat->id_categoria,
-            "editora" => "editora 2",
-            "faixa_etaria" => $cat->faixa_etaria,
-            "descricao" => $cat->descricao
-            ]);
+        $this->tester->seeRecord('common\models\CategoriaBrinquedos', ["editora" => "editora 2",]);
 
 
-        CategoriaBrinquedos::deleteAll("id_categoria="+$idcat);
-        Categoria::deleteAll("id=".$idcat);
+        CategoriaBrinquedos::deleteAll("id_categoria=".$cat->id_categoria);
+        Categoria::deleteAll("id=".$cat->id_categoria);
 
-        $this->tester->dontSeeInDatabase('categorias', ["id" => $idcat, "nome" => $categoria->nome]);
+        $this->tester->dontSeeRecord('common\models\Categoria', ["nome" => $categoria->nome]);
     }
 }

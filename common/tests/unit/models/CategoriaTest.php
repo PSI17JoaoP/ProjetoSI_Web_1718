@@ -16,24 +16,33 @@ class CategoriaTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
+    protected function _before()
+    {
+    }
+
+    protected function _after()
+    {
+    }
 
     public function testCategoriaCompleto()
     {
         $categoria = new Categoria();
         $categoria->nome="categoria teste";
         
-        expect("Categoria base criada", $categoria->save())->true();
+        $categoria->save();
 
-        $idcat = $this->tester->haveInDatabase('categorias', ["nome" => "categoria teste"]);
+        $this->tester->seeRecord('common\models\Categoria', ["nome" => "categoria teste"]);
+
+
         $cat = Categoria::findOne(['nome' => "categoria teste"]);
         
         $cat->nome = "categoria teste 2";
         $cat->save();
 
-        $this->tester->haveInDatabase('categorias', ["nome" => "categoria teste 2"]);
+        $this->tester->seeRecord('common\models\Categoria', ["nome" => "categoria teste 2"]);
 
         Categoria::deleteAll("id=".$cat->id);
 
-        $this->tester->dontSeeInDatabase('categorias', ["id" => $idcat, "nome" => "categoria teste 2"]);
+        $this->tester->dontSeeRecord('common\models\Categoria', ["nome" => "categoria teste 2"]);
     }
 }

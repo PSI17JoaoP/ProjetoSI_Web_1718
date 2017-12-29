@@ -14,16 +14,18 @@ class CategoriaComputadoresTest extends \Codeception\Test\Unit
 {
 
     /**
-     * @var \UnitTester
+     * @var \common\tests\UnitTester
      */
     protected $tester;
 
 
-    public function testCategoriaCompleto()
+    public function testCategoriaComputadoresCompleto()
     {
         $categoria = new Categoria();
-        $categoria->nome="categoria teste";
+        $categoria->nome="categoria teste c";
         $categoria->save();
+
+        $this->tester->seeRecord('common\models\Categoria', ["nome" => "categoria teste c"]);
 
         $eletro = new CategoriaEletronica();
         $eletro->id_categoria = $categoria->id;
@@ -31,33 +33,32 @@ class CategoriaComputadoresTest extends \Codeception\Test\Unit
         $eletro->marca = "teste";
         $eletro->save();
 
+        $this->tester->seeRecord('common\models\CategoriaEletronica', ["id_categoria" => $eletro->id_categoria]);
+
+
         $pc = new CategoriaComputadores();
         $pc->id_eletronica = $eletro->id_categoria;
         $pc->processador = "teste";
-        $pc->ram = "teste";
+        $pc->ram = "test";
         $pc->hdd = "teste";
         $pc->gpu = "teste";
         $pc->os = "teste";
         $pc->portatil = 0;
-        
-        expect("Categoria computador criada", $pc->save())->true();
-
         $pc->save();
         
-        $this->tester->seeInDatabase('c_computadores', ['id_eletronica' => $pc->id_eletronica,]);
+        $this->tester->seeRecord('common\models\CategoriaComputadores', ["id_eletronica" => $pc->id_eletronica]);
+
         $cat = CategoriaComputadores::findOne(['id_eletronica' => $pc->id_eletronica]);
         
         $cat->processador = "teste 2";
         $cat->save();
 
-        
-        //$this->tester->seeInDatabase('c_computadores', ["id_eletronica" => $pc->id_eletronica]);
+        $this->tester->seeRecord('common\models\CategoriaComputadores', ["id_eletronica" => $pc->id_eletronica, "processador" => "teste 2"]);
 
+        CategoriaComputadores::deleteAll("id_eletronica=".$cat->id_eletronica);
+        CategoriaEletronica::deleteAll("id_categoria=".$cat->id_eletronica);
+        Categoria::deleteAll("id=".$cat->id_eletronica);
 
-        CategoriaComputadores::deleteAll("id_eletronica=".$cat->id);
-        CategoriaEletronica::deleteAll("id_categoria=".$cat->id);
-        Categoria::deleteAll("id=".$cat->id);
-
-        $this->tester->dontSeeInDatabase('categorias', ["id" => $idcat, "nome" => "categoria teste"]);
+        $this->tester->dontSeeRecord('common\models\Categoria', ["id" => $cat->id_eletronica]);
     }
 }
