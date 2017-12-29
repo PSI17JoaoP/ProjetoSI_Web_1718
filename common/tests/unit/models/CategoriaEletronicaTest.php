@@ -18,7 +18,7 @@ class CategoriaEletronicaTest extends \Codeception\Test\Unit
     protected $tester;
 
 
-    public function testCategoriaComputadoresCompleto()
+    public function testCategoriaEletronicaCompleto()
     {
         $categoria = new Categoria();
         $categoria->nome="categoria teste e";
