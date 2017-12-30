@@ -137,9 +137,9 @@ class Anuncio extends ActiveRecord
         $objJSON= json_encode($objeto);
 
         if($insert)
-            $this->Publicar("INSERT",$objJSON);
+            $this->Publicar("InsertAnuncio",$objJSON);
         else
-            $this->Publicar("UPDATE",$objJSON);
+            $this->Publicar("UpdateAnuncio",$objJSON);
     }
 
     public function Publicar($canal,$msg)
