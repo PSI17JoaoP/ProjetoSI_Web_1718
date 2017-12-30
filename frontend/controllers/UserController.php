@@ -230,7 +230,19 @@ class UserController extends Controller
 
         $propostas = Proposta::findAll(['id_user' => Yii::$app->user->identity->getId()]);
 
-        return $this->render("historico", ['anuncios' => $anuncios,'propostas' => $propostas]);
+        $gestorCategorias = new GestorCategorias();
+        
+        $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');
+        
+        $contactos = [];       
+
+        return $this->render("historico", [
+        'anuncios' => $anuncios,
+        'propostas' => $categorias,
+        'propostasAceites' => $contactos,
+        'tipo' => $tipo, 
+        'titulo' => $titulo, 
+        'mensagem' => $mensagem]);
 
     }
 
