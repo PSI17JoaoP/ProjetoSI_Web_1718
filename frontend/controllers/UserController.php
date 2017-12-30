@@ -222,7 +222,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionHistorico($tipo = null, $titulo = null, $mensagem = null)
+    public function actionHistorico()
     {
         $this->layout = "main-user";
 
@@ -232,17 +232,12 @@ class UserController extends Controller
 
         $gestorCategorias = new GestorCategorias();
         
-        $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');
-        
-        $contactos = [];       
+        $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');              
 
         return $this->render("historico", [
         'anuncios' => $anuncios,
         'propostas' => $categorias,
-        'propostasAceites' => $contactos,
-        'tipo' => $tipo, 
-        'titulo' => $titulo, 
-        'mensagem' => $mensagem]);
+        ]);
 
     }
 

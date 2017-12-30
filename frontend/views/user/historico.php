@@ -74,17 +74,10 @@ $this->title = 'Histórico';
                                                 <p style="margin-top: 12px; margin-left: 5px"><b>Proposta:</b><?= Html::encode($dados[1][0]->nome) ?></p>
                                             </div>
                                             <div class="col-md-4">
-                                                <p style="margin-top: 12px; margin-left: 5px"><b>Aceite em:</b></p>
+                                                <p style="margin-top: 12px; margin-left: 5px"><b>Proposto em:</b><?= Html::encode($dados[0]->data_proposta) ?></p>
                                             </div>
                                             <div class="col-md-4">
-                                                <span class="pull-right">
-                                                    <?= Html::a('Detalhes de Contato', 'javascript:', [
-                                                        'class' => 'btn btn-primary view_details',
-                                                        'data-detail' => Url::toRoute(['user/detalhes-contacto']), 
-                                                        'data-idUser' => $dados[0]->id_user,
-                                                        'data-idUserProposta' => $dados[0]->id_anuncio,
-                                                        ])?>
-                                                </span>
+                                                <p style="margin-top: 12px; margin-left: 5px"><b>Estado:</b><?= Html::encode($dados[0]->estado) ?></p>
                                             </div>
                                         </div>
                                     </div>
