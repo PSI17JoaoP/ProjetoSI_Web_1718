@@ -1,13 +1,13 @@
 <?php
 
-namespace frontend\tests\functional;
+namespace frontend\tests\acceptance;
 
-use frontend\tests\FunctionalTester;
+use frontend\tests\AcceptanceTester;
 use common\fixtures\UserFixture;
 
 class LoginCest
 {
-    public function _before(FunctionalTester $I)
+    public function _before(AcceptanceTester $I)
     {
         $I->haveFixtures([
             'user' => [
@@ -26,26 +26,26 @@ class LoginCest
         ];
     }
 
-    public function checkEmpty(FunctionalTester $I)
+    public function checkEmpty(AcceptanceTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('', ''));
         $I->seeValidationError('“Nome do utilizador” não pode ficar em branco.');
         $I->seeValidationError('“Palavra-passe” não pode ficar em branco.');
     }
 
-    public function checkWrongPassword(FunctionalTester $I)
+    public function checkWrongPassword(AcceptanceTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('erao', 'wrong'));
         $I->seeValidationError('A palavra-passe está incorreta.');
     }
 
-    public function checkWrongUsername(FunctionalTester $I)
+    public function checkWrongUsername(AcceptanceTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('teste', 'wrong'));
         $I->seeValidationError('Este utilizador não existe.');
     }
     
-    public function checkValidLogin(FunctionalTester $I)
+    public function checkValidLogin(AcceptanceTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('erao', 'password_0'));
         $I->see('erao');
