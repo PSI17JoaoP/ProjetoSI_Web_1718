@@ -277,7 +277,7 @@ class UserController extends Controller
         {
             if($modalModel->guardar(Yii::$app->user->getId()))
             {
-                return $this->render($viewPath, [
+                return $this->redirect([$viewPath, 
                     'model' => $model,
                     'catList' => Tools::listaCategorias(),
                 ]);
