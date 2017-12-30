@@ -154,7 +154,11 @@ class SiteController extends Controller
                     ->groupBy('id_user')
                     ->count('id_user');
         
-        $userMAnuncios = User::findOne(['id' => $idUserMAnuncios[0]])->username;
+        $userMAnuncios = "";
+        if ($idUserMAnuncios != "0") {
+           $userMAnuncios = User::findOne(['id' => $idUserMAnuncios[0]])->username;
+        }
+        
 
         array_push($estatisticas, $userMAnuncios);
 
@@ -164,7 +168,11 @@ class SiteController extends Controller
                     ->groupBy('categoria')
                     ->one();
 
-        array_push($estatisticas, $listaCat[$catPopular['categoria']]);
+        $cat = "none";
+        if (isset($catPopular['categoria'])) {
+            $cat = $listaCat[$catPopular['categoria']];
+        }
+        array_push($estatisticas, $cat);
 
         return $this->render('index', ['stats' => $estatisticas]);
     }

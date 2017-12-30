@@ -1,16 +1,14 @@
 <?php
+namespace backend\tests\acceptance;
 
-namespace backend\tests\functional;
+use backend\tests\AcceptanceTester;
+use yii\helpers\Url;
+use common\fixtures\UserFixture as UserFixture;
 
-use \backend\tests\FunctionalTester;
-use backend\fixtures\UserFixture as UserFixture;
 
-/**
- * Class LoginCest
- */
-class LoginCest
+class HomeCest
 {
-    public function _before(FunctionalTester $I)
+    public function _before(AcceptanceTester $I)
     {
         $I->haveFixtures([
             'user' => [
@@ -20,16 +18,18 @@ class LoginCest
         ]);
     
     }
-    /**
-     * @param FunctionalTester $I
-     */
-    public function loginUser(FunctionalTester $I)
+
+    public function checkHome(AcceptanceTester $I)
     {
-        $I->am('guest');
-        $I->amOnPage('/site/login');
+        $I->amOnPage(Url::toRoute('/site/login'));
+        $I->see('Login');
+
         $I->fillField('#loginform-username', 'erau');
+        $I->wait(2);
         $I->fillField('#loginform-password', 'password_0');
+        $I->wait(2);
         $I->click('Login');
+        $I->wait(30); 
 
         $I->see('Dashboard - Back Office');
     }
