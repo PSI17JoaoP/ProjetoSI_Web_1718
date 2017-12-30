@@ -29,8 +29,17 @@ class HomeCest
         $I->fillField('#loginform-password', 'password_0');
         $I->wait(2);
         $I->click('Login');
-        $I->wait(15); 
+        $I->wait(5); 
 
         $I->see('Dashboard - Back Office');
+
+        $I->click('Todos');
+        $I->wait(2);
+        $I->click('Anúncios');
+        $I->wait(2);
+        $I->click('Propostas');
+        $I->wait(2);
+        $I->click('Utilizadores');
+        $I->wait(2);
     }
 }
