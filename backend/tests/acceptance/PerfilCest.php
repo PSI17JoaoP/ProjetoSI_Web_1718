@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use common\fixtures\UserFixture as UserFixture;
 
 
-class HomeCest
+class PerfilCest
 {
     public function _before(AcceptanceTester $I)
     {
@@ -19,7 +19,7 @@ class HomeCest
     
     }
 
-    public function checkHome(AcceptanceTester $I)
+    public function checkPerfil(AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/site/login'));
         $I->see('Login');
@@ -33,13 +33,24 @@ class HomeCest
 
         $I->see('Dashboard - Back Office');
 
-        $I->click('Todos');
+        $I->click('erau');
         $I->wait(2);
-        $I->click('Anúncios');
-        $I->wait(2);
-        $I->click('Propostas');
-        $I->wait(2);
-        $I->click('Utilizadores');
+        $I->click('Perfil');
         $I->wait(5);
+
+        $I->see("Editar dados pessoais");
+
+        $I->fillField('#perfilform-username', 'Erau2');
+        $I->wait(2);
+        $I->fillField('#perfilform-email', 'erau@erau.pt');
+        $I->wait(2);
+        $I->fillField('#perfilform-password', 'password_0');
+        $I->wait(2);
+
+        $I->click('Concluído');
+        $I->wait(2);
+        $I->see('Erau2');
+        $I->see('Gestão de Utilizadores');
+        $I->wait(10);
     }
 }
