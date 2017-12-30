@@ -63,7 +63,7 @@ $this->title = 'Histórico';
                     
                     <!--Código para apresentar as propostas-->  
 
-                    <?php foreach($propostasAceites as $dados) { ?>
+                    <?php foreach($propostas as $dados) { ?>
 
                         <div class="row">
                             <div class="col-md-12">
@@ -71,18 +71,18 @@ $this->title = 'Histórico';
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <p style="margin-top: 12px; margin-left: 5px"><b>Proposta:</b><?= Html::encode($dados["titulo"]) ?></p>
+                                                <p style="margin-top: 12px; margin-left: 5px"><b>Proposta:</b><?= Html::encode($dados[1][0]->nome) ?></p>
                                             </div>
                                             <div class="col-md-4">
-                                                <p style="margin-top: 12px; margin-left: 5px"><b>Aceite em:</b><?= Html::encode($dados["dataConclusao"]) ?></p>
+                                                <p style="margin-top: 12px; margin-left: 5px"><b>Aceite em:</b></p>
                                             </div>
                                             <div class="col-md-4">
                                                 <span class="pull-right">
                                                     <?= Html::a('Detalhes de Contato', 'javascript:', [
                                                         'class' => 'btn btn-primary view_details',
                                                         'data-detail' => Url::toRoute(['user/detalhes-contacto']), 
-                                                        'data-idUser' => $dados["idUser"],
-                                                        'data-idUserProposta' => $dados["idUserAnuncio"],
+                                                        'data-idUser' => $dados[0]->id_user,
+                                                        'data-idUserProposta' => $dados[0]->id_anuncio,
                                                         ])?>
                                                 </span>
                                             </div>
