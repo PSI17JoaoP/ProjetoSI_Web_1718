@@ -29,7 +29,7 @@ class HomeCest
         $I->fillField('#loginform-password', 'password_0');
         $I->wait(2);
         $I->click('Login');
-        $I->wait(30); 
+        $I->wait(15); 
 
         $I->see('Dashboard - Back Office');
     }

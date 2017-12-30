@@ -1,0 +1,10 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver
+        - Yii2:
+            part: [init, orm, fixtures]
+    config:
+        WebDriver:
+            url: http://localhost:8080
+            browser: chrome
