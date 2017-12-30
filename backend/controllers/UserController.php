@@ -25,7 +25,7 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'perfil', 'detalhes'],
+                        'actions' => ['index', 'perfil', 'detalhes', 'mudar-status'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ]
@@ -59,7 +59,7 @@ class UserController extends Controller
     public function actionIndex()
     {
         $clientes = (new Query())
-                    ->select(['id', 'email'])
+                    ->select(['id', 'email', 'status'])
                     ->from(User::tableName())
                     ->where('id != 1')
                     ->join('LEFT JOIN', Cliente::tableName(), user::TableName().".id = ".Cliente::tableName().".id_user")
@@ -67,6 +67,22 @@ class UserController extends Controller
                     ->all();
 
         return $this->render('index', ['clientes' => $clientes]);
+    }
+
+    public function actionMudarStatus($id)
+    {
+        $user = User::findOne(['id' => $id]);
+
+        if ($user->status == 10) 
+        {
+            $user->status = 0;
+        }else
+        {
+            $user->status = 10;
+        }
+        $user->save();
+        
+        $this->redirect(['user/index']);
     }
 
     public function actionDetalhes($id)
