@@ -6,7 +6,7 @@ use frontend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
 
 
-class HomeCest
+class ContaCest
 {
     public function _before(FunctionalTester $I)
     {
@@ -24,10 +24,24 @@ class HomeCest
         ]);
     }
 
-    public function checkOpen(FunctionalTester $I)
+    public function checkConta(FunctionalTester $I)
     {
-        $I->amOnPage(\Yii::$app->homeUrl);
+        $I->amOnPage('site/url');
         $I->see('Sistema de Trocas');
+
+        $I->see('erao');
+        $I->click('erao');
+        $I->see('Definições');
+        $I->click('Definições');
+
+        $I->submitForm('#conta-form', [
+            'ClienteForm[nomeCompleto]' => 'NomeTeste',
+            'ClienteForm[telefone]' => '912365478',
+            'ClienteForm[dataNasc]' => '2000-12-12',
+            'ClienteForm[regiao]' => 'leiria',
+        ]);
+
+        $I->see('Sucesso! As suas informações de conta foram atualizadas com sucesso.');
         
     }
 }

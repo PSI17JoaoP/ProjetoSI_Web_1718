@@ -40,6 +40,8 @@ use yii\bootstrap\ActiveForm;
                         <div class="panel-body">
                             <?= $form->field($model, 'nomeCompleto')->textInput() ?>
 
+                            <?= $form->field($model, 'dataNasc')->input('date') ?>
+
                             <?= $form->field($model, 'telefone')->textInput(['type' => 'number']) ?>
 
                             <?= $form->field($model, 'regiao')->dropDownList($regioes, ['prompt' => 'Região ...']) ?>
