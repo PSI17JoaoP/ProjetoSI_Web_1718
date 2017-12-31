@@ -71,7 +71,7 @@ class CategoriasController extends ActiveController
 
         switch ($flag) 
         {
-            case 'brinquedo':
+            case 'brinquedos':
                 $categoria = new CategoriaBrinquedos();
                 $categoria->id_categoria = $base->id;
                 $categoria->editora = $tier2['editora'];
