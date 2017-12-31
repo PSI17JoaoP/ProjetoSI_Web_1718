@@ -96,10 +96,6 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'users',
-                    'extraPatterns' => [
-                        'GET {id}/username' => 'username',
-                        'GET {id}/password' => 'password',
-                    ],
                 ],
             ],
         ],
