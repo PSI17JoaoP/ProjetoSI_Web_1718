@@ -73,7 +73,8 @@ return [
                     'extraPatterns' => [
                         'GET generos' => 'generos',
                         'GET tipos' => 'tipos',
-                        'POST /' => 'criar',
+                        'POST' => 'criar',
+                        'DELETE {id}' => 'apagar',
                     ],
                 ],
                 [

@@ -31,6 +31,7 @@ class AnunciosController extends ActiveController
 
         $behaviors['authenticator'] = [
             'class' => HttpBasicAuth::className(),
+            'except' => ['pesquisa'],
             'auth' => [$this, 'auth']
         ];
 
