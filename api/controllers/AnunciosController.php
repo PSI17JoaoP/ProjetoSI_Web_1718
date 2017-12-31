@@ -58,7 +58,7 @@ class AnunciosController extends ActiveController
         }
 
         //return ['id' => $id, 'Propostas' => null];
-        return new NotFoundHttpException('Não foi encontrado um anuncio com o ID desejado.', 404);
+        throw new NotFoundHttpException('Não foi encontrado um anuncio com o ID desejado.', 404);
     }
 
     public function actionTodasPropostas($username)
