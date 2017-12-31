@@ -240,6 +240,14 @@ class CategoriasController extends ActiveController
             Categoria::deleteAll('id='.$id);
         }
 
-        return $id;
+        $check = Categoria::findOne(['id' => $id]);
+        if ($check == null) 
+        {
+            return $id;
+        }else{
+            throw new BadRequestHttpException("Não foi possivel eliminar a categoria.", 400);
+        }
+
+        
     }
 }
