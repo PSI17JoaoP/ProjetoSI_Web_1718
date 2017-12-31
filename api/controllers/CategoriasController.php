@@ -50,7 +50,7 @@ class CategoriasController extends ActiveController
     public function actions()
     {
         $actions = parent::actions();
-        unset($actions['create']);
+        unset($actions['create'], $actions['delete']);
         return $actions;
     }
 
@@ -165,4 +165,44 @@ class CategoriasController extends ActiveController
         return ['ID' => $base->id];
     }
 
+    public function actionApagar($id)
+    {
+        $base = Categoria::findOne(['id' => $id]);
+
+        if($base == null)
+        {
+            return new NotFoundHttpException('Não foi encontrada a categoria desejada.', 404);
+        }
+
+        if($base)
+        {
+            if ($base->cRoupa) {
+                CategoriaRoupa::deleteAll('id_categoria='.$id);
+            }
+
+            if ($base->cLivros) {
+                CategoriaLivros::deleteAll('id_categoria='.$id);
+            }
+
+            if ($base->cEletronica) {
+                if ($base->cEletronica->cComputadores) {
+                    CategoriaComputadores::deleteAll('id_eletronica='.$id);
+                }else if ($base->cEletronica->cSmartphones) {
+                    CategoriaSmartphones::deleteAll('id_eletronica='.$id);
+                }
+                CategoriaEletronica::deleteAll('id_categoria='.$id);
+            }
+
+            if ($base->cBrinquedos) {
+                if ($base->cBrinquedos->cJogos) {
+                    CategoriaJogos::deleteAll('id_brinquedo='.$id);
+                }
+                CategoriaBrinquedos::deleteAll('id_categoria='.$id);
+            }
+
+            Categoria::deleteAll('id='.$id);
+        }
+
+        return $id;
+    }
 }
