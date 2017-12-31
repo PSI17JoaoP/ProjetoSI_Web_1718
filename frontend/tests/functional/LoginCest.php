@@ -42,7 +42,7 @@ class LoginCest
     public function checkWrongUsername(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('teste', 'wrong'));
-        $I->seeValidationError('Este utilizador não existe.');
+        $I->seeValidationError('Este utilizador não existe ou está bloqueado.');
     }
     
     public function checkValidLogin(FunctionalTester $I)

@@ -100,7 +100,7 @@ class Cliente extends ActiveRecord
         $objeto->id_user = $this->id_user;
         $objeto->nome_completo = $this->nome_completo;
         $objeto->data_nasc = $this->data_nasc;
-        $objeto->telefone = $objeto->telefone;
+        $objeto->telefone = $this->telefone;
         $objeto->regiao = $this->regiao;
         $objeto->pin = $this->pin;
         $objeto->path_imagem = $this->path_imagem;

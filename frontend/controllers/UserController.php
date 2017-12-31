@@ -53,6 +53,11 @@ class UserController extends Controller
 
         if ($model->load(Yii::$app->request->post())) 
         {
+            
+            if ($cliente == null) {
+                $cliente = new Cliente();
+                $cliente->id_user = Yii::$app->user->identity->getId();
+            }
 
             if($model->atualizar($cliente))
             {
@@ -272,7 +277,7 @@ class UserController extends Controller
         {
             if($modalModel->guardar(Yii::$app->user->getId()))
             {
-                return $this->render($viewPath, [
+                return $this->redirect([$viewPath, 
                     'model' => $model,
                     'catList' => Tools::listaCategorias(),
                 ]);

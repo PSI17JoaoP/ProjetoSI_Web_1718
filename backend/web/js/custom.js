@@ -42,6 +42,17 @@ $(".rowListaUsers").click(function()
                 });
             }            
 
+            var statusUrl = $("#userStatusSim").data('href');
+            $("#userStatusSim").attr('href', statusUrl+"?id="+detalhes["user"]["id"]);
+
+            if (detalhes["user"]["status"] == 10) 
+            {
+                $("#userStatus").text("Bloquear");
+            }else
+            {
+                $("#userStatus").text("Desbloquear");
+            }
+
             $("#userEmail").html(detalhes['user']['email']);
             
             $('.pesquisa_loading').css('display', 'none');
@@ -50,8 +61,20 @@ $(".rowListaUsers").click(function()
     
         $('#userAnuncios').empty();
             
+        $("#userStatusOpt").css('display', "none");
+
         $("#userInfo").css('display', "none");
         $('.pesquisa_loading').css('display', 'block');
+});
+
+$('#userStatus').click(function()
+{
+    $("#userStatusOpt").css('display', "inline-block");
+});
+
+$('#userStatusNao').click(function()
+{
+    $("#userStatusOpt").css('display', "none");
 });
 
 if($('.site-index').length){

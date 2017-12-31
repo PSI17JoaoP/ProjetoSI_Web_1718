@@ -20,10 +20,10 @@ class SignupCest
         $I->see('Registo', 'h3');
         $I->submitForm($this->formId, []);
         $I->wait(5);
-        $I->seeValidationError('“Nome do utilizador” não pode ficar em branco.');
-        $I->seeValidationError('“Palavra-passe” não pode ficar em branco.');
-        $I->seeValidationError('“Verificar Palavra-passe” não pode ficar em branco.');
-        $I->seeValidationError('“Email” não pode ficar em branco.');
+        $I->see('“Nome do utilizador” não pode ficar em branco.');
+        $I->see('“Palavra-passe” não pode ficar em branco.');
+        $I->see('“Verificar Palavra-passe” não pode ficar em branco.');
+        $I->see('“Email” não pode ficar em branco.');
 
     }
 
@@ -31,7 +31,7 @@ class SignupCest
     {
         $I->submitForm(
             $this->formId, [
-            'SignupForm[username]'  => 'tester',
+            'SignupForm[username]'  => 'testerExample5',
             'SignupForm[email]'     => 'ttttt',
             'SignupForm[password]'  => 'tester_password',
             'SignupForm[checkPassword]'  => 'tester_password',
@@ -47,16 +47,16 @@ class SignupCest
     public function signupSuccessfully(AcceptanceTester $I)
     {
         $I->submitForm($this->formId, [
-            'SignupForm[username]' => 'testerExample',
-            'SignupForm[email]' => 'tester.email@example.com',
+            'SignupForm[username]' => 'testerExample5',
+            'SignupForm[email]' => 'tester.email5@example.com',
             'SignupForm[password]' => 'tester_password',
             'SignupForm[checkPassword]'  => 'tester_password',
         ]);
 
         $I->wait(5);
         $I->seeRecord('common\models\User', [
-            'username' => 'testerExample',
-            'email' => 'tester.email@example.com',
+            'username' => 'testerExample5',
+            'email' => 'tester.email5@example.com',
         ]);
         
         $I->see('Criar Anúncio');

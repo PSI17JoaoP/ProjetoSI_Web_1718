@@ -22,6 +22,7 @@ dmstr\web\AdminLteAsset::register($this);
                                 <tr>
                                     <th>Nome do cliente</th>
                                     <th>Email</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,8 +32,14 @@ dmstr\web\AdminLteAsset::register($this);
                                         echo "
                                         <tr class='rowListaUsers' data-url='". Url::toRoute(['user/detalhes']) ."' data-id='". $cliente['id'] ."'>
                                             <td>". $cliente['nome_completo'] ."</td>
-                                            <td>". $cliente['email'] ."</td>
-                                        </tr>";
+                                            <td>". $cliente['email'] ."</td>";
+                                        if ($cliente['status'] == 10) {
+                                            echo "<td>Ativo</td>";
+                                        }else{
+                                            echo "<td>Bloqueado</td>";
+                                        }
+
+                                        echo"</tr>";
                                     }
                                 ?>
                             </tbody>

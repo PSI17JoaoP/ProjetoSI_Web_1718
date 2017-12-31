@@ -103,7 +103,7 @@ class ClienteForm extends Model
     public function atualizar($cliente) {
 
         //static
-        $this->dataNasc = $cliente->data_nasc;
+        //$this->dataNasc = $cliente->data_nasc;
         
         $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
 

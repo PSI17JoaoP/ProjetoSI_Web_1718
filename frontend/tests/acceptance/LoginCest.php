@@ -15,7 +15,7 @@ class LoginCest
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
         ]);
-        $I->amOnRoute('site/login');
+        $I->amOnPage('site/login');
     }
 
     protected function formParams($login, $password)
@@ -29,25 +29,29 @@ class LoginCest
     public function checkEmpty(AcceptanceTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('', ''));
-        $I->seeValidationError('“Nome do utilizador” não pode ficar em branco.');
-        $I->seeValidationError('“Palavra-passe” não pode ficar em branco.');
+        $I->wait(5);
+        $I->see('“Nome do utilizador” não pode ficar em branco.');
+        $I->see('“Palavra-passe” não pode ficar em branco.');
     }
 
     public function checkWrongPassword(AcceptanceTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('erao', 'wrong'));
-        $I->seeValidationError('A palavra-passe está incorreta.');
+        $I->wait(5);
+        $I->see('A palavra-passe está incorreta.');
     }
 
     public function checkWrongUsername(AcceptanceTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('teste', 'wrong'));
-        $I->seeValidationError('Este utilizador não existe.');
+        $I->wait(5);
+        $I->see('Este utilizador não existe ou está bloqueado.');
     }
     
     public function checkValidLogin(AcceptanceTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('erao', 'password_0'));
+        $I->wait(5);
         $I->see('erao');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Registo');

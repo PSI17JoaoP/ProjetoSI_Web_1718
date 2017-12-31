@@ -62,8 +62,11 @@ class CategoriasController extends ActiveController
 
         $tier1 = $dados["CategoriaMae"];
         $tier2 = $dados["CategoriaFilha"];
-        $tier3 = $dados["CategoriaNeta"];
-
+        
+        if(isset($dados["CategoriaNeta"]))
+        {
+            $tier3 = $dados["CategoriaNeta"];
+        }
         //----------
         $base = new Categoria();
         $base->nome = $tier1["nome"];
