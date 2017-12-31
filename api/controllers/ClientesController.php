@@ -46,7 +46,7 @@ class ClientesController extends ActiveController
         }
 
         //return ['PIN' => null, 'User' => null];
-        return new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);
+        throw new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);
     }
 
     public function actionPreferidas($id)
@@ -62,6 +62,6 @@ class ClientesController extends ActiveController
             return ['ID_User' => $id, 'CategoriasPreferidas' => $preferidas];
         }
 
-        return new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);
+        throw new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);
     }
 }

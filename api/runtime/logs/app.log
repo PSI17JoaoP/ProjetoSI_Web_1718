@@ -1685,3 +1685,205 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1512146625.6035
     'REQUEST_TIME' => 1512146625
 ]
+2017-12-31 14:52:29 [192.168.1.2][2][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.1.2
+2017-12-31 14:52:28 [192.168.1.2][2][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '192.168.1.2'
+    'REMOTE_PORT' => '49680'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => '192.168.1.2'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/categorias'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/categorias'
+    'PHP_SELF' => '/index.php/categorias'
+    'HTTP_HOST' => '192.168.1.2:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '178'
+    'HTTP_CONTENT_LENGTH' => '178'
+    'HTTP_AUTHORIZATION' => 'Basic TVBXN1A6'
+    'HTTP_ORIGIN' => 'chrome-extension://aejoelaoggembcahagimdiliamlcdmfm'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,pt-PT;q=0.8,pt;q=0.7'
+    'PHP_AUTH_USER' => 'MPW7P'
+    'PHP_AUTH_PW' => ''
+    'REQUEST_TIME_FLOAT' => 1514731948.0456
+    'REQUEST_TIME' => 1514731948
+]
+2017-12-31 17:15:06 [192.168.1.3][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "". in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2017-12-31 17:15:05 [192.168.1.3][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '192.168.1.3'
+    'REMOTE_PORT' => '34191'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => '192.168.1.2'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PHP_SELF' => '/index.php'
+    'HTTP_HOST' => '192.168.1.2:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Linux; Android 4.4.4; E2105 Build/24.0.A.5.14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7'
+    'REQUEST_TIME_FLOAT' => 1514740505.4549
+    'REQUEST_TIME' => 1514740505
+]
+2017-12-31 17:16:07 [192.168.1.3][-][-][error][yii\web\HttpException:405] yii\web\MethodNotAllowedHttpException: Method Not Allowed. This URL can only handle the following request methods: GET, HEAD. in C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\filters\VerbFilter.php:105
+Stack trace:
+#0 [internal function]: yii\filters\VerbFilter->beforeAction(Object(yii\base\ActionEvent))
+#1 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Component.php(557): call_user_func(Array, Object(yii\base\ActionEvent))
+#2 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(274): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#3 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Controller.php(164): yii\base\Controller->beforeAction(Object(yii\rest\IndexAction))
+#4 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Controller.php(155): yii\web\Controller->beforeAction(Object(yii\rest\IndexAction))
+#5 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('', Array)
+#6 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('categorias/', Array)
+#7 C:\wamp64\www\ProjetoSI_Web_1718\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\wamp64\www\ProjetoSI_Web_1718\api\web\index.php(17): yii\base\Application->run()
+#9 {main}
+2017-12-31 17:16:07 [192.168.1.3][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.1.3
+2017-12-31 17:16:07 [192.168.1.3][-][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '192.168.1.3'
+    'REMOTE_PORT' => '49495'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => '192.168.1.2'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/categorias/'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/categorias/'
+    'PHP_SELF' => '/index.php/categorias/'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_AUTHORIZATION' => 'Basic TVBXN1A6'
+    'CONTENT_TYPE' => 'application/json; charset=utf-8'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=utf-8'
+    'HTTP_USER_AGENT' => 'Dalvik/1.6.0 (Linux; U; Android 4.4.4; E2105 Build/24.0.A.5.14)'
+    'HTTP_HOST' => '192.168.1.2:8888'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_ACCEPT_ENCODING' => 'gzip'
+    'CONTENT_LENGTH' => '146'
+    'HTTP_CONTENT_LENGTH' => '146'
+    'PHP_AUTH_USER' => 'MPW7P'
+    'PHP_AUTH_PW' => ''
+    'REQUEST_TIME_FLOAT' => 1514740567.0664
+    'REQUEST_TIME' => 1514740567
+]
+2017-12-31 17:17:55 [192.168.1.3][2][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.1.3
+2017-12-31 17:17:53 [192.168.1.3][2][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '192.168.1.3'
+    'REMOTE_PORT' => '38758'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => '192.168.1.2'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/categorias'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/categorias'
+    'PHP_SELF' => '/index.php/categorias'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_AUTHORIZATION' => 'Basic TVBXN1A6'
+    'CONTENT_TYPE' => 'application/json; charset=utf-8'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=utf-8'
+    'HTTP_USER_AGENT' => 'Dalvik/1.6.0 (Linux; U; Android 4.4.4; E2105 Build/24.0.A.5.14)'
+    'HTTP_HOST' => '192.168.1.2:8888'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_ACCEPT_ENCODING' => 'gzip'
+    'CONTENT_LENGTH' => '146'
+    'HTTP_CONTENT_LENGTH' => '146'
+    'PHP_AUTH_USER' => 'MPW7P'
+    'PHP_AUTH_PW' => ''
+    'REQUEST_TIME_FLOAT' => 1514740673.1945
+    'REQUEST_TIME' => 1514740673
+]
+2017-12-31 17:22:10 [192.168.1.3][2][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.1.3
+2017-12-31 17:22:10 [192.168.1.3][2][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '192.168.1.3'
+    'REMOTE_PORT' => '58608'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => '192.168.1.2'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/categorias'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/categorias'
+    'PHP_SELF' => '/index.php/categorias'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_AUTHORIZATION' => 'Basic TVBXN1A6'
+    'CONTENT_TYPE' => 'application/json; charset=utf-8'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=utf-8'
+    'HTTP_USER_AGENT' => 'Dalvik/1.6.0 (Linux; U; Android 4.4.4; E2105 Build/24.0.A.5.14)'
+    'HTTP_HOST' => '192.168.1.2:8888'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_ACCEPT_ENCODING' => 'gzip'
+    'CONTENT_LENGTH' => '136'
+    'HTTP_CONTENT_LENGTH' => '136'
+    'PHP_AUTH_USER' => 'MPW7P'
+    'PHP_AUTH_PW' => ''
+    'REQUEST_TIME_FLOAT' => 1514740930.3622
+    'REQUEST_TIME' => 1514740930
+]
+2017-12-31 17:39:33 [192.168.1.3][2][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.1.3
+2017-12-31 17:39:33 [192.168.1.3][2][-][info][application] $_SERVER = [
+    'DOCUMENT_ROOT' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web'
+    'REMOTE_ADDR' => '192.168.1.3'
+    'REMOTE_PORT' => '34643'
+    'SERVER_SOFTWARE' => 'PHP 7.0.10 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => '192.168.1.2'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/categorias'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => 'C:\\wamp64\\www\\ProjetoSI_Web_1718\\api\\web\\index.php'
+    'PATH_INFO' => '/categorias'
+    'PHP_SELF' => '/index.php/categorias'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_AUTHORIZATION' => 'Basic TVBXN1A6'
+    'CONTENT_TYPE' => 'application/json; charset=utf-8'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=utf-8'
+    'HTTP_USER_AGENT' => 'Dalvik/1.6.0 (Linux; U; Android 4.4.4; E2105 Build/24.0.A.5.14)'
+    'HTTP_HOST' => '192.168.1.2:8888'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_ACCEPT_ENCODING' => 'gzip'
+    'CONTENT_LENGTH' => '138'
+    'HTTP_CONTENT_LENGTH' => '138'
+    'PHP_AUTH_USER' => 'MPW7P'
+    'PHP_AUTH_PW' => ''
+    'REQUEST_TIME_FLOAT' => 1514741973.3609
+    'REQUEST_TIME' => 1514741973
+]
