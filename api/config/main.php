@@ -71,6 +71,8 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'categorias',
                     'extraPatterns' => [
+                        'GET generos' => 'generos',
+                        'GET tipos' => 'tipos',
                         'POST /' => 'criar',
                     ],
                 ],

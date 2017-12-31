@@ -2,6 +2,7 @@
 
 namespace api\controllers;
 
+use common\models\TipoRoupas;
 use Yii;
 
 use common\models\User;
@@ -19,6 +20,7 @@ use common\models\CategoriaEletronica;
 use common\models\CategoriaSmartphones;
 use common\models\CategoriaComputadores;
 use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 
 
 class CategoriasController extends ActiveController
@@ -202,4 +204,21 @@ class CategoriasController extends ActiveController
         throw new BadRequestHttpException("Não foi possivel inserir as categorias.");
     }
 
+    public function actionGeneros() {
+
+        if(($generos = GeneroJogos::find()->all()) != null) {
+            return $generos;
+        }
+
+        throw new NotFoundHttpException("Não foram encontrados géneros de jogos.");
+    }
+
+    public function actionTipos() {
+
+        if(($tipos = TipoRoupas::find()->all()) != null) {
+            return $tipos;
+        }
+
+        throw new NotFoundHttpException("Não foram encontrados géneros de jogos.");
+    }
 }
