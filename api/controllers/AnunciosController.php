@@ -58,7 +58,7 @@ class AnunciosController extends ActiveController
         }
 
         //return ['id' => $id, 'Propostas' => null];
-        return new NotFoundHttpException('Não foi encontrado um anuncio com o ID desejado.', 404);
+        throw new NotFoundHttpException('Não foi encontrado um anuncio com o ID desejado.', 404);
     }
 
     public function actionTodasPropostas($username)
@@ -76,7 +76,7 @@ class AnunciosController extends ActiveController
             return ['Propostas' => $propostas];
         }
 
-        return new NotFoundHttpException('Não foi encontrado o utilizador', 404);
+        throw new NotFoundHttpException('Não foi encontrado o utilizador', 404);
     }
 
     public function actionPesquisa($titulo = null, $regiao = null, $categoria = null)
@@ -146,7 +146,7 @@ class AnunciosController extends ActiveController
         }
 
         //return ['Dados' => ['Titulo' => $titulo, 'Região' => $regiao, 'Categoria' => $categoria], 'Anuncios' => null];
-        return new NotFoundHttpException('Não foi encontradas categorias com os dados introduzidos.', 404);
+        throw new NotFoundHttpException('Não foi encontradas categorias com os dados introduzidos.', 404);
     }
 
     public function actionCategorias($id)
@@ -164,7 +164,7 @@ class AnunciosController extends ActiveController
         }
 
         //return ['id' => $id, 'Categorias' => null];
-        return new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
+        throw new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
     }
 
     public function actionSugeridos($username)
@@ -235,7 +235,7 @@ class AnunciosController extends ActiveController
             return $anunciosDestaques;
         }
 
-        return new NotFoundHttpException('Utilizador não encontrado.', 404);
+        throw new NotFoundHttpException('Utilizador não encontrado.', 404);
     }
 
 }

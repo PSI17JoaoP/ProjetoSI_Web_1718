@@ -8,6 +8,7 @@ use common\models\Proposta;
 use yii\rest\ActiveController;
 use yii\filters\auth\HttpBasicAuth;
 use frontend\models\GestorCategorias;
+use yii\web\NotFoundHttpException;
 
 
 class PropostasController extends ActiveController
@@ -51,7 +52,7 @@ class PropostasController extends ActiveController
             }
         }
 
-        return new NotFoundHttpException('Não foi encontradas categorias da proposta desejada.', 404);
+        throw new NotFoundHttpException('Não foi encontradas categorias da proposta desejada.', 404);
 
     }
 }
