@@ -50,12 +50,12 @@ class CategoriasController extends ActiveController
         return $cliente;
     }
 
-    /*public function actions()
+    public function actions()
     {
         $actions = parent::actions();
         unset($actions['create'], $actions['delete']);
         return $actions;
-    }*/
+    }
 
     public function actionCriar()
     {
