@@ -82,7 +82,7 @@ class CategoriasController extends ActiveController
                     $categoria = new CategoriaBrinquedos();
                     $categoria->id_categoria = $base->id;
                     $categoria->editora = $tier2['editora'];
-                    $categoria->faixa_etaria = $tier2['faixaEtaria'];
+                    $categoria->faixa_etaria = $tier2['faixa_etaria'];
                     $categoria->descricao = $tier2['descricao'];
 
                     if ($categoria->save()) {
@@ -95,14 +95,14 @@ class CategoriasController extends ActiveController
                     $categoria = new CategoriaBrinquedos();
                     $categoria->id_categoria = $base->id;
                     $categoria->editora = $tier2['editora'];
-                    $categoria->faixa_etaria = $tier2['faixaEtaria'];
+                    $categoria->faixa_etaria = $tier2['faixa_etaria'];
                     $categoria->descricao = $tier2['descricao'];
 
                     if ($categoria->save()) {
 
                         $subCategoria = new CategoriaJogos();
                         $subCategoria->id_brinquedo = $categoria->id_categoria;
-                        $subCategoria->id_genero = $tier3['idGenero'];
+                        $subCategoria->id_genero = $tier3['id_genero'];
                         $subCategoria->produtora = $tier3['produtora'];
 
                         if ($subCategoria->save()) {
