@@ -42,7 +42,7 @@ class ClientesController extends ActiveController
         {
             $user = User::findOne(['id' => $cliente->id_user]);
 
-            return ['PIN' => $pin, 'User' => ['Username' => $user->username, 'Email' => $user->email]];
+            return ['PIN' => $pin, 'User' => ['ID' => $user->id, 'Username' => $user->username, 'Email' => $user->email]];
         }
 
         //return ['PIN' => null, 'User' => null];
