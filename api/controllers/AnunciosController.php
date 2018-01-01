@@ -82,67 +82,80 @@ class AnunciosController extends ActiveController
 
     public function actionPesquisa($titulo = null, $regiao = null, $categoria = null)
     {
-        $params = ['like', 'titulo', $titulo];
+        $params1 = "";
+        $params2 = "";
+        $params3 = "";
+
+        if($titulo !== null)
+        {
+            $params1 = ['like', 'titulo', $titulo];
+        }
 
         if($regiao !== null)
         {
             $clientesIDs = Cliente::find()->where(['regiao' => $regiao])->select('id_user')->all();
 
-            $params[] = ['id_user' => $clientesIDs];
+            $params2 = ['id_user' => $clientesIDs];
         }
 
         if($categoria !== null)
         {
             $categoriasIDs = null;
+            $keyCat = null;
 
             switch ($categoria)
             {
                 case 'brinquedos':
 
                     $categoriasIDs = CategoriaBrinquedos::find()->select('id_categoria')->all();
-
+                    $keyCat = 'id_categoria';
                     break;
 
                 case 'jogos':
 
-                    $categoriasIDs = CategoriaJogos::find()->select('id_categoria')->all();
-
+                    $categoriasIDs = CategoriaJogos::find()->select('id_brinquedo')->all();
+                    $keyCat = 'id_brinquedo';
                     break;
 
                 case 'eletronica':
 
                     $categoriasIDs = CategoriaEletronica::find()->select('id_categoria')->all();
-
+                    $keyCat = 'id_categoria';
                     break;
 
                 case 'computadores':
 
-                    $categoriasIDs = CategoriaComputadores::find()->select('id_categoria')->all();
-
+                    $categoriasIDs = CategoriaComputadores::find()->select('id_eletronica')->all();
+                    $keyCat = 'id_eletronica';
                     break;
 
                 case 'smartphones':
 
-                    $categoriasIDs = CategoriaSmartphones::find()->select('id_categoria')->all();
-
+                    $categoriasIDs = CategoriaSmartphones::find()->select('id_eletronica')->all();
+                    $keyCat = 'id_eletronica';
                     break;
 
                 case 'livros':
 
                     $categoriasIDs = CategoriaLivros::find()->select('id_categoria')->all();
-
+                    $keyCat = 'id_categoria';
                     break;
 
                 case 'roupa':
 
                     $categoriasIDs = CategoriaLivros::find()->select('id_categoria')->all();
+                    $keyCat = 'id_categoria';
+            }
+            $listaIDs = [];
+            
+            foreach ($categoriasIDs as $key => $cat) {
+                array_push($listaIDs, $cat[$keyCat]);
             }
 
-            $params[] = ['cat_oferecer' => $categoriasIDs];
+            $params3 = ['cat_oferecer' => $listaIDs];
         }
 
-        //if($anuncios = Anuncio::findAll($params)) {
-        if($anuncios = Anuncio::find()->where($params)->all()) {
+        if($anuncios = Anuncio::find()->where($params1)->andWhere($params2)->andWhere($params3)->all()) {
             return ['Dados' => ['Titulo' => $titulo, 'Região' => $regiao, 'Categoria' => $categoria], 'Anuncios' => $anuncios];
         }
 
