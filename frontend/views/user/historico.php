@@ -2,7 +2,7 @@
 /* @var $this yii\web\View */
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
+
 
 
 $this->title = 'Histórico';
@@ -78,7 +78,7 @@ $this->title = 'Histórico';
                 
                  
         </div>
-    </div>
-
+        </div>
+        </div>
      
 </div>
