@@ -2,8 +2,9 @@
 
 namespace api\controllers;
 
-use common\models\Cliente;
 use common\models\User;
+use common\models\Cliente;
+use common\models\Anuncio;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
 use yii\filters\auth\HttpBasicAuth;
@@ -60,6 +61,18 @@ class ClientesController extends ActiveController
             }
 
             return ['ID_User' => $id, 'CategoriasPreferidas' => $preferidas];
+        }
+
+        throw new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);
+    }
+
+    public function actionAnuncios($id)
+    {
+        if($cliente = Cliente::findOne(['id_user' => $id]))
+        {
+            $anuncios = Anuncio::findAll(['id_user' => $id]);
+
+            return ['ID_User' => $id, 'Anuncios' => $anuncios];
         }
 
         throw new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);

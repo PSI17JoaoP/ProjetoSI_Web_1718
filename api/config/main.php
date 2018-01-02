@@ -84,6 +84,7 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'clientes',
                     'extraPatterns' => [
+                        'GET {id}/anuncios' => 'anuncios',
                         'GET pin/{pin}' => 'pin',
                         'GET {id}/categorias_preferidas' => 'preferidas'
                     ],
