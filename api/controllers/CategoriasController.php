@@ -176,7 +176,7 @@ class CategoriasController extends ActiveController
                     $categoria->id_categoria = $base->id;
                     $categoria->marca = $tier2['marca'];
                     $categoria->tamanho = $tier2['tamanho'];
-                    $categoria->id_tipo = $tier2['idTipo'];
+                    $categoria->id_tipo = $tier2['id_tipo'];
 
                     if($categoria->save()) {
                         return ['ID' => $categoria->id_categoria];
