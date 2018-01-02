@@ -55,6 +55,9 @@ return [
                         'GET {id}/propostas' => 'propostas',
                         'GET {id}/categorias' => 'categorias',
                         'GET titulo/{titulo}' => 'pesquisa',
+                        'GET regiao/{regiao}' => 'pesquisa',
+                        'GET categoria/{categoria}' => 'pesquisa',
+                        'GET regiao/{regiao}/categoria/{categoria}' => 'pesquisa',
                         'GET titulo/{titulo}/regiao/{regiao}' => 'pesquisa',
                         'GET titulo/{titulo}/categoria/{categoria}' => 'pesquisa',
                         'GET titulo/{titulo}/regiao/{regiao}/categoria/{categoria}' => 'pesquisa',
@@ -71,7 +74,10 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'categorias',
                     'extraPatterns' => [
+                        'GET generos' => 'generos',
+                        'GET tipos' => 'tipos',
                         'POST /' => 'criar',
+                        'DELETE {id}' => 'apagar',
                     ],
                 ],
                 [
@@ -96,10 +102,6 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'users',
-                    'extraPatterns' => [
-                        'GET {id}/username' => 'username',
-                        'GET {id}/password' => 'password',
-                    ],
                 ],
             ],
         ],

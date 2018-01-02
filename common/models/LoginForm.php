@@ -69,7 +69,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user) {
-                $this->addError($attribute, 'Este utilizador não existe.');
+                $this->addError($attribute, 'Este utilizador não existe ou está bloqueado.');
             }
         }
     }

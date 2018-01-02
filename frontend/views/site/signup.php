@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= Html::tag('h3', $this->title, ['style' => ['text-align' => 'center', 'margin-bottom' => '30px']])?>
 
-                <?php $form = ActiveForm::begin(); ?>
+                <?php $form = ActiveForm::begin(['id' => 'signup-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput() ?>
 

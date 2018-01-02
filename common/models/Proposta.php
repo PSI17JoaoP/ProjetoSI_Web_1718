@@ -88,4 +88,50 @@ class Proposta extends ActiveRecord
     {
         return $this->hasOne(Categoria::className(), ['id' => 'cat_proposto']);
     }
+
+
+    //-----------------------------------------------------
+    //                      MOSQUITTO
+    //-----------------------------------------------------
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        $objeto=new \stdClass();
+
+        $objeto->id = $this->id;
+        $objeto->cat_proposto = $this->cat_proposto;
+        $objeto->quant = $this->quant;
+        $objeto->id_user = $this->id_user;
+        $objeto->id_anuncio = $this->id_anuncio;
+        $objeto->estado = $this->estado;
+        $objeto->data_proposta = $this->data_proposta;
+
+        $objJSON= json_encode($objeto);
+
+        if($insert)
+            $this->Publicar("InsertProposta",$objJSON);
+        else
+            $this->Publicar("UpdateProposta",$objJSON);
+    }
+
+    public function Publicar($canal,$msg)
+    {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = ""; // set your username
+        $password = ""; // set your password
+        $client_id= "APIServer-publisher"; // unique!
+        $mqtt= new \common\mosquitto\phpMQTT($server, $port, $client_id);
+       
+        if ($mqtt->connect(true, NULL, $username, $password))
+        {
+            $mqtt->publish($canal, $msg, 0);
+            $mqtt->close();
+        }else 
+        { 
+            file_put_contents("debug.output","Timeout!"); 
+        }
+    }
 }

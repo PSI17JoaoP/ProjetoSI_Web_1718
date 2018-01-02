@@ -109,4 +109,55 @@ class Anuncio extends ActiveRecord
     {
         return $this->hasMany(Proposta::className(), ['id_anuncio' => 'id']);
     }
+
+
+    //-----------------------------------------------------
+    //                      MOSQUITTO
+    //-----------------------------------------------------
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        
+        $objeto=new \stdClass();
+
+        $objeto->id = $this->id;
+        $objeto->titulo = $this->titulo;
+        $objeto->id_user = $this->id_user;
+        $objeto->cat_oferecer = $this->cat_oferecer;
+        $objeto->quant_oferecer = $this->quant_oferecer;
+        $objeto->cat_receber = $this->cat_receber;
+        $objeto->quant_receber = $this->quant_receber;
+        $objeto->estado = $this->estado;
+        $objeto->data_criacao = $this->data_criacao;
+        $objeto->data_conclusao = $this->data_conclusao;
+        $objeto->comentarios = $this->comentarios;
+
+
+        $objJSON= json_encode($objeto);
+
+        if($insert)
+            $this->Publicar("InsertAnuncio",$objJSON);
+        else
+            $this->Publicar("UpdateAnuncio",$objJSON);
+    }
+
+    public function Publicar($canal,$msg)
+    {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = ""; // set your username
+        $password = ""; // set your password
+        $client_id= "APIServer-publisher"; // unique!
+        $mqtt= new \common\mosquitto\phpMQTT($server, $port, $client_id);
+       
+        if ($mqtt->connect(true, NULL, $username, $password))
+        {
+            $mqtt->publish($canal, $msg, 0);
+            $mqtt->close();
+        }else 
+        { 
+            file_put_contents("debug.output","Timeout!"); 
+        }
+    }
 }

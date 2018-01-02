@@ -25,7 +25,7 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'perfil', 'detalhes'],
+                        'actions' => ['index', 'perfil', 'detalhes', 'mudar-status'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ]
@@ -58,20 +58,31 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-
-        $notifications = array('Notification 1', 'Notification 2');
-        
-        $this->view->params['notifications'] = $notifications;
-        $this->layout = 'main';
-
         $clientes = (new Query())
-                    ->select(['id', 'email'])
+                    ->select(['id', 'email', 'status'])
                     ->from(User::tableName())
+                    ->where('id != 1')
                     ->join('LEFT JOIN', Cliente::tableName(), user::TableName().".id = ".Cliente::tableName().".id_user")
                     ->addSelect('nome_completo')
                     ->all();
 
         return $this->render('index', ['clientes' => $clientes]);
+    }
+
+    public function actionMudarStatus($id)
+    {
+        $user = User::findOne(['id' => $id]);
+
+        if ($user->status == 10) 
+        {
+            $user->status = 0;
+        }else
+        {
+            $user->status = 10;
+        }
+        $user->save();
+        
+        $this->redirect(['user/index']);
     }
 
     public function actionDetalhes($id)
@@ -110,19 +121,12 @@ class UserController extends Controller
     }
 
     public function actionPerfil()
-    {
-
-        $notifications = array('Notification 1', 'Notification 2');
-        
-        $this->view->params['notifications'] = $notifications;
-        $this->layout = 'main';
-
-        
+    {  
         $model = new PerfilForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->update()) {
             
-            return $this->render('index');
+            return $this->redirect(['user/index']);
             
         } else {
 

@@ -18,19 +18,19 @@ class LoginCest
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
         ]);
+    
     }
     /**
      * @param FunctionalTester $I
      */
     public function loginUser(FunctionalTester $I)
     {
+        $I->am('guest');
         $I->amOnPage('/site/login');
-        $I->fillField('Username', 'erau');
-        $I->fillField('Password', 'password_0');
-        $I->click('login-button');
+        $I->fillField('#loginform-username', 'erau');
+        $I->fillField('#loginform-password', 'password_0');
+        $I->click('Login');
 
-        $I->see('Logout (erau)', 'form button[type=submit]');
-        $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+        $I->see('Dashboard - Back Office');
     }
 }

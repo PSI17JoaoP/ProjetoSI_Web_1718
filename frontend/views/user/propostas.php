@@ -20,7 +20,7 @@ $this->title = 'Propostas Recebidas';
         ],
     ]) ?>
 
-<div class="col-12 col-md-8">
+<div class="col-12 col-md-12">
 <?php
     if($tipo != null)
     {
@@ -88,7 +88,7 @@ $this->title = 'Propostas Recebidas';
     </div>
 </div>
 
-<div class="col-12 col-md-8">
+<div class="col-12 col-md-12">
     <div class="panel panel-default">
         <div class="panel-heading">
             <strong>Propostas aceites</strong>                            

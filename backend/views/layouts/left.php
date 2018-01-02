@@ -7,8 +7,8 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Estatísticas', 'options' => ['class' => 'header']],
-                    ['label' => 'Anúncios', 'icon' => 'circle-o', 'url' => '#'],
-                    ['label' => 'Propostas', 'icon' => 'circle-o', 'url' => '#'],
+                    ['label' => 'Anúncios', 'icon' => 'circle-o', 'url' => ['site/anuncios']],
+                    ['label' => 'Propostas', 'icon' => 'circle-o', 'url' => ['site/propostas']],
                     ['label' => 'Utilizadores', 'icon' => 'circle-o', 'url' => ['user/index']],
                 ],
             ]

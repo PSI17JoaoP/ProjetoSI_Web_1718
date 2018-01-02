@@ -9,7 +9,7 @@ use yii\bootstrap\ActiveForm;
 
 ?>
 
-<div class="col-12 col-md-8">
+<div class="col-12 col-md-12">
 <?php
     if($tipo != null)
     {
@@ -39,6 +39,8 @@ use yii\bootstrap\ActiveForm;
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <?= $form->field($model, 'nomeCompleto')->textInput() ?>
+
+                            <?= $form->field($model, 'dataNasc')->input('date') ?>
 
                             <?= $form->field($model, 'telefone')->textInput(['type' => 'number']) ?>
 

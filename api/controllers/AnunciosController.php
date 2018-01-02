@@ -31,6 +31,7 @@ class AnunciosController extends ActiveController
 
         $behaviors['authenticator'] = [
             'class' => HttpBasicAuth::className(),
+            'except' => ['pesquisa'],
             'auth' => [$this, 'auth']
         ];
 
@@ -58,7 +59,7 @@ class AnunciosController extends ActiveController
         }
 
         //return ['id' => $id, 'Propostas' => null];
-        return new NotFoundHttpException('Não foi encontrado um anuncio com o ID desejado.', 404);
+        throw new NotFoundHttpException('Não foi encontrado um anuncio com o ID desejado.', 404);
     }
 
     public function actionTodasPropostas($username)
@@ -76,77 +77,90 @@ class AnunciosController extends ActiveController
             return ['Propostas' => $propostas];
         }
 
-        return new NotFoundHttpException('Não foi encontrado o utilizador', 404);
+        throw new NotFoundHttpException('Não foi encontrado o utilizador', 404);
     }
 
     public function actionPesquisa($titulo = null, $regiao = null, $categoria = null)
     {
-        $params = ['like', 'titulo', $titulo];
+        $params1 = "";
+        $params2 = "";
+        $params3 = "";
+
+        if($titulo !== null)
+        {
+            $params1 = ['like', 'titulo', $titulo];
+        }
 
         if($regiao !== null)
         {
             $clientesIDs = Cliente::find()->where(['regiao' => $regiao])->select('id_user')->all();
 
-            $params[] = ['id_user' => $clientesIDs];
+            $params2 = ['id_user' => $clientesIDs];
         }
 
         if($categoria !== null)
         {
             $categoriasIDs = null;
+            $keyCat = null;
 
             switch ($categoria)
             {
                 case 'brinquedos':
 
                     $categoriasIDs = CategoriaBrinquedos::find()->select('id_categoria')->all();
-
+                    $keyCat = 'id_categoria';
                     break;
 
                 case 'jogos':
 
-                    $categoriasIDs = CategoriaJogos::find()->select('id_categoria')->all();
-
+                    $categoriasIDs = CategoriaJogos::find()->select('id_brinquedo')->all();
+                    $keyCat = 'id_brinquedo';
                     break;
 
                 case 'eletronica':
 
                     $categoriasIDs = CategoriaEletronica::find()->select('id_categoria')->all();
-
+                    $keyCat = 'id_categoria';
                     break;
 
                 case 'computadores':
 
-                    $categoriasIDs = CategoriaComputadores::find()->select('id_categoria')->all();
-
+                    $categoriasIDs = CategoriaComputadores::find()->select('id_eletronica')->all();
+                    $keyCat = 'id_eletronica';
                     break;
 
                 case 'smartphones':
 
-                    $categoriasIDs = CategoriaSmartphones::find()->select('id_categoria')->all();
-
+                    $categoriasIDs = CategoriaSmartphones::find()->select('id_eletronica')->all();
+                    $keyCat = 'id_eletronica';
                     break;
 
                 case 'livros':
 
                     $categoriasIDs = CategoriaLivros::find()->select('id_categoria')->all();
-
+                    $keyCat = 'id_categoria';
                     break;
 
                 case 'roupa':
 
                     $categoriasIDs = CategoriaLivros::find()->select('id_categoria')->all();
+                    $keyCat = 'id_categoria';
+            }
+            $listaIDs = [];
+            
+            foreach ($categoriasIDs as $key => $cat) {
+                array_push($listaIDs, $cat[$keyCat]);
             }
 
-            $params[] = ['cat_oferecer' => $categoriasIDs];
+            $params3 = ['cat_oferecer' => $listaIDs];
         }
 
-        //if($anuncios = Anuncio::findAll($params)) {
-        if($anuncios = Anuncio::find()->where($params)->all()) {
+        if($anuncios = Anuncio::find()->where($params1)->andWhere($params2)->andWhere($params3)->all()) {
             return ['Dados' => ['Titulo' => $titulo, 'Região' => $regiao, 'Categoria' => $categoria], 'Anuncios' => $anuncios];
         }
 
         //return ['Dados' => ['Titulo' => $titulo, 'Região' => $regiao, 'Categoria' => $categoria], 'Anuncios' => null];
-        return new NotFoundHttpException('Não foi encontradas categorias com os dados introduzidos.', 404);
+        throw new NotFoundHttpException('Não foi encontradas categorias com os dados introduzidos.', 404);
     }
 
     public function actionCategorias($id)
@@ -164,7 +178,7 @@ class AnunciosController extends ActiveController
         }
 
         //return ['id' => $id, 'Categorias' => null];
-        return new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
+        throw new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
     }
 
     public function actionSugeridos($username)
@@ -235,7 +249,7 @@ class AnunciosController extends ActiveController
             return $anunciosDestaques;
         }
 
-        return new NotFoundHttpException('Utilizador não encontrado.', 404);
+        throw new NotFoundHttpException('Utilizador não encontrado.', 404);
     }
 
 }

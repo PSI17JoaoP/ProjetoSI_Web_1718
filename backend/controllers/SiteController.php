@@ -40,7 +40,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'pie-info'],
+                        'actions' => ['logout', 'index', 'pie-info', 'anuncios', 'propostas'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
@@ -154,7 +154,11 @@ class SiteController extends Controller
                     ->groupBy('id_user')
                     ->count('id_user');
         
-        $userMAnuncios = User::findOne(['id' => $idUserMAnuncios[0]])->username;
+        $userMAnuncios = "";
+        if ($idUserMAnuncios != "0") {
+           $userMAnuncios = User::findOne(['id' => $idUserMAnuncios[0]])->username;
+        }
+        
 
         array_push($estatisticas, $userMAnuncios);
 
@@ -164,16 +168,18 @@ class SiteController extends Controller
                     ->groupBy('categoria')
                     ->one();
 
-        array_push($estatisticas, $listaCat[$catPopular['categoria']]);
-
-        $notifications = ['Notification 1', 'Notification 2'];
-
-        $this->view->params['notifications'] = $notifications;
-        $this->layout = 'main';
+        $cat = "none";
+        if (isset($catPopular['categoria'])) {
+            $cat = $listaCat[$catPopular['categoria']];
+        }
+        array_push($estatisticas, $cat);
 
         return $this->render('index', ['stats' => $estatisticas]);
     }
 
+    /**
+     * Informação para alimentar o gráfico circular presente no index
+     */
     public function actionPieInfo()
     {
         if (Yii::$app->request->isAjax)
@@ -205,6 +211,79 @@ class SiteController extends Controller
             return $dados;
         }
     }
+
+    /**
+     * Estatísticas detalhadas sobre anúncios
+     */
+    public function actionAnuncios()
+    {
+
+        if (Yii::$app->request->isAjax) 
+        {
+            $dados = [];
+            $anunciosMes = (new Query())
+                ->select('MONTH(data_criacao) as "mes", COUNT(id) as "count"')
+                ->from(Anuncio::tableName())
+                ->where('MONTH(data_criacao) - MONTH(CURRENT_DATE) < 6')
+                ->groupBy('MONTH(data_criacao)')
+                ->all();
+            
+            $mesesPT = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            $mesAtual = \date('m');
+
+            for ($i = $mesAtual-5; $i <= $mesAtual ; $i++) 
+            { 
+                $dado = ["mes" => $mesesPT[$i-1], "count" => 0];
+
+                foreach ($anunciosMes as $key => $anuncio) 
+                {
+                    if($anuncio["mes"] == $i)
+                    {
+                        $dado = ["mes" => $mesesPT[$i-1], "count" => $anuncio["count"]];
+                    }
+                }
+                \array_push($dados, $dado);
+            }
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $dados;
+        }else
+        {
+            return $this->render('anuncios');
+        }
+    }
+
+    /**
+     * Estatísticas detalhadas sobre propostas
+     */
+    public function actionPropostas()
+    {
+        if (Yii::$app->request->isAjax) 
+        {
+            //$dados = [];
+            
+            $dados = (new Query())
+                ->select('count(id) as "count"')
+                ->from(Proposta::tableName())
+                ->where('estado = :estado', [':estado' => 'PENDENTE'])
+                ->join('JOIN', Cliente::tableName(), Proposta::tableName().'.id_user = '.Cliente::tableName().'.id_user')
+                ->addSelect('regiao')
+                ->groupBy('regiao')
+                ->all();
+
+            foreach ($dados as $key => $dado) 
+            {
+                $dados[$key]['regiao'] = Tools::listaRegioes()[$dado['regiao']];
+            }
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $dados;
+        }else
+        {
+            return $this->render('propostas');
+        }
+    }
+
 
     /**
      * Login action.

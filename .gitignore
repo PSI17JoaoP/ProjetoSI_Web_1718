@@ -35,3 +35,6 @@ phpunit.phar
 /.vagrant
 
 /.vscode
+
+chromedriver.exe
+*.jar

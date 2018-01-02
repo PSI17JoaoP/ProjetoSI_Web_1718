@@ -29,21 +29,27 @@ class LoginCest
     public function checkEmpty(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('', ''));
-        $I->seeValidationError('Username cannot be blank.');
-        $I->seeValidationError('Password cannot be blank.');
+        $I->seeValidationError('“Nome do utilizador” não pode ficar em branco.');
+        $I->seeValidationError('“Palavra-passe” não pode ficar em branco.');
     }
 
     public function checkWrongPassword(FunctionalTester $I)
     {
-        $I->submitForm('#login-form', $this->formParams('admin', 'wrong'));
-        $I->seeValidationError('Incorrect username or password.');
+        $I->submitForm('#login-form', $this->formParams('erao', 'wrong'));
+        $I->seeValidationError('A palavra-passe está incorreta.');
+    }
+
+    public function checkWrongUsername(FunctionalTester $I)
+    {
+        $I->submitForm('#login-form', $this->formParams('teste', 'wrong'));
+        $I->seeValidationError('Este utilizador não existe ou está bloqueado.');
     }
     
     public function checkValidLogin(FunctionalTester $I)
     {
-        $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
-        $I->see('Logout (erau)', 'form button[type=submit]');
+        $I->submitForm('#login-form', $this->formParams('erao', 'password_0'));
+        $I->see('erao');
         $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+        $I->dontSeeLink('Registo');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 
 dmstr\web\AdminLteAsset::register($this);
@@ -14,6 +15,12 @@ dmstr\web\AdminLteAsset::register($this);
     <p id="userEmail"></p>
     <p id="userTelefone"></p>
     <p id="userRegiao"></p>
+    <button id="userStatus" class="btn btn-warning btn-sm">Bloquear</button>
+    <span id="userStatusOpt" style="display:none">
+    Tem a certeza ?
+        <a id="userStatusSim" class="btn btn-danger btn-sm" data-href="<?= Url::toRoute(['user/mudar-status'])?>">Sim</a>
+        <button id="userStatusNao" class="btn btn-success btn-sm">Não</button>
+    </span>
 </div>
 <div class="col-xs-12">
     <div class="panel">

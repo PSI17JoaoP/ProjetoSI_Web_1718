@@ -85,4 +85,50 @@ class Cliente extends ActiveRecord
     {
         return $this->hasMany(Proposta::className(), ['id_user' => 'id_user']);
     }
+
+
+    //-----------------------------------------------------
+    //                      MOSQUITTO
+    //-----------------------------------------------------
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        $objeto=new \stdClass();
+
+        $objeto->id_user = $this->id_user;
+        $objeto->nome_completo = $this->nome_completo;
+        $objeto->data_nasc = $this->data_nasc;
+        $objeto->telefone = $this->telefone;
+        $objeto->regiao = $this->regiao;
+        $objeto->pin = $this->pin;
+        $objeto->path_imagem = $this->path_imagem;
+
+        $objJSON= json_encode($objeto);
+
+        if($insert)
+            $this->Publicar("InsertCliente",$objJSON);
+        else
+            $this->Publicar("UpdateCliente",$objJSON);
+    }
+
+    public function Publicar($canal,$msg)
+    {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = ""; // set your username
+        $password = ""; // set your password
+        $client_id= "APIServer-publisher"; // unique!
+        $mqtt= new \common\mosquitto\phpMQTT($server, $port, $client_id);
+       
+        if ($mqtt->connect(true, NULL, $username, $password))
+        {
+            $mqtt->publish($canal, $msg, 0);
+            $mqtt->close();
+        }else 
+        { 
+            file_put_contents("debug.output","Timeout!"); 
+        }
+    }
 }

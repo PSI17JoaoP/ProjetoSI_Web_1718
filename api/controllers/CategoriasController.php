@@ -2,6 +2,7 @@
 
 namespace api\controllers;
 
+use common\models\TipoRoupas;
 use Yii;
 
 use common\models\User;
@@ -18,6 +19,8 @@ use common\models\CategoriaBrinquedos;
 use common\models\CategoriaEletronica;
 use common\models\CategoriaSmartphones;
 use common\models\CategoriaComputadores;
+use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 
 
 class CategoriasController extends ActiveController
@@ -50,7 +53,7 @@ class CategoriasController extends ActiveController
     public function actions()
     {
         $actions = parent::actions();
-        unset($actions['create']);
+        unset($actions['create'], $actions['delete']);
         return $actions;
     }
 
@@ -62,104 +65,208 @@ class CategoriasController extends ActiveController
 
         $tier1 = $dados["CategoriaMae"];
         $tier2 = $dados["CategoriaFilha"];
-        $tier3 = $dados["CategoriaNeta"];
+        
+        if(isset($dados["CategoriaNeta"])) {
+            $tier3 = $dados["CategoriaNeta"];
+        }
 
         //----------
         $base = new Categoria();
         $base->nome = $tier1["nome"];
-        $base->save();
 
-        switch ($flag) 
-        {
-            case 'brinquedo':
-                $categoria = new CategoriaBrinquedos();
-                $categoria->id_categoria = $base->id;
-                $categoria->editora = $tier2['editora'];
-                $categoria->faixa_etaria = $tier2['faixaEtaria'];
-                $categoria->descricao = $tier2['descricao'];
-                $categoria->save();
+        if($base->save()) {
 
-                break;
-            
+            switch ($flag) {
+
+                case 'brinquedos':
+                    $categoria = new CategoriaBrinquedos();
+                    $categoria->id_categoria = $base->id;
+                    $categoria->editora = $tier2['editora'];
+                    $categoria->faixa_etaria = $tier2['faixa_etaria'];
+                    $categoria->descricao = $tier2['descricao'];
+
+                    if ($categoria->save()) {
+                        return ['ID' => $categoria->id_categoria];
+                    }
+
+                    break;
+
                 case 'jogos':
-                $categoria = new CategoriaBrinquedos();
-                $categoria->id_categoria = $base->id;
-                $categoria->editora = $tier2['editora'];
-                $categoria->faixa_etaria = $tier2['faixaEtaria'];
-                $categoria->descricao = $tier2['descricao'];
-                $categoria->save();
+                    $categoria = new CategoriaBrinquedos();
+                    $categoria->id_categoria = $base->id;
+                    $categoria->editora = $tier2['editora'];
+                    $categoria->faixa_etaria = $tier2['faixa_etaria'];
+                    $categoria->descricao = $tier2['descricao'];
 
-                $subCategoria = new CategoriaJogos();
-                $subCategoria->id_brinquedo = $categoria->id_categoria;
-                $subCategoria->id_genero = $tier3['idGenero'];
-                $subCategoria->produtora = $tier3['produtora'];
-                $subCategoria->save();
-                break;
+                    if ($categoria->save()) {
 
-            case 'eletronica':
-                $categoria = new CategoriaEletronica();
-                $categoria->id_categoria = $base->id;
-                $categoria->marca = $tier2['marca'];
-                $categoria->descricao = $tier2['descricao'];
-                $categoria->save();
-                break;
-            
-            case 'computadores':
-                $categoria = new CategoriaEletronica();
-                $categoria->id_categoria = $base->id;
-                $categoria->marca = $tier2['marca'];
-                $categoria->descricao = $tier2['descricao'];
-                $categoria->save();
+                        $subCategoria = new CategoriaJogos();
+                        $subCategoria->id_brinquedo = $categoria->id_categoria;
+                        $subCategoria->id_genero = $tier3['id_genero'];
+                        $subCategoria->produtora = $tier3['produtora'];
 
-                $subCategoria = new CategoriaComputadores();
-                $subCategoria->id_eletronica = $categoria->id_categoria;
-                $subCategoria->processador = $tier3['processador'];
-                $subCategoria->ram = $tier3['ram'];
-                $subCategoria->hdd = $tier3['hdd'];
-                $subCategoria->gpu = $tier3['gpu'];
-                $subCategoria->os = $tier3['os'];
-                $subCategoria->portatil = $tier3['portatil'];
-                $subCategoria->save();
-                break;
+                        if ($subCategoria->save()) {
+                            return ['ID' => $subCategoria->id_brinquedo];
+                        }
+                    }
 
-            case 'smartphones':
-                $categoria = new CategoriaEletronica();
-                $categoria->id_categoria = $base->id;
-                $categoria->marca = $tier2['marca'];
-                $categoria->descricao = $tier2['descricao'];
-                $categoria->save();
+                    break;
 
-                $subCategoria = new CategoriaSmartphones();
-                $subCategoria->id_eletronica = $categoria->id_categoria;
-                $subCategoria->processador = $tier3['processador'];
-                $subCategoria->ram = $tier3['ram'];
-                $subCategoria->hdd = $tier3['hdd'];
-                $subCategoria->os = $tier3['os'];
-                $subCategoria->tamanho = $tier3['tamanho'];
-                $subCategoria->save();
-                break;
+                case 'eletronica':
+                    $categoria = new CategoriaEletronica();
+                    $categoria->id_categoria = $base->id;
+                    $categoria->marca = $tier2['marca'];
+                    $categoria->descricao = $tier2['descricao'];
 
-            case 'roupa':
-                $categoria = new CategoriaRoupa();
-                $categoria->id_categoria = $base->id;
-                $categoria->marca = $tier2['marca'];
-                $categoria->tamanho = $tier2['tamanho'];
-                $categoria->id_tipo = $tier2['idTipo'];
-                $categoria->save();
-                break;
+                    if($categoria->save()) {
+                        return ['ID' => $categoria->id_categoria];
+                    }
 
-            case 'livros':
-                $categoria = new CategoriaLivros();
-                $categoria->id_categoria = $base->id;
-                $categoria->titulo = $tier2['titulo'];
-                $categoria->editora = $tier2['editora'];
-                $categoria->autor = $tier2['autor'];
-                $categoria->isbn = $tier2['isbn'];
-                $categoria->save();
-                break;
+                    break;
+
+                case 'computadores':
+                    $categoria = new CategoriaEletronica();
+                    $categoria->id_categoria = $base->id;
+                    $categoria->marca = $tier2['marca'];
+                    $categoria->descricao = $tier2['descricao'];
+
+                    if ($categoria->save()) {
+
+                        $subCategoria = new CategoriaComputadores();
+                        $subCategoria->id_eletronica = $categoria->id_categoria;
+                        $subCategoria->processador = $tier3['processador'];
+                        $subCategoria->ram = $tier3['ram'];
+                        $subCategoria->hdd = $tier3['hdd'];
+                        $subCategoria->gpu = $tier3['gpu'];
+                        $subCategoria->os = $tier3['os'];
+                        $subCategoria->portatil = $tier3['portatil'];
+
+                        if ($subCategoria->save()) {
+                            return ['ID' => $subCategoria->id_eletronica];
+                        }
+                    }
+
+                    break;
+
+                case 'smartphones':
+                    $categoria = new CategoriaEletronica();
+                    $categoria->id_categoria = $base->id;
+                    $categoria->marca = $tier2['marca'];
+                    $categoria->descricao = $tier2['descricao'];
+
+                    if($categoria->save()) {
+
+                        $subCategoria = new CategoriaSmartphones();
+                        $subCategoria->id_eletronica = $categoria->id_categoria;
+                        $subCategoria->processador = $tier3['processador'];
+                        $subCategoria->ram = $tier3['ram'];
+                        $subCategoria->hdd = $tier3['hdd'];
+                        $subCategoria->os = $tier3['os'];
+                        $subCategoria->tamanho = $tier3['tamanho'];
+
+                        if ($subCategoria->save()) {
+                            return ['ID' => $subCategoria->id_eletronica];
+                        }
+                    }
+
+                    break;
+
+                case 'roupa':
+                    $categoria = new CategoriaRoupa();
+                    $categoria->id_categoria = $base->id;
+                    $categoria->marca = $tier2['marca'];
+                    $categoria->tamanho = $tier2['tamanho'];
+                    $categoria->id_tipo = $tier2['idTipo'];
+
+                    if($categoria->save()) {
+                        return ['ID' => $categoria->id_categoria];
+                    }
+
+                    break;
+
+                case 'livros':
+                    $categoria = new CategoriaLivros();
+                    $categoria->id_categoria = $base->id;
+                    $categoria->titulo = $tier2['titulo'];
+                    $categoria->editora = $tier2['editora'];
+                    $categoria->autor = $tier2['autor'];
+                    $categoria->isbn = $tier2['isbn'];
+
+                    if($categoria->save()) {
+                        return ['ID' => $categoria->id_categoria];
+                    }
+
+                    break;
+            }
         }
 
-        return ['ID' => $base->id];
+        //return ['ID' => $base->id];
+        throw new BadRequestHttpException("Não foi possivel inserir as categorias.");
     }
 
+    public function actionGeneros() {
+
+        if(($generos = GeneroJogos::find()->all()) != null) {
+            return $generos;
+        }
+
+        throw new NotFoundHttpException("Não foram encontrados géneros de jogos.");
+    }
+
+    public function actionTipos() {
+
+        if(($tipos = TipoRoupas::find()->all()) != null) {
+            return $tipos;
+        }
+
+        throw new NotFoundHttpException("Não foram encontrados géneros de jogos.");
+
+    }
+
+    public function actionApagar($id)
+    {
+        $base = Categoria::findOne(['id' => $id]);
+
+        if($base == null)
+        {
+            return new NotFoundHttpException('Não foi encontrada a categoria desejada.', 404);
+        }
+
+        if($base)
+        {
+            if ($base->cRoupa) {
+                CategoriaRoupa::deleteAll('id_categoria='.$id);
+            }
+
+            if ($base->cLivros) {
+                CategoriaLivros::deleteAll('id_categoria='.$id);
+            }
+
+            if ($base->cEletronica) {
+                if ($base->cEletronica->cComputadores) {
+                    CategoriaComputadores::deleteAll('id_eletronica='.$id);
+                }else if ($base->cEletronica->cSmartphones) {
+                    CategoriaSmartphones::deleteAll('id_eletronica='.$id);
+                }
+                CategoriaEletronica::deleteAll('id_categoria='.$id);
+            }
+
+            if ($base->cBrinquedos) {
+                if ($base->cBrinquedos->cJogos) {
+                    CategoriaJogos::deleteAll('id_brinquedo='.$id);
+                }
+                CategoriaBrinquedos::deleteAll('id_categoria='.$id);
+            }
+
+            Categoria::deleteAll('id='.$id);
+        }
+
+        $check = Categoria::findOne(['id' => $id]);
+        if ($check == null) 
+        {
+            return $id;
+        }else{
+            throw new BadRequestHttpException("Não foi possivel eliminar a categoria.", 400);
+        }
+    }
 }
