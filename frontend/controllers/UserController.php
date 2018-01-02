@@ -227,11 +227,23 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionHistory()
+    public function actionHistorico()
     {
         $this->layout = "main-user";
 
-        return $this->render('history');
+        $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->identity->getId()]);
+
+        $propostas = Proposta::findAll(['id_user' => Yii::$app->user->identity->getId()]);
+
+        $gestorCategorias = new GestorCategorias();
+        
+        $categorias = $gestorCategorias->getCategoriasDados($propostas, 'cat_proposto');              
+
+        return $this->render("historico", [
+        'anuncios' => $anuncios,
+        'propostas' => $categorias,
+        ]);
+
     }
 
     public function actionPin()
