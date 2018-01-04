@@ -164,7 +164,7 @@ class AnunciosController extends ActiveController
         throw new NotFoundHttpException('Não foi encontradas categorias com os dados introduzidos.', 404);
     }
 
-    public function actionCategorias($id)
+    public function actionCategoriasO($id)
     {
         $gestor = new GestorCategorias();
 
@@ -179,7 +179,24 @@ class AnunciosController extends ActiveController
             }
         }
 
-        //return ['id' => $id, 'Categorias' => null];
+        throw new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
+    }
+
+    public function actionCategoriasR($id)
+    {
+        $gestor = new GestorCategorias();
+
+        if($anuncio = Anuncio::findOne(['id' => $id]))
+        {
+            if($categorias = $gestor->getCategorias($anuncio, 'cat_receber'))
+            {
+                $categoriaMae = array_shift($categorias);
+                $cat = Tools::tipoCategoria($categoriaMae->id);
+
+                return ['id' => $id, 'Flag' => $cat, 'Categorias' => ['Base' => $categoriaMae, 'Filhas' => $categorias]];
+            }
+        }
+
         throw new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
     }
 
