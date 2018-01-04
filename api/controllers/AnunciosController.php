@@ -2,24 +2,25 @@
 
 namespace api\controllers;
 
-use common\models\Anuncio;
-use common\models\CategoriaBrinquedos;
-use common\models\CategoriaComputadores;
-use common\models\CategoriaEletronica;
-use common\models\CategoriaJogos;
-use common\models\CategoriaLivros;
-use common\models\CategoriaSmartphones;
-use common\models\CategoriaRoupa;
-use common\models\Cliente;
+use yii\db\Query;
 use common\models\User;
+use common\models\Tools;
+use common\models\Anuncio;
+use common\models\Cliente;
 use common\models\Proposta;
-use common\models\CategoriaPreferida;
-use common\models\ImagensAnuncio;
-use frontend\models\GestorCategorias;
 use yii\rest\ActiveController;
+use common\models\CategoriaRoupa;
+use common\models\CategoriaJogos;
+use common\models\ImagensAnuncio;
+use common\models\CategoriaLivros;
 use yii\web\NotFoundHttpException;
 use yii\filters\auth\HttpBasicAuth;
-use yii\db\Query;
+use frontend\models\GestorCategorias;
+use common\models\CategoriaPreferida;
+use common\models\CategoriaBrinquedos;
+use common\models\CategoriaEletronica;
+use common\models\CategoriaSmartphones;
+use common\models\CategoriaComputadores;
 
 class AnunciosController extends ActiveController
 {
@@ -172,8 +173,9 @@ class AnunciosController extends ActiveController
             if($categorias = $gestor->getCategorias($anuncio, 'cat_oferecer'))
             {
                 $categoriaMae = array_shift($categorias);
+                $cat = Tools::tipoCategoria($categoriaMae->id);
 
-                return ['id' => $id, 'Categorias' => ['Base' => $categoriaMae, 'Filhas' => $categorias]];
+                return ['id' => $id, 'Flag' => $cat, 'Categorias' => ['Base' => $categoriaMae, 'Filhas' => $categorias]];
             }
         }
 
