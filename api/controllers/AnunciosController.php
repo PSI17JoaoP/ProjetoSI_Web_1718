@@ -49,8 +49,6 @@ class AnunciosController extends ActiveController
         return $cliente;
     }
 
-
-
     public function actionPropostas($id)
     {
         if($anuncio = Anuncio::findOne(['id' => $id]))
@@ -71,7 +69,8 @@ class AnunciosController extends ActiveController
             $propostas = Proposta::find()
                     ->join('JOIN', Anuncio::tableName(), Proposta::tableName().'.id_anuncio = '.Anuncio::tableName().'.id')
                     ->where('anuncios.id_user = :user', [':user' => $user->id])
-                    ->andWhere('anuncios.estado = :estado', [':estado' => 'ATIVO'])
+                    ->andWhere('anuncios.estado = :estadoAnuncio', [':estadoAnuncio' => 'ATIVO'])
+                    ->andWhere('propostas.estado = :estadoProposta', [':estadoProposta' => 'PENDENTE'])
                     ->all();
 
             return ['Propostas' => $propostas];
