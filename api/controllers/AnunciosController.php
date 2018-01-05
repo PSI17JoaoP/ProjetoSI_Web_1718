@@ -2,24 +2,25 @@
 
 namespace api\controllers;
 
-use common\models\Anuncio;
-use common\models\CategoriaBrinquedos;
-use common\models\CategoriaComputadores;
-use common\models\CategoriaEletronica;
-use common\models\CategoriaJogos;
-use common\models\CategoriaLivros;
-use common\models\CategoriaSmartphones;
-use common\models\CategoriaRoupa;
-use common\models\Cliente;
+use yii\db\Query;
 use common\models\User;
+use common\models\Tools;
+use common\models\Anuncio;
+use common\models\Cliente;
 use common\models\Proposta;
-use common\models\CategoriaPreferida;
-use common\models\ImagensAnuncio;
-use frontend\models\GestorCategorias;
 use yii\rest\ActiveController;
+use common\models\CategoriaRoupa;
+use common\models\CategoriaJogos;
+use common\models\ImagensAnuncio;
+use common\models\CategoriaLivros;
 use yii\web\NotFoundHttpException;
 use yii\filters\auth\HttpBasicAuth;
-use yii\db\Query;
+use frontend\models\GestorCategorias;
+use common\models\CategoriaPreferida;
+use common\models\CategoriaBrinquedos;
+use common\models\CategoriaEletronica;
+use common\models\CategoriaSmartphones;
+use common\models\CategoriaComputadores;
 
 class AnunciosController extends ActiveController
 {
@@ -162,7 +163,7 @@ class AnunciosController extends ActiveController
         throw new NotFoundHttpException('Não foi encontradas categorias com os dados introduzidos.', 404);
     }
 
-    public function actionCategorias($id)
+    public function actionCategoriasO($id)
     {
         $gestor = new GestorCategorias();
 
@@ -171,12 +172,30 @@ class AnunciosController extends ActiveController
             if($categorias = $gestor->getCategorias($anuncio, 'cat_oferecer'))
             {
                 $categoriaMae = array_shift($categorias);
+                $cat = Tools::tipoCategoria($categoriaMae->id);
 
-                return ['id' => $id, 'Categorias' => ['Base' => $categoriaMae, 'Filhas' => $categorias]];
+                return ['id' => $id, 'Flag' => $cat, 'Categorias' => ['Base' => $categoriaMae, 'Filhas' => $categorias]];
             }
         }
 
-        //return ['id' => $id, 'Categorias' => null];
+        throw new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
+    }
+
+    public function actionCategoriasR($id)
+    {
+        $gestor = new GestorCategorias();
+
+        if($anuncio = Anuncio::findOne(['id' => $id]))
+        {
+            if($categorias = $gestor->getCategorias($anuncio, 'cat_receber'))
+            {
+                $categoriaMae = array_shift($categorias);
+                $cat = Tools::tipoCategoria($categoriaMae->id);
+
+                return ['id' => $id, 'Flag' => $cat, 'Categorias' => ['Base' => $categoriaMae, 'Filhas' => $categorias]];
+            }
+        }
+
         throw new NotFoundHttpException('Não foi encontradas categorias do anúncio desejado.', 404);
     }
 
