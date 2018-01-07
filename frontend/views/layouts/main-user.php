@@ -32,7 +32,7 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <nav class="col-md-2">
+        <nav class="col-md-2 navbar">
             <?= $this->render('sidebar') ?>
         </nav>
         <section class="col-md-10">

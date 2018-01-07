@@ -14,7 +14,6 @@ use yii\bootstrap\NavBar;
     ]);
     $menuItems = [];
 
-    //Comentem o if e o else para efeito de desenvolvimento na parte autenticada
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
         $menuItems[] = ['label' => 'Registo', 'url' => ['/site/signup']];
