@@ -139,7 +139,7 @@ $(function(){
                 {
                     var row = rowModel.clone();
     
-                    $('#pesquisa_row_imagem', row).attr('src', anuncio.path_relativo);
+                    $('#pesquisa_row_imagem', row).attr('src', "../../../common/images/"+anuncio.path_relativo);
 
                     $('#pesquisa_row_titulo', row).text(anuncio.titulo);
                     $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
@@ -192,7 +192,9 @@ $(function(){
                 $.each(anuncios, function(i, anuncio) 
                 {
                     var row = rowModel.clone();
-    
+
+                    $('#pesquisa_row_imagem', row).attr('src', "../../../common/images/"+anuncio.path_relativo);
+
                     $('#pesquisa_row_titulo', row).text(anuncio.titulo);
                     $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
                     
@@ -245,6 +247,8 @@ $(function(){
                 {
                     var row = rowModel.clone();
     
+                    $('#pesquisa_row_imagem', row).attr('src', "../../../common/images/"+anuncio.path_relativo);
+
                     $('#pesquisa_row_titulo', row).text(anuncio.titulo);
                     $('#pesquisa_row_detalhes', row).attr('data-id', anuncio.id);
                     
