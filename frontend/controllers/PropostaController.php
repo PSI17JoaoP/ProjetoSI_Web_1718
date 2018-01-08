@@ -30,10 +30,9 @@ class PropostaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create'],
                 'rules' => [
                     [
-                        'actions' => ['create'],
+                        'actions' => ['create', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
