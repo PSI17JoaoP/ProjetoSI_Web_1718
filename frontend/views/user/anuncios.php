@@ -20,7 +20,7 @@ $this->title = 'Os meus anúncios';
     ],
 ]) ?>
 
-<div class="col-12 col-md-12">
+<div class="col-12">
 <?php
     if($tipo != null)
     {

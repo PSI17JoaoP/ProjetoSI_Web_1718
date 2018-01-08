@@ -5,8 +5,7 @@
 use yii\helpers\Html;
 
 ?>
-
-<ul class="nav nav-pills flex-column">
+<ul class="nav nav-pills flex-column nav-header" style="background-color: #f5f5f5;">
     <li class="nav-item">
         <?= Html::a('Definições da Conta', 'conta', ['class' => 'nav-link'])?>
     </li>
