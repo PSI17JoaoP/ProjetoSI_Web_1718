@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use common\fixtures\UserFixture as UserFixture;
 
 
-class HomeCest
+class LoginCest
 {
     public function _before(AcceptanceTester $I)
     {
@@ -19,7 +19,7 @@ class HomeCest
     
     }
 
-    public function checkHome(AcceptanceTester $I)
+    public function checkLogin(AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/site/login'));
         $I->see('Login');

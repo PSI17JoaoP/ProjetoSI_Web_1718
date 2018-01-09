@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 ?>
 
-<ul class="nav navbar-nav">
+<ul class="nav navbar-nav" style="position:absolute">
     <li class="nav-item">
         <?= Html::a('Definições da Conta', 'conta', ['class' => 'nav-link'])?>
     </li>
