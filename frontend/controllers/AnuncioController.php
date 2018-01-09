@@ -41,7 +41,6 @@ class AnuncioController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'search'],
                 'rules' => [
                     [
                         'actions' => ['create'],
@@ -49,7 +48,7 @@ class AnuncioController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['search'],
+                        'actions' => ['search', 'detalhes'],
                         'allow' => true,
                     ],
                 ],

@@ -25,12 +25,15 @@ class UserController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'history', 'anuncios', 'propostas', 'conta'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'history', 'anuncios', 'propostas', 'conta'],
+                        'actions' => ['index', 'historico', 'anuncios', 'propostas', 'conta', 'detalhes-contacto', 'pin'],
                         'allow' => true,
                         'roles' => ['cliente'],
+                    ],
+                    [
+                        'actions' => ['cliente'],
+                        'allow' => true,
                     ],
                 ],
 
