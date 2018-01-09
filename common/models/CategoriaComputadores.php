@@ -50,6 +50,7 @@ class CategoriaComputadores extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id_eletronica' => 'Categoria',
             'processador' => 'CPU',
             'ram' => 'Memória RAM',
             'hdd' => 'Armazenamento',
