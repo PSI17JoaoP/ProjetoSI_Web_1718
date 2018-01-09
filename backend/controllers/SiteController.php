@@ -224,7 +224,7 @@ class SiteController extends Controller
             $anunciosMes = (new Query())
                 ->select('MONTH(data_criacao) as "mes", COUNT(id) as "count"')
                 ->from(Anuncio::tableName())
-                ->where('MONTH(data_criacao) - MONTH(CURRENT_DATE) < 6')
+                ->where('MONTH(CURRENT_DATE) - MONTH(data_criacao) < 6')
                 ->groupBy('MONTH(data_criacao)')
                 ->all();
             
@@ -233,15 +233,22 @@ class SiteController extends Controller
 
             for ($i = $mesAtual-5; $i <= $mesAtual ; $i++) 
             { 
-                $dado = ["mes" => $mesesPT[$i-1], "count" => 0];
+                $val = $i;
+                if ($val <= 0) 
+                {
+                    $val += 12;
+                }
+
+                $dado = ["mes" => $mesesPT[$val-1], "count" => 0];
 
                 foreach ($anunciosMes as $key => $anuncio) 
                 {
-                    if($anuncio["mes"] == $i)
+                    if($anuncio["mes"] == $val)
                     {
-                        $dado = ["mes" => $mesesPT[$i-1], "count" => $anuncio["count"]];
+                        $dado = ["mes" => $mesesPT[$val-1], "count" => $anuncio["count"]];
                     }
                 }
+
                 \array_push($dados, $dado);
             }
 
