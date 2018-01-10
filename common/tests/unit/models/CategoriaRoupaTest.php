@@ -10,7 +10,7 @@ use common\models\CategoriaRoupa;
 /**
  * Categoria test
  */
-class CategoriaLivrosTest extends \Codeception\Test\Unit
+class CategoriaRoupaTest extends \Codeception\Test\Unit
 {
 
     /**

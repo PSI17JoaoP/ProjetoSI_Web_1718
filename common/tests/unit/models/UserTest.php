@@ -2,6 +2,7 @@
 namespace common\tests\unit\models;
 
 
+use common\fixtures\UserFixture;
 use common\models\User;
 
 class UserTest extends \Codeception\Test\Unit
@@ -13,6 +14,12 @@ class UserTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
+        $this->tester->haveFixtures([
+            'user' => [
+                'class' => UserFixture::className(),
+                'dataFile' => codecept_data_dir() . 'user.php'
+            ]
+        ]);
     }
 
     protected function _after()
