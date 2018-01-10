@@ -46,6 +46,7 @@ class CategoriaBrinquedos extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id_categoria' => 'Categoria',
             'editora' => 'Editora',
             'faixa_etaria' => 'Faixa Etária',
             'descricao' => 'Descrição',

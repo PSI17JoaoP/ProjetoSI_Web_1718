@@ -3,6 +3,12 @@
 namespace common\models;
 
 use yii\db\Query;
+use common\models\CategoriaRoupa;
+use common\models\CategoriaJogos;
+use common\models\CategoriaLivros;
+use common\models\CategoriaEletronica;
+use common\models\CategoriaBrinquedos;
+use common\models\CategoriaComputadores;
 
 class Tools
 {
@@ -43,6 +49,9 @@ class Tools
                 );
     }
 
+    /**
+     * Noma da categoria
+     */
     public static function tipoCategoria($idCategoria)
     {
         $base = Categoria::findOne(['id' => $idCategoria]);
@@ -78,5 +87,48 @@ class Tools
         }
 
         return "Aberto a sugestões";
+    }
+
+    /**
+     * Nova instância da categoria
+     * (detalhes only)
+     */
+    public static function novaCategoria($idCategoria)
+    {
+        $base = Categoria::findOne(['id' => $idCategoria]);
+
+        if($base)
+        {
+            if ($base->cRoupa) {
+                return new CategoriaRoupa();
+            }
+
+            if ($base->cLivros) {
+                return new CategoriaLivros();
+            }
+
+            if ($base->cEletronica) {
+                if ($base->cEletronica->cComputadores) {
+                    return new CategoriaComputadores();
+                }else if ($base->cEletronica->cSmartphones) {
+                    return new CategoriaSmartphones();
+                }else{
+                    return new CategoriaEletronica();
+                }
+
+            }
+
+            if ($base->cBrinquedos) {
+                if ($base->cBrinquedos->cJogos) {
+                    return new CategoriaJogos();
+                }else{
+                    return new CategoriaBrinquedos();
+                }
+            }
+
+            return new Categoria();
+        }
+
+        return null;
     }
 }

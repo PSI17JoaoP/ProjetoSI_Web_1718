@@ -46,6 +46,7 @@ class CategoriaLivros extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id_categoria' => 'Categoria',
             'titulo' => 'Titulo',
             'editora' => 'Editora',
             'autor' => 'Autor',

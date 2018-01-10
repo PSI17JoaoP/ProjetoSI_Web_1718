@@ -180,17 +180,55 @@ class AnuncioController extends Controller
         //$anuncio = (new Query())->from(Anuncio::tableName())->where('id = :id', [':id' => $id])->all();
         $anuncio = Anuncio::findOne('id = ' + $id);
 
+
         $categoriaO = $gestor->getCategorias($anuncio, 'cat_oferecer');
         $categoriaOBase = array_shift($categoriaO);
 
+        $catO = Tools::novaCategoria($categoriaOBase->id);
         
+        $n = \count($categoriaO);
+        for ($i=0; $i < $n; $i++) 
+        { 
+            foreach ($categoriaO[$i] as $key => $value) 
+            {
+                if (\in_array($key, ['id_categoria', 'id_brinquedo', 'id_eletronica'])) 
+                {
+                    $value = Tools::tipoCategoria($categoriaOBase->id);
+                }
+
+                if(isset($catO->attributeLabels()[$key]))
+                    $categoriaO[$n][$catO->attributeLabels()[$key]] = $value;
+                unset($categoriaO[$i][$key]);
+            }
+        }
+        
+
         $categoriaR = $gestor->getCategorias($anuncio, 'cat_receber');
         if($categoriaR)
         {
             $categoriaRBase = array_shift($categoriaR);
+
+            $catR = Tools::novaCategoria($categoriaRBase->id);
+            
+            $n = \count($categoriaR);
+            for ($i=0; $i < $n; $i++) 
+            { 
+                foreach ($categoriaR[$i] as $key => $value) 
+                {
+                    if (\in_array($key, ['id_categoria', 'id_brinquedo', 'id_eletronica'])) 
+                    {
+                        $value = Tools::tipoCategoria($categoriaOBase->id);
+                    }
+
+                    if(isset($catR->attributeLabels()[$key]))
+                        $categoriaR[$n][$catR->attributeLabels()[$key]] = $value;
+                    unset($categoriaR[$i][$key]);
+                }
+            }
         }else{
             $categoriaRBase = ['nome' => "Aberto a sugestões"];
         }
+
 
         Yii::$app->response->format = Response::FORMAT_JSON;
         return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR];

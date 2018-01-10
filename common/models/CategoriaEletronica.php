@@ -46,6 +46,7 @@ class CategoriaEletronica extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id_categoria' => 'Categoria',
             'descricao' => 'Descrição',
             'marca' => 'Marca',
         ];

@@ -45,7 +45,9 @@ class CategoriaJogos extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id_brinquedo' => 'Categoria',
             'produtora' => 'Produtora',
+            'id_genero' => 'Género'
         ];
     }
 

@@ -47,8 +47,10 @@ class CategoriaRoupa extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id_categoria' => 'Categoria',
             'marca' => 'Marca',
             'tamanho' => 'Tamanho',
+            'id_tipo' => 'Tipo de Roupa'
         ];
     }
 
