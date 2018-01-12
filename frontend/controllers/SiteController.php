@@ -1,27 +1,28 @@
 <?php
 namespace frontend\controllers;
 
-use common\models\Anuncio;
 use Yii;
-use yii\base\InvalidParamException;
-use yii\helpers\ArrayHelper;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
-use common\models\Tools;
-use common\models\CategoriaPreferida;
-use frontend\models\SignupForm;
 use yii\db\Query;
-use common\models\CategoriaBrinquedos;
-use common\models\CategoriaComputadores;
-use common\models\CategoriaEletronica;
+use common\models\User;
+use yii\web\Controller;
+use common\models\Tools;
+use common\models\Anuncio;
+use yii\filters\VerbFilter;
+use common\models\LoginForm;
+use yii\helpers\ArrayHelper;
+use yii\filters\AccessControl;
+use frontend\models\SignupForm;
 use common\models\CategoriaJogos;
-use common\models\CategoriaLivros;
-use common\models\CategoriaRoupa;
-use common\models\CategoriaSmartphones;
 use common\models\ImagensAnuncio;
+use common\models\CategoriaRoupa;
+use common\models\CategoriaLivros;
+use yii\base\InvalidParamException;
+use yii\web\BadRequestHttpException;
+use common\models\CategoriaPreferida;
+use common\models\CategoriaEletronica;
+use common\models\CategoriaBrinquedos;
+use common\models\CategoriaSmartphones;
+use common\models\CategoriaComputadores;
 
 
 /**
@@ -243,10 +244,12 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    /*public function actionAbout()
+    public function actionAbout()
     {
-        return $this->render('about');
-    }*/
+        $n = User::find()->count();
+
+        return $this->render('about', ["n" => $n]);
+    }
 
     /**
      * Signs user up.

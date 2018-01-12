@@ -9,6 +9,7 @@
  * @var $model frontend\models\ClienteForm
  */
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use common\models\Anuncio;
 
@@ -43,6 +44,8 @@ $this->title = 'Página Inicial';
                         <?= Html::endForm() ?>
                     </div>
                 </div>
+
+                <a href="<?= Url::toRoute(['site/about'])?>">Users</a>
             </div>
 
             <?php
