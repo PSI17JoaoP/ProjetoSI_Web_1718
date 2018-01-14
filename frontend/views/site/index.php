@@ -18,8 +18,10 @@ $this->title = 'Página Inicial';
 
 <div class="site-index">
     <div class="body-content">
-        <div class="row" style="margin-bottom: 10%">
-            <div class="col-md-8">
+        <div class="row" style="margin-bottom: 5%; margin-top: 3%">
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
                 <div class="panel panel-primary">
                     <div class="panel-body">
                         <?= Html::beginForm(['anuncio/search'], 'get', ['class' => 'form', 'role' => 'search'])?>
@@ -44,6 +46,8 @@ $this->title = 'Página Inicial';
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-1"></div>
 
             <?php
 

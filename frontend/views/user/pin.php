@@ -31,12 +31,14 @@ $this->title = 'PIN Móvel'
                         <div class="col-md-6" style="border: 4px #0a0a0a;">
 
                             <?php if($model->pin !== null) {
-                                echo Html::tag('p', $model->pin);
+                                echo Html::tag('p', $model->pin, [
+                                    'style' => 'text-align: center; font-size: 25px; margin-top: 13px;',
+                                ]);
                             }
 
                             echo Html::a('Gerar PIN', ['pin', 'id' => $model->id_user], [
-                                    'class' => 'btn btn-default',
-                                    'style' => 'margin-left: 17px; margin-top: 13px']); ?>
+                                'class' => 'btn btn-default',
+                                'style' => 'margin-left: 17px; margin-top: 13px']); ?>
 
                         </div>
 
