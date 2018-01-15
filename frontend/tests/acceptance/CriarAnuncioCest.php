@@ -15,7 +15,7 @@ class CriarAnuncioCest
         ]);
     }
 
-    public function login($I)
+    public function login(AcceptanceTester $I)
     {
         $I->amOnPage('/site/login');
 
