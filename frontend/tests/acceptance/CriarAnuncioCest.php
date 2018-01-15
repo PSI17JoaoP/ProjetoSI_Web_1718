@@ -13,10 +13,7 @@ class CriarAnuncioCest
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
         ]);
-    }
 
-    public function login($I)
-    {
         $I->amOnPage('/site/login');
 
         $I->submitForm('#login-form',  [
@@ -27,10 +24,9 @@ class CriarAnuncioCest
         $I->wait(3);
     }
 
+
     public function checkCriarAnuncioReceber(AcceptanceTester $I)
     {
-        $this->login($I);
-
         $I->see('Criar Anúncio');
         $I->click('Criar Anúncio');
 
@@ -107,8 +103,6 @@ class CriarAnuncioCest
      */
     public function checkCriarAnuncioTodos(AcceptanceTester $I)
     {
-        $this->login($I);
-
         $I->see('Criar Anúncio');
         $I->click('Criar Anúncio');
 
