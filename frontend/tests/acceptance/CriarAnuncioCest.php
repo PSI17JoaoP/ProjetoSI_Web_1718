@@ -15,16 +15,21 @@ class CriarAnuncioCest
         ]);
     }
 
-    public function checkCriarAnuncioReceber(AcceptanceTester $I)
+    public function login($I)
     {
         $I->amOnPage('/site/login');
 
         $I->submitForm('#login-form',  [
-            'LoginForm[username]' => 'TesteUser',
-            'LoginForm[password]' => '12345678',
+            'LoginForm[username]' => 'ML29',
+            'LoginForm[password]' => '123456',
         ]);
 
         $I->wait(3);
+    }
+
+    public function checkCriarAnuncioReceber(AcceptanceTester $I)
+    {
+        $this->login($I);
 
         $I->see('Criar Anúncio');
         $I->click('Criar Anúncio');
@@ -32,7 +37,7 @@ class CriarAnuncioCest
         $I->wait(3);
 
         $I->see('Título');
-        $I->fillField(['name' => 'AnuncioForm[titulo]'], 'TesteFuncional');
+        $I->fillField(['name' => 'AnuncioForm[titulo]'], 'TesteAceitação');
         $I->wait(1);
 
         $I->click('#field-cat-oferta');
@@ -91,7 +96,7 @@ class CriarAnuncioCest
         $I->wait(3);
 
         $I->see('Sucesso! O seu anúncio foi criado com sucesso.');
-        $I->see('Título:TesteFuncional');
+        $I->see('Título:TesteAceitação');
 
         $I->seeInCurrentUrl('/user/anuncios');
     }
@@ -102,7 +107,7 @@ class CriarAnuncioCest
      */
     public function checkCriarAnuncioTodos(AcceptanceTester $I)
     {
-        $I->amOnPage('/');
+        $this->login($I);
 
         $I->see('Criar Anúncio');
         $I->click('Criar Anúncio');
@@ -110,7 +115,7 @@ class CriarAnuncioCest
         $I->wait(3);
 
         $I->see('Título');
-        $I->fillField(['name' => 'AnuncioForm[titulo]'], 'TesteFuncional');
+        $I->fillField(['name' => 'AnuncioForm[titulo]'], 'TesteACeitação');
         $I->wait(1);
 
         $I->click('#field-cat-oferta');
@@ -133,7 +138,7 @@ class CriarAnuncioCest
         $I->wait(1);
 
         $I->click('#field-cat-procura');
-        $I->see('Todos', '#field-cat-procura option[value=todos]');
+        $I->see('Todas as Categorias', '#field-cat-procura option[value=todos]');
         $I->click('#field-cat-procura option[value=todos]');
 
         $I->wait(3);
@@ -151,7 +156,7 @@ class CriarAnuncioCest
         $I->wait(3);
 
         $I->see('Sucesso! O seu anúncio foi criado com sucesso.');
-        $I->see('Título:TesteFuncional');
+        $I->see('Título:TesteACeitação');
 
         $I->seeInCurrentUrl('/user/anuncios');
     }
