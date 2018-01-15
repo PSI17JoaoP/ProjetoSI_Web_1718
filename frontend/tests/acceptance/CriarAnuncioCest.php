@@ -20,17 +20,16 @@ class CriarAnuncioCest
         $I->amOnPage('/site/login');
 
         $I->submitForm('#login-form',  [
-            'LoginForm[username]' => 'ML29',
-            'LoginForm[password]' => '123456',
+            'LoginForm[username]' => 'TesteUser',
+            'LoginForm[password]' => '12345678',
         ]);
 
         $I->wait(3);
     }
 
+
     public function checkCriarAnuncioReceber(AcceptanceTester $I)
     {
-        $this->login($I);
-
         $I->see('Criar Anúncio');
         $I->click('Criar Anúncio');
 
@@ -107,8 +106,6 @@ class CriarAnuncioCest
      */
     public function checkCriarAnuncioTodos(AcceptanceTester $I)
     {
-        $this->login($I);
-
         $I->see('Criar Anúncio');
         $I->click('Criar Anúncio');
 
