@@ -141,6 +141,8 @@ function pesquisa()
                 },
         }).then(function(anuncios)
         {
+            $('.anuncio-search').empty();
+
             if (anuncios.length == 0) 
             {
                 var noResults = "<div align='center'><p>Parece que não há nenhum anúncio...</p><p>Tente pesquisar com outros filtros</p></div>"
