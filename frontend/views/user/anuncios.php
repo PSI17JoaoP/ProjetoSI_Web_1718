@@ -1,6 +1,12 @@
 <?php
-/* @var $this yii\web\View */
-/* @var $anuncios array */
+/**
+ * @var $this yii\web\View
+ * @var $anuncios array
+ * @var $tipo string
+ * @var $titulo string
+ * @var $mensagem string
+ * @var $anunciosConcluidos array
+ */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -36,6 +42,7 @@ $this->title = 'Os meus anúncios';
             <strong>Anúncios concluídos</strong>                            
         </div>
         <div class="panel-body contactos-detalhes">
+
             <?php foreach($anunciosConcluidos as $dados) { ?>
 
                     <div class="row">
@@ -99,7 +106,8 @@ $this->title = 'Os meus anúncios';
                                                 echo "<img id='pesquisa_row_imagem' src='../../../common/images/". $dados[0]->imagensAnuncios[0]->path_relativo ."' alt='' width = '75px' height = '75px'>";
                                             }
                                             ?>
-                                        </div>
+                                    </div>
+
                                     <div class="col-md-6">
                                         <p style="margin-top: 8px; margin-left: 5px"><b>Título:</b><?= Html::encode($dados[0]->titulo) ?></p>
                                     </div>
@@ -112,11 +120,17 @@ $this->title = 'Os meus anúncios';
                                                 'data-id' => $dados[0]->id
                                                 ])?>
 
-                                            <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
+                                            <?= Html::a('Eliminar', ['anuncio/delete'], [
+                                                    'class' => 'btn btn-danger',
+                                                    'data' => [
+                                                        'method' => 'post',
+                                                        'params' => [
+                                                            'id' => $dados[0]->id,
+                                                        ],
+                                                    ]
+                                            ]) ?>
                                         </span>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

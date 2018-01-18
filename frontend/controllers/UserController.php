@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\base\Exception;
+
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\AccessControl;
@@ -13,7 +13,6 @@ use common\models\Proposta;
 use common\models\Tools;
 use frontend\models\ClienteForm;
 use frontend\models\GestorCategorias;
-use yii\web\UploadedFile;
 
 class UserController extends Controller
 {
@@ -47,12 +46,10 @@ class UserController extends Controller
     public function actionConta($tipo = null, $titulo = null, $mensagem = null)
     {
         $this->layout = "main-user";
-
         
         $cliente = Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]);
 
         $model = new ClienteForm();
-
 
         if ($model->load(Yii::$app->request->post())) 
         {
