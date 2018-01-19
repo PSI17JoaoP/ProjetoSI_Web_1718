@@ -94,7 +94,7 @@ class SiteController extends Controller
         {
             //$notifs = new Notificacoes(Yii::$app->user->identity->getId(), Yii::$app->user->identity->username);
             //$notifications = $notifs->getAll();
-            new Notificacoes();
+            //new Notificacoes();
         }
 
         $this->view->params['notifications'] = $notifications;
