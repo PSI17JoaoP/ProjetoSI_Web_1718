@@ -244,12 +244,12 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+    /*
     public function actionAbout()
     {
-        $n = User::find()->count();
 
-        return $this->render('about', ["n" => $n]);
     }
+    */
 
     /**
      * Signs user up.

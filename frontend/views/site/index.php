@@ -46,8 +46,6 @@ $this->title = 'Página Inicial';
                         <?= Html::endForm() ?>
                     </div>
                 </div>
-
-                <a href="<?= Url::toRoute(['site/about'])?>">Users</a>
             </div>
 
             <div class="col-md-1"></div>

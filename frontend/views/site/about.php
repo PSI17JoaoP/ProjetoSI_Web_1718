@@ -8,6 +8,5 @@ $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
-    
-    N. utilizadores : <?= $n ?>
+
 </div>
