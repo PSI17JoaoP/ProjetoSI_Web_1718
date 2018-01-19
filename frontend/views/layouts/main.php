@@ -24,7 +24,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<?= $this->render('topbar') ?>
+<?= $this->render('topbar', ['notificacoes' => $this->params['notifications']]) ?>
 
 <div class="wrap">
     <div class="container">

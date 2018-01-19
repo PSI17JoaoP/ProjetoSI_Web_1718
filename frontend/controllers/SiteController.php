@@ -12,8 +12,9 @@ use common\models\LoginForm;
 use yii\helpers\ArrayHelper;
 use yii\filters\AccessControl;
 use frontend\models\SignupForm;
-use common\models\CategoriaJogos;
+use common\models\Notificacoes;
 use common\models\ImagensAnuncio;
+use common\models\CategoriaJogos;
 use common\models\CategoriaRoupa;
 use common\models\CategoriaLivros;
 use yii\base\InvalidParamException;
@@ -79,6 +80,28 @@ class SiteController extends Controller
             ],
         ];
     }
+
+
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $notifications = array();
+
+        if (!Yii::$app->user->isGuest) 
+        {
+            //$notifs = new Notificacoes(Yii::$app->user->identity->getId(), Yii::$app->user->identity->username);
+            //$notifications = $notifs->getAll();
+            new Notificacoes();
+        }
+
+        $this->view->params['notifications'] = $notifications;
+
+        return true; 
+    }
+
 
     /**
      * Displays homepage.

@@ -3,17 +3,17 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\base\Exception;
-use yii\web\Controller;
 use yii\web\Response;
-use yii\filters\AccessControl;
-use common\models\Anuncio;
-use common\models\Cliente;
-use common\models\Proposta;
+use yii\web\Controller;
+use yii\base\Exception;
 use common\models\Tools;
+use yii\web\UploadedFile;
+use common\models\Cliente;
+use common\models\Anuncio;
+use common\models\Proposta;
+use yii\filters\AccessControl;
 use frontend\models\ClienteForm;
 use frontend\models\GestorCategorias;
-use yii\web\UploadedFile;
 
 class UserController extends Controller
 {

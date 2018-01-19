@@ -26,6 +26,22 @@ use yii\bootstrap\NavBar;
         }
 
         $menuItems[] =  Html::beginTag('li', ['class' => 'nav-item dropdown'])
+            . Html::tag('a','Notificações',
+                ['class' => 'nav-link dropdown-toggle',
+                    'id' => 'navbarDropdownMenuNotif',
+                    'data-toggle' => 'dropdown',
+                    'aria-haspopup' => true,
+                    'aria-expanded' => false])
+            . Html::beginTag('div', ['class' => 'dropdown-menu', 'aria-labelledby' => 'navbarDropdownMenuNotif']);
+
+        foreach($notificacoes as $notificacao)
+        {
+            $menuItems[] = Html::a("$notificacao", ['user/propostas'], ['class' => 'dropdown-item btn']);
+        }
+
+        $menuItems[] = Html::endTag('div') . Html::endTag('li');
+
+        $menuItems[] =  Html::beginTag('li', ['class' => 'nav-item dropdown'])
             . Html::tag('a', Yii::$app->user->identity->username,
                 ['class' => 'nav-link dropdown-toggle',
                 'id' => 'navbarDropdownMenuLink',
