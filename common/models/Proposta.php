@@ -3,7 +3,9 @@
 namespace common\models;
 
 use Yii;
+use common\models\User;
 use yii\db\ActiveRecord;
+use common\models\Anuncio;
 
 /**
  * This is the model class for table "propostas".
@@ -109,11 +111,39 @@ class Proposta extends ActiveRecord
         $objeto->data_proposta = $this->data_proposta;
 
         $objJSON= json_encode($objeto);
-
+        
         if($insert)
+        {
             $this->Publicar("InsertProposta",$objJSON);
+        }
         else
+        {
             $this->Publicar("UpdateProposta",$objJSON);
+        }
+           
+        
+        $usernameCliente = "";
+        $mensagem = "";
+
+        if ($this->estado == "PENDENTE") //Notificar cliente de proposta recebida
+        {
+            $anuncio = Anuncio::findOne(["id" => $this->id_anuncio]);
+            $usernameCliente = $anuncio->idUser->username;
+            $mensagem = "Nova proposta para um dos seus anúncios";
+        }else //Notificar cliente de estado da proposta (aceite/recusar)
+        {
+            if ($this->estado == "ACEITE") {
+                $estado = "aceite!";
+            } else {
+                $estado = "recusada.";
+            }
+            
+
+            $usernameCliente = User::findOne(["id" => $this->id_user])->username;
+            $mensagem = "Uma das suas propostas foi $estado";
+        }
+
+        $this->Publicar($usernameCliente, $mensagem);
     }
 
     public function Publicar($canal,$msg)

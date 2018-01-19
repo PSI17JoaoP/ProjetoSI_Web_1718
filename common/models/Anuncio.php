@@ -75,7 +75,7 @@ class Anuncio extends ActiveRecord
      */
     public function getIdUser()
     {
-        return $this->hasOne(User::className(), ['id_user' => 'id_user']);
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
 
     /**
