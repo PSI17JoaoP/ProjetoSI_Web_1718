@@ -32,6 +32,7 @@ class AnuncioForm extends Model
     //const ESTADO_ATIVO = 'ATIVO';
     //const ESTADO_CONCLUIDO = 'CONCLUIDO';
     //const ESTADO_FECHADO = 'FECHADO';
+    //const ESTADO_SUSPEITO = 'SUSPEITO';
 
     /**
      * @inheritdoc
