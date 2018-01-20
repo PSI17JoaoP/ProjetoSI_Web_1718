@@ -15,6 +15,8 @@ use yii\db\ActiveRecord;
  * @property string $regiao
  * @property string $pin
  * @property string $path_imagem 
+ * @property integer $n_reviews
+ * @property integer $total_score
  *
  * @property Anuncio[] $anuncios
  * @property User $idUser
@@ -37,7 +39,7 @@ class Cliente extends ActiveRecord
     {
         return [
             [['nome_completo', 'data_nasc', 'telefone', 'regiao'], 'required'],
-            [['telefone'], 'integer'],
+            [['id_user', 'telefone','n_reviews', 'total_score'], 'integer'],
             [['data_nasc'], 'safe'],
             [['nome_completo'], 'string', 'max' => 50],
             [['pin'], 'string', 'max' => 5],
@@ -59,6 +61,8 @@ class Cliente extends ActiveRecord
             'regiao' => 'Região',
             'pin' => 'Pin',
             'path_imagem' => 'Imagem',
+            'n_reviews' => 'N Reviews',
+            'total_score' => 'Total Score',
         ];
     }
 
