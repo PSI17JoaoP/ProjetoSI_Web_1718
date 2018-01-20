@@ -30,7 +30,7 @@ class AnuncioForm extends Model
 
     //Constantes de Estado do Anúncio
     //const ESTADO_ATIVO = 'ATIVO';
-    //const ESTADO_FECHADO = 'FECHADO';
+    //const ESTADO_FECHADO = 'CONCLUIDO';
 
     /**
      * @inheritdoc
