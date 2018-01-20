@@ -65,6 +65,26 @@ class AnuncioController extends Controller
         ];
     }
 
+
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $notifications = array();
+
+        if (!Yii::$app->user->isGuest) 
+        {
+
+        }
+
+        $this->view->params['notifications'] = $notifications;
+
+        return true; 
+    }
+
+    
     /**
      * Lists all Anuncio models.
      * @return mixed

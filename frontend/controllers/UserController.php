@@ -44,6 +44,24 @@ class UserController extends Controller
         ];
     }
 
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $notifications = array();
+
+        if (!Yii::$app->user->isGuest) 
+        {
+
+        }
+
+        $this->view->params['notifications'] = $notifications;
+
+        return true; 
+    }
+
     public function actionConta($tipo = null, $titulo = null, $mensagem = null)
     {
         $this->layout = "main-user";

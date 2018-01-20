@@ -50,6 +50,26 @@ class PropostaController extends Controller
         ];
     }
 
+
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $notifications = array();
+
+        if (!Yii::$app->user->isGuest) 
+        {
+
+        }
+
+        $this->view->params['notifications'] = $notifications;
+
+        return true; 
+    }
+
+    
     /**
      * Displays a single Proposta model.
      * @param integer $id
