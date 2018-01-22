@@ -2,19 +2,20 @@
 
 namespace frontend\controllers;
 
-use common\models\Cliente;
 use Yii;
 use yii\base\Model;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
-use common\models\Anuncio;
-use common\models\Proposta;
+use yii\web\Controller;
 use common\models\Tools;
+use common\models\Cliente;
+use common\models\Anuncio;
+use yii\widgets\ActiveForm;
+use yii\filters\VerbFilter;
+use common\models\Proposta;
+use yii\filters\AccessControl;
+use common\models\Notificacoes;
 use frontend\models\PropostaForm;
+use yii\web\NotFoundHttpException;
 use frontend\controllers\UserController;
 
 /**
@@ -61,7 +62,7 @@ class PropostaController extends Controller
 
         if (!Yii::$app->user->isGuest) 
         {
-
+            $notifications = Notificacoes::findAll(["id_user" => Yii::$app->user->identity->getId(), "lida" => '0']);
         }
 
         $this->view->params['notifications'] = $notifications;

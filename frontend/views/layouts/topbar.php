@@ -1,9 +1,10 @@
 <?php
 
-use common\models\Anuncio;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use common\models\Anuncio;
 
     NavBar::begin([
         'brandLabel' => 'Sistema de Trocas',
@@ -36,7 +37,7 @@ use yii\bootstrap\NavBar;
 
         foreach($notificacoes as $notificacao)
         {
-            $menuItems[] = Html::a("$notificacao", ['user/propostas'], ['class' => 'dropdown-item btn']);
+            $menuItems[] = Html::a($notificacao->mensagem, Url::toRoute(['user/propostas', 'id_notificacao' => $notificacao->id]), ['class' => 'dropdown-item btn']);
         }
 
         $menuItems[] = Html::endTag('div') . Html::endTag('li');

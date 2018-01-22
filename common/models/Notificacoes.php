@@ -4,35 +4,63 @@ namespace common\models;
 
 use Yii;
 
-
-class Notificacoes
+/**
+ * This is the model class for table "notificacoes".
+ *
+ * @property integer $id
+ * @property integer $id_user
+ * @property string $mensagem
+ * @property integer $lida
+ *
+ * @property User $idUser
+ */
+class Notificacoes extends \yii\db\ActiveRecord
 {
-    public function __construct()
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
     {
-            $server = "127.0.0.1";     
-    $port = 1883;                     
-    $username = "";                   
-    $password = "";                   
-    $client_id = \uniqid();
-
-    $mqtt = new \common\mosquitto\phpMQTT($server, $port, $client_id);
-
-    if(!$mqtt->connect(true, NULL, $username, $password)) {
-        exit(1);
+        return 'notificacoes';
     }
 
-    //$mqtt->publish(Yii::$app->user->identity->username, "Entrou", 0);
-
-    $topics[Yii::$app->user->identity->username] = array("qos" => 0, "function" => "procmsg");
-    $mqtt->subscribe($topics, 0);
-    
-    while($mqtt->proc()){
-            
-    }
-    $mqtt->close();
-    }
-    function procmsg($topic, $msg)
+    /**
+     * @inheritdoc
+     */
+    public function rules()
     {
-        
+        return [
+            [['id_user', 'mensagem'], 'required'],
+            [['id_user', 'lida'], 'integer'],
+            [['mensagem'], 'string', 'max' => 255],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'id_user' => 'Id User',
+            'mensagem' => 'Mensagem',
+            'lida' => 'Lida',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
+    }
+
+    public function ler()
+    {
+        $this->lida = 1;
+        return $this->save();
     }
 }

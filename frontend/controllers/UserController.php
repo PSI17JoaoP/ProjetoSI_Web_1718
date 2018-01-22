@@ -12,6 +12,7 @@ use common\models\Cliente;
 use common\models\Anuncio;
 use common\models\Proposta;
 use yii\filters\AccessControl;
+use common\models\Notificacoes;
 use frontend\models\ClienteForm;
 use frontend\models\GestorCategorias;
 
@@ -54,7 +55,7 @@ class UserController extends Controller
 
         if (!Yii::$app->user->isGuest) 
         {
-
+            $notifications = Notificacoes::findAll(["id_user" => Yii::$app->user->identity->getId(), "lida" => '0']);
         }
 
         $this->view->params['notifications'] = $notifications;
@@ -195,9 +196,16 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionPropostas($tipo = null, $titulo = null, $mensagem = null)
+    public function actionPropostas($tipo = null, $titulo = null, $mensagem = null, $id_notificacao = null)
     {
         $this->layout = "main-user";
+
+        //Marcar notificação como lida, se for o caso
+        if ($id_notificacao != null) 
+        {
+            $notificacao = Notificacoes::findOne(["id" => $id_notificacao]);
+            $notificacao->ler();
+        }
 
         $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->getId()]);
 

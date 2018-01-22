@@ -92,9 +92,7 @@ class SiteController extends Controller
 
         if (!Yii::$app->user->isGuest) 
         {
-            //$notifs = new Notificacoes(Yii::$app->user->identity->getId(), Yii::$app->user->identity->username);
-            //$notifications = $notifs->getAll();
-            //new Notificacoes();
+            $notifications = Notificacoes::findAll(["id_user" => Yii::$app->user->identity->getId(), "lida" => '0']);
         }
 
         $this->view->params['notifications'] = $notifications;

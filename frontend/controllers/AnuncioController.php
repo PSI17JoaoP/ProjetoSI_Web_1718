@@ -4,29 +4,32 @@ namespace frontend\controllers;
 
 use Yii;
 
-use yii\base\Exception;
 use yii\db\Query;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+use yii\base\Model;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
-use frontend\models\AnuncioForm;
-use frontend\models\GestorCategorias;
+use yii\base\Exception;
+use yii\web\Controller;
+use common\models\Tools;
 use common\models\Anuncio;
 use common\models\Cliente;
-use common\models\Tools;
-use common\models\CategoriaBrinquedos;
-use common\models\CategoriaComputadores;
-use common\models\CategoriaEletronica;
+use yii\widgets\ActiveForm;
+use yii\filters\VerbFilter;
+use common\models\Categoria;
+use common\models\TipoRoupas;
+use common\models\GeneroJogos;
+use yii\filters\AccessControl;
+use common\models\Notificacoes;
+use frontend\models\AnuncioForm;
+use common\models\CategoriaRoupa;
+use common\models\ImagensAnuncio;
 use common\models\CategoriaJogos;
 use common\models\CategoriaLivros;
-use common\models\CategoriaRoupa;
+use yii\web\NotFoundHttpException;
+use frontend\models\GestorCategorias;
+use common\models\CategoriaEletronica;
+use common\models\CategoriaBrinquedos;
 use common\models\CategoriaSmartphones;
-use common\models\Categoria;
-use yii\base\Model;
-use common\models\ImagensAnuncio;
+use common\models\CategoriaComputadores;
 
 /**
  * AnuncioController implements the CRUD actions for Anuncio model.
@@ -76,7 +79,7 @@ class AnuncioController extends Controller
 
         if (!Yii::$app->user->isGuest) 
         {
-
+            $notifications = Notificacoes::findAll(["id_user" => Yii::$app->user->identity->getId(), "lida" => '0']);
         }
 
         $this->view->params['notifications'] = $notifications;
@@ -216,6 +219,15 @@ class AnuncioController extends Controller
                     $value = Tools::tipoCategoria($categoriaOBase->id);
                 }
 
+                if ($key == "id_tipo") {
+                    $value = TipoRoupas::findOne(["id" => $value])->nome;
+                }
+
+                if ($key == "id_genero") {
+                    $value = GeneroJogos::findOne(["id" => $value])->nome;
+                }
+                
+
                 if(isset($catO->attributeLabels()[$key]))
                     $categoriaO[$n][$catO->attributeLabels()[$key]] = $value;
                 unset($categoriaO[$i][$key]);
@@ -238,6 +250,14 @@ class AnuncioController extends Controller
                     if (\in_array($key, ['id_categoria', 'id_brinquedo', 'id_eletronica'])) 
                     {
                         $value = Tools::tipoCategoria($categoriaOBase->id);
+                    }
+
+                    if ($key == "id_tipo") {
+                        $value = TipoRoupas::findOne(["id" => $value])->nome;
+                    }
+    
+                    if ($key == "id_genero") {
+                        $value = GeneroJogos::findOne(["id" => $value])->nome;
                     }
 
                     if(isset($catR->attributeLabels()[$key]))

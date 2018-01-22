@@ -6,6 +6,7 @@ use Yii;
 use common\models\User;
 use yii\db\ActiveRecord;
 use common\models\Anuncio;
+use common\models\Notificacoes;
 
 /**
  * This is the model class for table "propostas".
@@ -124,12 +125,14 @@ class Proposta extends ActiveRecord
         
         $usernameCliente = "";
         $mensagem = "";
+        $idCliente = 0;
 
         if ($this->estado == "PENDENTE") //Notificar cliente de proposta recebida
         {
             $anuncio = Anuncio::findOne(["id" => $this->id_anuncio]);
             $usernameCliente = $anuncio->idUser->username;
             $mensagem = "Nova proposta para um dos seus anúncios";
+            $idCliente = $anuncio->idUser->id;
         }else //Notificar cliente de estado da proposta (aceite/recusar)
         {
             if ($this->estado == "ACEITE") {
@@ -141,9 +144,18 @@ class Proposta extends ActiveRecord
 
             $usernameCliente = User::findOne(["id" => $this->id_user])->username;
             $mensagem = "Uma das suas propostas foi $estado";
+            $idCliente = $this->id_user;
         }
 
         $this->Publicar($usernameCliente, $mensagem);
+
+        //Tabela
+        $notificacao = new Notificacoes();
+        $notificacao->id_user = $idCliente;
+        $notificacao->mensagem = $mensagem;
+        $notificacao->lida = 0;
+        $notificacao->save();
+
     }
 
     public function Publicar($canal,$msg)
