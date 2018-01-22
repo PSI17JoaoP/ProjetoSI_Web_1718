@@ -131,7 +131,8 @@ class Proposta extends ActiveRecord
         {
             $anuncio = Anuncio::findOne(["id" => $this->id_anuncio]);
             $usernameCliente = $anuncio->idUser->username;
-            $mensagem = "Nova proposta para um dos seus anúncios";
+            $titulo = $anuncio->titulo;
+            $mensagem = "Nova proposta para o seu anúncio '$titulo";
             $idCliente = $anuncio->idUser->id;
         }else //Notificar cliente de estado da proposta (aceite/recusar)
         {
@@ -143,7 +144,8 @@ class Proposta extends ActiveRecord
             
 
             $usernameCliente = User::findOne(["id" => $this->id_user])->username;
-            $mensagem = "Uma das suas propostas foi $estado";
+            $titulo = Anuncio::findOne(["id" => $this->id_anuncio])->titulo;
+            $mensagem = "A sua proposta ao anúncio '$titulo' foi $estado";
             $idCliente = $this->id_user;
         }
 
