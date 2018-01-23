@@ -123,6 +123,7 @@ $(function(){
                 "score" : score
             }
         }).then(function(response){
+            $('.filled-stars').css("width", "0%");
             if (response == true) {
                 $('.modal_rating').css('display', 'none');
                 $('.modal_detalhes').append("<p class='text-success'>Votado com sucesso!</p>");
