@@ -2,6 +2,7 @@
 
 namespace api\controllers;
 
+use common\models\Tools;
 use common\models\User;
 use common\models\Cliente;
 use common\models\Proposta;
@@ -47,8 +48,9 @@ class PropostasController extends ActiveController
             if($categorias = $gestor->getCategorias($proposta, 'cat_proposto'))
             {
                 $categoriaMae = array_shift($categorias);
+                $categoriaNome = Tools::tipoCategoria($categoriaMae->id);
 
-                return ['id' => $id, 'Categorias' => ['Base' => $categoriaMae, 'Filhas' => $categorias]];
+                return ['id' => $id, 'Categoria' => $categoriaNome, 'Categorias' => ['Base' => $categoriaMae, 'Filhas' => $categorias]];
             }
         }
 
