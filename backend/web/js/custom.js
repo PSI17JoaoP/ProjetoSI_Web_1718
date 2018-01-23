@@ -32,6 +32,15 @@ $(".rowListaUsers").click(function()
                 $("#userTelefone").html(detalhes['cliente']['telefone']);
                 $("#userRegiao").html(detalhes['cliente']['regiao']);
 
+                $("#userScore").html("Pontuação:"+detalhes['score'] + "%");
+                if (detalhes['score'] >= 75) {
+                    $("#userScore").attr("class", "text-success");
+                }else if (detalhes['score'] < 50) {
+                    $("#userScore").attr("class", "text-danger");
+                }else{
+                    $("#userScore").attr("class", "text-warning");
+                }
+
                 detalhes['anuncios'].forEach(anuncio => {
                     var anuncioRow = $('<tr>').append(
                         $('<td>').text(anuncio['titulo']),

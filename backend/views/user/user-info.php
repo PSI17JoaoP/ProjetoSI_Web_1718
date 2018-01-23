@@ -9,6 +9,7 @@ dmstr\web\AdminLteAsset::register($this);
 
 <div class="col-xs-4">
     <img src="../../web/assets/pic_placeholder.png" width="85px" height="85px"  alt="" id="userImage" />
+    <p id="userScore">Pontuação:</p>
 </div>
 <div class="col-xs-8">
     <h3 id="userProfileName" ></h3>
