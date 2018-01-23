@@ -14,6 +14,7 @@ $(function(){
                 var detalhesId = $(this).data("id");
 
                 $('.modal_detalhes').empty();
+                $('.modal_rating').css('display', 'none');
 
                 $.ajax(detalhesUrl, {
                     method: 'GET',
@@ -51,9 +52,13 @@ $(function(){
                     content += "<br>";
                     content += "<p>Comentários: </p><p>"+data[0].comentarios+"</p>";
 
+                    $('#btn-rate').attr("data-id", data[0].id_user);
+
                     $('.modal_detalhes').append(content);
 
                     $('.pesquisa_loading_modal').css('display', 'none');
+
+                    $('.modal_rating').css('display', 'block');
                 });
 
                 $('#modal_geral').modal('toggle');
@@ -100,6 +105,29 @@ $(function(){
         });
     });
 
+    $("#btn-rate").on('click', function()
+    {
+        var detalhesUrl = $(this).data("detail");
+        var idCliente = $(this).data("id");
+        var score = $("#rate").val();
+
+        $.ajax(detalhesUrl, {
+            method: 'GET',
+            type: 'json',
+            data: 
+            {
+                "id_cliente" : idCliente,
+                "score" : score
+            }
+        }).then(function(response){
+            if (response == true) {
+                $('.modal_rating').css('display', 'none');
+                $('.modal_detalhes').append("<p class='text-success'>Votado com sucesso!</p>");
+            }else{
+                $('.modal_detalhes').append("<p class='text-danger'>Erro ao votar</p>");
+            }
+        });
+    });
     
     $('#pesquisa_titulo').on('input',function(){
         pesquisa();

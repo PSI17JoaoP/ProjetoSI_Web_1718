@@ -28,7 +28,7 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'historico', 'anuncios', 'propostas', 'conta', 'detalhes-contacto', 'pin'],
+                        'actions' => ['index', 'historico', 'anuncios', 'propostas', 'conta', 'detalhes-contacto', 'pin', 'avaliar'],
                         'allow' => true,
                         'roles' => ['cliente'],
                     ],
@@ -334,6 +334,26 @@ class UserController extends Controller
             ],
             'content' => '//forms/cliente'
         ]);
+
+        return false;
+    }
+
+    public function actionAvaliar($id_cliente, $score)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $cliente = Cliente::findOne(["id_user" => $id_cliente]);
+
+        if ($cliente) 
+        {
+            $cliente->n_reviews += 1;
+            $cliente->total_score += ($score*10);
+            
+            if($cliente->save(false))
+            {
+                return true;
+            }
+        }
 
         return false;
     }

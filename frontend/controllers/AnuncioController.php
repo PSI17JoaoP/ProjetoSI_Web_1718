@@ -12,19 +12,20 @@ use yii\web\Controller;
 use common\models\Tools;
 use common\models\Anuncio;
 use common\models\Cliente;
-use yii\widgets\ActiveForm;
+use common\models\Reports;
 use yii\filters\VerbFilter;
+use yii\widgets\ActiveForm;
 use common\models\Categoria;
 use common\models\TipoRoupas;
-use common\models\GeneroJogos;
 use yii\filters\AccessControl;
+use common\models\GeneroJogos;
 use common\models\Notificacoes;
 use frontend\models\AnuncioForm;
-use common\models\CategoriaRoupa;
 use common\models\ImagensAnuncio;
 use common\models\CategoriaJogos;
-use common\models\CategoriaLivros;
+use common\models\CategoriaRoupa;
 use yii\web\NotFoundHttpException;
+use common\models\CategoriaLivros;
 use frontend\models\GestorCategorias;
 use common\models\CategoriaEletronica;
 use common\models\CategoriaBrinquedos;
@@ -174,6 +175,7 @@ class AnuncioController extends Controller
         }
 
         $anuncios = $anuncios->andWhere(['not', 'estado=:estado'], [':estado' => "CONCLUIDO"]);
+        $anuncios = $anuncios->andWhere(['not', 'id_user=:id'], [':id' => Yii::$app->user->identity->getId()]);
         $anuncios = $anuncios->all();
 
         if (Yii::$app->request->isAjax)
@@ -268,7 +270,6 @@ class AnuncioController extends Controller
         }else{
             $categoriaRBase = ['nome' => "Aberto a sugestões"];
         }
-
 
         Yii::$app->response->format = Response::FORMAT_JSON;
         return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR];
