@@ -347,7 +347,7 @@ class UserController extends Controller
         if ($cliente) 
         {
             $cliente->n_reviews += 1;
-            $cliente->total_score += ($score*10);
+            $cliente->total_score += ($score*10 * 2);
             
             if($cliente->save(false))
             {
