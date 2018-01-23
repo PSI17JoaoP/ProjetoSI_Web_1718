@@ -271,8 +271,14 @@ class AnuncioController extends Controller
             $categoriaRBase = ['nome' => "Aberto a sugestões"];
         }
 
+        $proprio = false;
+
+        if ($anuncio->id_user == Yii::$app->user->identity->getId()) {
+            $proprio = true;
+        }
+
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR];
+        return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR, $proprio];
 
     }
 

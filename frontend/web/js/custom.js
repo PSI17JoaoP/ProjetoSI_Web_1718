@@ -58,7 +58,10 @@ $(function(){
 
                     $('.pesquisa_loading_modal').css('display', 'none');
 
-                    $('.modal_rating').css('display', 'block');
+                    if (data[5] == false) {
+                        $('.modal_rating').css('display', 'block');
+                    }
+                    
                 });
 
                 $('#modal_geral').modal('toggle');
