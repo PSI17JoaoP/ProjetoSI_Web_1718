@@ -96,7 +96,7 @@ class UserController extends Controller
         {
             $score = "0";
             if ($cliente->n_reviews > 0) {
-                $score = ($cliente->total_score / $cliente->n_reviews);
+                $score = round(($cliente->total_score / $cliente->n_reviews), 2);
             }
             
 
