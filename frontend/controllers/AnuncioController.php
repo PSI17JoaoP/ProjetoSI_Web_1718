@@ -88,34 +88,6 @@ class AnuncioController extends Controller
         return true; 
     }
 
-    
-    /**
-     * Lists all Anuncio models.
-     * @return mixed
-     */
-    /*public function actionIndex()
-    {
-        $searchModel = new AnuncioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }*/
-
-    /**
-     * Displays a single Anuncio model.
-     * @param integer $id
-     * @return mixed
-     */
-    /*public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }*/
-
     /**
      * Searches for Anuncio models.
      * @param string $titulo
@@ -174,7 +146,7 @@ class AnuncioController extends Controller
             $anuncios = $anuncios->Where(['like', 'titulo', $titulo]);
         }
 
-        $anuncios = $anuncios->andWhere(['not', 'estado=:estado'], [':estado' => "CONCLUIDO"]);
+        $anuncios = $anuncios->andWhere('estado=:estado', [':estado' => "ATIVO"]);
         $anuncios = $anuncios->andWhere(['not', 'id_user=:id'], [':id' => Yii::$app->user->identity->getId()]);
         $anuncios = $anuncios->all();
 
