@@ -26,6 +26,14 @@ $(function(){
                 }).then(function(data){
                     var content = "<h3>Título: "+data[0].titulo+"<small>  Criado a: "+data[0].data_criacao+"</small></h3>";
 
+                    if (data[6] >= 75) {
+                        content += "<p class='text-success'>Pontuação:"+data[6]+"%</p>";
+                    }else if (data[6] < 50) {
+                        content += "<p class='text-danger'>Pontuação:"+data[6]+"%</p>";
+                    }else{
+                        content += "<p class='text-primary'>Pontuação:"+data[6]+"%</p>";
+                    }
+
                     content += "<br>";
                     content += "<h4><b>Troco</b> "+data[1].nome+"</h4>";
 

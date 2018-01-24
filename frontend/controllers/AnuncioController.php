@@ -243,6 +243,7 @@ class AnuncioController extends Controller
             $categoriaRBase = ['nome' => "Aberto a sugestões"];
         }
 
+        //Estado de report
         $mostrar = true;
 
         $nReports = (new Query())
@@ -254,9 +255,17 @@ class AnuncioController extends Controller
             $mostrar = false;
         }
 
+        //Score anucio->id_user
+        $cliente = Cliente::findOne(['id_user' => $anuncio->id_user]);
+
+        $score = 0;
+
+        if ($cliente->n_reviews > 0) {
+            $score = round(($cliente->total_score / $cliente->n_reviews), 2);
+        }
 
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR, $mostrar];
+        return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR, $mostrar, $score];
 
     }
 
