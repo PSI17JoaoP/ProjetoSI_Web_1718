@@ -33,9 +33,9 @@ $this->title = 'Propostas Recebidas';
 ?>  
     <div class="panel panel-default">
         <div class="panel-heading">
-            <strong>Propostas pendentes</strong>
+            <a onclick="$('#c-pendentes').collapse('toggle')"><strong>Propostas pendentes</strong></a>
         </div>
-        <div class="panel-body anuncio-detalhes">
+        <div id="c-pendentes" class="panel-body anuncio-detalhes panel-collapse collapse in">
 
             <?php foreach($propostas as $dados) { ?>
 
@@ -91,9 +91,9 @@ $this->title = 'Propostas Recebidas';
 <div class="col-12">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <strong>Propostas aceites</strong>                            
+            <a onclick="$('#c-aceites').collapse('toggle')"><strong>Propostas aceites</strong></a>                    
         </div>
-        <div class="panel-body contactos-detalhes">
+        <div id="c-aceites" class="panel-body contactos-detalhes panel-collapse collapse in">
             <?php foreach($propostasAceites as $dados) { ?>
 
                     <div class="row">

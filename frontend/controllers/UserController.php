@@ -147,6 +147,7 @@ class UserController extends Controller
 
         //$categorias = $gestorCategorias->getCategoriasDados($anuncios, 'cat_oferecer');
         $anunciosAtivos = [];
+        $anunciosFechados = [];
         $contactos = [];
 
         foreach($anuncios as $anuncio)
@@ -179,17 +180,23 @@ class UserController extends Controller
                 }
 
                 \array_push($contactos, $contacto);
-            }else 
+
+            }else if ($anuncio->estado == "FECHADO") 
+            {
+                \array_push($anunciosFechados, $anuncio);
+            } 
             {
                 \array_push($anunciosAtivos, $anuncio);
             }
         }
 
         $categorias = $gestorCategorias->getCategoriasDados($anunciosAtivos, 'cat_oferecer');
+        $categoriasFechadas = $gestorCategorias->getCategoriasDados($anunciosFechados, 'cat_oferecer');
 
         return $this->render('anuncios', [
             'anuncios' => $categorias,
-            'anunciosConcluidos' => $contactos,            
+            'anunciosConcluidos' => $contactos, 
+            'anunciosFechados' => $categoriasFechadas,           
             'tipo' => $tipo, 
             'titulo' => $titulo, 
             'mensagem' => $mensagem

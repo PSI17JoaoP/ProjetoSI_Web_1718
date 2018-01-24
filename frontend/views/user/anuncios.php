@@ -33,9 +33,9 @@ $this->title = 'Os meus anúncios';
 ?> 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <strong>Anúncios concluídos</strong>                            
+            <a onclick="$('#c-detalhes').collapse('toggle')"><strong>Anúncios concluídos</strong></a>
         </div>
-        <div class="panel-body contactos-detalhes">
+        <div id="c-detalhes" class="panel-body contactos-detalhes panel-collapse collapse in">
             <?php foreach($anunciosConcluidos as $dados) { ?>
 
                     <div class="row">
@@ -81,15 +81,65 @@ $this->title = 'Os meus anúncios';
 <div class="col-12"> 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <strong>Anúncios Ativos</strong>                            
+            <a onclick="$('#c-ativos').collapse('toggle')"><strong>Anúncios Ativos</strong></a>
         </div>
-        <div class="panel-body anuncio-detalhes">
+        <div id="c-ativos" class="panel-body anuncio-detalhes panel-collapse collapse in">
 
             <?php foreach($anuncios as $dados) { ?>
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                            <?php
+                                            if($dados[0]->imagensAnuncios != null)
+                                            {
+                                                echo "<img id='pesquisa_row_imagem' src='../../../common/images/". $dados[0]->imagensAnuncios[0]->path_relativo ."' alt='' width = '75px' height = '75px'>";
+                                            }
+                                            ?>
+                                        </div>
+                                    <div class="col-md-6">
+                                        <p style="margin-top: 8px; margin-left: 5px"><b>Título:</b><?= Html::encode($dados[0]->titulo) ?></p>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <span class="pull-right">
+                                            <?= Html::a('Detalhes', 'javascript:', [
+                                                'class' => 'btn btn-primary view_model',
+                                                'data-detail' => Url::toRoute(['anuncio/detalhes']), 
+                                                'data-id' => $dados[0]->id
+                                                ])?>
+
+                                            <?= Html::a('Eliminar', ['delete'], ['class' => 'btn btn-danger']) ?>
+                                        </span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
+<div class="col-12"> 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a onclick="$('#c-fechados').collapse('toggle')"><strong>Anúncios Fechados</strong></a>
+        </div>
+        <div id="c-fechados" class="panel-body anuncio-detalhes panel-collapse collapse in">
+
+            <?php foreach($anunciosFechados as $dados) { ?>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-collapse">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-2">
