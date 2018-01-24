@@ -2,10 +2,12 @@
 
 namespace api\controllers;
 
+use common\models\ImagensProposta;
 use common\models\Tools;
 use common\models\User;
 use common\models\Cliente;
 use common\models\Proposta;
+use Yii;
 use yii\rest\ActiveController;
 use yii\filters\auth\HttpBasicAuth;
 use frontend\models\GestorCategorias;
@@ -56,5 +58,25 @@ class PropostasController extends ActiveController
 
         throw new NotFoundHttpException('Não foi encontradas categorias da proposta desejada.', 404);
 
+    }
+
+    public function actionImagens($id)
+    {
+        if($imagens = ImagensProposta::findAll(['proposta_id' => $id])) {
+
+            $imagensBytes = array();
+
+            foreach ($imagens as $imagem) {
+                $bytes = file_get_contents(Yii::getAlias('@common/images') . "/" .  $imagem->path_relativo);
+
+                array_push($imagensBytes, base64_encode($bytes));
+            }
+
+            if(!empty($imagensBytes)) {
+                return ['Imagens' => $imagensBytes];
+            }
+        }
+
+        throw new NotFoundHttpException('Não foi encontradas imagens da proposta desejada.', 404);
     }
 }

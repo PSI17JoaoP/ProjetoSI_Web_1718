@@ -2,6 +2,7 @@
 
 namespace api\controllers;
 
+use Yii;
 use yii\db\Query;
 use common\models\User;
 use common\models\Tools;
@@ -268,6 +269,26 @@ class AnunciosController extends ActiveController
         }
 
         throw new NotFoundHttpException('Utilizador não encontrado.', 404);
+    }
+
+    public function actionImagens($id)
+    {
+        if($imagens = ImagensAnuncio::findAll(['anuncio_id' => $id])) {
+
+            $imagensBytes = array();
+
+            foreach ($imagens as $imagem) {
+                $bytes = file_get_contents(Yii::getAlias('@common/images') . "/" .  $imagem->path_relativo);
+
+                array_push($imagensBytes, base64_encode($bytes));
+            }
+
+            if(!empty($imagensBytes)) {
+                return ['Imagens' => $imagensBytes];
+            }
+        }
+
+        throw new NotFoundHttpException('Não foi encontradas imagens do anuncio desejado.', 404);
     }
 
 }

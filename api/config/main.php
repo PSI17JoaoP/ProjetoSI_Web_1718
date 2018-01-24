@@ -53,6 +53,7 @@ return [
                         'GET propostas/{username}' => 'todas-propostas',
                         'GET sugeridos/{username}' => 'sugeridos',
                         'GET {id}/propostas' => 'propostas',
+                        'GET {id}/imagens' => 'imagens',
                         'GET {id}/categoriaOferecer' => 'categorias-o',
                         'GET {id}/categoriaReceber' => 'categorias-r',
                         'GET titulo/{titulo}' => 'pesquisa',
@@ -98,7 +99,8 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'propostas',
                     'extraPatterns' => [
-                        'GET {id}/categorias' => 'categorias'
+                        'GET {id}/categorias' => 'categorias',
+                        'GET {id}/imagens' => 'imagens',
                     ],
                 ],
                 [
