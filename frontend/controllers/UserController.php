@@ -137,10 +137,16 @@ class UserController extends Controller
     }
 
 
-    public function actionAnuncios($tipo = null, $titulo = null, $mensagem = null)
+    public function actionAnuncios($tipo = null, $titulo = null, $mensagem = null, $id_notificacao = null)
     {
         $this->layout = "main-user";
 
+        //Marcar notificação como lida, se for o caso
+        if ($id_notificacao != null) 
+        {
+            $notificacao = Notificacoes::findOne(["id" => $id_notificacao]);
+            $notificacao->ler();
+        }
         $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->identity->getId()]);
 
         $gestorCategorias = new GestorCategorias();
