@@ -103,6 +103,12 @@ class ReportController extends Controller
 
                 $cliente->total_score -= 10;
                 
+                if ($cliente->total_score < 0) {
+                    $user = User::findOne(["id" => $anuncio->id_user]);
+                    $user->status = 0;
+                    $user->save();
+                }
+
                 if ($cliente->save()) 
                 {
                     return true;
