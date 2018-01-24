@@ -116,7 +116,7 @@ class SiteController extends Controller
                 ->select(['anuncios.id', 'cat_oferecer', 'cat_receber'])
                 ->from(Anuncio::tableName())
                 ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
-                ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"])
+                ->andWhere('estado = :estado', [':estado' => "ATIVO"])
                 ->join('JOIN', ImagensAnuncio::tableName(), Anuncio::tableName().'.id = '.ImagensAnuncio::tableName().'.anuncio_id')
                 ->addSelect('path_relativo')
                 ->orderBy(Anuncio::tableName().'.id DESC')
@@ -137,7 +137,7 @@ class SiteController extends Controller
                 ->select(['anuncios.id', 'cat_oferecer', 'cat_receber'])
                 ->from(Anuncio::tableName())
                 ->where('id_user != :id_user', [':id_user' => Yii::$app->user->getId()])
-                ->andWhere('estado != :estado', [':estado' => "CONCLUIDO"])
+                ->andWhere('estado = :estado', [':estado' => "ATIVO"])
                 ->join('JOIN', ImagensAnuncio::tableName(), Anuncio::tableName().'.id = '.ImagensAnuncio::tableName().'.anuncio_id')
                 ->addSelect(ImagensAnuncio::tableName().'.path_relativo');
                 
@@ -189,11 +189,13 @@ class SiteController extends Controller
 
         else {
             $anunciosRecentes = Anuncio::find()
+                ->where('estado = :estado', [':estado' => "ATIVO"])
                 ->orderBy('id DESC')
                 ->limit(5)
                 ->all();
 
             $anunciosDestaques = Anuncio::find()
+                ->where('estado = :estado', [':estado' => "ATIVO"])
                 ->orderBy('id DESC')
                 ->limit(5)
                 ->all();
