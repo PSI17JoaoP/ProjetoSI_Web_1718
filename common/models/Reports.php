@@ -11,7 +11,7 @@ use Yii;
  * @property integer $id_user
  * @property integer $id_anuncio
  *
- * @property Anuncios $idAnuncio
+ * @property Anuncio $idAnuncio
  * @property User $idUser
  */
 class Reports extends \yii\db\ActiveRecord
@@ -32,7 +32,7 @@ class Reports extends \yii\db\ActiveRecord
         return [
             [['id_user', 'id_anuncio'], 'required'],
             [['id_user', 'id_anuncio'], 'integer'],
-            [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncios::className(), 'targetAttribute' => ['id_anuncio' => 'id']],
+            [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncio::className(), 'targetAttribute' => ['id_anuncio' => 'id']],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
@@ -54,7 +54,7 @@ class Reports extends \yii\db\ActiveRecord
      */
     public function getIdAnuncio()
     {
-        return $this->hasOne(Anuncios::className(), ['id' => 'id_anuncio']);
+        return $this->hasOne(Anuncio::className(), ['id' => 'id_anuncio']);
     }
 
     /**

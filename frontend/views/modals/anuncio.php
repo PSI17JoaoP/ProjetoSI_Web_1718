@@ -30,5 +30,12 @@ use kartik\rating\StarRating;
         'id' => 'btn-rate',
         'class' => 'btn btn-primary btn-sm', 
         'data-detail' => Url::toRoute(['user/avaliar'])])?>
+
+    <button id="reportShow" class="btn btn-warning btn-sm">Reportar</button>
+    <span id="reportOpt" style="display:none">
+    Tem a certeza ?
+        <button id="reportSim" class="btn btn-danger btn-sm" data-href="<?= Url::toRoute(['anuncio/reportar'])?>">Sim</button>
+        <button id="reportNao" class="btn btn-success btn-sm">Não</button>
+    </span>
 </div>
 

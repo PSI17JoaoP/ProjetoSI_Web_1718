@@ -53,14 +53,17 @@ $(function(){
                     content += "<p>Comentários: </p><p>"+data[0].comentarios+"</p>";
 
                     $('#btn-rate').attr("data-id", data[0].id_user);
+                    
+                    $("#reportSim").attr('data-id', data[0].id);
 
                     $('.modal_detalhes').append(content);
 
                     $('.pesquisa_loading_modal').css('display', 'none');
 
-                    if (data[5] == false) {
+                    if (data[5] == true) {
                         $('.modal_rating').css('display', 'block');
-                    }
+                        $("#reportOpt").css('display', "none");
+                    }   
                     
                 });
 
@@ -133,6 +136,38 @@ $(function(){
         });
     });
     
+    $('#reportShow').click(function()
+    {
+        $("#reportOpt").css('display', "inline-block");
+    });
+
+    $('#reportNao').click(function()
+    {
+        $("#reportOpt").css('display', "none");
+    });
+
+    $('#reportSim').click(function()
+    {
+        var detalhesUrl = $(this).data("href");
+        var idAnuncio = $(this).data("id");
+
+        $.ajax(detalhesUrl, {
+            method: 'GET',
+            type: 'json',
+            data: 
+            {
+                "id" : idAnuncio
+            }
+        }).then(function(response){
+            if (response == true) {
+                $('.modal_rating').css('display', 'none');
+                $('.modal_detalhes').append("<p class='text-success'>Reportado com sucesso!</p>");
+            }else{
+                $('.modal_detalhes').append("<p class='text-danger'>Erro ao reportar</p>");
+            }
+        });
+    });
+
     $('#pesquisa_titulo').on('input',function(){
         pesquisa();
     });

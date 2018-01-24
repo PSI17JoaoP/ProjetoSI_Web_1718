@@ -47,7 +47,7 @@ class AnuncioController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create'],
+                        'actions' => ['create', 'reportar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -243,14 +243,20 @@ class AnuncioController extends Controller
             $categoriaRBase = ['nome' => "Aberto a sugestões"];
         }
 
-        $proprio = false;
+        $mostrar = true;
 
-        if ($anuncio->id_user == Yii::$app->user->identity->getId()) {
-            $proprio = true;
+        $nReports = (new Query())
+            ->from(Reports::tableName())
+            ->where(['id_user' => Yii::$app->user->identity->getId(), 'id_anuncio' => $anuncio->id])
+            ->count();
+
+        if ($anuncio->id_user == Yii::$app->user->identity->getId() || $nReports > 0) {
+            $mostrar = false;
         }
 
+
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR, $proprio];
+        return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR, $mostrar];
 
     }
 
@@ -378,6 +384,22 @@ class AnuncioController extends Controller
                 'catList' => Tools::listaCategorias(),
             ]);
         }
+    }
+
+    
+    public function actionReportar($id)
+    {
+        $report = new Reports();
+        $report->id_user = Yii::$app->user->identity->getId();
+        $report->id_anuncio = $id;
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if ($report->save()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
