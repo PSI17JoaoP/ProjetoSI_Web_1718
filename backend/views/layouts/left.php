@@ -21,6 +21,7 @@
                         'items' => 
                         [
                             ['label' => 'Utilizadores', 'icon' => 'circle-o', 'url' => ['user/index']],
+                            ['label' => 'Reports', 'icon' => 'circle-o', 'url' => ['report/index']],
                         ]
                     ],
                     

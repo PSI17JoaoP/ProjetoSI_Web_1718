@@ -18,6 +18,8 @@ $(".rowListaUsers").click(function()
                 $("#userProfileName").html(detalhes['user']['username']);
                 $("#userTelefone").empty();
                 $("#userRegiao").empty();
+                
+                $("#userScore").html("Sem pontuação");
             }else
             {
                 if(detalhes['cliente']['path_imagem'] != null)
@@ -84,6 +86,33 @@ $('#userStatus').click(function()
 $('#userStatusNao').click(function()
 {
     $("#userStatusOpt").css('display', "none");
+});
+
+$(".fechar").click(function(){
+    var id = $(this).data("id");
+    var url = $(this).data("url");
+
+    $.ajax(url, 
+        {
+            method: 'GET',
+            type: 'json',
+            data: 
+                {
+                    "id" : id
+                }
+        }).then(function(response)
+        {
+            var dom = "#acao"+id;
+            
+            if (response == true) 
+            {
+                $(dom).empty();
+                $(dom).append("<p class='text-success'>Fechado com sucesso</p>");
+            }else
+            {
+                $(dom).append("<p class='text-success'>Erro ao fechar anúncio</p>");
+            }
+        });
 });
 
 if($('.site-index').length){
