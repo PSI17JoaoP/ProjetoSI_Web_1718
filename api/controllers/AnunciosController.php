@@ -156,7 +156,7 @@ class AnunciosController extends ActiveController
             $params3 = ['cat_oferecer' => $listaIDs];
         }
 
-        if($anuncios = Anuncio::find()->where($params1)->andWhere($params2)->andWhere($params3)->all()) {
+        if($anuncios = Anuncio::find()->where($params1)->andWhere($params2)->andWhere($params3)->andWhere('estado=:estado', [':estado' => "ATIVO"])->all()) {
             return ['Dados' => ['Titulo' => $titulo, 'Região' => $regiao, 'Categoria' => $categoria], 'Anuncios' => $anuncios];
         }
 

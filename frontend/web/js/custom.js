@@ -14,6 +14,7 @@ $(function(){
                 var detalhesId = $(this).data("id");
 
                 $('.modal_detalhes').empty();
+                $('.modal_rating').css('display', 'none');
 
                 $.ajax(detalhesUrl, {
                     method: 'GET',
@@ -24,6 +25,14 @@ $(function(){
                     }
                 }).then(function(data){
                     var content = "<h3>Título: "+data[0].titulo+"<small>  Criado a: "+data[0].data_criacao+"</small></h3>";
+
+                    if (data[6] >= 75) {
+                        content += "<p class='text-success'>Pontuação:"+data[6]+"%</p>";
+                    }else if (data[6] < 50) {
+                        content += "<p class='text-danger'>Pontuação:"+data[6]+"%</p>";
+                    }else{
+                        content += "<p class='text-primary'>Pontuação:"+data[6]+"%</p>";
+                    }
 
                     content += "<br>";
                     content += "<h4><b>Troco</b> "+data[1].nome+"</h4>";
@@ -51,9 +60,19 @@ $(function(){
                     content += "<br>";
                     content += "<p>Comentários: </p><p>"+data[0].comentarios+"</p>";
 
+                    $('#btn-rate').attr("data-id", data[0].id_user);
+                    
+                    $("#reportSim").attr('data-id', data[0].id);
+
                     $('.modal_detalhes').append(content);
 
                     $('.pesquisa_loading_modal').css('display', 'none');
+
+                    if (data[5] == true) {
+                        $('.modal_rating').css('display', 'block');
+                        $("#reportOpt").css('display', "none");
+                    }   
+                    
                 });
 
                 $('#modal_geral').modal('toggle');
@@ -100,7 +119,63 @@ $(function(){
         });
     });
 
+    $("#btn-rate").on('click', function()
+    {
+        var detalhesUrl = $(this).data("detail");
+        var idCliente = $(this).data("id");
+        var score = $("#rate").val();
+
+        $.ajax(detalhesUrl, {
+            method: 'GET',
+            type: 'json',
+            data: 
+            {
+                "id_cliente" : idCliente,
+                "score" : score
+            }
+        }).then(function(response){
+            $('.filled-stars').css("width", "0%");
+            if (response == true) {
+                $('.modal_rating').css('display', 'none');
+                $('.modal_detalhes').append("<p class='text-success'>Votado com sucesso!</p>");
+            }else{
+                $('.modal_detalhes').append("<p class='text-danger'>Erro ao votar</p>");
+            }
+        });
+    });
     
+    $('#reportShow').click(function()
+    {
+        $("#reportOpt").css('display', "inline-block");
+    });
+
+    $('#reportNao').click(function()
+    {
+        $("#reportOpt").css('display', "none");
+    });
+
+    $('#reportSim').click(function()
+    {
+        var detalhesUrl = $(this).data("href");
+        var idAnuncio = $(this).data("id");
+
+        $.ajax(detalhesUrl, {
+            method: 'GET',
+            type: 'json',
+            data: 
+            {
+                "id" : idAnuncio
+            }
+        }).then(function(response){
+            if (response == true) {
+                $('.modal_rating').css('display', 'none');
+                $('.modal_detalhes').append("<p class='text-success'>Reportado com sucesso!</p>");
+            }else{
+                $('.modal_detalhes').append("<p class='text-danger'>Erro ao reportar</p>");
+            }
+        });
+    });
+
     $('#pesquisa_titulo').on('input',function(){
         pesquisa();
     });

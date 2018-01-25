@@ -37,7 +37,13 @@ use common\models\Anuncio;
 
         foreach($notificacoes as $notificacao)
         {
-            $menuItems[] = Html::a($notificacao->mensagem, Url::toRoute(['user/propostas', 'id_notificacao' => $notificacao->id]), ['class' => 'dropdown-item btn']);
+            if (strpos($notificacao->mensagem, 'proposta') !== false) 
+            {
+                $menuItems[] = Html::a($notificacao->mensagem, Url::toRoute(['user/propostas', 'id_notificacao' => $notificacao->id]), ['class' => 'dropdown-item btn']);
+            }else {
+                $menuItems[] = Html::a($notificacao->mensagem, Url::toRoute(['user/anuncios', 'id_notificacao' => $notificacao->id]), ['class' => 'dropdown-item btn']);
+            }
+
         }
 
         $menuItems[] = Html::endTag('div') . Html::endTag('li');

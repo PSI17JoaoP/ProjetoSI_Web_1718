@@ -92,8 +92,15 @@ class UserController extends Controller
 
         $anuncios = null;
         
+        $score = 0;
+        
         if($cliente)
-        {
+        {    
+            if ($cliente->n_reviews > 0) {
+                $score = round(($cliente->total_score / $cliente->n_reviews), 2);
+            }
+            
+
             $cliente->regiao = Tools::listaRegioes()[$cliente->regiao];
 
             $anuncios = (new Query())
@@ -117,7 +124,7 @@ class UserController extends Controller
         
 
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return ['user' => $user, 'cliente' => $cliente, 'anuncios' => $anuncios];
+        return ['user' => $user, 'cliente' => $cliente, 'anuncios' => $anuncios, 'score' => $score];
     }
 
     public function actionPerfil()

@@ -12,19 +12,20 @@ use yii\web\Controller;
 use common\models\Tools;
 use common\models\Anuncio;
 use common\models\Cliente;
-use yii\widgets\ActiveForm;
+use common\models\Reports;
 use yii\filters\VerbFilter;
+use yii\widgets\ActiveForm;
 use common\models\Categoria;
 use common\models\TipoRoupas;
-use common\models\GeneroJogos;
 use yii\filters\AccessControl;
+use common\models\GeneroJogos;
 use common\models\Notificacoes;
 use frontend\models\AnuncioForm;
-use common\models\CategoriaRoupa;
 use common\models\ImagensAnuncio;
 use common\models\CategoriaJogos;
-use common\models\CategoriaLivros;
+use common\models\CategoriaRoupa;
 use yii\web\NotFoundHttpException;
+use common\models\CategoriaLivros;
 use frontend\models\GestorCategorias;
 use common\models\CategoriaEletronica;
 use common\models\CategoriaBrinquedos;
@@ -46,7 +47,7 @@ class AnuncioController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create'],
+                        'actions' => ['create', 'reportar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -86,34 +87,6 @@ class AnuncioController extends Controller
 
         return true; 
     }
-
-    
-    /**
-     * Lists all Anuncio models.
-     * @return mixed
-     */
-    /*public function actionIndex()
-    {
-        $searchModel = new AnuncioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }*/
-
-    /**
-     * Displays a single Anuncio model.
-     * @param integer $id
-     * @return mixed
-     */
-    /*public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }*/
 
     /**
      * Searches for Anuncio models.
@@ -173,7 +146,8 @@ class AnuncioController extends Controller
             $anuncios = $anuncios->Where(['like', 'titulo', $titulo]);
         }
 
-        $anuncios = $anuncios->andWhere(['not', 'estado=:estado'], [':estado' => "CONCLUIDO"]);
+        $anuncios = $anuncios->andWhere('estado=:estado', [':estado' => "ATIVO"]);
+        $anuncios = $anuncios->andWhere(['not', 'id_user=:id'], [':id' => Yii::$app->user->identity->getId()]);
         $anuncios = $anuncios->all();
 
         if (Yii::$app->request->isAjax)
@@ -269,9 +243,29 @@ class AnuncioController extends Controller
             $categoriaRBase = ['nome' => "Aberto a sugestões"];
         }
 
+        //Estado de report
+        $mostrar = true;
+
+        $nReports = (new Query())
+            ->from(Reports::tableName())
+            ->where(['id_user' => Yii::$app->user->identity->getId(), 'id_anuncio' => $anuncio->id])
+            ->count();
+
+        if ($anuncio->id_user == Yii::$app->user->identity->getId() || $nReports > 0) {
+            $mostrar = false;
+        }
+
+        //Score anucio->id_user
+        $cliente = Cliente::findOne(['id_user' => $anuncio->id_user]);
+
+        $score = 0;
+
+        if ($cliente->n_reviews > 0) {
+            $score = round(($cliente->total_score / $cliente->n_reviews), 2);
+        }
 
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR];
+        return [$anuncio, $categoriaOBase, $categoriaO, $categoriaRBase, $categoriaR, $mostrar, $score];
 
     }
 
@@ -399,6 +393,22 @@ class AnuncioController extends Controller
                 'catList' => Tools::listaCategorias(),
             ]);
         }
+    }
+
+    
+    public function actionReportar($id)
+    {
+        $report = new Reports();
+        $report->id_user = Yii::$app->user->identity->getId();
+        $report->id_anuncio = $id;
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if ($report->save()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

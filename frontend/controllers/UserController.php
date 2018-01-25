@@ -28,7 +28,7 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'historico', 'anuncios', 'propostas', 'conta', 'detalhes-contacto', 'pin'],
+                        'actions' => ['index', 'historico', 'anuncios', 'propostas', 'conta', 'detalhes-contacto', 'pin', 'avaliar'],
                         'allow' => true,
                         'roles' => ['cliente'],
                     ],
@@ -137,16 +137,23 @@ class UserController extends Controller
     }
 
 
-    public function actionAnuncios($tipo = null, $titulo = null, $mensagem = null)
+    public function actionAnuncios($tipo = null, $titulo = null, $mensagem = null, $id_notificacao = null)
     {
         $this->layout = "main-user";
 
+        //Marcar notificação como lida, se for o caso
+        if ($id_notificacao != null) 
+        {
+            $notificacao = Notificacoes::findOne(["id" => $id_notificacao]);
+            $notificacao->ler();
+        }
         $anuncios = Anuncio::findAll(['id_user' => Yii::$app->user->identity->getId()]);
 
         $gestorCategorias = new GestorCategorias();
 
         //$categorias = $gestorCategorias->getCategoriasDados($anuncios, 'cat_oferecer');
         $anunciosAtivos = [];
+        $anunciosFechados = [];
         $contactos = [];
 
         foreach($anuncios as $anuncio)
@@ -179,17 +186,23 @@ class UserController extends Controller
                 }
 
                 \array_push($contactos, $contacto);
-            }else 
+
+            }else if ($anuncio->estado == "FECHADO") 
+            {
+                \array_push($anunciosFechados, $anuncio);
+            } 
             {
                 \array_push($anunciosAtivos, $anuncio);
             }
         }
 
         $categorias = $gestorCategorias->getCategoriasDados($anunciosAtivos, 'cat_oferecer');
+        $categoriasFechadas = $gestorCategorias->getCategoriasDados($anunciosFechados, 'cat_oferecer');
 
         return $this->render('anuncios', [
             'anuncios' => $categorias,
-            'anunciosConcluidos' => $contactos,            
+            'anunciosConcluidos' => $contactos, 
+            'anunciosFechados' => $categoriasFechadas,           
             'tipo' => $tipo, 
             'titulo' => $titulo, 
             'mensagem' => $mensagem
@@ -334,6 +347,26 @@ class UserController extends Controller
             ],
             'content' => '//forms/cliente'
         ]);
+
+        return false;
+    }
+
+    public function actionAvaliar($id_cliente, $score)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $cliente = Cliente::findOne(["id_user" => $id_cliente]);
+
+        if ($cliente) 
+        {
+            $cliente->n_reviews += 1;
+            $cliente->total_score += ($score*10 * 2);
+            
+            if($cliente->save(false))
+            {
+                return true;
+            }
+        }
 
         return false;
     }
