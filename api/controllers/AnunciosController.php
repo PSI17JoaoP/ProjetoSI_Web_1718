@@ -14,6 +14,8 @@ use common\models\CategoriaRoupa;
 use common\models\CategoriaJogos;
 use common\models\ImagensAnuncio;
 use common\models\CategoriaLivros;
+use yii\web\BadRequestHttpException;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\auth\HttpBasicAuth;
 use frontend\models\GestorCategorias;
@@ -22,6 +24,7 @@ use common\models\CategoriaBrinquedos;
 use common\models\CategoriaEletronica;
 use common\models\CategoriaSmartphones;
 use common\models\CategoriaComputadores;
+use yii\web\ServerErrorHttpException;
 
 class AnunciosController extends ActiveController
 {
@@ -275,20 +278,67 @@ class AnunciosController extends ActiveController
     {
         if($imagens = ImagensAnuncio::findAll(['anuncio_id' => $id])) {
 
-            $imagensBytes = array();
+            $imagensBase64 = array();
 
             foreach ($imagens as $imagem) {
-                $bytes = file_get_contents(Yii::getAlias('@common/images') . "/" .  $imagem->path_relativo);
+                $imagemBytes = file_get_contents(Yii::getAlias('@common/images') . "/" .  $imagem->path_relativo);
 
-                array_push($imagensBytes, base64_encode($bytes));
+                array_push($imagensBase64, base64_encode($imagemBytes));
             }
 
-            if(!empty($imagensBytes)) {
-                return ['Imagens' => $imagensBytes];
+            if(!empty($imagensBase64)) {
+                return ['Imagens' => $imagensBase64];
             }
         }
 
         throw new NotFoundHttpException('Não foi encontradas imagens do anuncio desejado.', 404);
+    }
+
+    public function actionImagensMovel($id)
+    {
+        $imagensMovel = array();
+
+        $imagensBase64 = Yii::$app->request->post('Imagens');
+
+        if($imagensBase64 != null) {
+
+            foreach ($imagensBase64 as $key => $imagemBase64) {
+
+                $imagemBytes = base64_decode($imagemBase64);
+
+                if ($imagemBytes != false) {
+
+                    $nomeImagem = $id . '_' . $key . '.png';
+
+                    $imagemAnuncio = new ImagensAnuncio();
+                    $imagemAnuncio->anuncio_id = $id;
+                    $imagemAnuncio->path_relativo = $nomeImagem;
+
+                    if ($imagemAnuncio->save()) {
+
+                        $bytesImagem = file_put_contents(Yii::getAlias('@common/images') . "/" . $nomeImagem, $imagemBytes);
+
+                        if($bytesImagem != false) {
+                            array_push($imagensMovel, [$nomeImagem => $imagemBase64]);
+                        } else {
+                            throw new ServerErrorHttpException('Ocorreu um erro ao guardar as imagens da aplicação móvel.' . $bytesImagem . '_' . count($imagemBytes));
+                        }
+
+                    } else {
+                        throw new ServerErrorHttpException('Não foi possivél guardar as imagens devido um erro no processamento.');
+                    }
+
+                } else {
+                    throw new ServerErrorHttpException('Ocorreu um erro no processamento das imagens da aplicação móvel.');
+                }
+            }
+
+            if(!empty($imagensMovel)) {
+                return $imagensMovel;
+            }
+        }
+
+        throw new ServerErrorHttpException('Ocorreu um erro no envio das imagens da aplicação móvel.');
     }
 
 }

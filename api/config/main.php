@@ -63,6 +63,7 @@ return [
                         'GET titulo/{titulo}/regiao/{regiao}' => 'pesquisa',
                         'GET titulo/{titulo}/categoria/{categoria}' => 'pesquisa',
                         'GET titulo/{titulo}/regiao/{regiao}/categoria/{categoria}' => 'pesquisa',
+                        'POST {id}/imagens' => 'imagens-movel',
                     ],
                     'tokens' => [
                         '{id}' => '<id:\\d+>',
@@ -101,6 +102,7 @@ return [
                     'extraPatterns' => [
                         'GET {id}/categorias' => 'categorias',
                         'GET {id}/imagens' => 'imagens',
+                        'POST {id}/imagens' => 'imagens-movel',
                     ],
                 ],
                 [
