@@ -11,16 +11,17 @@ use yii\web\Controller;
 use common\models\Tools;
 use common\models\Anuncio;
 use common\models\Cliente;
-use yii\widgets\ActiveForm;
 use yii\filters\VerbFilter;
+use yii\widgets\ActiveForm;
+use common\models\Proposta;
 use common\models\Categoria;
 use yii\filters\AccessControl;
 use frontend\models\AnuncioForm;
 use common\models\ImagensAnuncio;
 use common\models\CategoriaRoupa;
 use common\models\CategoriaJogos;
-use common\models\CategoriaLivros;
 use yii\web\NotFoundHttpException;
+use common\models\CategoriaLivros;
 use yii\web\ForbiddenHttpException;
 use frontend\models\GestorCategorias;
 use common\models\CategoriaBrinquedos;
@@ -361,6 +362,16 @@ class AnuncioController extends Controller
 
                 ImagensAnuncio::deleteAll('anuncio_id='.$anuncio->id);
                 
+
+                $propostasRemover = Proposta::findAll(["id_anuncio" => $anuncio->id]);
+
+                foreach ($propostasRemover as $proposta) 
+                {
+                    \array_push($categoriasRemover, $proposta->cat_proposto);
+                }
+
+                Proposta::deleteAll('id_anuncio='.$anuncio->id);
+
                 if ($anuncio->delete()) 
                 {
                     foreach ($categoriasRemover as $categoria) 
