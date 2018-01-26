@@ -115,4 +115,62 @@ class Categoria extends ActiveRecord
     {
         return $this->hasMany(User::className(), ['id' => 'id_user'])->viaTable('categoria_preferida', ['id_categoria' => 'id']);
     }
+
+    /**
+     * Método de remoção das categorias filhas.
+     *
+     * @return bool
+     * @throws \Exception
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function removerFilhas() {
+
+        if ($this->cRoupa && $this->cRoupa->delete())
+        {
+            return true;
+        }
+
+        if ($this->cLivros && $this->cLivros->delete())
+        {
+            return true;
+        }
+
+        if ($this->cEletronica)
+        {
+            if ($this->cEletronica->cComputadores)
+            {
+                if($this->cEletronica->cComputadores->delete() == false) {
+                    return false;
+                }
+            }
+
+            else if ($this->cEletronica->cSmartphones)
+            {
+                if($this->cEletronica->cSmartphones->delete() == false) {
+                    return false;
+                }
+            }
+
+            if($this->cEletronica->delete()) {
+                return true;
+            }
+        }
+
+        if ($this->cBrinquedos)
+        {
+            if ($this->cBrinquedos->cJogos)
+            {
+                if($this->cBrinquedos->cJogos->delete() == false) {
+                    return false;
+                }
+            }
+
+            if($this->cBrinquedos->delete()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

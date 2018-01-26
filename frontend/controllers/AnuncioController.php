@@ -2,12 +2,13 @@
 
 namespace frontend\controllers;
 
+use common\models\ImagensProposta;
+use Throwable;
 use Yii;
 
 use yii\db\Query;
 use yii\base\Model;
 use yii\web\Response;
-use yii\base\Exception;
 use yii\web\Controller;
 use common\models\Tools;
 use common\models\Cliente;
@@ -170,12 +171,13 @@ class AnuncioController extends Controller
 
     /**
      * Retorna os detalhes de um anúncio com base no id recebido
+     * @param $id
+     * @return array
      */
     public function actionDetalhes($id)
     {
         $gestor = new GestorCategorias();
 
-        //$anuncio = (new Query())->from(Anuncio::tableName())->where('id = :id', [':id' => $id])->all();
         $anuncio = Anuncio::findOne('id = ' . $id);
 
         $categoriaO = $gestor->getCategorias($anuncio, 'cat_oferecer');
@@ -420,6 +422,9 @@ class AnuncioController extends Controller
      * If deletion is successful, the browser will be redirected to the previous page.
      * @param integer $id
      * @return mixed
+     * @throws \Exception
+     * @throws Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -429,74 +434,90 @@ class AnuncioController extends Controller
 
             if($anuncio != null) 
             {
-
-                $gestor = new GestorCategorias();
-
                 $categoriasRemover = array();
-                
-                \array_push($categoriasRemover, $anuncio->cat_oferecer);
+
+                /**
+                 * Categorias do anúncio.
+                 */
+                array_push($categoriasRemover, $anuncio->cat_oferecer);
+
                 if ($anuncio->cat_receber != null) 
                 {
-                    \array_push($categoriasRemover, $anuncio->cat_receber);
+                    array_push($categoriasRemover, $anuncio->cat_receber);
                 }
 
-                ImagensAnuncio::deleteAll('anuncio_id='.$anuncio->id);
-                
+                /**
+                 * Imagens do anúncio.
+                 */
+                if($imagensAnuncio = ImagensAnuncio::findAll(['anuncio_id' => $anuncio->id])) {
 
-                $propostasRemover = Proposta::findAll(["id_anuncio" => $anuncio->id]);
+                    /**
+                     * Remoção da imagem.
+                     */
+                    foreach ($imagensAnuncio as $imagemAnuncio) {
+                        unlink(Yii::getAlias('@common/images') . '/' .  $imagemAnuncio->path_relativo);
+                    }
 
-                foreach ($propostasRemover as $proposta) 
-                {
-                    \array_push($categoriasRemover, $proposta->cat_proposto);
+                    /**
+                     * Remoção dos registos das imagens.
+                     */
+                    ImagensAnuncio::deleteAll('anuncio_id='.$anuncio->id);
                 }
 
-                Proposta::deleteAll('id_anuncio='.$anuncio->id);
+                /**
+                 * Propostas do anúncio.
+                 */
+                if($propostasRemover = Proposta::findAll(['id_anuncio' => $anuncio->id])) {
 
-                if ($anuncio->delete()) 
-                {
-                    foreach ($categoriasRemover as $categoria) 
-                    {
-                        $base = Categoria::findOne(["id" => $categoria]);
-                        
-                        if($base)
-                        {
-                            if ($base->cRoupa) 
-                            {
-                                $base->cRoupa->delete();
-                            }
-                            if ($base->cLivros) 
-                            {
-                                $base->cLivros->delete();
-                            }
+                    /**
+                     * Imagens das propostas.
+                     */
+                    foreach ($propostasRemover as $proposta) {
 
-                            if ($base->cEletronica) 
-                            {
-                                if ($base->cEletronica->cComputadores) 
-                                {
-                                    $base->cEletronica->cComputadores->delete();
-                                }else if ($base->cEletronica->cSmartphones)
-                                {
-                                    $base->cEletronica->cSmartphones->delete();
-                                }
+                        /**
+                         * Categoria da proposta.
+                         */
+                        array_push($categoriasRemover, $proposta->cat_proposto);
 
-                                $base->cEletronica->delete();
-                            }
+                        $imagensProposta = ImagensProposta::findAll(['proposta_id' => $proposta->id]);
 
-                            if ($base->cBrinquedos) 
-                            {
-                                if ($base->cBrinquedos->cJogos) 
-                                {
-                                    $base->cBrinquedos->delete();
-                                }
+                        /**
+                         * Remoção da imagem.
+                         */
+                        foreach ($imagensProposta as $imagemProposta) {
+                            unlink(Yii::getAlias('@common/images') . '/' . $anuncio->id . '_' . $imagemProposta->path_relativo);
+                        }
 
-                                $base->cBrinquedos->delete();
-                            }
+                        /**
+                         * Remoção dos registos das imagens.
+                         */
+                        ImagensProposta::deleteAll('proposta_id=' . $proposta->id);
+                    }
 
+                    Proposta::deleteAll('id_anuncio=' . $anuncio->id);
+                }
+
+                /**
+                 * Remoção do Anúncio
+                 */
+                if ($anuncio->delete()) {
+
+                    /**
+                     * Categorias do anúncio e das suas propostas.
+                     */
+                    foreach ($categoriasRemover as $categoria) {
+
+                        $base = Categoria::findOne(['id' => $categoria]);
+
+                        /**
+                         * Remoção das categorias.
+                         */
+                        if ($base && $base->removerFilhas()) {
                             $base->delete();
                         }
                     }
 
-                    return $this->redirect(['user/anuncios', 
+                    return $this->redirect(['user/anuncios',
                         'tipo' => "success",
                         'titulo' => "Sucesso!",
                         'mensagem' => "O seu anúncio foi removido com sucesso"
