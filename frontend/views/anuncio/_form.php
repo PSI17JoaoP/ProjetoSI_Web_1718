@@ -259,7 +259,7 @@ use yii\helpers\Url;
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <?= $form->field($model, 'imageFiles')->fileInput(['multiple' => true]) ?>
+                                        <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true]) ?>
                                     </div>
                                 </div>
                             </div>
