@@ -359,6 +359,8 @@ class AnuncioController extends Controller
                     \array_push($categoriasRemover, $anuncio->cat_receber);
                 }
 
+                ImagensAnuncio::deleteAll('anuncio_id='.$anuncio->id);
+                
                 if ($anuncio->delete()) 
                 {
                     foreach ($categoriasRemover as $categoria) 
