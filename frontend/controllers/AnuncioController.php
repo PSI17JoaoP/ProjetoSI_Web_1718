@@ -42,7 +42,7 @@ class AnuncioController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create'],
+                        'actions' => ['create', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -359,55 +359,55 @@ class AnuncioController extends Controller
                 switch ($categoriaONome) {
                     case 'Roupa':
 
-                        $categoriaORemover = CategoriaRoupa::findOne(['id' => $categoriaOBase->id]);
+                        $categoriaORemover = CategoriaRoupa::findOne(['id_categoria' => $categoriaOBase->id]);
 
                         break;
 
                     case 'Livros':
 
-                        $categoriaORemover = CategoriaLivros::findOne(['id' => $categoriaOBase->id]);
+                        $categoriaORemover = CategoriaLivros::findOne(['id_categoria' => $categoriaOBase->id]);
 
                         break;
 
                     case 'Computadores':
 
-                        $categoriaEletComputador = CategoriaEletronica::findOne(['id' => $categoriaOBase->id]);
+                        $categoriaEletComputador = CategoriaComputadores::findOne(['id_eletronica' => $categoriaOBase->id]);
 
                         if ($categoriaEletComputador && $categoriaEletComputador->delete()) {
-                            $categoriaORemover = CategoriaComputadores::findOne(['id_eletronica' => $categoriaOBase->id]);
+                            $categoriaORemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaOBase->id]);
                         }
 
                         break;
 
                     case 'Smartphones':
 
-                        $categoriaEletSmartphone = CategoriaEletronica::findOne(['id' => $categoriaOBase->id]);
+                        $categoriaEletSmartphone = CategoriaSmartphones::findOne(['id_eletronica' => $categoriaOBase->id]);
 
                         if ($categoriaEletSmartphone && $categoriaEletSmartphone->delete()) {
-                            $categoriaORemover = CategoriaSmartphones::findOne(['id_eletronica' => $categoriaOBase->id]);
+                            $categoriaORemover =  CategoriaEletronica::findOne(['id_categoria' => $categoriaOBase->id]);
                         }
 
                         break;
 
                     case 'Eletrónica':
 
-                        $categoriaORemover = CategoriaEletronica::findOne(['id' => $categoriaOBase->id]);
+                        $categoriaORemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaOBase->id]);
 
                         break;
 
                     case 'Jogos':
 
-                        $categoriaBrinqJogo = CategoriaBrinquedos::findOne(['id' => $categoriaOBase->id]);
+                        $categoriaBrinqJogo = CategoriaJogos::findOne(['id_brinquedo' => $categoriaOBase->id]);
 
                         if ($categoriaBrinqJogo && $categoriaBrinqJogo->delete()) {
-                            $categoriaORemover = CategoriaJogos::findOne(['id_brinquedo' => $categoriaOBase->id]);
+                            $categoriaORemover =  CategoriaBrinquedos::findOne(['id_categoria' => $categoriaOBase->id]);
                         }
 
                         break;
 
                     case 'Brinquedos':
 
-                        $categoriaORemover = CategoriaBrinquedos::findOne(['id' => $categoriaOBase->id]);
+                        $categoriaORemover = CategoriaBrinquedos::findOne(['id_categoria' => $categoriaOBase->id]);
 
                         break;
                 }
@@ -426,55 +426,55 @@ class AnuncioController extends Controller
                         switch ($categoriaRNome) {
                             case 'Roupa':
 
-                                $categoriaRRemover = CategoriaRoupa::findOne(['id' => $categoriaRBase->id]);
+                                $categoriaRRemover = CategoriaRoupa::findOne(['id_categoria' => $categoriaRBase->id]);
 
                                 break;
 
                             case 'Livros':
 
-                                $categoriaRRemover = CategoriaLivros::findOne(['id' => $categoriaRBase->id]);
+                                $categoriaRRemover = CategoriaLivros::findOne(['id_categoria' => $categoriaRBase->id]);
 
                                 break;
 
                             case 'Computadores':
 
-                                $categoriaEletComputador = CategoriaEletronica::findOne(['id' => $categoriaRBase->id]);
+                                $categoriaEletComputador = CategoriaComputadores::findOne(['id_eletronica' => $categoriaRBase->id]);
 
                                 if ($categoriaEletComputador && $categoriaEletComputador->delete()) {
-                                    $categoriaRRemover = CategoriaComputadores::findOne(['id_eletronica' => $categoriaRBase->id]);
+                                    $categoriaRRemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaRBase->id]);
                                 }
 
                                 break;
 
                             case 'Smartphones':
 
-                                $categoriaEletSmartphone = CategoriaEletronica::findOne(['id' => $categoriaRBase->id]);
+                                $categoriaEletSmartphone = CategoriaSmartphones::findOne(['id_eletronica' => $categoriaRBase->id]);
 
                                 if ($categoriaEletSmartphone && $categoriaEletSmartphone->delete()) {
-                                    $categoriaRRemover = CategoriaSmartphones::findOne(['id_eletronica' => $categoriaRBase->id]);
+                                    $categoriaRRemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaRBase->id]);
                                 }
 
                                 break;
 
                             case 'Eletrónica':
 
-                                $categoriaRRemover = CategoriaEletronica::findOne(['id' => $categoriaRBase->id]);
+                                $categoriaRRemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaRBase->id]);
 
                                 break;
 
                             case 'Jogos':
 
-                                $categoriaBrinqJogo = CategoriaBrinquedos::findOne(['id' => $categoriaRBase->id]);
+                                $categoriaBrinqJogo = CategoriaJogos::findOne(['id_brinquedo' => $categoriaRBase->id]);
 
                                 if ($categoriaBrinqJogo && $categoriaBrinqJogo->delete()) {
-                                    $categoriaRRemover = CategoriaJogos::findOne(['id_brinquedo' => $categoriaRBase->id]);
+                                    $categoriaRRemover = CategoriaBrinquedos::findOne(['id_categoria' => $categoriaRBase->id]);
                                 }
 
                                 break;
 
                             case 'Brinquedos':
 
-                                $categoriaRRemover = CategoriaBrinquedos::findOne(['id' => $categoriaRBase->id]);
+                                $categoriaRRemover = CategoriaBrinquedos::findOne(['id_categoria' => $categoriaRBase->id]);
 
                                 break;
                         }
@@ -482,7 +482,7 @@ class AnuncioController extends Controller
                         if($categoriaRRemover && $categoriaRRemover->delete()) {
 
                             if ($anuncio->delete()) {
-                                return $this->redirect(['user/anuncios'], [
+                                return $this->redirect(['user/anuncios', 
                                     'tipo' => "success",
                                     'titulo' => "Sucesso!",
                                     'mensagem' => "O seu anúncio foi removido com sucesso"
@@ -494,7 +494,7 @@ class AnuncioController extends Controller
                     else if ($anuncio->cat_receber == null) {
 
                          if ($anuncio->delete()) {
-                             return $this->redirect(['user/anuncios'], [
+                             return $this->redirect(['user/anuncios', 
                                  'tipo' => "success",
                                  'titulo' => "Sucesso!",
                                  'mensagem' => "O seu anúncio foi removido com sucesso"
@@ -505,10 +505,10 @@ class AnuncioController extends Controller
             }
         }
 
-        return $this->redirect(['user/anuncios'], [
-            /*'tipo' => "success",
-            'titulo' => "Sucesso!",
-            'mensagem' => "O seu anúncio foi criado com sucesso"*/
+        return $this->redirect(['user/anuncios',
+            'tipo' => "danger",
+            'titulo' => "Atenção!",
+            'mensagem' => "Não foi possível eliminar o seu anúncio"
         ]);
     }
 

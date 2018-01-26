@@ -120,13 +120,10 @@ $this->title = 'Os meus anúncios';
                                                 'data-id' => $dados[0]->id
                                                 ])?>
 
-                                            <?= Html::a('Eliminar', ['anuncio/delete'], [
+                                            <?= Html::a('Eliminar', ['anuncio/delete', 'id' => $dados[0]->id], [
                                                     'class' => 'btn btn-danger',
                                                     'data' => [
-                                                        'method' => 'post',
-                                                        'params' => [
-                                                            'id' => $dados[0]->id,
-                                                        ],
+                                                        'method' => 'post'
                                                     ]
                                             ]) ?>
                                         </span>
