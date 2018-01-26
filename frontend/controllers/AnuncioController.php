@@ -5,27 +5,28 @@ namespace frontend\controllers;
 use Yii;
 
 use yii\db\Query;
-use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+use yii\base\Model;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
-use frontend\models\AnuncioForm;
-use frontend\models\GestorCategorias;
+use yii\web\Controller;
+use common\models\Tools;
 use common\models\Anuncio;
 use common\models\Cliente;
-use common\models\Tools;
-use common\models\CategoriaBrinquedos;
-use common\models\CategoriaComputadores;
-use common\models\CategoriaEletronica;
+use yii\widgets\ActiveForm;
+use yii\filters\VerbFilter;
+use common\models\Categoria;
+use yii\filters\AccessControl;
+use frontend\models\AnuncioForm;
+use common\models\ImagensAnuncio;
+use common\models\CategoriaRoupa;
 use common\models\CategoriaJogos;
 use common\models\CategoriaLivros;
-use common\models\CategoriaRoupa;
+use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
+use frontend\models\GestorCategorias;
+use common\models\CategoriaBrinquedos;
+use common\models\CategoriaEletronica;
 use common\models\CategoriaSmartphones;
-use yii\base\Model;
-use common\models\ImagensAnuncio;
+use common\models\CategoriaComputadores;
 
 /**
  * AnuncioController implements the CRUD actions for Anuncio model.
@@ -341,166 +342,72 @@ class AnuncioController extends Controller
      */
     public function actionDelete($id)
     {
-        if($id != null) {
-
+        if($id != null) 
+        {
             $anuncio = Anuncio::findOne(['id' => $id]);
 
-            if($anuncio != null) {
+            if($anuncio != null) 
+            {
 
                 $gestor = new GestorCategorias();
 
-                $categoriasOferecer = $gestor->getCategorias($anuncio, 'cat_oferecer');
-                $categoriaOBase = array_shift($categoriasOferecer);
-
-                $categoriaONome = Tools::tipoCategoria($categoriaOBase->id);
-
-                $categoriaORemover = null;
-
-                switch ($categoriaONome) {
-                    case 'Roupa':
-
-                        $categoriaORemover = CategoriaRoupa::findOne(['id_categoria' => $categoriaOBase->id]);
-
-                        break;
-
-                    case 'Livros':
-
-                        $categoriaORemover = CategoriaLivros::findOne(['id_categoria' => $categoriaOBase->id]);
-
-                        break;
-
-                    case 'Computadores':
-
-                        $categoriaEletComputador = CategoriaComputadores::findOne(['id_eletronica' => $categoriaOBase->id]);
-
-                        if ($categoriaEletComputador && $categoriaEletComputador->delete()) {
-                            $categoriaORemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaOBase->id]);
-                        }
-
-                        break;
-
-                    case 'Smartphones':
-
-                        $categoriaEletSmartphone = CategoriaSmartphones::findOne(['id_eletronica' => $categoriaOBase->id]);
-
-                        if ($categoriaEletSmartphone && $categoriaEletSmartphone->delete()) {
-                            $categoriaORemover =  CategoriaEletronica::findOne(['id_categoria' => $categoriaOBase->id]);
-                        }
-
-                        break;
-
-                    case 'Eletrónica':
-
-                        $categoriaORemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaOBase->id]);
-
-                        break;
-
-                    case 'Jogos':
-
-                        $categoriaBrinqJogo = CategoriaJogos::findOne(['id_brinquedo' => $categoriaOBase->id]);
-
-                        if ($categoriaBrinqJogo && $categoriaBrinqJogo->delete()) {
-                            $categoriaORemover =  CategoriaBrinquedos::findOne(['id_categoria' => $categoriaOBase->id]);
-                        }
-
-                        break;
-
-                    case 'Brinquedos':
-
-                        $categoriaORemover = CategoriaBrinquedos::findOne(['id_categoria' => $categoriaOBase->id]);
-
-                        break;
+                $categoriasRemover = array();
+                
+                \array_push($categoriasRemover, $anuncio->cat_oferecer);
+                if ($anuncio->cat_receber != null) 
+                {
+                    \array_push($categoriasRemover, $anuncio->cat_receber);
                 }
 
-                if ($categoriaORemover && $categoriaORemover->delete()) {
-
-                    if ($anuncio->cat_receber != null) {
-
-                        $categoriasReceber = $gestor->getCategorias($anuncio, 'cat_receber');
-                        $categoriaRBase = array_shift($categoriasReceber);
-
-                        $categoriaRNome = Tools::tipoCategoria($categoriaRBase->id);
-
-                        $categoriaRRemover = null;
-
-                        switch ($categoriaRNome) {
-                            case 'Roupa':
-
-                                $categoriaRRemover = CategoriaRoupa::findOne(['id_categoria' => $categoriaRBase->id]);
-
-                                break;
-
-                            case 'Livros':
-
-                                $categoriaRRemover = CategoriaLivros::findOne(['id_categoria' => $categoriaRBase->id]);
-
-                                break;
-
-                            case 'Computadores':
-
-                                $categoriaEletComputador = CategoriaComputadores::findOne(['id_eletronica' => $categoriaRBase->id]);
-
-                                if ($categoriaEletComputador && $categoriaEletComputador->delete()) {
-                                    $categoriaRRemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaRBase->id]);
-                                }
-
-                                break;
-
-                            case 'Smartphones':
-
-                                $categoriaEletSmartphone = CategoriaSmartphones::findOne(['id_eletronica' => $categoriaRBase->id]);
-
-                                if ($categoriaEletSmartphone && $categoriaEletSmartphone->delete()) {
-                                    $categoriaRRemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaRBase->id]);
-                                }
-
-                                break;
-
-                            case 'Eletrónica':
-
-                                $categoriaRRemover = CategoriaEletronica::findOne(['id_categoria' => $categoriaRBase->id]);
-
-                                break;
-
-                            case 'Jogos':
-
-                                $categoriaBrinqJogo = CategoriaJogos::findOne(['id_brinquedo' => $categoriaRBase->id]);
-
-                                if ($categoriaBrinqJogo && $categoriaBrinqJogo->delete()) {
-                                    $categoriaRRemover = CategoriaBrinquedos::findOne(['id_categoria' => $categoriaRBase->id]);
-                                }
-
-                                break;
-
-                            case 'Brinquedos':
-
-                                $categoriaRRemover = CategoriaBrinquedos::findOne(['id_categoria' => $categoriaRBase->id]);
-
-                                break;
-                        }
-
-                        if($categoriaRRemover && $categoriaRRemover->delete()) {
-
-                            if ($anuncio->delete()) {
-                                return $this->redirect(['user/anuncios', 
-                                    'tipo' => "success",
-                                    'titulo' => "Sucesso!",
-                                    'mensagem' => "O seu anúncio foi removido com sucesso"
-                                ]);
+                if ($anuncio->delete()) 
+                {
+                    foreach ($categoriasRemover as $categoria) 
+                    {
+                        $base = Categoria::findOne(["id" => $categoria]);
+                        
+                        if($base)
+                        {
+                            if ($base->cRoupa) 
+                            {
+                                $base->cRoupa->delete();
                             }
+                            if ($base->cLivros) 
+                            {
+                                $base->cLivros->delete();
+                            }
+
+                            if ($base->cEletronica) 
+                            {
+                                if ($base->cEletronica->cComputadores) 
+                                {
+                                    $base->cEletronica->cComputadores->delete();
+                                }else if ($base->cEletronica->cSmartphones)
+                                {
+                                    $base->cEletronica->cSmartphones->delete();
+                                }
+
+                                $base->cEletronica->delete();
+                            }
+
+                            if ($base->cBrinquedos) 
+                            {
+                                if ($base->cBrinquedos->cJogos) 
+                                {
+                                    $base->cBrinquedos->delete();
+                                }
+
+                                $base->cBrinquedos->delete();
+                            }
+
+                            $base->delete();
                         }
                     }
 
-                    else if ($anuncio->cat_receber == null) {
-
-                         if ($anuncio->delete()) {
-                             return $this->redirect(['user/anuncios', 
-                                 'tipo' => "success",
-                                 'titulo' => "Sucesso!",
-                                 'mensagem' => "O seu anúncio foi removido com sucesso"
-                             ]);
-                        }
-                    }
+                    return $this->redirect(['user/anuncios', 
+                        'tipo' => "success",
+                        'titulo' => "Sucesso!",
+                        'mensagem' => "O seu anúncio foi removido com sucesso"
+                    ]);
                 }
             }
         }
