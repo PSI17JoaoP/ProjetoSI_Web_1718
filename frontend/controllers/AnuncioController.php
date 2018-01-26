@@ -10,25 +10,27 @@ use yii\web\Response;
 use yii\base\Exception;
 use yii\web\Controller;
 use common\models\Tools;
-use common\models\Anuncio;
 use common\models\Cliente;
 use common\models\Reports;
-use yii\filters\VerbFilter;
+use common\models\Anuncio;
 use yii\widgets\ActiveForm;
+use yii\filters\VerbFilter;
+use common\models\Proposta;
 use common\models\Categoria;
 use common\models\TipoRoupas;
-use yii\filters\AccessControl;
 use common\models\GeneroJogos;
+use yii\filters\AccessControl;
 use common\models\Notificacoes;
 use frontend\models\AnuncioForm;
-use common\models\ImagensAnuncio;
 use common\models\CategoriaJogos;
+use common\models\ImagensAnuncio;
 use common\models\CategoriaRoupa;
 use yii\web\NotFoundHttpException;
 use common\models\CategoriaLivros;
+use yii\web\ForbiddenHttpException;
 use frontend\models\GestorCategorias;
-use common\models\CategoriaEletronica;
 use common\models\CategoriaBrinquedos;
+use common\models\CategoriaEletronica;
 use common\models\CategoriaSmartphones;
 use common\models\CategoriaComputadores;
 
@@ -47,7 +49,7 @@ class AnuncioController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create', 'reportar'],
+                        'actions' => ['create', 'reportar', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -57,13 +59,13 @@ class AnuncioController extends Controller
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {
-                    throw new Exception('You are not allowed to access this page');
+                    throw new ForbiddenHttpException('You are not allowed to access this page');
                 }
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -142,7 +144,7 @@ class AnuncioController extends Controller
 
         //Filtrar título
         else if ($titulo != null)
-        {            
+        {
             $anuncios = $anuncios->Where(['like', 'titulo', $titulo]);
         }
 
@@ -171,24 +173,23 @@ class AnuncioController extends Controller
      */
     public function actionDetalhes($id)
     {
-
         $gestor = new GestorCategorias();
 
         //$anuncio = (new Query())->from(Anuncio::tableName())->where('id = :id', [':id' => $id])->all();
-        $anuncio = Anuncio::findOne('id = ' + $id);
-
+        $anuncio = Anuncio::findOne('id = ' . $id);
 
         $categoriaO = $gestor->getCategorias($anuncio, 'cat_oferecer');
         $categoriaOBase = array_shift($categoriaO);
 
         $catO = Tools::novaCategoria($categoriaOBase->id);
         
-        $n = \count($categoriaO);
-        for ($i=0; $i < $n; $i++) 
+        $n = count($categoriaO);
+
+        for ($i=0; $i < $n; $i++)
         { 
             foreach ($categoriaO[$i] as $key => $value) 
             {
-                if (\in_array($key, ['id_categoria', 'id_brinquedo', 'id_eletronica'])) 
+                if (in_array($key, ['id_categoria', 'id_brinquedo', 'id_eletronica']))
                 {
                     $value = Tools::tipoCategoria($categoriaOBase->id);
                 }
@@ -204,24 +205,26 @@ class AnuncioController extends Controller
 
                 if(isset($catO->attributeLabels()[$key]))
                     $categoriaO[$n][$catO->attributeLabels()[$key]] = $value;
+
                 unset($categoriaO[$i][$key]);
             }
         }
-        
 
         $categoriaR = $gestor->getCategorias($anuncio, 'cat_receber');
+
         if($categoriaR)
         {
             $categoriaRBase = array_shift($categoriaR);
 
             $catR = Tools::novaCategoria($categoriaRBase->id);
             
-            $n = \count($categoriaR);
+            $n = count($categoriaR);
+
             for ($i=0; $i < $n; $i++) 
             { 
                 foreach ($categoriaR[$i] as $key => $value) 
                 {
-                    if (\in_array($key, ['id_categoria', 'id_brinquedo', 'id_eletronica'])) 
+                    if (in_array($key, ['id_categoria', 'id_brinquedo', 'id_eletronica']))
                     {
                         $value = Tools::tipoCategoria($categoriaOBase->id);
                     }
@@ -236,10 +239,11 @@ class AnuncioController extends Controller
 
                     if(isset($catR->attributeLabels()[$key]))
                         $categoriaR[$n][$catR->attributeLabels()[$key]] = $value;
+
                     unset($categoriaR[$i][$key]);
                 }
             }
-        }else{
+        } else {
             $categoriaRBase = ['nome' => "Aberto a sugestões"];
         }
 
@@ -412,36 +416,101 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Updates an existing Anuncio model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    /*public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }*/
-
-    /**
      * Deletes an existing Anuncio model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected to the previous page.
      * @param integer $id
      * @return mixed
      */
-    /*public function actionDelete($id)
+    public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if($id != null) 
+        {
+            $anuncio = Anuncio::findOne(['id' => $id]);
 
-        return $this->redirect(['index']);
-    }*/
+            if($anuncio != null) 
+            {
+
+                $gestor = new GestorCategorias();
+
+                $categoriasRemover = array();
+                
+                \array_push($categoriasRemover, $anuncio->cat_oferecer);
+                if ($anuncio->cat_receber != null) 
+                {
+                    \array_push($categoriasRemover, $anuncio->cat_receber);
+                }
+
+                ImagensAnuncio::deleteAll('anuncio_id='.$anuncio->id);
+                
+
+                $propostasRemover = Proposta::findAll(["id_anuncio" => $anuncio->id]);
+
+                foreach ($propostasRemover as $proposta) 
+                {
+                    \array_push($categoriasRemover, $proposta->cat_proposto);
+                }
+
+                Proposta::deleteAll('id_anuncio='.$anuncio->id);
+
+                if ($anuncio->delete()) 
+                {
+                    foreach ($categoriasRemover as $categoria) 
+                    {
+                        $base = Categoria::findOne(["id" => $categoria]);
+                        
+                        if($base)
+                        {
+                            if ($base->cRoupa) 
+                            {
+                                $base->cRoupa->delete();
+                            }
+                            if ($base->cLivros) 
+                            {
+                                $base->cLivros->delete();
+                            }
+
+                            if ($base->cEletronica) 
+                            {
+                                if ($base->cEletronica->cComputadores) 
+                                {
+                                    $base->cEletronica->cComputadores->delete();
+                                }else if ($base->cEletronica->cSmartphones)
+                                {
+                                    $base->cEletronica->cSmartphones->delete();
+                                }
+
+                                $base->cEletronica->delete();
+                            }
+
+                            if ($base->cBrinquedos) 
+                            {
+                                if ($base->cBrinquedos->cJogos) 
+                                {
+                                    $base->cBrinquedos->delete();
+                                }
+
+                                $base->cBrinquedos->delete();
+                            }
+
+                            $base->delete();
+                        }
+                    }
+
+                    return $this->redirect(['user/anuncios', 
+                        'tipo' => "success",
+                        'titulo' => "Sucesso!",
+                        'mensagem' => "O seu anúncio foi removido com sucesso"
+                    ]);
+                }
+            }
+        }
+
+        return $this->redirect(['user/anuncios',
+            'tipo' => "danger",
+            'titulo' => "Atenção!",
+            'mensagem' => "Não foi possível eliminar o seu anúncio"
+        ]);
+    }
 
     /**
      * Finds the Anuncio model based on its primary key value.

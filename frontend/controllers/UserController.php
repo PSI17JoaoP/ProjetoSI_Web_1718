@@ -66,12 +66,10 @@ class UserController extends Controller
     public function actionConta($tipo = null, $titulo = null, $mensagem = null)
     {
         $this->layout = "main-user";
-
         
         $cliente = Cliente::findOne(['id_user' => Yii::$app->user->identity->getId()]);
 
         $model = new ClienteForm();
-
 
         if ($model->load(Yii::$app->request->post())) 
         {
