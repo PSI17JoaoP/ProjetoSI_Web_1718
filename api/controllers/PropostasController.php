@@ -12,6 +12,7 @@ use yii\rest\ActiveController;
 use yii\filters\auth\HttpBasicAuth;
 use frontend\models\GestorCategorias;
 use yii\web\NotFoundHttpException;
+use yii\web\ServerErrorHttpException;
 
 
 class PropostasController extends ActiveController
@@ -98,11 +99,11 @@ class PropostasController extends ActiveController
 
                     $nomeImagem = $id . '_' . $key . '.png';
 
-                    $imagemAnuncio = new ImagensProposta();
-                    $imagemAnuncio->proposta_id = $id;
-                    $imagemAnuncio->path_relativo = $nomeImagem;
+                    $imagemProposta = new ImagensProposta();
+                    $imagemProposta->proposta_id = $id;
+                    $imagemProposta->path_relativo = $nomeImagem;
 
-                    if ($imagemAnuncio->save()) {
+                    if ($imagemProposta->save()) {
 
                         $bytesImagem = file_put_contents(Yii::getAlias('@common/images') . "/" . $proposta->idAnuncio->id . '_' . $nomeImagem, $imagemBytes);
 
