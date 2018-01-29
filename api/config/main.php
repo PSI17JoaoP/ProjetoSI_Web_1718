@@ -100,10 +100,15 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'propostas',
                     'extraPatterns' => [
+                        'GET {username}' => 'todas-propostas',
                         'GET {id}/categorias' => 'categorias',
                         'GET {id}/imagens' => 'imagens',
                         'POST {id}/imagens' => 'imagens-movel',
                     ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                        '{username}' => '<username:[\\w\s]+>',
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',

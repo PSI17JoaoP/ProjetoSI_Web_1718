@@ -42,6 +42,20 @@ class PropostasController extends ActiveController
         return $cliente;
     }
 
+    public function actionTodasPropostas($username)
+    {
+        $user = User::findOne(['username' => $username]);
+
+        if($user)
+        {
+            $propostas = Proposta::findAll(['id_user' => $user->id]);
+
+            return ['Propostas' => $propostas];
+        }
+
+        throw new NotFoundHttpException('Não foi encontrado o utilizador', 404);
+    }
+
     public function actionCategorias($id)
     {
         $gestor = new GestorCategorias();
