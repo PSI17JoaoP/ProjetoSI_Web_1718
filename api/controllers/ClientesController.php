@@ -3,8 +3,10 @@
 namespace api\controllers;
 
 use common\models\User;
+use common\models\Tools;
 use common\models\Cliente;
 use common\models\Anuncio;
+use common\models\Proposta;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
 use yii\filters\auth\HttpBasicAuth;
@@ -73,6 +75,21 @@ class ClientesController extends ActiveController
             $anuncios = Anuncio::findAll(['id_user' => $id]);
 
             return ['ID_User' => $id, 'Anuncios' => $anuncios];
+        }
+
+        throw new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);
+    }
+
+    public function actionDetalhesContacto($idAnuncio)
+    {
+        $cliente = Cliente::find()
+                    ->join('JOIN', Proposta::tableName(), Proposta::tableName().".id_user = ". Cliente::tableName().".id_user")
+                    ->join('JOIN', Anuncio::tableName(), Anuncio::tableName().".id =". Proposta::tableName().".id_anuncio")
+                    ->where(['anuncios.id' => $idAnuncio, 'anuncios.estado' => "CONCLUIDO", "propostas.estado" => "ACEITE"])
+                    ->one();
+        
+        if ($cliente) {
+            return ["Nome" => $cliente->nome_completo, "Telefone" => $cliente->telefone, "Regiao" => Tools::listaRegioes()[$cliente->regiao]];
         }
 
         throw new NotFoundHttpException('Não foi encontrado o utilizador desejado.', 404);

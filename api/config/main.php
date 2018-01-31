@@ -89,10 +89,12 @@ return [
                     'extraPatterns' => [
                         'GET {id}/anuncios' => 'anuncios',
                         'GET pin/{pin}' => 'pin',
-                        'GET {id}/categorias_preferidas' => 'preferidas'
+                        'GET {id}/categorias_preferidas' => 'preferidas',
+                        'GET contato/{idAnuncio}' => 'detalhes-contacto'
                     ],
                     'tokens' => [
                         '{id}' => '<id:\\d+>',
+                        '{idAnuncio}' => '<idAnuncio:\\d+>',
                         '{pin}' => '<pin:\\w+>',
                     ]
                 ],
