@@ -15,6 +15,7 @@ class LoginCest
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
         ]);
+
         $I->amOnRoute('site/login');
     }
 

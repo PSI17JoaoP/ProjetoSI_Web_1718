@@ -76,9 +76,8 @@ class AnuncioTest extends \Codeception\Test\Unit
             "estado" => "ATIVO",
             "data_criacao" => $model->data_criacao,
         ]);
-        $anuncio = Anuncio::findOne(['id' => $idAnuncio]);
 
-        Anuncio::deleteAll("id=".$idAnuncio);
+        Anuncio::deleteAll("id=" . $idAnuncio);
         $this->tester->dontSeeInDatabase('anuncios', ["id" => $idAnuncio]);
     }
 

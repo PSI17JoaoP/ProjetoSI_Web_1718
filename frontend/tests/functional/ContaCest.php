@@ -16,6 +16,7 @@ class ContaCest
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
         ]);
+
         $I->amOnRoute('site/login');
 
         $I->submitForm('#login-form',  [
@@ -26,8 +27,7 @@ class ContaCest
 
     public function checkConta(FunctionalTester $I)
     {
-        $I->amOnPage('site/url');
-        $I->see('Sistema de Trocas');
+        $I->amOnPage('/');
 
         $I->see('erao');
         $I->click('erao');

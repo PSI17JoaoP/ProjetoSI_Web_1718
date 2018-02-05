@@ -2,7 +2,6 @@
 namespace frontend\tests\acceptance;
 
 use frontend\tests\AcceptanceTester;
-use yii\helpers\Url;
 
 class HomeCest
 {
@@ -32,21 +31,9 @@ class HomeCest
         $I->wait(1);
         $I->fillField('#clienteform-telefone', "912365478");
         $I->wait(1);
-        /*
-        $I->fillField('#clienteform-regiao', "aveiro");
-        $I->wait(1);
-        */
 
         $I->click('Guardar');
 
-        /*
-        $I->submitForm('#cliente-form', [
-            'ClienteForm[nomeCompleto]' => 'Teste exemplo',
-            'ClienteForm[dataNasc]' => '2000-01-01',
-            'ClienteForm[telefone]' => '912345678',
-            'ClienteForm[regiao]' => 'aveiro',
-        ]);
-        */
         $I->wait(5);
     }
 }

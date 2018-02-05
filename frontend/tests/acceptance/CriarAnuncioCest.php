@@ -20,8 +20,8 @@ class CriarAnuncioCest
         $I->amOnPage('/site/login');
 
         $I->submitForm('#login-form',  [
-            'LoginForm[username]' => 'TesteUser',
-            'LoginForm[password]' => '12345678',
+            'LoginForm[username]' => 'erao',
+            'LoginForm[password]' => 'password_0',
         ]);
 
         $I->wait(3);
