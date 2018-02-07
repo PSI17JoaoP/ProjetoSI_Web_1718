@@ -7,29 +7,38 @@ class CriarAnuncioCest
 {
     public function _before(AcceptanceTester $I)
     {
-        $I->haveFixtures([
+        /*$I->haveFixtures([
             'user' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
-        ]);
+        ]);*/
     }
 
-    public function login(AcceptanceTester $I)
+    /*public function login(AcceptanceTester $I)
     {
         $I->amOnPage('/site/login');
 
         $I->submitForm('#login-form',  [
-            'LoginForm[username]' => 'erao',
-            'LoginForm[password]' => 'password_0',
+            'LoginForm[username]' => 'testerExample14',
+            'LoginForm[password]' => 'tester_password',
         ]);
 
         $I->wait(3);
-    }
+    }*/
 
 
     public function checkCriarAnuncioReceber(AcceptanceTester $I)
     {
+        $I->amOnPage('/site/login');
+
+        $I->submitForm('#login-form',  [
+            'LoginForm[username]' => 'testerExample14',
+            'LoginForm[password]' => 'tester_password',
+        ]);
+
+        $I->wait(3);
+
         $I->see('Criar Anúncio');
         $I->click('Criar Anúncio');
 
@@ -85,7 +94,7 @@ class CriarAnuncioCest
         $I->fillField(['name' => 'AnuncioForm[comentarios]'], 'ComentariosTeste');
         $I->wait(1);
 
-        $I->attachFile('AnuncioForm[imageFiles]', 'image.jpg');
+        $I->attachFile('AnuncioForm[imageFiles][]', 'image.jpg');
 
         $I->wait(1);
 
@@ -100,19 +109,26 @@ class CriarAnuncioCest
         $I->seeInCurrentUrl('/user/anuncios');
     }
 
-    /**
-     * @after checkCriarAnuncioReceber
-     * @param \frontend\tests\AcceptanceTester $I
-     */
+    
     public function checkCriarAnuncioTodos(AcceptanceTester $I)
     {
+        $I->amOnPage('/');
+        $I->wait(5);
+        $I->amOnPage('/site/login');
+
+        $I->submitForm('#login-form',  [
+            'LoginForm[username]' => 'testerExample14',
+            'LoginForm[password]' => 'tester_password',
+        ]);
+
+        $I->wait(3);
         $I->see('Criar Anúncio');
         $I->click('Criar Anúncio');
 
         $I->wait(3);
 
         $I->see('Título');
-        $I->fillField(['name' => 'AnuncioForm[titulo]'], 'TesteACeitação');
+        $I->fillField(['name' => 'AnuncioForm[titulo]'], 'TesteACeitação2');
         $I->wait(1);
 
         $I->click('#field-cat-oferta');
@@ -143,7 +159,7 @@ class CriarAnuncioCest
         $I->fillField(['name' => 'AnuncioForm[comentarios]'], 'ComentariosTeste');
         $I->wait(1);
 
-        $I->attachFile('AnuncioForm[imageFiles]', 'image.jpg');
+        $I->attachFile('AnuncioForm[imageFiles][]', 'image.jpg');
 
         $I->wait(1);
 

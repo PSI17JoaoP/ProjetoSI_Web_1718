@@ -37,7 +37,7 @@ class LoginCest
 
     public function checkWrongPassword(AcceptanceTester $I)
     {
-        $I->submitForm('#login-form', $this->formParams('erao', 'wrong'));
+        $I->submitForm('#login-form', $this->formParams('testerExample10', 'wrong'));
         $I->wait(5);
         $I->see('A palavra-passe está incorreta.');
     }
@@ -51,9 +51,9 @@ class LoginCest
     
     public function checkValidLogin(AcceptanceTester $I)
     {
-        $I->submitForm('#login-form', $this->formParams('erao', 'password_0'));
+        $I->submitForm('#login-form', $this->formParams('testerExample10', 'tester_password'));
         $I->wait(5);
-        $I->see('erao');
+        $I->see('testerExample10');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Registo');
     }

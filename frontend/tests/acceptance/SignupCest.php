@@ -31,7 +31,7 @@ class SignupCest
     {
         $I->submitForm(
             $this->formId, [
-            'SignupForm[username]'  => 'testerExample5',
+            'SignupForm[username]'  => 'testerExample13',
             'SignupForm[email]'     => 'ttttt',
             'SignupForm[password]'  => 'tester_password',
             'SignupForm[checkPassword]'  => 'tester_password',
@@ -47,16 +47,16 @@ class SignupCest
     public function signupSuccessfully(AcceptanceTester $I)
     {
         $I->submitForm($this->formId, [
-            'SignupForm[username]' => 'testerExample5',
-            'SignupForm[email]' => 'tester.email5@example.com',
+            'SignupForm[username]' => 'testerExample13',
+            'SignupForm[email]' => 'tester.email13@example.com',
             'SignupForm[password]' => 'tester_password',
             'SignupForm[checkPassword]'  => 'tester_password',
         ]);
 
         $I->wait(5);
         $I->seeRecord('common\models\User', [
-            'username' => 'testerExample5',
-            'email' => 'tester.email5@example.com',
+            'username' => 'testerExample13',
+            'email' => 'tester.email13@example.com',
         ]);
         
         $I->see('Criar Anúncio');

@@ -10,8 +10,8 @@ class HomeCest
         $I->amOnPage('site/signup');
 
         $I->submitForm('#signup-form', [
-            'SignupForm[username]' => 'testerExample8',
-            'SignupForm[email]' => 'tester.email8@example.com',
+            'SignupForm[username]' => 'testerExample14',
+            'SignupForm[email]' => 'tester.email14@example.com',
             'SignupForm[password]' => 'tester_password',
             'SignupForm[checkPassword]'  => 'tester_password',
         ]);

@@ -21,25 +21,17 @@ class LoginCest
 
     public function checkLogin(AcceptanceTester $I)
     {
-        $I->amOnPage(Url::toRoute('/site/login'));
+        $I->amOnPage('/site/login');
         $I->see('Login');
 
-        $I->fillField('#loginform-username', 'erau');
+        $I->fillField('#loginform-username', 'admin');
         $I->wait(2);
-        $I->fillField('#loginform-password', 'password_0');
+        $I->fillField('#loginform-password', '123456');
         $I->wait(2);
         $I->click('Login');
         $I->wait(5); 
 
         $I->see('Dashboard - Back Office');
 
-        $I->click('Todos');
-        $I->wait(2);
-        $I->click('Anúncios');
-        $I->wait(2);
-        $I->click('Propostas');
-        $I->wait(2);
-        $I->click('Utilizadores');
-        $I->wait(5);
     }
 }
