@@ -95,7 +95,7 @@ class Cliente extends ActiveRecord
     //                      MOSQUITTO
     //-----------------------------------------------------
 
-    public function afterSave($insert, $changedAttributes)
+    /*public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
 
@@ -134,5 +134,5 @@ class Cliente extends ActiveRecord
         { 
             file_put_contents("debug.output","Timeout!"); 
         }
-    }
+    }*/
 }

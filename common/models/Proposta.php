@@ -101,7 +101,7 @@ class Proposta extends ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
 
-        $objeto=new \stdClass();
+        /*$objeto=new \stdClass();
 
         $objeto->id = $this->id;
         $objeto->cat_proposto = $this->cat_proposto;
@@ -120,7 +120,7 @@ class Proposta extends ActiveRecord
         else
         {
             $this->Publicar("UpdateProposta",$objJSON);
-        }
+        }*/
            
         
         $usernameCliente = "";
@@ -149,7 +149,7 @@ class Proposta extends ActiveRecord
             $idCliente = $this->id_user;
         }
 
-        $this->Publicar($usernameCliente, $mensagem);
+        //$this->Publicar($usernameCliente, $mensagem);
 
         //Tabela
         $notificacao = new Notificacoes();
@@ -160,7 +160,7 @@ class Proposta extends ActiveRecord
 
     }
 
-    public function Publicar($canal,$msg)
+    /*public function Publicar($canal,$msg)
     {
         $server = "127.0.0.1";
         $port = 1883;
@@ -177,5 +177,5 @@ class Proposta extends ActiveRecord
         { 
             file_put_contents("debug.output","Timeout!"); 
         }
-    }
+    }*/
 }
